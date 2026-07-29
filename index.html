@@ -1,0 +1,2414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fishtagged — tag map</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://unpkg.com https://www.gstatic.com;
+  style-src 'self' 'unsafe-inline' https://unpkg.com;
+  connect-src 'self' https://unpkg.com https://www.gstatic.com https://identitytoolkit.googleapis.com
+    https://securetoken.googleapis.com https://api.weather.gov https://basemaps.cartocdn.com
+    https://*.basemaps.cartocdn.com
+    https://server.arcgisonline.com https://*.run.app;
+  img-src 'self' data: blob: https://basemaps.cartocdn.com https://*.basemaps.cartocdn.com
+    https://server.arcgisonline.com https://*.run.app;
+  font-src 'self' data: https://basemaps.cartocdn.com https://*.basemaps.cartocdn.com;
+  worker-src 'self' blob: https://unpkg.com;
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+">
+<link rel="icon" href="assets/fishtagged-logo.png">
+
+<link href="https://unpkg.com/maplibre-gl@6.0.0/dist/maplibre-gl.css" rel="stylesheet">
+<script type="module" src="assets/maplibre-loader.js"></script>
+<script src="security/auth-config.js"></script>
+<script type="module" src="security/auth-client.js?v=20260729c"></script>
+
+<style>
+  :root{
+    --ink:#20292b;            --label:#69736f;
+    --hair:#e3e6e1;
+    --paper:#ffffff;
+    --field:#f3f6f2;
+    --green:#6f8c78;          --green-dk:#5a7765;
+    --rust:#b4622d;           --rust-dk:#8f4a1f;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; margin:0; }
+  body{ font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; color:var(--ink); background:var(--paper); }
+  h1,h2,h3{ font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-weight:700; letter-spacing:-.01em; }
+  .num{ font-variant-numeric:tabular-nums; }
+  .cap{ font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--label); font-weight:bold; }
+
+  #gate{ position:fixed; inset:0; background:var(--paper); overflow:auto; z-index:40; }
+  .brandbar{ display:flex; align-items:center; gap:12px; padding:15px clamp(16px,5vw,46px); border-bottom:1px solid var(--hair); }
+  .logo{ display:flex; align-items:center; gap:9px; font-weight:800; font-size:17px; letter-spacing:.03em; }
+  .navlinks{ margin-left:auto; display:flex; align-items:center; gap:24px; font-size:14px; }
+  .navlinks a{ color:var(--ink); text-decoration:none; }
+  .navlinks a:hover{ color:var(--green-dk); }
+  .cta{ background:var(--green); color:#fff !important; padding:9px 16px; border-radius:6px; }
+  .cta:hover{ background:var(--green-dk); }
+  #gate .col{ width:min(900px,90vw); margin:0 auto; padding:5vh 0 7vh; }
+  .hero{ background:var(--field); border:1px solid var(--hair); border-radius:16px; padding:48px 40px; text-align:center; }
+  #gate h1{ font-size:clamp(28px,4.6vw,46px); margin:0 0 12px; line-height:1.06; }
+  #gate h1 i{ color:var(--green); font-style:normal; }
+  .hero .lead{ font-size:17px; line-height:1.55; max-width:560px; margin:0 auto; color:#3a4145; }
+  .sub{ display:flex; justify-content:center; gap:18px; font-size:13px; color:var(--label); margin-top:16px; }
+  .levels{ margin-top:34px; border-top:1px solid var(--hair); }
+  .lvl{ display:flex; gap:18px; align-items:center; padding:18px 6px; border-bottom:1px solid var(--hair);
+        cursor:pointer; background:none; border-left:0; border-right:0; border-top:0; width:100%; text-align:left;
+        font-family:inherit; color:inherit; }
+  .lvl:hover{ background:var(--field); }
+  .lvl .n{ font-size:22px; font-weight:800; color:var(--green); width:30px; flex:none; }
+  .lvl h3{ font-size:19px; margin:0 0 3px; }
+  .lvl p{ margin:0; font-size:13.5px; color:#52595d; line-height:1.45; max-width:560px; }
+  .lvl .who{ margin-left:auto; flex:none; font-size:11px; color:var(--label); border:1px solid var(--hair);
+             padding:4px 11px; border-radius:20px; white-space:nowrap; }
+
+  button.flat{ height:38px; border:1px solid var(--hair); background:#fff; color:var(--ink); font-family:inherit;
+               font-size:13px; cursor:pointer; padding:0 14px; }
+  button.flat:hover{ border-color:var(--ink); }
+
+  #app{ position:fixed; inset:0; display:none; }
+  #app.on{ display:block; }
+  #map{ position:absolute; inset:0; background:#dfe4e2; }
+
+  .mapstamp{ position:absolute; top:12px; left:12px; z-index:6; height:38px; display:flex;
+             align-items:center; gap:9px; padding:5px 10px 5px 7px; background:rgba(255,255,255,.94);
+             border:1px solid var(--hair); border-radius:20px; box-shadow:0 3px 14px rgba(20,33,31,.12);
+             backdrop-filter:blur(8px); }
+  .mapstamp img{ display:block; width:auto; height:25px; }
+  .mapstamp .lvlname{ max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+                      font-size:11px; font-weight:700; color:#46504c; }
+
+  .quickmenu{ position:absolute; top:12px; right:12px; z-index:14; }
+  .quick-trigger{ height:38px; min-width:76px; display:flex; align-items:center; justify-content:center; gap:7px;
+                  border:1px solid var(--hair); border-radius:20px; background:rgba(255,255,255,.95);
+                  color:var(--ink); box-shadow:0 3px 14px rgba(20,33,31,.12); font:700 12px inherit;
+                  cursor:pointer; backdrop-filter:blur(8px); }
+  .quick-trigger .chev{ font-size:9px; color:var(--label); transition:transform .15s; }
+  .quick-trigger[aria-expanded="true"] .chev{ transform:rotate(180deg); }
+  .quick-pop{ position:absolute; top:45px; right:0; width:148px; padding:5px; background:#fff;
+              border:1px solid var(--hair); border-radius:10px; box-shadow:0 9px 28px rgba(20,33,31,.18); }
+  .quick-pop[hidden]{ display:none; }
+  .quick-pop button{ width:100%; min-height:34px; padding:7px 9px; border:0; border-radius:6px; background:#fff;
+                     color:var(--ink); text-align:left; font:12px inherit; cursor:pointer; }
+  .quick-pop button:hover,.quick-pop button:focus-visible{ background:var(--field); outline:none; }
+  .quick-pop button + button{ border-top:1px solid var(--hair); border-top-left-radius:0; border-top-right-radius:0; }
+
+  .tool-dock{ position:absolute; top:64px; left:12px; z-index:11; width:104px; height:104px; }
+  .wheel{ --dial-angle:0deg; position:relative; width:104px; height:104px; border-radius:50%;
+          border:1px solid #d9ded8; box-shadow:0 6px 22px rgba(23,34,31,.18);
+          background:
+            radial-gradient(circle at center,#fafbf8 0 38%,transparent 39%),
+            conic-gradient(from var(--dial-angle),var(--rust) 0 12deg,#f5f7f3 12deg 360deg);
+          user-select:none; touch-action:none; transition:transform .16s ease; }
+  .wheel:hover{ transform:translateY(-1px); }
+  .wheel::after{ content:""; position:absolute; inset:5px; border:1px solid rgba(111,140,120,.23);
+                 border-radius:50%; pointer-events:none; }
+  .wheel-key,.wheel-center{ position:absolute; z-index:2; display:flex; align-items:center; justify-content:center;
+                            border:0; color:#59635f; background:transparent; font-family:inherit; cursor:pointer; }
+  .wheel-key{ width:27px; height:27px; border-radius:50%; font-size:15px; font-weight:800; }
+  .wheel-key:hover,.wheel-key:focus-visible{ background:#fff; color:var(--rust-dk); outline:none; }
+  .wheel-key.prev{ top:5px; left:38px; }
+  .wheel-key.next{ bottom:5px; left:38px; }
+  .wheel-key.hide{ top:38px; left:5px; font-size:17px; }
+  .wheel-key.open{ top:38px; right:5px; font-size:20px; }
+  .wheel-center{ top:29px; left:29px; width:46px; height:46px; flex-direction:column; border-radius:50%;
+                 background:#fff; border:1px solid #d9ded8; box-shadow:inset 0 1px 0 #fff,0 1px 4px rgba(25,34,32,.12);
+                 line-height:1.05; }
+  .wheel-center:hover,.wheel-center:focus-visible{ border-color:var(--green); outline:none; }
+  .wheel-center strong{ font-size:8px; letter-spacing:.08em; }
+  .wheel-center small{ display:block; max-width:38px; margin-top:2px; overflow:hidden; text-overflow:ellipsis;
+                       white-space:nowrap; color:var(--green-dk); font-size:7px; }
+
+  .pane{ position:absolute; top:64px; left:126px; width:264px; background:rgba(255,255,255,.97);
+         border:1px solid var(--hair); border-radius:10px; box-shadow:0 6px 24px rgba(20,33,31,.16);
+         z-index:10; max-height:calc(100% - 78px); overflow:hidden; backdrop-filter:blur(9px); }
+  .pane.hidden{ display:none; }
+  .panehead{ height:35px; display:flex; align-items:center; gap:8px; padding:0 8px 0 12px;
+             border-bottom:1px solid var(--hair); }
+  .panehead span{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+                  font-size:11px; font-weight:750; color:#46504c; }
+  .panehead button{ width:25px; height:25px; border:0; border-radius:50%; background:transparent;
+                    color:var(--label); font-size:18px; cursor:pointer; }
+  .panehead button:hover,.panehead button:focus-visible{ background:var(--field); color:var(--ink); outline:none; }
+  .panebody{ max-height:calc(100vh - 113px); overflow:auto; overscroll-behavior:contain; }
+  .foldcap{ display:flex; justify-content:space-between; align-items:center; width:100%; border:0; background:none;
+            padding:0; font-family:inherit; cursor:pointer; user-select:none; text-align:left; }
+  .foldcap .chev{ font-size:9px; color:var(--label); transition:transform .15s; }
+  .blk.closed .chev{ transform:rotate(-90deg); }
+  .blk.closed .fbody{ display:none; }
+  .blk{ border-top:1px solid var(--hair); padding:10px 12px; }
+  .blk:first-child{ border-top:0; }
+  .blk:not(.closed){ background:linear-gradient(90deg,rgba(111,140,120,.12),rgba(255,255,255,0) 75%); }
+  .blk:not(.closed) > .foldcap{ color:var(--green-dk); }
+
+  .seek{ display:flex; gap:7px; align-items:center; }
+  .seek input{ flex:1; min-width:0; height:31px; border:1px solid var(--hair); border-radius:4px; padding:0 10px;
+               font-family:Verdana,sans-serif; font-size:13.5px; }
+  .seek input:focus{ outline:none; border-color:var(--ink); }
+  .seek button{ height:31px; padding:0 11px; border:1px solid var(--green); background:var(--green); color:#fff;
+                font-family:inherit; font-size:12.5px; cursor:pointer; border-radius:6px; }
+  .seek button:hover{ background:var(--green-dk); border-color:var(--green-dk); }
+  .tries{ font-size:12px; color:var(--label); margin-top:8px; }
+  .tries a{ color:var(--rust-dk); cursor:pointer; text-decoration:underline; }
+  .said{ display:none; margin-top:9px; font-size:12.5px; padding:8px 10px; line-height:1.4; }
+  .said.on{ display:block; }
+  .said.good{ background:var(--field); border:1px solid var(--hair); }
+  .said.bad{ background:#f7e9e6; color:#9a3318; }
+  .seek.mini input{ height:31px; }
+  .seek.mini button{ height:31px; }
+  .soon{ font-size:11.5px; color:var(--green-dk); margin-top:8px; font-weight:600; }
+  .hint{ display:flex; align-items:center; gap:7px; margin-top:12px; font-size:11.5px; color:#c0402c; font-weight:600; }
+  .hdot{ width:16px; height:16px; border-radius:50%; background:#c0402c; border:2px solid #fff;
+         box-shadow:0 0 0 1px #d8dcd6; color:#fff; font-size:9.5px; font-weight:bold;
+         display:flex; align-items:center; justify-content:center; flex:none; }
+
+  .seg{ display:flex; border:1px solid var(--hair); }
+  .seg button{ flex:1; border:0; border-left:1px solid var(--hair); background:#fff; padding:8px 0; cursor:pointer;
+               font-family:inherit; font-size:12.5px; color:var(--label); }
+  .seg button:first-child{ border-left:0; }
+  .seg button.on{ background:var(--ink); color:#fff; }
+
+  .sel{ width:100%; height:34px; border:1px solid var(--hair); border-radius:0; background:#fff;
+        font-family:inherit; font-size:12.5px; color:var(--ink); padding:0 8px; cursor:pointer; }
+  .sel:focus{ outline:none; border-color:var(--ink); }
+  .sel + .sel{ margin-top:6px; }
+  .shotload{ display:flex; align-items:center; justify-content:center; gap:7px; min-height:90px;
+             background:var(--field); border:1px solid var(--hair); font-size:11.5px; color:var(--label); }
+  .sp2{ width:14px; height:14px; border:2px solid var(--hair); border-top-color:var(--green);
+        border-radius:50%; animation:spin .8s linear infinite; flex:none; }
+
+  .nums{ display:grid; grid-template-columns:1fr 1fr; gap:11px 16px; }
+  .nums .one .v{ font-family:Verdana,sans-serif; font-size:22px; font-weight:bold; }
+  .nums .one .k{ font-size:10.5px; color:var(--label); margin-top:2px; }
+
+  .ingest{ font-size:11.5px; color:#52595d; line-height:1.6; }
+  .ingest b{ color:#1a7a4e; }
+  .ingest code{ font-family:Consolas,Menlo,monospace; background:var(--field); padding:1px 4px; }
+
+  .legend .lt{ font-size:12.5px; font-weight:bold; }
+  .legend .ls{ font-size:11px; color:var(--label); margin:1px 0 8px; }
+  .ramp{ height:10px; }
+  .ramp.temp{ background:linear-gradient(90deg,#2c6fb0,#83b9d6,#eeeedc,#e0a558,#c0402c); }
+  .ramp.seq{ background:linear-gradient(90deg,#eef2ee,#a9c6ab,#5a9469,#2f6a45); }
+  .ramp.press{ background:linear-gradient(90deg,#486f91,#9db5c5,#eeeedc,#d5aa75,#9b573c); }
+  .scale{ display:flex; justify-content:space-between; font-size:10px; color:var(--label); margin-top:4px; }
+  .legend .ret{ display:flex; align-items:center; gap:7px; font-size:11px; color:#3f474b; margin-top:9px;
+                padding-top:8px; border-top:1px solid var(--hair); }
+  .dot-ret{ width:12px; height:12px; border-radius:50%; background:#c9cdc7; border:2.5px solid var(--rust); }
+
+  .spots .ssub{ font-size:11px; color:var(--label); margin:7px 0; }
+  .b-row{ margin-bottom:8px; }
+  .b-row .bl{ display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:3px; }
+  .b-row .bl .nm{ color:#3f474b; }
+  .b-row .bl .vl{ color:var(--label); font-family:Verdana,sans-serif; }
+  .b-track{ height:9px; background:var(--field); }
+  .b-fill{ height:9px; background:var(--rust); }
+
+  .veil{ position:absolute; inset:0; background:var(--paper); z-index:8; display:flex; align-items:center;
+         justify-content:center; flex-direction:column; gap:12px; }
+  .veil.off{ display:none; }
+  .sp{ width:26px; height:26px; border:3px solid var(--hair); border-top-color:var(--ink); border-radius:50%;
+       animation:spin .8s linear infinite; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .veil span{ font-size:12.5px; color:var(--label); }
+
+  .maplibregl-popup-content{ padding:0; border:1px solid var(--hair); box-shadow:0 8px 26px rgba(35,40,43,.22);
+                             font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; }
+  .maplibregl-popup{ z-index:7; }
+  .maplibregl-popup-close-button{ font-size:18px; color:#fff; right:4px; top:2px; }
+  .card{ width:228px; }
+  .card .top{ background:var(--ink); color:#fff; padding:11px 13px; }
+  .card .top .big{ font-size:17px; font-weight:800; }
+  .card .top .tg{ font-size:11px; color:#c9cdc7; margin-top:2px; font-family:Verdana,sans-serif; }
+  .card .mark{ display:inline-block; margin-top:8px; font-size:10px; font-weight:bold; text-transform:uppercase;
+               letter-spacing:.04em; padding:3px 7px; }
+  .card .mark.r{ background:var(--rust); color:#fff; }
+  .card .mark.t{ background:#3a4145; color:#cfd3cd; }
+  .card .body{ padding:8px 13px 12px; max-height:calc(100vh - 155px); overflow-y:auto; }
+  .detail-toggle{ display:flex; align-items:center; justify-content:space-between; width:100%; margin-top:9px;
+                  padding:7px 0; border:0; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
+                  background:#fff; color:var(--ink); font-family:inherit; font-size:11px; font-weight:700;
+                  text-transform:uppercase; letter-spacing:.06em; cursor:pointer; }
+  .detail-toggle .chev{ color:var(--label); font-size:9px; transition:transform .15s; }
+  .detail-toggle[aria-expanded="false"] .chev{ transform:rotate(-90deg); }
+  .card-details[hidden]{ display:none; }
+  .card .r{ display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid #eee; font-size:12.5px; }
+  .card .r:last-of-type{ border-bottom:0; }
+  .card .r .k{ color:var(--label); }
+  .card .r .v{ font-family:Verdana,sans-serif; text-align:right; }
+  .capnav{ display:flex; align-items:center; justify-content:space-between; gap:6px; margin-top:9px;
+           position:sticky; bottom:-12px; background:#fff; padding:7px 0 4px; }
+  .capnav button{ border:1px solid var(--hair); background:#fff; color:var(--ink); padding:6px 8px;
+                  font-family:inherit; font-size:11px; cursor:pointer; }
+  .capnav button:hover{ border-color:var(--rust); color:var(--rust-dk); }
+  .capnav span{ color:var(--label); font-family:Verdana,sans-serif; font-size:10px; }
+  .card .shot-wrap{ margin-top:10px; }
+  .card .shot{ width:100%; max-height:175px; object-fit:cover; border-radius:8px; display:block; cursor:zoom-in; }
+  .card .noimg{ background:var(--field); border:1px dashed var(--hair); border-radius:8px; padding:14px;
+                text-align:center; font-size:12px; color:var(--label); }
+  .card .noimg small{ display:block; margin-top:3px; font-size:10.5px; opacity:.8; }
+  #lightbox{ position:fixed; inset:0; z-index:80; background:rgba(20,28,28,.86); display:none;
+             align-items:center; justify-content:center; flex-direction:column; gap:10px; cursor:zoom-out; padding:24px; }
+  #lightbox.on{ display:flex; }
+  #lightbox img{ max-width:90vw; max-height:80vh; border-radius:8px; box-shadow:0 16px 50px rgba(0,0,0,.5); }
+  #lightbox .lb-cap{ color:#dfe4e0; font-size:13px; }
+  .card .trip{ background:var(--field); margin:0 -13px 4px; padding:7px 13px; font-size:12px; color:#3f474b; }
+  .card .trip b{ font-family:Verdana,sans-serif; color:var(--ink); }
+  .card .legs{ margin:4px 0 2px; }
+  .leg{ display:flex; justify-content:space-between; gap:8px; font-size:11.5px; padding:3px 0; border-bottom:1px dotted #e7e7e1; }
+  .leg:last-child{ border-bottom:0; }
+  .leg .when{ color:var(--label); }
+  .leg .where{ text-align:right; }
+  .leg .mi{ color:var(--rust-dk); }
+
+  .wxlist{ margin-top:8px; }
+  .wxrow{ display:grid; grid-template-columns:34px 1fr; gap:7px; align-items:start; padding:6px 0;
+          border-bottom:1px solid var(--hair); font-size:11.5px; }
+  .wxrow:last-child{ border-bottom:0; }
+  .wxrow b{ font-size:11px; }
+  .wxrow span{ color:#3f474b; line-height:1.35; }
+  .wxnote{ color:var(--label); font-size:10.5px; line-height:1.4; margin-top:7px; }
+
+  .login{ position:fixed; inset:0; z-index:90; display:none; align-items:center; justify-content:center;
+          padding:20px; background:rgba(25,34,34,.48); }
+  .login.on{ display:flex; }
+  .loginbox{ width:min(360px,100%); background:#fff; border:1px solid var(--hair); border-radius:10px;
+             box-shadow:0 16px 48px rgba(20,29,29,.25); padding:22px; }
+  .loginbox h2{ margin:0; font-size:21px; }
+  .loginbox p{ margin:6px 0 17px; color:var(--label); font-size:12.5px; line-height:1.45; }
+  .loginbox label{ display:block; margin-top:10px; color:var(--label); font-size:11px; font-weight:700; }
+  .loginbox input{ width:100%; height:38px; margin-top:4px; border:1px solid var(--hair); border-radius:4px;
+                   padding:0 10px; font:13px inherit; color:var(--ink); }
+  .loginbox input:focus{ outline:none; border-color:var(--ink); }
+  .login-note{ margin:12px 0 0; padding:9px 10px; background:var(--field); color:var(--label);
+               font-size:10.5px; line-height:1.4; }
+  .mfa-step[hidden], .credential-fields[hidden], .signup-fields[hidden]{ display:none; }
+  .login-actions{ display:flex; gap:8px; margin-top:16px; }
+  .login-actions button{ flex:1; }
+  .loginmsg{ min-height:17px; margin-top:10px; color:#9a3318; font-size:11.5px; }
+  .preview-login{ display:none; width:100%; margin-top:8px; border:0; background:none; color:var(--green-dk);
+                  text-decoration:underline; font:12px inherit; cursor:pointer; }
+  .phone-step[hidden]{ display:none; }
+  .phone-note{ margin-top:8px; color:var(--label); font-size:10.5px; line-height:1.4; }
+  .mfa-setup{ display:block; margin-top:8px; color:var(--green-dk); text-align:center;
+              font-size:12px; }
+  button.mfa-setup{ width:100%; border:0; background:none; text-decoration:underline; cursor:pointer; }
+  .mfa-setup[hidden]{ display:none; }
+  .feedback-form textarea{ width:100%; min-height:88px; margin-top:9px; padding:8px 9px; resize:vertical;
+                           border:1px solid var(--hair); border-radius:4px; color:var(--ink); font:12px/1.4 inherit; }
+  .feedback-form textarea:focus{ outline:none; border-color:var(--ink); }
+  .stars{ display:flex; gap:3px; margin-top:8px; }
+  .stars button{ width:34px; height:34px; padding:0; border:1px solid var(--hair); border-radius:4px;
+                 background:#fff; color:#aeb4af; font-size:20px; cursor:pointer; }
+  .stars button.on{ border-color:#b8872b; color:#b8872b; background:#fff9e8; }
+  .form-msg{ min-height:16px; margin-top:7px; color:var(--label); font-size:10.5px; line-height:1.35; }
+  .form-msg.bad{ color:#96391f; }
+  .form-msg.good{ color:#2f6a45; }
+  .admin-counts{ display:grid; grid-template-columns:repeat(3,1fr); gap:5px; margin-top:8px; }
+  .admin-counts div{ padding:7px 5px; border:1px solid var(--hair); background:var(--field); text-align:center; }
+  .admin-counts b{ display:block; font:700 15px Verdana,sans-serif; }
+  .admin-counts span{ color:var(--label); font-size:9px; text-transform:uppercase; letter-spacing:.04em; }
+  .recent-access{ margin-top:9px; }
+  .recent-row{ padding:6px 0; border-bottom:1px solid var(--hair); font-size:10.5px; line-height:1.35; }
+  .recent-row:last-child{ border-bottom:0; }
+  .recent-row b{ display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .recent-row span{ color:var(--label); }
+  .report-buttons{ display:grid; gap:6px; margin-top:10px; }
+  .idlewarn{ position:absolute; right:14px; bottom:74px; z-index:12; display:none; width:280px;
+             background:#fff; border:1px solid var(--hair); border-left:4px solid var(--rust);
+             box-shadow:0 8px 28px rgba(20,29,29,.2); padding:12px; }
+  .idlewarn.on{ display:block; }
+  .idlewarn strong{ display:block; font-size:14px; }
+  .idlewarn span{ display:block; margin:4px 0 10px; color:var(--label); font-size:11.5px; line-height:1.4; }
+  .idlewarn button{ width:100%; }
+
+  @media (max-width:680px){
+    .legend{ display:none; }
+    .mapstamp{ top:8px; left:8px; height:34px; max-width:195px; padding-right:9px; }
+    .mapstamp img{ height:22px; }
+    .mapstamp .lvlname{ max-width:126px; font-size:10px; }
+    .quickmenu{ top:8px; right:8px; }
+    .quick-trigger{ height:34px; min-width:67px; }
+    .quick-pop{ top:40px; }
+    .tool-dock{ top:auto; bottom:42px; left:8px; width:92px; height:92px; }
+    .wheel{ width:92px; height:92px; }
+    .wheel-key.prev{ top:3px; left:33px; }
+    .wheel-key.next{ bottom:3px; left:33px; }
+    .wheel-key.hide{ top:33px; left:3px; }
+    .wheel-key.open{ top:33px; right:3px; }
+    .wheel-center{ top:25px; left:25px; width:42px; height:42px; }
+    .pane{ top:auto; right:8px; bottom:140px; left:8px; width:auto; max-height:52vh; }
+    .panebody{ max-height:calc(52vh - 35px); }
+    .idlewarn{ left:8px; right:8px; bottom:140px; width:auto; }
+    .maplibregl-ctrl-bottom-left{ left:96px; }
+  }
+</style>
+</head>
+
+<body>
+
+<div id="gate">
+  <div class="brandbar">
+    <span class="logo"><img src="assets/fishtagged-logo.png" alt="Fishtagged" style="height:44px;display:block"></span>
+    <nav class="navlinks">
+      <a href="https://fishtagged.org/" target="_blank" rel="noopener">About</a>
+      <a href="https://fishtagged.org/" target="_blank" rel="noopener">River Data</a>
+      <a class="cta" href="https://fishtagged.org/" target="_blank" rel="noopener">Report a Catch</a>
+    </nav>
+  </div>
+  <div class="col">
+    <div class="hero">
+      <h1>Search a tag. <i>Follow a fish.</i></h1>
+      <p class="lead">Look up any Fishtagged tag and trace
+        where that fish has travelled between catches.</p>
+      <div class="sub"><span>Upper Potomac River</span><span class="num" id="gateN">4,661 captures · 2020–2026</span></div>
+    </div>
+
+    <div class="levels">
+      <button class="lvl" data-go="l1">
+        <span class="n">1</span>
+        <span><h3>Search a tag</h3><p>Type a tag number to see when it was tagged, how many times
+          it came back, and the path from one catch to the next. Free for anyone.</p></span>
+        <span class="who">open</span>
+      </button>
+      <button class="lvl" data-go="l2">
+        <span class="n">2</span>
+        <span><h3>River conditions beta</h3><p>All species as generalised heatmaps. Remap the
+          heat by water data or nearby-airport weather from each catch time.</p></span>
+        <span class="who">login</span>
+      </button>
+      <button class="lvl" data-go="l3">
+        <span class="n">3</span>
+        <span><h3>Staff</h3><p>Full access — individual fish points and exact locations, all species,
+          every field and toggle, plus the tile-feed status and a CSV export.</p></span>
+        <span class="who">staff login</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="app">
+  <div id="map"></div>
+
+  <div class="mapstamp">
+    <img src="assets/fishtagged-logo.png" alt="Fishtagged">
+    <span class="lvlname" id="lvlName"></span>
+  </div>
+
+  <div class="quickmenu">
+    <button class="quick-trigger" id="quickBtn" type="button" aria-expanded="false"
+      aria-controls="quickPop">Map <span class="chev" aria-hidden="true">&#9660;</span></button>
+    <div class="quick-pop" id="quickPop" hidden>
+      <button id="baseBtn" type="button">Satellite view</button>
+      <button id="leaveBtn" type="button">Change level</button>
+      <button id="logoutBtn" type="button" style="display:none">Log out</button>
+    </div>
+  </div>
+
+  <div class="tool-dock">
+    <div class="wheel" id="toolWheel" role="group" aria-label="Map tool selector">
+      <button class="wheel-key prev" id="toolPrev" type="button" aria-label="Previous tool">&#9650;</button>
+      <button class="wheel-key next" id="toolNext" type="button" aria-label="Next tool">&#9660;</button>
+      <button class="wheel-key hide" id="toolHide" type="button" aria-label="Close tools">&times;</button>
+      <button class="wheel-key open" id="toolOpen" type="button" aria-label="Open selected tool">&#8250;</button>
+      <button class="wheel-center" id="menuBtn" type="button" aria-expanded="false" aria-controls="pane">
+        <strong>TOOLS</strong><small id="wheelLabel">Search</small>
+      </button>
+    </div>
+  </div>
+
+  <div class="pane hidden" id="pane" aria-label="Map tools">
+    <div class="panehead">
+      <span id="paneLabel">Map tools</span>
+      <button id="paneClose" type="button" aria-label="Close map tools">&times;</button>
+    </div>
+    <div class="panebody" id="paneBody"></div>
+  </div>
+
+  <div class="idlewarn" id="idleWarn" role="alert" aria-live="assertive">
+    <strong>Still there?</strong>
+    <span>No activity for five minutes. Move your mouse or stay signed in within
+      <b id="idleCount">60</b> seconds.</span>
+    <button class="flat" id="staySignedIn" type="button">Stay signed in</button>
+  </div>
+
+  <div class="veil" id="veil"><div class="sp"></div><span>loading…</span></div>
+</div>
+
+<div class="login" id="login" aria-hidden="true">
+  <div class="loginbox" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <h2 id="loginTitle">Account login</h2>
+    <p id="loginIntro">Sign in to open the protected map tools.</p>
+    <form id="loginForm">
+      <div class="credential-fields" id="credentialFields">
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" type="email" autocomplete="username" required>
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password" autocomplete="current-password" required>
+        <div class="signup-fields" id="signupFields" hidden>
+          <label for="signupPasswordConfirm">Confirm password</label>
+          <input id="signupPasswordConfirm" type="password" autocomplete="new-password">
+          <label for="signupPhone">Phone number</label>
+          <input id="signupPhone" type="tel" inputmode="tel" autocomplete="tel"
+            maxlength="18" placeholder="+13015550123">
+          <div class="phone-note">Include the country code. The number is used only for account
+            administration and is not displayed publicly or SMS-verified.</div>
+        </div>
+      </div>
+      <div class="mfa-step" id="mfaStep" hidden>
+        <label for="loginMfa">Security code</label>
+        <input id="loginMfa" type="text" inputmode="numeric" autocomplete="one-time-code"
+          maxlength="8" pattern="[0-9 ]{6,8}">
+      </div>
+      <div class="phone-step" id="phoneStep" hidden>
+        <label for="loginPhone">Phone number</label>
+        <input id="loginPhone" type="tel" inputmode="tel" autocomplete="tel"
+          maxlength="18" placeholder="+13015550123">
+        <div class="phone-note">Required for account administration. Include the country code.
+          This number is not displayed publicly or SMS-verified.</div>
+      </div>
+      <div class="login-actions">
+        <button class="flat" type="button" id="loginCancel">Cancel</button>
+        <button class="flat" type="submit" id="loginSubmit">Sign in</button>
+      </div>
+      <div class="loginmsg" id="loginMsg" aria-live="polite"></div>
+      <a class="mfa-setup" id="mfaSetupLink" href="security/enroll-mfa.html" hidden>
+        Set up a security code
+      </a>
+      <button class="mfa-setup" id="verifyEmailBtn" type="button" hidden>
+        Send verification email
+      </button>
+      <button class="mfa-setup" id="resetPasswordBtn" type="button">
+        Forgot password?
+      </button>
+      <button class="mfa-setup" id="createAccountBtn" type="button">
+        Create account
+      </button>
+    </form>
+    <div class="login-note">Sign-in is handled by Google Identity Platform. Fishtagged does not
+      receive or store your password.</div>
+    <button class="preview-login" id="previewLogin" type="button">Preview this level locally</button>
+  </div>
+</div>
+
+<div id="lightbox" onclick="this.classList.remove('on')"><img alt=""><div class="lb-cap"></div></div>
+
+<script>
+const HERE = location.href.replace(/[^/]*$/,"");
+const DATA_VERSION = "20260729b";
+const DATA_FILE = "fish_index-20260701.json";
+const TILE_ROOT = "tiles-20260701";
+const PUBLIC_META_FILE = "public-meta-20260701.json";
+const LEVEL2_TILE_ROOT = "tiles-level2-20260701";
+const RIVER_FILE = "river/potomac-network-20260721.json";
+const PHOTO_PROXY = "https://fishtaggedfileproxy-840956266329.us-east4.run.app/retrieve?img_id=";
+const SECURITY = window.FISHTAGGED_SECURITY || {};
+const AUTH_URL = typeof SECURITY.accessApi==="string" && !SECURITY.accessApi.includes("REPLACE_")
+  ? SECURITY.accessApi.replace(/\/+$/,"") : "";
+const TAG_URL = AUTH_URL ? AUTH_URL+"/v1/tag" : "";
+const LEVEL2_SUMMARY_URL = AUTH_URL ? AUTH_URL+"/v1/level2/summary" : "";
+const LEVEL2_TILE_API = AUTH_URL ? AUTH_URL+"/v1/level2/tiles" : "";
+const ADMIN_INDEX_URL = AUTH_URL ? AUTH_URL+"/v1/admin/index" : "";
+const ADMIN_TILE_ROOT = AUTH_URL ? AUTH_URL+"/v1/admin/tiles" : "";
+const PROFILE_URL = AUTH_URL ? AUTH_URL+"/v1/profile" : "";
+const FEEDBACK_URL = AUTH_URL ? AUTH_URL+"/v1/feedback" : "";
+const ADMIN_OVERVIEW_URL = AUTH_URL ? AUTH_URL+"/v1/admin/overview" : "";
+const LOCAL_PREVIEW = ["localhost","127.0.0.1"].includes(location.hostname) &&
+  SECURITY.localDemoData===true;
+const IDLE_TIME = 5*60*1000;
+const IDLE_GRACE = 60*1000;
+const MAP_READY = window.maplibregl ? Promise.resolve() : new Promise((resolve,reject)=>{
+  window.addEventListener("maplibre-ready",resolve,{once:true});
+  window.addEventListener("maplibre-error",()=>reject(new Error("The map library could not be loaded.")),{once:true});
+});
+const esc = value => String(value??"").replace(/[&<>"']/g,char=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[char]));
+const JOURNEY_COLOR = ["match",["get","to"],
+  2,"#2f8f56",3,"#d89a24",4,"#2f6fb0",5,"#7656a4",6,"#258a8a","#b4622d"];
+const photoURL = file => PHOTO_PROXY + encodeURIComponent(file);
+function loadPhoto(wrap, file, tagNum){
+  wrap.innerHTML = '<div class="shotload"><span class="sp2"></span> loading photo…</div>';
+  const img = new Image();
+  img.className = "shot"; img.alt = "tag "+tagNum;
+  img.onload  = ()=>{ wrap.innerHTML = ""; wrap.appendChild(img); };
+  img.onerror = ()=>{ wrap.innerHTML = '<div class="noimg">No photo on file<small>'+esc(file)+'</small></div>'; };
+  img.onclick = ()=> openShot(img.src, file);
+  img.src = photoURL(file);
+}
+function openShot(url, file){
+  const lb = document.getElementById("lightbox");
+  lb.querySelector("img").src = url;
+  lb.querySelector(".lb-cap").textContent = file || "";
+  lb.classList.add("on");
+}
+
+const LIGHT = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
+const SAT_TILES = [
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+];
+const RAMP = {
+  tF:  { title:"Water temperature", unit:"°F", kind:"temp",
+         stops:[40,"#2c6fb0", 52,"#83b9d6", 62,"#eeeedc", 70,"#e0a558", 78,"#c0402c"], scale:["40","60","78"] },
+  lvl: { title:"River level", unit:"ft", kind:"seq",
+         stops:[1,"#eef2ee", 2.5,"#a9c6ab", 4,"#5a9469", 7,"#2f6a45"], scale:["1","4","7+"] },
+  turb:{ title:"Turbidity", unit:"FNU", kind:"seq",
+         stops:[1,"#eef2ee", 8,"#a9c6ab", 20,"#5a9469", 40,"#2f6a45"], scale:["1","20","40+"] },
+  do:  { title:"Dissolved oxygen", unit:"mg/L", kind:"seq",
+         stops:[6,"#eef2ee", 8.5,"#a9c6ab", 11,"#5a9469", 13,"#2f6a45"], scale:["6","11","13+"] },
+  cfs: { title:"Discharge", unit:"CFS", kind:"seq",
+         stops:[1500,"#eef2ee", 6000,"#a9c6ab", 12000,"#5a9469", 20000,"#2f6a45"], scale:["1.5k","12k","20k"] },
+  airF:{ title:"Air temperature", unit:"°F", kind:"temp",
+         stops:[25,"#2c6fb0", 45,"#83b9d6", 65,"#eeeedc", 80,"#e0a558", 95,"#c0402c"], scale:["25","65","95"] },
+  windMph:{ title:"Wind speed", unit:"mph", kind:"seq",
+         stops:[0,"#eef2ee", 5,"#a9c6ab", 12,"#5a9469", 25,"#2f6a45"], scale:["0","12","25+"] },
+  pressIn:{ title:"Barometric pressure", unit:"inHg", kind:"press",
+         stops:[29.2,"#486f91", 29.7,"#9db5c5", 30.0,"#eeeedc", 30.3,"#d5aa75", 30.7,"#9b573c"], scale:["29.2","30.0","30.7"] },
+};
+function colorBy(field){
+  const r = RAMP[field];
+  const e = ["interpolate",["linear"],["to-number",["get",field],-999], -998,"#c4c8c2"];
+  for(let i=0;i<r.stops.length;i+=2) e.push(r.stops[i], r.stops[i+1]);
+  return e;
+}
+function metricValue(field,value){
+  const number=Number(value);
+  if(!Number.isFinite(number)) return null;
+  if(field==="airF") return number>=-50 && number<=140 ? number : null;
+  if(field==="pressIn") return number>=20 && number<=35 ? number : null;
+  return number>=0 ? number : null;
+}
+
+let map, META, TAGS=[], BYNUM={}, LEVEL2_SUMMARY=null, DATA_KEY=null, scaleCtl=null;
+let role, base="light", view="points", hydro=null, species="All", retOnly=false;
+let picked=null, fitted=false, units="mi";
+let pendingRole=null;
+let toolIndex=0, wheelMotion=0, wheelTimer=null;
+let verifiedSession=null, activeToken="", authWait=null;
+let mfaPending=false, phonePending=false, signupMode=false;
+let feedbackRating=0;
+let idleTimer=null, idleLogoutTimer=null, idleTick=null, idleDeadline=0, lastActivity=0;
+const dmi=v=>{ const m=parseFloat(v); return isNaN(m) ? "—" :
+  (units==="km" ? (m<.125 ? Math.round(m*1609.34)+" m" : (m*1.60934).toFixed(1)+" km") :
+   (m<.1 ? Math.round(m*5280)+" ft" : m.toFixed(1)+" mi")); };
+const empty = ()=>({type:"FeatureCollection",features:[]});
+async function fetchTimed(url,options={},timeout=12000){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),timeout);
+  try{
+    return await fetch(url,{...options,signal:controller.signal});
+  }finally{
+    clearTimeout(timer);
+  }
+}
+
+const LEVELS = { l1:"Level 1 · search a tag", l2:"Level 2 · beta", l3:"Level 3 · staff" };
+function authSession(){
+  return verifiedSession;
+}
+function canOpen(level,session){
+  if(level==="l1") return true;
+  if(!session) return false;
+  return level==="l2" ? ["level2","account","admin"].includes(session.role) : session.role==="admin";
+}
+function authClient(){
+  if(window.FT_AUTH) return Promise.resolve(window.FT_AUTH);
+  if(authWait) return authWait;
+  authWait=new Promise((resolve,reject)=>{
+    const ready=()=>{
+      clearTimeout(timer);
+      resolve(window.FT_AUTH);
+    };
+    const timer=setTimeout(()=>{
+      window.removeEventListener("ft-auth-ready",ready);
+      reject(new Error("The sign-in service did not load."));
+    },8000);
+    window.addEventListener("ft-auth-ready",ready,{once:true});
+  });
+  return authWait.catch(error=>{
+    authWait=null;
+    throw error;
+  });
+}
+function resetLoginStep(){
+  mfaPending=false;
+  phonePending=false;
+  signupMode=false;
+  byId("credentialFields").hidden=false;
+  byId("mfaStep").hidden=true;
+  byId("phoneStep").hidden=true;
+  byId("signupFields").hidden=true;
+  byId("loginEmail").required=true;
+  byId("loginPassword").required=true;
+  byId("loginPassword").autocomplete="current-password";
+  byId("loginMfa").required=false;
+  byId("loginMfa").value="";
+  byId("loginPhone").required=false;
+  byId("loginPhone").value="";
+  byId("signupPasswordConfirm").required=false;
+  byId("signupPasswordConfirm").value="";
+  byId("signupPhone").required=false;
+  byId("signupPhone").value="";
+  byId("mfaSetupLink").hidden=true;
+  byId("verifyEmailBtn").hidden=true;
+  byId("resetPasswordBtn").hidden=false;
+  byId("createAccountBtn").hidden=false;
+  set("createAccountBtn","Create account");
+  set("loginSubmit","Sign in");
+  if(window.FT_AUTH) window.FT_AUTH.cancelMfa();
+}
+function closeLogin(){
+  const box=byId("login");
+  box.classList.remove("on");
+  box.setAttribute("aria-hidden","true");
+  byId("loginForm").reset();
+  resetLoginStep();
+  set("loginMsg","");
+  pendingRole=null;
+}
+function openLogin(level){
+  pendingRole=level;
+  resetLoginStep();
+  set("loginTitle",level==="l3"?"Staff login":"Account login");
+  set("loginIntro",level==="l3"?"Sign in with a staff account to open exact locations and administration tools.":
+    "Sign in to open river conditions and river-mile tools.");
+  byId("createAccountBtn").hidden=level==="l3";
+  const preview=byId("previewLogin");
+  preview.style.display=LOCAL_PREVIEW?"block":"none";
+  const box=byId("login");
+  box.classList.add("on");
+  box.setAttribute("aria-hidden","false");
+  setTimeout(()=>byId("loginEmail").focus(),0);
+}
+function toggleCreateAccount(){
+  if(pendingRole==="l3") return;
+  if(signupMode){
+    resetLoginStep();
+    set("loginTitle","Account login");
+    set("loginIntro","Sign in to open river conditions and river-mile tools.");
+    set("loginMsg","");
+    byId("loginEmail").focus();
+    return;
+  }
+  signupMode=true;
+  mfaPending=false;
+  phonePending=false;
+  byId("credentialFields").hidden=false;
+  byId("mfaStep").hidden=true;
+  byId("phoneStep").hidden=true;
+  byId("signupFields").hidden=false;
+  byId("loginPassword").autocomplete="new-password";
+  byId("signupPasswordConfirm").required=true;
+  byId("signupPhone").required=true;
+  byId("resetPasswordBtn").hidden=true;
+  byId("verifyEmailBtn").hidden=true;
+  set("loginTitle","Create account");
+  set("loginIntro","Create an account, verify your email, and wait for Level 2 approval.");
+  set("loginSubmit","Create account");
+  set("createAccountBtn","Back to sign in");
+  set("loginMsg","");
+  byId("loginEmail").focus();
+}
+async function authorizeLevel(level){
+  const client=await authClient();
+  if(!client?.configured || !AUTH_URL){
+    throw new Error("The account service still needs its Google Cloud settings.");
+  }
+  const token=await client.token();
+  const response=await fetchTimed(AUTH_URL+"/v1/access",{
+    method:"POST",
+    headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},
+    body:JSON.stringify({level})
+  });
+  let result={};
+  try{ result=await response.json(); }catch(e){}
+  if(!response.ok || !result.granted){
+    const error=new Error(result.message||"This account cannot open that level.");
+    error.code=result.code||"access_denied";
+    throw error;
+  }
+  verifiedSession={
+    role:result.role,
+    email:result.email||"",
+    displayName:result.displayName||""
+  };
+  activeToken=token;
+  return verifiedSession;
+}
+function showPhoneStep(){
+  phonePending=true;
+  mfaPending=false;
+  byId("credentialFields").hidden=true;
+  byId("mfaStep").hidden=true;
+  byId("phoneStep").hidden=false;
+  byId("loginEmail").required=false;
+  byId("loginPassword").required=false;
+  byId("loginMfa").required=false;
+  byId("loginPhone").required=true;
+  byId("mfaSetupLink").hidden=true;
+  byId("resetPasswordBtn").hidden=true;
+  set("loginIntro","Add a phone number to finish setting up this account.");
+  set("loginSubmit","Save phone number");
+  set("loginMsg","");
+  setTimeout(()=>byId("loginPhone").focus(),0);
+}
+function cleanPhone(value){
+  const trimmed=String(value||"").trim();
+  const digits=trimmed.replace(/\D/g,"");
+  if(digits.length===10) return "+1"+digits;
+  if(digits.length===11 && digits.startsWith("1")) return "+"+digits;
+  if(trimmed.startsWith("+")) return "+"+digits;
+  return trimmed;
+}
+async function savePhone(inputId="loginPhone"){
+  const phone=cleanPhone(val(inputId));
+  if(!/^\+[1-9]\d{7,14}$/.test(phone)){
+    const error=new Error("Enter a valid phone number with its country code.");
+    error.code="invalid_phone";
+    throw error;
+  }
+  const client=await authClient();
+  const token=await client.token();
+  const response=await fetchTimed(PROFILE_URL,{
+    method:"POST",
+    headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},
+    body:JSON.stringify({phone})
+  });
+  let result={};
+  try{ result=await response.json(); }catch(e){}
+  if(!response.ok || !result.saved){
+    const error=new Error(result.message||"The phone number could not be saved.");
+    error.code=result.code||"profile_failed";
+    throw error;
+  }
+}
+async function sendVerification(){
+  const button=byId("verifyEmailBtn");
+  button.disabled=true;
+  set("loginMsg","Sending verification email…");
+  try{
+    const client=await authClient();
+    await client.sendVerificationEmail();
+    set("loginMsg","Verification email sent. Open it, verify the address, then sign in again.");
+  }catch(error){
+    set("loginMsg",error.message||"The verification email could not be sent.");
+  }finally{
+    button.disabled=false;
+  }
+}
+async function sendPasswordReset(){
+  const email=val("loginEmail").trim();
+  if(!email){
+    set("loginMsg","Enter the account email first.");
+    byId("loginEmail").focus();
+    return;
+  }
+  const button=byId("resetPasswordBtn");
+  button.disabled=true;
+  set("loginMsg","Sending password reset email…");
+  try{
+    const client=await authClient();
+    await client.sendPasswordReset(email);
+  }catch(error){}
+  set("loginMsg","If that approved account exists, a password reset email has been sent.");
+  button.disabled=false;
+}
+async function requestLevel(level){
+  if(level==="l1"){ enter(level); return; }
+  try{
+    const client=await authClient();
+    if(client?.currentUser()){
+      const session=await authorizeLevel(level);
+      if(canOpen(level,session)){ enter(level); return; }
+    }
+  }catch(error){
+    openLogin(level);
+    if(error.code==="phone_required"){
+      showPhoneStep();
+      return;
+    }
+    set("loginMsg",error.message||"Sign in to continue.");
+    byId("mfaSetupLink").hidden=error.code!=="mfa_required";
+    byId("verifyEmailBtn").hidden=error.code!=="email_not_verified";
+    return;
+  }
+  openLogin(level);
+}
+async function signIn(e){
+  e.preventDefault();
+  const submit=byId("loginSubmit");
+  submit.disabled=true;
+  set("loginMsg",phonePending?"Saving phone number…":mfaPending?"Checking code…":"Signing in…");
+  try{
+    const client=await authClient();
+    if(!client?.configured || !AUTH_URL){
+      throw new Error("The account service still needs its Google Cloud settings.");
+    }
+    if(phonePending){
+      await savePhone();
+      const level=pendingRole;
+      const session=await authorizeLevel(level);
+      if(!canOpen(level,session)) throw new Error("This account cannot open that level.");
+      closeLogin();
+      enter(level);
+      return;
+    }
+    if(signupMode){
+      const email=val("loginEmail").trim();
+      const password=val("loginPassword");
+      const confirmation=val("signupPasswordConfirm");
+      if(password.length<12) throw new Error("Use a password with at least 12 characters.");
+      if(password!==confirmation) throw new Error("The two passwords do not match.");
+      cleanPhone(val("signupPhone"));
+      const phone=cleanPhone(val("signupPhone"));
+      if(!/^\+[1-9]\d{7,14}$/.test(phone)){
+        throw new Error("Enter a valid phone number with its country code.");
+      }
+      await client.createAccount(email,password);
+      let profileSaved=true;
+      try{
+        await savePhone("signupPhone");
+      }catch(error){
+        profileSaved=false;
+      }
+      try{
+        await client.sendVerificationEmail();
+      }finally{
+        await client.signOut();
+      }
+      resetLoginStep();
+      byId("createAccountBtn").hidden=false;
+      byId("loginEmail").value=email;
+      byId("loginPassword").value="";
+      set("loginTitle","Check your email");
+      set("loginIntro","Open the verification email, then return here after an administrator approves Level 2 access.");
+      set("loginMsg",profileSaved
+        ?"Account created. Verify your email before signing in."
+        :"Account created, but the phone number could not be saved. Contact an administrator.");
+      return;
+    }
+    const result=mfaPending
+      ? await client.finishMfa(val("loginMfa").replace(/\s/g,""))
+      : await client.signIn(val("loginEmail").trim(),val("loginPassword"));
+    if(result.requiresMfa){
+      mfaPending=true;
+      byId("credentialFields").hidden=true;
+      byId("mfaStep").hidden=false;
+      byId("resetPasswordBtn").hidden=true;
+      byId("loginEmail").required=false;
+      byId("loginPassword").required=false;
+      byId("loginMfa").required=true;
+      set("loginIntro","Enter the current code from your authenticator app.");
+      set("loginSubmit","Verify");
+      set("loginMsg","");
+      byId("loginMfa").focus();
+      return;
+    }
+    const level=pendingRole;
+    const session=await authorizeLevel(level);
+    if(!canOpen(level,session)) throw new Error("This account cannot open that level.");
+    closeLogin();
+    enter(level);
+  }catch(error){
+    if(error.code==="phone_required"){
+      showPhoneStep();
+      return;
+    }
+    set("loginMsg",error.message||"Sign-in failed. Check your information and try again.");
+    byId("mfaSetupLink").hidden=error.code!=="mfa_required";
+    byId("verifyEmailBtn").hidden=error.code!=="email_not_verified";
+  }finally{
+    submit.disabled=false;
+  }
+}
+function previewLevel(){
+  if(!LOCAL_PREVIEW || (pendingRole!=="l2" && pendingRole!=="l3")) return;
+  const level=pendingRole;
+  verifiedSession={role:"admin",email:"local preview",localPreview:true};
+  activeToken="";
+  closeLogin();
+  enter(level);
+}
+function protectedLevel(){
+  return (role==="l2" || role==="l3") && byId("app").classList.contains("on");
+}
+function stopIdle(){
+  clearTimeout(idleTimer);
+  clearTimeout(idleLogoutTimer);
+  clearInterval(idleTick);
+  idleTimer=idleLogoutTimer=idleTick=null;
+  byId("idleWarn").classList.remove("on");
+}
+function armIdle(){
+  stopIdle();
+  if(protectedLevel()) idleTimer=setTimeout(showIdleWarning,IDLE_TIME);
+}
+function showIdleWarning(){
+  if(!protectedLevel()) return;
+  idleDeadline=Date.now()+IDLE_GRACE;
+  set("idleCount","60");
+  byId("idleWarn").classList.add("on");
+  idleTick=setInterval(()=>{
+    set("idleCount",String(Math.max(0,Math.ceil((idleDeadline-Date.now())/1000))));
+  },1000);
+  idleLogoutTimer=setTimeout(()=>logoutSession(true),IDLE_GRACE);
+}
+function staySignedIn(){
+  if(protectedLevel()){
+    armIdle();
+    recordSessionEvent("session_refresh",role);
+  }
+}
+function noteActivity(){
+  if(!protectedLevel()) return;
+  if(byId("idleWarn").classList.contains("on")){
+    staySignedIn();
+    return;
+  }
+  const now=Date.now();
+  if(now-lastActivity<1000) return;
+  lastActivity=now;
+  armIdle();
+}
+async function recordSessionEvent(event,level){
+  if(!verifiedSession || verifiedSession.localPreview || !AUTH_URL) return;
+  try{
+    const client=await authClient();
+    const token=await client.token();
+    await fetchTimed(AUTH_URL+"/v1/audit",{
+      method:"POST",
+      headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},
+      body:JSON.stringify({event,level}),
+      keepalive:true
+    },4000);
+  }catch(e){}
+}
+async function logoutSession(timedOut){
+  const level=role;
+  stopIdle();
+  await recordSessionEvent(timedOut?"idle_timeout":"logout",level);
+  try{
+    const client=await authClient();
+    await client.signOut();
+  }catch(e){}
+  verifiedSession=null;
+  activeToken="";
+  byId("app").classList.remove("on");
+  byId("gate").style.display="block";
+  clearPick();
+  if(level==="l2" || level==="l3"){
+    TAGS=[];
+    BYNUM={};
+    META=null;
+    DATA_KEY=null;
+    LEVEL2_SUMMARY=null;
+    if(map){ map.remove(); map=null; scaleCtl=null; fitted=false; }
+  }
+  if(timedOut){
+    openLogin(level);
+    set("loginMsg","You were logged out because the inactivity warning expired.");
+  }
+}
+async function loadIndex(){
+  const key=LOCAL_PREVIEW ? "local" : (role==="l3"?"admin":role==="l2"?"level2":"public");
+  if(DATA_KEY===key) return;
+  let response;
+  if(key==="admin" || key==="level2"){
+    const url=key==="admin"?ADMIN_INDEX_URL:LEVEL2_SUMMARY_URL;
+    if(!url || !activeToken) throw new Error("Private data service is not configured.");
+    response=await fetchTimed(url,{
+      headers:{"Authorization":"Bearer "+activeToken}
+    });
+  }else{
+    response=await fetchTimed(HERE+(key==="local"?DATA_FILE:PUBLIC_META_FILE)+"?v="+DATA_VERSION);
+  }
+  if(!response.ok) throw new Error("Map data could not be loaded.");
+  const j=await response.json();
+  META=j.meta;
+  if(key==="public"){
+    TAGS=[];
+    BYNUM={};
+    LEVEL2_SUMMARY=null;
+  }else if(key==="level2"){
+    TAGS=[];
+    BYNUM={};
+    LEVEL2_SUMMARY=j.groups||{};
+  }else{
+    TAGS=j.tags;
+    BYNUM=j.byNum;
+    LEVEL2_SUMMARY=null;
+  }
+  DATA_KEY=key;
+  const g=byId("gateN"); if(g && META.count) g.textContent = META.count.toLocaleString()+" captures · 2020–2026";
+}
+function findCachedTag(n){
+  const idx = BYNUM[n];
+  if(!idx) return null;
+  let best, score=-1;
+  for(const i of idx){
+    const t = TAGS[i];
+    const rc = t.caps.filter(c=>c.rc==="Recaptured").length;
+    const s = rc*1000 + t.caps.length;
+    if(s>score){ score=s; best={t, rc, others:idx.length-1}; }
+  }
+  return best;
+}
+function cacheTag(tag){
+  if(!tag?.num) return;
+  const index=TAGS.length;
+  TAGS.push(tag);
+  BYNUM[String(tag.num)]=[index];
+}
+async function lookupTag(n){
+  const cached=findCachedTag(n);
+  if(cached) return cached;
+  if(!TAG_URL) throw new Error("The tag search service is not configured.");
+  const response=await fetchTimed(TAG_URL+"?n="+encodeURIComponent(n));
+  if(!response.ok) throw new Error("Tag search is temporarily unavailable.");
+  const result=await response.json();
+  if(!result.found || !result.tag) return null;
+  cacheTag(result.tag);
+  const recaptures=result.tag.caps.filter(capture=>capture.rc==="Recaptured").length;
+  return {t:result.tag,rc:recaptures,others:0};
+}
+function fishTileURL(){
+  if(LOCAL_PREVIEW && role==="l3") return HERE+TILE_ROOT+"/{z}/{x}/{y}.pbf?v="+DATA_VERSION;
+  if(LOCAL_PREVIEW) return HERE+LEVEL2_TILE_ROOT+"/{z}/{x}/{y}.pbf?v="+DATA_VERSION;
+  if(role==="l3") return ADMIN_TILE_ROOT+"/{z}/{x}/{y}.pbf";
+  return LEVEL2_TILE_API+"/{z}/{x}/{y}.pbf";
+}
+function refreshFishTiles(){
+  const source=map?.getSource("fish");
+  if(source?.setTiles) source.setTiles([fishTileURL()]);
+}
+function addLayers(){
+  if(!map.getSource("satellite")) map.addSource("satellite",{
+    type:"raster",tileSize:256,tiles:SAT_TILES,attribution:"Esri"
+  });
+  if(!map.getLayer("satellite-base")) map.addLayer({
+    id:"satellite-base",type:"raster",source:"satellite",
+    layout:{visibility:base==="sat"?"visible":"none"}
+  });
+  ["line","jstr","pts","ring"].forEach(s=>{ if(!map.getSource(s)) map.addSource(s,{type:"geojson",data:empty()}); });
+  if(role!=="l1"){
+    if(!map.getSource("fish")) map.addSource("fish",{
+      type:"vector", tiles:[fishTileURL()],
+      minzoom:META.minzoom, maxzoom:META.maxzoom, bounds:META.bounds });
+    map.addLayer({ id:"heat", type:"heatmap", source:"fish", "source-layer":"fish",
+      layout:{visibility:"none"}, paint:{
+        "heatmap-radius":["interpolate",["linear"],["zoom"],7,10,12,26],
+        "heatmap-opacity":["interpolate",["linear"],["zoom"],7,.8,12,.6,14.5,0],
+        "heatmap-color":["interpolate",["linear"],["heatmap-density"],
+          0,"rgba(238,242,238,0)",.2,"#a9c6ab",.5,"#5a9469",.8,"#2f6a45",1,"#23463a"] }});
+    map.addLayer({ id:"condition", type:"circle", source:"fish", "source-layer":"fish",
+      layout:{visibility:"none"}, paint:{
+        "circle-radius":["interpolate",["linear"],["zoom"],
+          6,["interpolate",["linear"],["to-number",["get","weight"],1],1,8,50,19],
+          12,["interpolate",["linear"],["to-number",["get","weight"],1],1,18,50,42]],
+        "circle-color":"#5a9469",
+        "circle-opacity":.58,
+        "circle-blur":.82 }});
+    map.addLayer({ id:"dots", type:"circle", source:"fish", "source-layer":"fish", paint:{
+        "circle-radius":["interpolate",["linear"],["zoom"],8,3,12,5.5,16,9],
+        "circle-color":"#5a9469",
+        "circle-stroke-width":["case",["==",["get","rc"],"Recaptured"],2.2,.6],
+        "circle-stroke-color":["case",["==",["get","rc"],"Recaptured"],"#b4622d","#fff"],
+        "circle-opacity":.92 }});
+  }
+
+  map.addLayer({ id:"jstr", type:"line", source:"jstr",
+    paint:{"line-color":"#8b9494","line-width":1.8,"line-dasharray":[2,1.6],"line-opacity":.85}});
+  map.addLayer({ id:"jglow", type:"line", source:"line",
+    filter:["==",["get","kind"],"river"],
+    paint:{"line-color":JOURNEY_COLOR,"line-width":8,"line-opacity":.16,"line-blur":3}});
+  map.addLayer({ id:"jline", type:"line", source:"line", filter:["==",["get","kind"],"river"],
+    layout:{"line-cap":"round","line-join":"round"},
+    paint:{"line-color":JOURNEY_COLOR,"line-width":2.8}});
+  map.addLayer({ id:"jconnect", type:"line", source:"line", filter:["==",["get","kind"],"connector"],
+    layout:{"line-cap":"round"},
+    paint:{"line-color":"#6f7978","line-width":1.4,"line-dasharray":[1.2,1.2],"line-opacity":.8}});
+  map.addLayer({ id:"jlinestr", type:"line", source:"line", filter:["==",["get","kind"],"straight"],
+    layout:{"line-cap":"round"},
+    paint:{"line-color":JOURNEY_COLOR,"line-width":2.4,"line-dasharray":[1.5,1.2]}});
+  map.addLayer({ id:"jdot", type:"circle", source:"pts",
+    paint:{"circle-radius":["interpolate",["linear"],["zoom"],8,8,13,11,16,14],
+           "circle-color":["match",["get","n"],1,"#c0402c",2,"#2f8f56",3,"#d89a24",4,"#2f6fb0",5,"#7656a4",6,"#258a8a","#596260"],
+           "circle-stroke-width":2,"circle-stroke-color":"#fff"}});
+  map.addLayer({ id:"jnum", type:"symbol", source:"pts",
+    layout:{"text-field":["to-string",["get","n"]],"text-font":["Open Sans Bold"],"text-size":12,"text-allow-overlap":true},
+    paint:{"text-color":"#fff"}});
+
+  map.addLayer({ id:"halo", type:"circle", source:"ring",
+    paint:{"circle-radius":17,"circle-color":"rgba(180,98,45,.10)","circle-stroke-color":"#b4622d","circle-stroke-width":1.6}});
+  map.addLayer({ id:"hit", type:"circle", source:"ring",
+    paint:{"circle-radius":6.5,"circle-color":"#b4622d","circle-stroke-color":"#fff","circle-stroke-width":2.2}});
+  ["measln","meas"].forEach(s=>{ if(!map.getSource(s)) map.addSource(s,{type:"geojson",data:empty()}); });
+  map.addLayer({ id:"measln", type:"line", source:"measln", layout:{"line-cap":"round"},
+    paint:{"line-color":"#20292b","line-width":2.6,"line-dasharray":[2,1.4]}});
+  map.addLayer({ id:"measpt", type:"circle", source:"meas",
+    paint:{"circle-radius":6,"circle-color":"#20292b","circle-stroke-color":"#fff","circle-stroke-width":2}});
+}
+
+function tileFilter(layer){
+  const f=["all"];
+  if(species!=="All") f.push(["==",["get","sp"],species]);
+  if(retOnly) f.push(["==",["get","rc"],"Recaptured"]);
+  if((layer==="heat" || layer==="condition") && hydro) f.push(["!=",["get",hydro],""]);
+  return f.length>1 ? f : null;
+}
+function applyFilter(){
+  ["dots","heat","condition"].forEach(id=>{ if(map.getLayer(id)) map.setFilter(id, tileFilter(id)); });
+}
+function setView(v){
+  view=v;
+  const conditionOn = role==="l2" && v==="heat" && Boolean(hydro);
+  const heatOn = role!=="l1" && v==="heat" && !conditionOn;
+  const dotsOn = role!=="l1" && v!=="heat";
+  if(map.getLayer("heat")) map.setLayoutProperty("heat","visibility", heatOn?"visible":"none");
+  if(map.getLayer("condition")) map.setLayoutProperty("condition","visibility", conditionOn?"visible":"none");
+  if(map.getLayer("dots")) map.setLayoutProperty("dots","visibility", dotsOn?"visible":"none");
+  if(heatOn && role!=="l2" && map.getLayer("heat")){
+    map.setPaintProperty("heat","heatmap-weight",1);
+    map.setPaintProperty("heat","heatmap-color",DENSITY_COLOR);
+  }
+  legend();
+}
+const DENSITY_COLOR=["interpolate",["linear"],["heatmap-density"],
+  0,"rgba(238,242,238,0)",.2,"#a9c6ab",.5,"#5a9469",.8,"#2f6a45",1,"#23463a"];
+function paintHeat(){
+  if(!map.getLayer("heat")) return;
+  const countWeight=["interpolate",["linear"],["to-number",["get","weight"],1],
+    1,.28,10,.65,50,1];
+  map.setPaintProperty("heat","heatmap-weight",countWeight);
+  map.setPaintProperty("heat","heatmap-color",DENSITY_COLOR);
+}
+function setHydro(h){
+  hydro=h;
+  applyFilter();
+  if(role==="l2"){
+    paintHeat();
+    if(h && map.getLayer("condition")) map.setPaintProperty("condition","circle-color",colorBy(h));
+    setView(view);
+  }
+  else if(map.getLayer("dots")) map.setPaintProperty("dots","circle-color", h?colorBy(h):"#5a9469");
+  legend();
+}
+
+function legend(){
+  const box=byId("legend"); if(!box) return;
+  const T=byId("legTitle"), S=byId("legSub"), R=byId("legRamp"), C=byId("legScale");
+  R.style.display="";
+  box.style.display="block";
+  if(view==="heat"){
+    if(role==="l2" && hydro){
+      const r=RAMP[hydro];
+      T.textContent=r.title+" — heatmap";
+      S.textContent="warmer colour = higher "+r.unit;
+      R.className="ramp "+r.kind;
+      C.innerHTML=r.scale.map(s=>"<span>"+s+"</span>").join("");
+    }else{
+      T.textContent="Catch density"; S.textContent="darker = more tags";
+      R.className="ramp seq"; C.innerHTML="<span>fewer</span><span>more</span>";
+    }
+    return;
+  }
+  if(hydro){
+    const r=RAMP[hydro];
+    T.textContent=r.title; S.textContent="each dot is one catch · "+r.unit;
+    R.className="ramp "+r.kind; C.innerHTML=r.scale.map(s=>"<span>"+s+"</span>").join("");
+    return;
+  }
+  T.textContent="Tagged catches"; S.textContent="each dot is one catch";
+  R.style.display="none"; C.innerHTML="";
+}
+function filteredCaps(){
+  const out=[];
+  for(const t of TAGS){
+    for(const c of t.caps){
+      if(species!=="All" && (c.sp||t.sp)!==species) continue;
+      if(retOnly && c.rc!=="Recaptured") continue;
+      out.push(c);
+    }
+  }
+  return out;
+}
+function summaryGroup(days=0){
+  if(!LEVEL2_SUMMARY) return null;
+  return LEVEL2_SUMMARY[[species,retOnly?"ret":"all",String(days)].join("|")]||null;
+}
+function stats(){
+  const metric=hydro || "tF";
+  const summary=role==="l2" ? summaryGroup(0) : null;
+  if(summary){
+    set("nCount",summary.count.toLocaleString());
+    set("nRecap",summary.recaptures.toLocaleString());
+    const average=summary.averages[metric];
+    set("nTemp",average==null?"—":Number(average).toFixed(metric==="pressIn"?2:1));
+    set("nTempK","avg "+RAMP[metric].unit+" "+RAMP[metric].title.toLowerCase());
+    const moved=summary.averageMoved;
+    set("nMiles",moved==null?"—":(units==="km"?moved*1.60934:moved).toFixed(1));
+    set("nMilesK","avg "+(units==="km"?"km":"mi")+" moved");
+    bars();
+    return;
+  }
+  const caps=filteredCaps();
+  const values=caps.map(c=>metricValue(metric,c[metric])).filter(value=>value!==null);
+  const rec=caps.filter(c=>c.rc==="Recaptured").length;
+  set("nCount", caps.length.toLocaleString());
+  set("nRecap", rec.toLocaleString());
+  if(byId("nTemp")){
+    set("nTemp", values.length ? (values.reduce((a,b)=>a+b,0)/values.length).toFixed(metric==="pressIn"?2:1) : "—");
+    set("nTempK", "avg "+RAMP[metric].unit+" "+RAMP[metric].title.toLowerCase());
+  }
+  if(byId("nMiles")){
+    let tot=0, cnt=0;
+    for(const t of TAGS){
+      if(species!=="All" && t.sp!==species) continue;
+      if(t.caps.length<2) continue;
+      tot+=pathMiles(t.caps); cnt++;
+    }
+    set("nMiles", cnt ? (units==="km"?(tot/cnt*1.60934):(tot/cnt)).toFixed(1) : "—");
+    if(byId("nMilesK")) set("nMilesK", "avg "+(units==="km"?"km":"mi")+" moved");
+  }
+  bars();
+}
+function bars(){
+  const wrap=document.getElementById("bars"); if(!wrap) return;
+  const days=+((byId("cycle")||{}).value||0);
+  let top;
+  const summary=role==="l2" ? summaryGroup(days) : null;
+  if(summary){
+    top=summary.topSpots.map(item=>[item.spot,item.n]);
+  }else{
+    let cut=null;
+    if(days){
+      let mx=0;
+      for(const t of TAGS) for(const c of t.caps){ const d=+new Date(c.dt); if(d>mx) mx=d; }
+      cut=mx - days*864e5;
+    }
+    const count={};
+    for(const c of filteredCaps()){
+      if(!c.spot) continue;
+      if(cut && +new Date(c.dt)<cut) continue;
+      count[c.spot]=(count[c.spot]||0)+1;
+    }
+    top=Object.entries(count).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  }
+  const max=top.length?top[0][1]:1;
+  wrap.innerHTML = top.map(([nm,v])=>`
+    <div class="b-row">
+      <div class="bl"><span class="nm">${esc(nm)}</span><span class="vl">${v}</span></div>
+      <div class="b-track"><div class="b-fill" style="width:${Math.round(v/max*100)}%"></div></div>
+    </div>`).join("") || '<div class="ssub">no catches in this filter</div>';
+  const sub = retOnly ? "recaptures by location" : (species!=="All" ? species.toLowerCase()+" by location" : "captures by location");
+  set("sideSub", sub);
+}
+function clearPick(){
+  picked=null;
+  if(map) ["line","jstr","pts","ring"].forEach(s=>map.getSource(s) && map.getSource(s).setData(empty()));
+  if(capPop){ capPop.remove(); capPop=null; capPinned=false; }
+}
+let journeyToken=0;
+function captureFeature(t,c,i,caps){
+  let totalStraight=0, totalRiver=0, allRiver=true;
+  for(let n=1;n<=i;n++){
+    totalStraight+=milesBetween([caps[n-1].lng,caps[n-1].lat],[caps[n].lng,caps[n].lat]);
+    if(caps[n]._river) totalRiver+=caps[n]._river.miles;
+    else allRiver=false;
+  }
+  return {type:"Feature",geometry:{type:"Point",coordinates:[c.lng,c.lat]},properties:{
+    r:i===0?"start":"again", idx:i, n:i+1, count:caps.length, last:i===caps.length-1,
+    from:i, to:i+1, num:t.num, color:t.color||"", alpha:t.alpha||"", sp:t.sp,
+    dt:c.dt, spot:c.spot||"", file:c.file||"", rc:c.rc||"",
+    inch:c.in||"", mm:c.mm||"",
+    leg:i>0 ? milesBetween([caps[i-1].lng,caps[i-1].lat],[c.lng,c.lat]).toFixed(4) : "",
+    riv:i>0 && c._river ? c._river.miles.toFixed(4) : "",
+    totalLeg:i>0 ? totalStraight.toFixed(4) : "",
+    totalRiv:i>0 && allRiver ? totalRiver.toFixed(4) : "",
+    tF:c.tF??"", lvl:c.lvl??"", turb:c.turb??"", do:c.do??"", cfs:c.cfs??"",
+    airF:c.airF??"", windMph:c.windMph??"", pressIn:c.pressIn??"", wxStation:c.wxStation||""
+  }};
+}
+function journeyLegs(caps){
+  const legs=[], str=[], snaps=new Map();
+  for(let i=1;i<caps.length;i++){
+    const a=caps[i-1], b=caps[i];
+    if(b._river){
+      const props={kind:"river",from:i,to:i+1,miles:b._river.miles.toFixed(4)};
+      legs.push({type:"Feature",properties:props,
+        geometry:{type:"LineString",coordinates:b._river.coords}});
+      snaps.set(i-1,{actual:[a.lng,a.lat],point:b._river.snapA,n:i});
+      snaps.set(i,{actual:[b.lng,b.lat],point:b._river.snapB,n:i+1});
+      if(!b._river.local){
+        str.push({type:"Feature",properties:{from:i,to:i+1},
+          geometry:{type:"LineString",coordinates:[[a.lng,a.lat],[b.lng,b.lat]]}});
+      }
+    }else{
+      legs.push({type:"Feature",properties:{kind:"straight",from:i,to:i+1},
+        geometry:{type:"LineString",coordinates:[[a.lng,a.lat],[b.lng,b.lat]]}});
+    }
+  }
+  for(const snap of snaps.values()){
+    if(!snap.point || milesBetween(snap.actual,snap.point)<.01) continue;
+    legs.push({type:"Feature",properties:{kind:"connector",n:snap.n},
+      geometry:{type:"LineString",coordinates:[snap.actual,snap.point]}});
+  }
+  return [legs,str];
+}
+function drawJourney(t, ready){
+  const caps=t.caps;
+  const paint=()=>{
+    const [legs,str]=journeyLegs(caps);
+    map.getSource("line").setData({type:"FeatureCollection",features:legs});
+    map.getSource("jstr").setData({type:"FeatureCollection",features:str});
+    map.getSource("pts").setData({type:"FeatureCollection",
+      features:caps.map((c,i)=>captureFeature(t,c,i,caps))});
+  };
+  paint();
+  if(caps.length<2) return;
+  const tok=++journeyToken;
+  riverNetwork().then(()=>{
+    if(tok!==journeyToken || picked!==t.num) return;
+    const snaps=caps.map(c=>riverSnap([c.lng,c.lat]));
+    for(let i=1;i<caps.length;i++){
+      caps[i]._river=riverLeg(
+        [caps[i-1].lng,caps[i-1].lat],
+        [caps[i].lng,caps[i].lat],
+        snaps[i-1],snaps[i]
+      );
+    }
+    paint();
+    if(ready) ready();
+  }).catch(()=>{});
+}
+function milesBetween(a,b){
+  const R=3958.8, rad=x=>x*Math.PI/180;
+  const dLat=rad(b[1]-a[1]), dLng=rad(b[0]-a[0]);
+  const s=Math.sin(dLat/2)**2 + Math.cos(rad(a[1]))*Math.cos(rad(b[1]))*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(s));
+}
+function pathMiles(caps){
+  let m=0;
+  for(let i=1;i<caps.length;i++) m+=milesBetween([caps[i-1].lng,caps[i-1].lat],[caps[i].lng,caps[i].lat]);
+  return m;
+}
+function riverMiles(caps){
+  let total=0;
+  for(let i=1;i<caps.length;i++){
+    if(!caps[i]._river) return null;
+    total+=caps[i]._river.miles;
+  }
+  return total;
+}
+
+let measuring=false, mPts=[], RIVER=null, RIVER_LOAD=null;
+const mSay=h=>{ const e=byId("mOut"); if(e) e.innerHTML=h; };
+const RIVER_CELL=.025;
+function riverNetwork(){
+  if(RIVER) return Promise.resolve(RIVER);
+  if(RIVER_LOAD) return RIVER_LOAD;
+  RIVER_LOAD=fetchTimed(HERE+RIVER_FILE,{},15000).then(r=>{
+    if(!r.ok) throw new Error("river network not found");
+    return r.json();
+  }).then(data=>{
+    const nodes=new Map(), grid=new Map();
+    const edges=data.edges.map((row,index)=>{
+      const coords=row[7], cum=[0];
+      for(let i=1;i<coords.length;i++) cum.push(cum[i-1]+milesBetween(coords[i-1],coords[i]));
+      const edge={index,from:row[1],to:row[2],miles:row[3],order:row[4],name:row[5],coords,cum,total:cum[cum.length-1]};
+      for(const node of [edge.from,edge.to]){
+        if(!nodes.has(node)) nodes.set(node,[]);
+      }
+      nodes.get(edge.from).push([edge.to,index]);
+      nodes.get(edge.to).push([edge.from,index]);
+      let west=Infinity,south=Infinity,east=-Infinity,north=-Infinity;
+      for(const p of coords){ west=Math.min(west,p[0]); south=Math.min(south,p[1]); east=Math.max(east,p[0]); north=Math.max(north,p[1]); }
+      const x0=Math.floor(west/RIVER_CELL), x1=Math.floor(east/RIVER_CELL);
+      const y0=Math.floor(south/RIVER_CELL), y1=Math.floor(north/RIVER_CELL);
+      for(let x=x0;x<=x1;x++) for(let y=y0;y<=y1;y++){
+        const key=x+":"+y;
+        if(!grid.has(key)) grid.set(key,[]);
+        grid.get(key).push(index);
+      }
+      return edge;
+    });
+    RIVER={edges,nodes,grid,meta:data.meta};
+    return RIVER;
+  }).catch(error=>{
+    RIVER_LOAD=null;
+    throw error;
+  });
+  return RIVER_LOAD;
+}
+function riverCandidates(pt){
+  const x=Math.floor(pt[0]/RIVER_CELL), y=Math.floor(pt[1]/RIVER_CELL), found=new Set();
+  for(let ring=1;ring<=3;ring++){
+    for(let dx=-ring;dx<=ring;dx++) for(let dy=-ring;dy<=ring;dy++){
+      const list=RIVER.grid.get((x+dx)+":"+(y+dy));
+      if(list) for(const edge of list) found.add(edge);
+    }
+  }
+  return found;
+}
+function riverSnap(pt){
+  const ky=69, kx=69*Math.cos(pt[1]*Math.PI/180);
+  let best=null;
+  for(const edgeIndex of riverCandidates(pt)){
+    const edge=RIVER.edges[edgeIndex];
+    for(let i=1;i<edge.coords.length;i++){
+      const p0=edge.coords[i-1], p1=edge.coords[i];
+      const ax=(p0[0]-pt[0])*kx, ay=(p0[1]-pt[1])*ky;
+      const bx=(p1[0]-pt[0])*kx, by=(p1[1]-pt[1])*ky;
+      const dx=bx-ax, dy=by-ay, len=dx*dx+dy*dy;
+      const amount=len?Math.max(0,Math.min(1,-(ax*dx+ay*dy)/len)):0;
+      const off=Math.hypot(ax+amount*dx,ay+amount*dy);
+      if(!best || off<best.off){
+        const point=[p0[0]+amount*(p1[0]-p0[0]),p0[1]+amount*(p1[1]-p0[1])];
+        const alongRaw=edge.cum[i-1]+amount*(edge.cum[i]-edge.cum[i-1]);
+        const along=edge.total ? edge.miles*alongRaw/edge.total : 0;
+        best={edge,seg:i-1,amount,point,along,off};
+      }
+    }
+  }
+  return best && best.off<=1 ? best : null;
+}
+function heapPush(heap,item){
+  let i=heap.length;
+  heap.push(item);
+  while(i>0){
+    const p=(i-1)>>1;
+    if(heap[p][0]<=item[0]) break;
+    heap[i]=heap[p]; i=p;
+  }
+  heap[i]=item;
+}
+function heapPop(heap){
+  if(!heap.length) return null;
+  const first=heap[0], last=heap.pop();
+  if(heap.length){
+    heap[0]=last;
+    for(let i=0;;){
+      let child=i*2+1;
+      if(child>=heap.length) break;
+      if(child+1<heap.length && heap[child+1][0]<heap[child][0]) child++;
+      if(heap[i][0]<=heap[child][0]) break;
+      [heap[i],heap[child]]=[heap[child],heap[i]]; i=child;
+    }
+  }
+  return first;
+}
+function appendLine(out,line){
+  for(const point of line){
+    const last=out[out.length-1];
+    if(!last || last[0]!==point[0] || last[1]!==point[1]) out.push(point);
+  }
+}
+function beforeSnap(s){ return s.edge.coords.slice(0,s.seg+1).concat([s.point]); }
+function afterSnap(s){ return [s.point].concat(s.edge.coords.slice(s.seg+1)); }
+function directEdge(a,b){
+  let line;
+  if(a.seg===b.seg) line=[a.point,b.point];
+  else if(a.along<b.along) line=[a.point].concat(a.edge.coords.slice(a.seg+1,b.seg+1),[b.point]);
+  else line=[b.point].concat(a.edge.coords.slice(b.seg+1,a.seg+1),[a.point]).reverse();
+  return {miles:Math.abs(a.along-b.along),coords:line};
+}
+function riverRouteFromSnaps(a,b){
+  if(!a || !b) return null;
+  let direct=a.edge.index===b.edge.index ? directEdge(a,b) : null;
+  const starts=[[a.edge.from,a.along],[a.edge.to,a.edge.miles-a.along]];
+  const ends=new Map([[b.edge.from,b.along],[b.edge.to,b.edge.miles-b.along]]);
+  const distance=new Map(), previous=new Map(), heap=[];
+  for(const [node,cost] of starts){
+    if(!distance.has(node) || cost<distance.get(node)){
+      distance.set(node,cost); heapPush(heap,[cost,node]);
+    }
+  }
+  let best=direct?direct.miles:Infinity, target=null;
+  while(heap.length){
+    const [cost,node]=heapPop(heap);
+    if(cost!==distance.get(node)) continue;
+    if(cost>=best) break;
+    if(ends.has(node) && cost+ends.get(node)<best){ best=cost+ends.get(node); target=node; }
+    for(const [next,edgeIndex] of RIVER.nodes.get(node)||[]){
+      const nextCost=cost+RIVER.edges[edgeIndex].miles;
+      if(nextCost<(distance.get(next)??Infinity)){
+        distance.set(next,nextCost);
+        previous.set(next,[node,edgeIndex]);
+        heapPush(heap,[nextCost,next]);
+      }
+    }
+  }
+  if(direct && direct.miles<=best) return {...direct,
+    miles:direct.miles+a.off+b.off,waterMiles:direct.miles,
+    offsetA:a.off,offsetB:b.off,snapA:a.point,snapB:b.point};
+  if(target===null) return null;
+  const steps=[];
+  let node=target;
+  while(previous.has(node)){
+    const [from,edgeIndex]=previous.get(node);
+    steps.push([from,node,edgeIndex]); node=from;
+  }
+  steps.reverse();
+  const line=[];
+  appendLine(line,node===a.edge.from ? beforeSnap(a).reverse() : afterSnap(a));
+  for(const [from,to,edgeIndex] of steps){
+    const edge=RIVER.edges[edgeIndex];
+    appendLine(line,from===edge.from && to===edge.to ? edge.coords : edge.coords.slice().reverse());
+  }
+  appendLine(line,target===b.edge.from ? beforeSnap(b) : afterSnap(b).reverse());
+  return {miles:best+a.off+b.off,waterMiles:best,coords:line,
+    offsetA:a.off,offsetB:b.off,snapA:a.point,snapB:b.point};
+}
+function riverLeg(aPoint,bPoint,aSnap,bSnap){
+  const route=riverRouteFromSnaps(aSnap,bSnap);
+  if(!route) return null;
+  const straight=milesBetween(aPoint,bPoint);
+  if(straight>0 && straight<=.12 && route.waterMiles<=straight*1.2){
+    return {miles:straight,waterMiles:straight,coords:[aPoint,bPoint],
+      offsetA:0,offsetB:0,snapA:aPoint,snapB:bPoint,local:true};
+  }
+  return route;
+}
+function riverRoute(aPoint,bPoint){
+  if(!RIVER) return null;
+  return riverLeg(aPoint,bPoint,riverSnap(aPoint),riverSnap(bPoint));
+}
+function measureStart(){
+  measuring=true; mPts=[];
+  map.getSource("meas").setData(empty()); map.getSource("measln").setData(empty());
+  map.getCanvas().style.cursor="crosshair";
+  mSay("click the first point…");
+  document.getElementById("mGo").textContent="Click 2 points · press again to cancel";
+  document.getElementById("mGo").onclick=measureCancel;
+}
+function measureCancel(){
+  measuring=false; mPts=[];
+  map.getCanvas().style.cursor="";
+  map.getSource("meas").setData(empty()); map.getSource("measln").setData(empty());
+  mSay("");
+  const b=document.getElementById("mGo");
+  if(b){ b.textContent="Click two points on the "+(role==="l2"?"river":"map"); b.onclick=measureStart; }
+}
+async function measureClick(e){
+  if(!measuring) return;
+  mPts.push([e.lngLat.lng, e.lngLat.lat]);
+  map.getSource("meas").setData({type:"FeatureCollection",
+    features:mPts.map(p=>({type:"Feature",properties:{},geometry:{type:"Point",coordinates:p}}))});
+  if(mPts.length===1){ mSay("…now the second point"); return; }
+  measuring=false; map.getCanvas().style.cursor="";
+  const b=document.getElementById("mGo");
+  if(b){ b.textContent="Click two points on the "+(role==="l2"?"river":"map"); b.onclick=measureStart; }
+  measureShow();
+}
+async function measureShow(){
+  if(mPts.length<2) return;
+  const mode=val("mMode")||(role==="l2"?"river":"straight"), unit=val("mUnit")||"mi";
+  const cv=m=>unit==="km" ? (m*1.60934).toFixed(1)+" km" : m.toFixed(1)+" mi";
+  const straight=milesBetween(mPts[0],mPts[1]);
+  if(mode==="straight"){
+    map.getSource("measln").setData({type:"Feature",properties:{},geometry:{type:"LineString",coordinates:mPts}});
+    mSay("<b>"+cv(straight)+"</b> as the crow flies");
+    return;
+  }
+  try{ await riverNetwork(); }
+  catch(e){ mSay("river network not loaded — <b>"+cv(straight)+"</b> straight"); return; }
+  const route=riverRoute(mPts[0],mPts[1]);
+  if(!route){
+    map.getSource("measln").setData({type:"Feature",properties:{},geometry:{type:"LineString",coordinates:mPts}});
+    mSay("a point is too far from the mapped river network — <b>"+cv(straight)+"</b> straight shown");
+    return;
+  }
+  map.getSource("measln").setData({type:"Feature",properties:{},geometry:{type:"LineString",coordinates:[mPts[0]].concat(route.coords,[mPts[1]])}});
+  mSay("<b>"+cv(route.miles)+"</b> by river · "+cv(straight)+" straight");
+}
+function measureRedo(){ if(mPts.length===2) measureShow(); }
+function daysOut(caps){
+  const a=new Date(caps[0].dt), b=new Date(caps[caps.length-1].dt);
+  return (isNaN(a)||isNaN(b)) ? null : Math.round((b-a)/86400000);
+}
+function showSearchResult(hit){
+  if(picked!==hit.t.num) return;
+  const caps=hit.t.caps, more=hit.others ? "  (+"+hit.others+" more on this number)" : "";
+  if(caps.length>1){
+    const mi=pathMiles(caps).toFixed(1), river=role==="l2"?riverMiles(caps):null, d=daysOut(caps);
+    say(`Tag ${hit.t.num} — caught ${caps.length} times, ${hit.rc} recapture${hit.rc===1?"":"s"}. Straight line ${dmi(mi)}`+
+        (river!=null?`, river ${dmi(river.toFixed(1))}`:"")+(d!=null?` over ${d} days.`:".")+more,"good");
+  }else{
+    say(`Tag ${hit.t.num} — tagged, no recaptures yet.`+more,"good");
+  }
+  if(role!=="l1"){
+    const last=caps[caps.length-1];
+    showCap(captureFeature(hit.t,last,caps.length-1,caps),true);
+  }
+}
+
+let searchToken=0;
+async function search(n, fly){
+  n=(n||"").replace(/\D/g,"");
+  if(!n){ say("Type a tag number first.","bad"); return; }
+  const token=++searchToken;
+  let hit;
+  try{ hit=await lookupTag(n); }
+  catch(error){ if(token===searchToken) say(error.message,"bad"); return; }
+  if(token!==searchToken) return;
+  if(!hit){ say("Tag "+n+" isn't in the data.","bad"); clearPick(); return; }
+  const caps=hit.t.caps, last=caps[caps.length-1];
+  picked=n;
+  if(capPop){ capPop.remove(); capPop=null; capPinned=false; }
+  map.getSource("ring").setData(captureFeature(hit.t,last,caps.length-1,caps));
+  drawJourney(hit.t,()=>showSearchResult(hit));
+  if(fly){
+    if(innerWidth<=680) showPane(false);
+    if(caps.length>1){
+      const xs=caps.map(c=>c.lng), ys=caps.map(c=>c.lat);
+      map.fitBounds([[Math.min(...xs),Math.min(...ys)],[Math.max(...xs),Math.max(...ys)]],
+        {padding:innerWidth<=680?{top:58,right:28,bottom:122,left:28}:
+          {top:66,right:42,bottom:62,left:byId("pane").classList.contains("hidden")?128:410},
+         maxZoom:18,duration:800});
+    } else map.flyTo({center:[last.lng,last.lat],zoom:16,speed:.9});
+  }
+  showSearchResult(hit);
+}
+
+const shortDateTime = s=>{ const d=new Date(s); return isNaN(d)?s:
+  d.toLocaleString("en-US",{month:"numeric",day:"2-digit",year:"numeric",hour:"numeric",minute:"2-digit"}); };
+let capPop=null, capPinned=false;
+function capHTML(p){
+  const idx=+p.idx, n=idx+1, count=+p.count||1, file=p.file||"";
+  const label = idx===0 ? "Tagged" : "Recaptured";
+  const legRow = p.leg ? `<div class="r"><span class="k">Straight Line Traveled</span><span class="v">+${dmi(p.leg)}</span></div>` : "";
+  const rivRow = role==="l2" && p.riv ? `<div class="r"><span class="k">River Distance</span><span class="v">+${dmi(p.riv)}</span></div>` : "";
+  const totalMiles = role==="l2" && p.totalRiv ? p.totalRiv : p.totalLeg;
+  const totalRow = idx>1 ? `<div class="r"><span class="k">Total Through Capture ${n}</span><span class="v">${dmi(totalMiles)}${role==="l2"&&p.totalRiv?" river":" straight"}</span></div>` : "";
+  const len = (p.inch||p.mm) ? `<div class="r"><span class="k">Length</span><span class="v">${p.inch?esc(p.inch)+'"':""}${p.mm?" · "+esc(p.mm)+" mm":""}</span></div>` : "";
+  const extra = role==="l1" ? "" : [
+    ["Water temp",p.tF,"°F"],["River level",p.lvl,"ft"],["Turbidity",p.turb,"FNU"],
+    ["Oxygen",p.do,"mg/L"],["Flow",p.cfs,"CFS"],["Air temp",p.airF,"°F"],
+    ["Wind",p.windMph,"mph"],["Pressure",p.pressIn,"inHg"],["Weather station",p.wxStation,""]
+  ].map(([k,v,u])=>(v==null||v===""||+v<0)?"":`<div class="r"><span class="k">${k}</span><span class="v">${esc(v)} ${u}</span></div>`).join("");
+  const shot = file ? `<div class="shot-wrap" id="capShot"></div>` : "";
+  const nav = count<2 ? "" : `<div class="capnav">
+    ${idx>0?`<button id="capPrev">← Capture ${idx}</button>`:"<span></span>"}
+    <span>${n} / ${count}</span>
+    ${n<count?`<button id="capNext">Capture ${n+1} →</button>`:"<span></span>"}
+  </div>`;
+  return `<div class="card" style="width:218px">
+    <div class="top"><div class="big">${esc(p.sp)}</div><div class="tg">Tag ${esc(p.num)}</div>
+      <div class="mark ${idx===0?"t":"r"}">Capture ${n} of ${count} · ${label}</div></div>
+    <div class="body">
+      ${shot}
+      <button class="detail-toggle" id="capInfoToggle" type="button" aria-expanded="false">
+        Catch details <span class="chev" aria-hidden="true">&#9660;</span>
+      </button>
+      <div class="card-details" id="capDetails" hidden>
+        <div class="r"><span class="k">Date and time</span><span class="v">${esc(shortDateTime(p.dt))}</span></div>
+        ${idx>0?`<div class="r"><span class="k">Movement leg</span><span class="v">${idx} → ${n}</span></div>`:""}
+        <div class="r"><span class="k">Location</span><span class="v">${esc(p.spot||"—")}</span></div>
+        ${legRow}${rivRow}${totalRow}${len}${extra}
+      </div>
+      ${nav}
+    </div></div>`;
+}
+function wireDetails(toggleId,detailsId){
+  const toggle=byId(toggleId), details=byId(detailsId);
+  if(!toggle || !details) return;
+  toggle.onclick=()=>{
+    const open=toggle.getAttribute("aria-expanded")==="true";
+    toggle.setAttribute("aria-expanded",String(!open));
+    details.hidden=open;
+  };
+}
+function showCap(f, pin){
+  if(capPop) capPop.remove();
+  const p=f.properties;
+  const screenPoint=map.project(f.geometry.coordinates);
+  const canvas=map.getCanvas();
+  const side=screenPoint.x<canvas.clientWidth/2?"left":"right";
+  const anchor=canvas.clientWidth<=520
+    ? (screenPoint.y<canvas.clientHeight/2?"top":"bottom")
+    : (screenPoint.y<235?"top-"+side:
+      (screenPoint.y>canvas.clientHeight-235?"bottom-"+side:side));
+  const next=new maplibregl.Popup({offset:11, anchor, closeButton:pin, closeOnClick:false, maxWidth:"210px"})
+    .setLngLat(f.geometry.coordinates).setHTML(capHTML(p)).addTo(map);
+  capPop=next;
+  capPinned=pin;
+  next.on("close",()=>{
+    if(capPop===next) capPop=null;
+    capPinned=false;
+  });
+  if(p.file){
+    const w=document.getElementById("capShot"); if(w) loadPhoto(w, p.file, p.num+" capture "+p.n);
+  }
+  const matches=(BYNUM[String(p.num)]||[]).map(i=>TAGS[i]);
+  const tag=matches.find(t=>t.color===p.color && (t.alpha||"")===(p.alpha||"")) || (findCachedTag(String(p.num))||{}).t;
+  const openCapture=index=>{
+    if(!tag || !tag.caps[index]) return;
+    showCap(captureFeature(tag,tag.caps[index],index,tag.caps),true);
+  };
+  const prev=document.getElementById("capPrev"), nextButton=document.getElementById("capNext");
+  if(prev) prev.onclick=()=>openCapture(+p.idx-1);
+  if(nextButton) nextButton.onclick=()=>openCapture(+p.idx+1);
+  wireDetails("capInfoToggle","capDetails");
+}
+
+function clickCapture(e){
+  if(measuring) return;
+  const layers=["hit","halo","jnum","jdot"].filter(id=>map.getLayer(id));
+  const box=[[e.point.x-8,e.point.y-8],[e.point.x+8,e.point.y+8]];
+  const feature=map.queryRenderedFeatures(box,{layers})
+    .find(item=>item.properties && item.properties.num);
+  if(!feature) return;
+  if(e.preventDefault) e.preventDefault();
+  if(e.originalEvent) e.originalEvent.preventDefault();
+  showCap(feature,true);
+}
+
+function say(t,kind){ const e=document.getElementById("said"); if(!e) return;
+  e.textContent=t; e.className="said on "+kind; }
+function sunTimes(d, lat, lng){
+  const rad=Math.PI/180, zen=90.833;
+  const doy=Math.floor((d-new Date(d.getFullYear(),0,0))/864e5);
+  function one(rising){
+    const lh=lng/15, t=doy+((rising?6:18)-lh)/24, M=(0.9856*t)-3.289;
+    let L=M+1.916*Math.sin(M*rad)+0.020*Math.sin(2*M*rad)+282.634; L=(L+360)%360;
+    let RA=Math.atan(0.91764*Math.tan(L*rad))/rad; RA=(RA+360)%360;
+    RA+=Math.floor(L/90)*90-Math.floor(RA/90)*90; RA/=15;
+    const sinD=0.39782*Math.sin(L*rad), cosD=Math.cos(Math.asin(sinD));
+    const cosH=(Math.cos(zen*rad)-sinD*Math.sin(lat*rad))/(cosD*Math.cos(lat*rad));
+    if(cosH>1||cosH<-1) return null;
+    let H=(rising?360-Math.acos(cosH)/rad:Math.acos(cosH)/rad)/15;
+    let UT=(H+RA-0.06571*t-6.622-lh)%24; if(UT<0)UT+=24;
+    const r=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+    r.setUTCMinutes(Math.round(UT*60)); return r;
+  }
+  return {rise:one(true), set:one(false)};
+}
+function moonPhase(d){
+  const syn=29.53058867;
+  let age=((d-Date.UTC(2000,0,6,18,14))/864e5)%syn; if(age<0)age+=syn;
+  const names=["New moon","Waxing crescent","First quarter","Waxing gibbous","Full moon",
+               "Waning gibbous","Last quarter","Waning crescent"];
+  const name=names[Math.floor(((age+syn/16)%syn)/(syn/8))];
+  return {name, lit:Math.round((1-Math.cos(2*Math.PI*age/syn))/2*100)};
+}
+function astroHTML(){
+  const now=new Date(), lat=39.35, lng=-77.6;
+  const sun=sunTimes(now,lat,lng), moon=moonPhase(now);
+  const hm=t=>t?t.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"}):"—";
+  return fold("Sun &amp; Moon — today", `
+    <div class="nums" style="margin-top:9px">
+      <div class="one"><div class="v num">${hm(sun.rise)}</div><div class="k">sunrise</div></div>
+      <div class="one"><div class="v num">${hm(sun.set)}</div><div class="k">sunset</div></div>
+      <div class="one"><div class="v num">${moon.lit}%</div><div class="k">${moon.name.toLowerCase()}</div></div>
+    </div>`, false);
+}
+
+let LIVE_WEATHER=null, LIVE_WEATHER_AT=0;
+function weatherHTML(){
+  const weather=META.weather || {};
+  const coverage=weather.coveragePct==null ? "" :
+    `<div class="wxnote">Archived airport weather matched ${esc(weather.coveragePct)}% of capture times.</div>`;
+  return fold("Airport weather — now", `
+    <div class="wxlist">
+      <div class="wxrow"><b>IAD</b><span id="wx-IAD">loading…</span></div>
+      <div class="wxrow"><b>DCA</b><span id="wx-DCA">loading…</span></div>
+      <div class="wxrow"><b>MRB</b><span id="wx-MRB">loading…</span></div>
+    </div>${coverage}`, false);
+}
+function drawLiveWeather(){
+  if(!LIVE_WEATHER) return;
+  for(const [code,text] of Object.entries(LIVE_WEATHER)){
+    const row=byId("wx-"+code);
+    if(row) row.textContent=text;
+  }
+}
+async function loadLiveWeather(){
+  if(LIVE_WEATHER && Date.now()-LIVE_WEATHER_AT<600000){ drawLiveWeather(); return; }
+  const stations=["IAD","DCA","MRB"];
+  const settled=await Promise.allSettled(stations.map(async code=>{
+    const response=await fetchTimed("https://api.weather.gov/stations/K"+code+"/observations/latest",{
+      headers:{Accept:"application/geo+json"}
+    },8000);
+    if(!response.ok) throw new Error(response.status);
+    const p=(await response.json()).properties;
+    const air=p.temperature.value==null?null:p.temperature.value*9/5+32;
+    const wind=p.windSpeed.value==null?null:p.windSpeed.value*.621371;
+    const pressure=p.barometricPressure.value==null?null:p.barometricPressure.value/3386.389;
+    const pieces=[];
+    if(air!=null) pieces.push(air.toFixed(0)+"°F");
+    if(wind!=null) pieces.push("wind "+wind.toFixed(0)+" mph");
+    if(pressure!=null) pieces.push(pressure.toFixed(2)+" inHg");
+    if(p.textDescription) pieces.push(p.textDescription.toLowerCase());
+    return [code,pieces.join(" · ") || "no current report"];
+  }));
+  LIVE_WEATHER={};
+  settled.forEach((result,index)=>{
+    LIVE_WEATHER[stations[index]]=result.status==="fulfilled"?result.value[1]:"current report unavailable";
+  });
+  LIVE_WEATHER_AT=Date.now();
+  drawLiveWeather();
+}
+
+function fold(cap, body, open){
+  return `<div class="blk fold ${open?"":"closed"}">
+    <button class="cap foldcap" type="button" aria-expanded="${open?"true":"false"}">
+      <span>${cap}</span><span class="chev" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="fbody">${body}</div></div>`;
+}
+function feedbackBlock(){
+  const stars=[1,2,3,4,5].map(number=>
+    `<button type="button" data-rating="${number}" aria-label="${number} star${number===1?"":"s"}" aria-pressed="false">&#9733;</button>`
+  ).join("");
+  return fold("Feedback",`<div class="feedback-form">
+      <div class="ssub">How useful was this map?</div>
+      <div class="stars" id="feedbackStars" role="radiogroup" aria-label="Rating out of 5">${stars}</div>
+      <textarea id="feedbackComments" maxlength="2000" placeholder="Comments (optional)"></textarea>
+      <button class="flat" id="feedbackSend" type="button" style="width:100%;margin-top:8px">Submit feedback</button>
+      <div class="form-msg" id="feedbackMsg" aria-live="polite">Sent with your signed-in account.</div>
+    </div>`,false);
+}
+function adminRecordsBlock(){
+  return fold("Account records",`
+      <div id="adminOverview" class="form-msg">Loading account activity…</div>
+      <div id="recentAccess" class="recent-access"></div>
+      <div class="report-buttons">
+        <button class="flat" id="usersReport" type="button">Download users CSV</button>
+        <button class="flat" id="accessReport" type="button">Download access CSV</button>
+        <button class="flat" id="feedbackReport" type="button">Download feedback CSV</button>
+      </div>
+      <div class="form-msg" id="reportMsg" aria-live="polite">Each download is created from the current records.</div>
+    `,false);
+}
+function panel(){
+  const seekBody = `<div class="seek">
+        <div class="cap" style="align-self:center;flex:none">Tag #</div>
+        <input id="seek" inputmode="numeric" maxlength="6" placeholder="tag number">
+        <button id="seekGo">Search</button>
+      </div>
+      <div class="tries">View <a data-n="304">304</a> · <a data-n="841">841</a> · <a data-n="97">97</a> · <a data-n="1974">1974</a></div>
+      <div class="said" id="said"></div>`;
+  const seek = fold("Search a tag",seekBody,true);
+
+  const viewSeg = fold("Map",`<div class="seg" id="viewSeg" style="margin-top:8px">
+        <button data-v="points" class="${view!=="heat"?"on":""}">Points</button>
+        <button data-v="heat" class="${view==="heat"?"on":""}">Heatmap</button>
+      </div>`,false);
+
+  const speciesChips = fold("Species", `
+      <select id="spp" class="sel" style="margin-top:8px">
+        ${["All",...Object.keys(META.species||{}).filter(name=>name)]
+          .map(name=>`<option value="${esc(name)}"${species===name?" selected":""}>${esc(name)}</option>`).join("")}
+      </select>`, false);
+
+  const numbers = fold("In view",`<div class="nums" style="margin-top:9px">
+        <div class="one"><div class="v num" id="nCount">—</div><div class="k">catches</div></div>
+        <div class="one"><div class="v num" id="nRecap">—</div><div class="k">recaptures</div></div>
+        ${role==="l1"?"":'<div class="one"><div class="v num" id="nTemp">—</div><div class="k" id="nTempK">avg °F water temperature</div></div>'+ 
+                         '<div class="one"><div class="v num" id="nMiles">—</div><div class="k" id="nMilesK">avg mi moved</div></div>'}
+      </div>`,false);
+
+  const legendBlk = fold("Legend", `
+      <div class="legend" id="legend" style="margin-top:8px">
+        <div class="lt" id="legTitle"></div>
+        <div class="ls" id="legSub"></div>
+        <div class="ramp seq" id="legRamp"></div>
+        <div class="scale" id="legScale"></div>
+        <div class="ret"><span class="dot-ret"></span> rust ring / line = a fish caught again</div></div>`, false);
+
+  if(role==="l1"){
+    return fold("Search a tag",`<div class="seek mini">
+      <div class="cap" style="align-self:center;flex:none">Tag #</div>
+      <input id="seek" inputmode="numeric" maxlength="6" placeholder="tag number">
+      <button id="seekGo">Search</button>
+    </div>
+      <div class="tries">View <a data-n="841">841</a> · <a data-n="304">304</a> · <a data-n="97">97</a> · <a data-n="1974">1974</a></div>
+      <div class="soon">More features coming soon.</div>
+      <div class="said" id="said"></div>
+      <div class="hint"><span class="hdot">1</span> Click a numbered capture to view that catch</div>
+    `,true);
+  }
+
+  const hydroRows = [['tF','Water temperature','°F'],['lvl','River level','ft'],
+    ['turb','Turbidity','FNU'],['do','Dissolved oxygen','mg/L'],['cfs','Discharge','CFS'],
+    ['airF','Air temperature','°F'],['windMph','Wind speed','mph'],['pressIn','Barometric pressure','inHg']];
+  const hydroMenu = fold(role==="l2"?"Heatmap shows":"Colour the points by", `
+      <select id="hydro" class="sel" style="margin-top:8px">
+        <option value="">${role==="l2"?"Catch density":"None"}</option>
+        ${hydroRows.map(([h,t,u])=>`<option value="${h}"${hydro===h?" selected":""}>${t} (${u})</option>`).join("")}
+      </select>`, false);
+  const measure = fold("Measure", `
+      <select id="mMode" class="sel" style="margin-top:8px">
+        ${role==="l2"?'<option value="river">By river distance</option>':""}
+        <option value="straight">Straight line, as the crow flies</option>
+      </select>
+      <select id="mUnit" class="sel">
+        <option value="mi">miles</option>
+        <option value="km">kilometers</option>
+      </select>
+      <button class="flat" id="mGo" style="width:100%;margin-top:8px">Click two points on the ${role==="l2"?"river":"map"}</button>
+      <div class="ingest" id="mOut" style="margin-top:7px"></div>`, false);
+
+  const recap = fold("Show", `
+      <select id="retSel" class="sel" style="margin-top:8px">
+        <option value="all"${retOnly?"":" selected"}>All catches</option>
+        <option value="ret"${retOnly?" selected":""}>Recaptured only</option>
+      </select>
+      <select id="unitSel" class="sel">
+        <option value="mi"${units==="mi"?" selected":""}>miles</option>
+        <option value="km"${units==="km"?" selected":""}>kilometers</option>
+      </select>`, false);
+
+  const spots = fold("Busiest spots",`<div class="spots">
+      <div class="ssub" id="sideSub">captures by location</div>
+      <select id="cycle" class="sel">
+        <option value="0">All time</option>
+        <option value="30">Last 30 days of data</option>
+        <option value="7">Last 7 days of data</option>
+      </select>
+      <div id="bars" style="margin-top:10px"></div>
+    </div>`,false);
+
+  if(role==="l2"){
+    return seek + speciesChips + hydroMenu + measure + weatherHTML() + astroHTML() +
+      recap + numbers + spots + legendBlk + feedbackBlock();
+  }
+  const feed = fold("Tile feed",`<div class="ingest" style="margin-top:8px">
+        source <code>${LOCAL_PREVIEW?TILE_ROOT+"/{z}/{x}/{y}.pbf":"protected Cloud Run tiles"}</code><br>
+        <b>● live</b> · <span id="featN"></span> catches · layer <code>fish</code><br>
+        exact point access · administrator only
+      </div>
+      <button class="flat" id="csv" style="width:100%;margin-top:9px">Export this view (CSV)</button>`,false);
+  return seek + viewSeg + speciesChips + hydroMenu + measure + weatherHTML() + astroHTML() +
+    recap + numbers + spots + feed + legendBlk + adminRecordsBlock() + feedbackBlock();
+}
+
+function toolBlocks(){
+  return [...document.querySelectorAll("#paneBody .fold")];
+}
+function toolName(block){
+  return block?.querySelector(".foldcap span")?.textContent.trim() || "Map tools";
+}
+function syncToolDial(){
+  const blocks=toolBlocks();
+  if(!blocks.length) return;
+  toolIndex=(toolIndex+blocks.length)%blocks.length;
+  const name=toolName(blocks[toolIndex]);
+  set("wheelLabel",name);
+  set("paneLabel","Map tools · "+name);
+  byId("toolWheel").style.setProperty("--dial-angle",(toolIndex/blocks.length*360)+"deg");
+}
+function showPane(show){
+  const pane=byId("pane");
+  pane.classList.toggle("hidden",!show);
+  byId("menuBtn").setAttribute("aria-expanded",String(show));
+}
+function chooseTool(index,reveal=true){
+  const blocks=toolBlocks();
+  if(!blocks.length) return;
+  toolIndex=(index+blocks.length)%blocks.length;
+  blocks.forEach((block,i)=>{
+    const open=i===toolIndex;
+    block.classList.toggle("closed",!open);
+    block.querySelector(".foldcap")?.setAttribute("aria-expanded",String(open));
+  });
+  syncToolDial();
+  if(reveal){
+    showPane(true);
+    blocks[toolIndex].scrollIntoView({block:"nearest"});
+  }
+}
+function stepTool(amount){
+  chooseTool(toolIndex+amount,true);
+}
+function wireToolDock(){
+  byId("toolPrev").onclick=()=>stepTool(-1);
+  byId("toolNext").onclick=()=>stepTool(1);
+  byId("toolOpen").onclick=()=>chooseTool(toolIndex,true);
+  byId("toolHide").onclick=()=>showPane(false);
+  byId("paneClose").onclick=()=>showPane(false);
+  byId("menuBtn").onclick=()=>{
+    if(byId("pane").classList.contains("hidden")) chooseTool(toolIndex,true);
+    else showPane(false);
+  };
+  const wheel=byId("toolWheel");
+  if(!wheel._wired){
+    wheel._wired=true;
+    wheel.addEventListener("wheel",event=>{
+      event.preventDefault();
+      wheelMotion+=event.deltaY;
+      clearTimeout(wheelTimer);
+      wheelTimer=setTimeout(()=>{ wheelMotion=0; },180);
+      if(Math.abs(wheelMotion)<24) return;
+      stepTool(wheelMotion<0?-1:1);
+      wheelMotion=0;
+    },{passive:false});
+    wheel.addEventListener("keydown",event=>{
+      if(event.key==="ArrowUp" || event.key==="ArrowLeft"){ event.preventDefault(); stepTool(-1); }
+      if(event.key==="ArrowDown" || event.key==="ArrowRight"){ event.preventDefault(); stepTool(1); }
+      if(event.key==="Escape"){ event.preventDefault(); showPane(false); }
+    });
+  }
+}
+
+function defaults(){
+  if(role==="l1"){ view="points"; hydro=null; species="All"; retOnly=false; }
+  if(role==="l2"){ view="heat";   hydro=null; species="All"; retOnly=false; }
+  if(role==="l3"){ view="points"; hydro=null; species="All"; retOnly=false; }
+}
+function formMessage(id,text,tone=""){
+  const message=byId(id);
+  if(!message) return;
+  message.textContent=text;
+  message.className="form-msg"+(tone?" "+tone:"");
+}
+function paintStars(){
+  document.querySelectorAll("#feedbackStars button").forEach(button=>{
+    const on=Number(button.dataset.rating)<=feedbackRating;
+    button.classList.toggle("on",on);
+    button.setAttribute("aria-pressed",String(Number(button.dataset.rating)===feedbackRating));
+  });
+}
+async function sendFeedback(){
+  if(!feedbackRating){
+    formMessage("feedbackMsg","Choose a star rating first.","bad");
+    return;
+  }
+  if(LOCAL_PREVIEW){
+    formMessage("feedbackMsg","Feedback will save after the secure cloud service is connected.","bad");
+    return;
+  }
+  const button=byId("feedbackSend");
+  button.disabled=true;
+  formMessage("feedbackMsg","Sending…");
+  try{
+    const client=await authClient();
+    const token=await client.token();
+    const response=await fetchTimed(FEEDBACK_URL,{
+      method:"POST",
+      headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},
+      body:JSON.stringify({
+        level:role,
+        rating:feedbackRating,
+        comments:val("feedbackComments").trim()
+      })
+    });
+    let result={};
+    try{ result=await response.json(); }catch(e){}
+    if(!response.ok || !result.recorded) throw new Error(result.message||"Feedback could not be sent.");
+    feedbackRating=0;
+    paintStars();
+    val("feedbackComments","");
+    formMessage("feedbackMsg","Thank you. Your feedback was recorded.","good");
+  }catch(error){
+    formMessage("feedbackMsg",error.message||"Feedback could not be sent.","bad");
+  }finally{
+    button.disabled=false;
+  }
+}
+async function downloadReport(path,filename,button){
+  if(LOCAL_PREVIEW){
+    formMessage("reportMsg","Live reports are available after the secure cloud service is connected.","bad");
+    return;
+  }
+  const oldText=button.textContent;
+  button.disabled=true;
+  button.textContent="Preparing…";
+  formMessage("reportMsg","Creating the current report…");
+  try{
+    const client=await authClient();
+    const token=await client.token();
+    const response=await fetchTimed(AUTH_URL+path,{
+      headers:{"Authorization":"Bearer "+token}
+    },30000);
+    if(!response.ok){
+      let result={};
+      try{ result=await response.json(); }catch(e){}
+      throw new Error(result.message||"The report could not be created.");
+    }
+    const url=URL.createObjectURL(await response.blob());
+    const link=document.createElement("a");
+    link.href=url;
+    link.download=filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    formMessage("reportMsg",filename+" downloaded.","good");
+  }catch(error){
+    formMessage("reportMsg",error.message||"The report could not be created.","bad");
+  }finally{
+    button.disabled=false;
+    button.textContent=oldText;
+  }
+}
+async function loadAdminOverview(){
+  const output=byId("adminOverview");
+  if(!output) return;
+  if(LOCAL_PREVIEW){
+    output.textContent="Account activity will appear here when the secure cloud service is connected.";
+    return;
+  }
+  try{
+    const client=await authClient();
+    const token=await client.token();
+    const response=await fetchTimed(ADMIN_OVERVIEW_URL,{
+      headers:{"Authorization":"Bearer "+token}
+    });
+    let result={};
+    try{ result=await response.json(); }catch(e){}
+    if(!response.ok) throw new Error(result.message||"Account records are unavailable.");
+    const counts=result.counts||{};
+    output.className="";
+    output.innerHTML=`<div class="admin-counts">
+      <div><b>${Number(counts.total||0).toLocaleString()}</b><span>accounts</span></div>
+      <div><b>${Number(counts.level2||0).toLocaleString()}</b><span>level 2</span></div>
+      <div><b>${Number(counts.admin||0).toLocaleString()}</b><span>staff</span></div>
+    </div><div class="form-msg">${Number(counts.disabled||0).toLocaleString()} disabled account${Number(counts.disabled)===1?"":"s"}.</div>`;
+    const recent=Array.isArray(result.recent)?result.recent:[];
+    byId("recentAccess").innerHTML=recent.length
+      ? `<div class="ssub">Recent level access</div>`+recent.map(item=>{
+          const time=item.at ? new Date(item.at).toLocaleString() : "time unavailable";
+          return `<div class="recent-row"><b>${esc(item.email||"Unknown account")}</b>
+            <span>${esc((item.level||"level").toUpperCase())} · ${esc(time)} · ${Number(item.totalAccesses||0).toLocaleString()} total</span></div>`;
+        }).join("")
+      : '<div class="form-msg">No successful level access has been recorded yet.</div>';
+  }catch(error){
+    formMessage("adminOverview",error.message||"Account records are unavailable.","bad");
+  }
+}
+function wire(){
+  const g=document.getElementById("seekGo");
+  if(g) g.onclick=()=>search(val("seek"),true);
+  const s=document.getElementById("seek");
+  if(s) s.addEventListener("keydown",e=>{ if(e.key==="Enter") search(s.value,true); });
+  document.querySelectorAll(".tries a").forEach(a=>a.onclick=()=>{ s.value=a.dataset.n; search(a.dataset.n,true); });
+
+  bindSeg("viewSeg","v", v=>setView(v));
+  document.querySelectorAll("#paneBody .foldcap").forEach(c=>c.onclick=()=>{
+    const block=c.closest(".fold"), blocks=toolBlocks(), index=blocks.indexOf(block);
+    if(block.classList.contains("closed")) chooseTool(index,true);
+    else{
+      toolIndex=index;
+      block.classList.add("closed");
+      c.setAttribute("aria-expanded","false");
+      syncToolDial();
+    }
+  });
+  const rs=byId("retSel");
+  if(rs) rs.onchange=()=>{ retOnly=(rs.value==="ret"); applyFilter(); stats(); };
+  const us=byId("unitSel");
+  if(us) us.onchange=()=>{ units=us.value; scaleCtl.setUnit(units==="km"?"metric":"imperial");
+    if(capPop){ capPop.remove(); capPop=null; capPinned=false; } stats(); };
+  feedbackRating=0;
+  document.querySelectorAll("#feedbackStars button").forEach(button=>{
+    button.onclick=()=>{
+      feedbackRating=Number(button.dataset.rating);
+      paintStars();
+      formMessage("feedbackMsg",feedbackRating+" out of 5 selected.");
+    };
+  });
+  if(byId("feedbackSend")) byId("feedbackSend").onclick=sendFeedback;
+  if(byId("usersReport")) byId("usersReport").onclick=event=>
+    downloadReport("/v1/admin/users.csv","fishtagged-users.csv",event.currentTarget);
+  if(byId("accessReport")) byId("accessReport").onclick=event=>
+    downloadReport("/v1/admin/access.csv","fishtagged-access-log.csv",event.currentTarget);
+  if(byId("feedbackReport")) byId("feedbackReport").onclick=event=>
+    downloadReport("/v1/admin/feedback.csv","fishtagged-feedback.csv",event.currentTarget);
+  if(byId("adminOverview")) loadAdminOverview();
+
+  const h=document.getElementById("hydro");
+  if(h) h.addEventListener("change",()=>{
+    setHydro(h.value||null);
+    stats();
+    if(role!=="l2" && hydro && view!=="points"){ setView("points"); flag("viewSeg","v","points"); }
+  });
+
+  const sp=document.getElementById("spp");
+  if(sp) sp.addEventListener("change",()=>{ species=sp.value; applyFilter(); stats(); });
+
+  const mg=document.getElementById("mGo");
+  if(mg){ mg.onclick=measureStart;
+    document.getElementById("mMode").onchange=measureRedo;
+    document.getElementById("mUnit").onchange=measureRedo; }
+
+  if(byId("featN")) set("featN", META.count.toLocaleString());
+  const cy=byId("cycle"); if(cy) cy.onchange=()=>bars();
+  if(byId("csv")) document.getElementById("csv").onclick=exportCSV;
+}
+function bindSeg(id,attr,fn){
+  const el=document.getElementById(id); if(!el) return;
+  el.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return;
+    el.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); fn(b.dataset[attr]); });
+}
+function flag(id,attr,v){ const el=document.getElementById(id); if(!el) return;
+  el.querySelectorAll("button").forEach(b=>b.classList.toggle("on", b.dataset[attr]===v)); }
+
+function fitAll(){
+  const paneOpen=!byId("pane").classList.contains("hidden");
+  const padding=innerWidth<=680 ? {top:54,left:18,right:18,bottom:118} :
+    {top:66,left:paneOpen?410:128,right:38,bottom:58};
+  map.fitBounds([[META.bounds[0],META.bounds[1]],[META.bounds[2],META.bounds[3]]],
+    {padding,duration:0});
+  fitted=true;
+}
+
+function onStyle(){
+  addLayers(); applyFilter(); setView(view); setHydro(hydro); stats();
+  if(picked) search(picked,false);
+  if(!fitted) fitAll();
+  document.getElementById("veil").classList.add("off");
+}
+
+async function enter(r){
+  try{
+    await MAP_READY;
+  }catch(error){
+    document.getElementById("gate").style.display="none";
+    document.getElementById("app").classList.add("on");
+    document.getElementById("veil").innerHTML=
+      '<span style="max-width:320px;text-align:center;line-height:1.5">The map could not start. Check the connection and reload this page.</span>';
+    return;
+  }
+  role=r; defaults();
+  document.getElementById("lvlName").textContent=LEVELS[r];
+  document.getElementById("gate").style.display="none";
+  document.getElementById("app").classList.add("on");
+  document.getElementById("logoutBtn").style.display = r==="l1" ? "none" : "block";
+
+  try{ await loadIndex(); }
+  catch(e){ document.getElementById("veil").innerHTML=
+    '<span style="max-width:320px;text-align:center;line-height:1.5">Open this site through GitHub Pages or a local web server. The map data cannot load from a file:// page.</span>';
+    return; }
+
+  const pane=document.getElementById("pane");
+  document.getElementById("paneBody").innerHTML=panel();
+  toolIndex=0;
+  pane.classList.toggle("hidden",r!=="l1");
+  wire();
+  wireToolDock();
+  syncToolDial();
+  document.getElementById("menuBtn").setAttribute("aria-expanded",String(!pane.classList.contains("hidden")));
+  if(r!=="l1") loadLiveWeather();
+
+  if(!map){
+    map=new maplibregl.Map({
+      container:"map",
+      style:LIGHT,
+      center:[-77.6,39.35],
+      zoom:9,
+      transformRequest:url=>activeToken &&
+        [ADMIN_TILE_ROOT,LEVEL2_TILE_API].some(root=>root && url.startsWith(root))
+        ? {url,headers:{"Authorization":"Bearer "+activeToken}}
+        : {url}
+    });
+    map.addControl(new maplibregl.NavigationControl({showCompass:false}),"bottom-right");
+    scaleCtl=new maplibregl.ScaleControl({unit:"imperial", maxWidth:110});
+    map.addControl(scaleCtl,"bottom-left");
+    map.addControl(new maplibregl.GeolocateControl({positionOptions:{enableHighAccuracy:true}}),"bottom-right");
+    map.on("style.load",onStyle);
+    map.on("idle", hideVeil);
+    map.on("click", measureClick);
+    map.on("click", clickCapture);
+    map.on("dblclick", clickCapture);
+    if(r!=="l1"){
+      map.on("click","dots",e=>{ if(!measuring) search(String(e.features[0].properties.tag), false); });
+      map.on("mouseenter","dots",()=>map.getCanvas().style.cursor="pointer");
+      map.on("mouseleave","dots",()=>map.getCanvas().style.cursor="");
+    }
+    map.on("mouseenter","jdot",e=>{ map.getCanvas().style.cursor="pointer"; if(role==="l1" && !capPinned) showCap(e.features[0],false); });
+    map.on("mouseleave","jdot",()=>{ map.getCanvas().style.cursor=""; if(role==="l1" && !capPinned && capPop){ capPop.remove(); capPop=null; } });
+    map.on("click",()=>{ if(innerWidth<=680 && !measuring) showPane(false); });
+  } else if(map.isStyleLoaded()){
+    refreshFishTiles();
+    clearPick(); applyFilter(); setView(view); setHydro(hydro); stats();
+    fitAll();
+    hideVeil();
+  }
+  armIdle();
+  setTimeout(hideVeil, 3000);
+}
+
+function exportCSV(){
+  const head=["num","color","alpha","sp","rc","dt","spot","lng","lat","tF","lvl","turb","do","cfs","airF","dewF","windMph","gustMph","pressIn","wxStation","wxTime"];
+  const lines=[head.join(",")];
+  for(const t of TAGS){
+    if(species!=="All" && t.sp!==species) continue;
+    for(const c of t.caps){
+      if(retOnly && c.rc!=="Recaptured") continue;
+      const row=[t.num,t.color,t.alpha,t.sp,c.rc,c.dt,c.spot,c.lng,c.lat,c.tF,c.lvl,c.turb,c.do,c.cfs,c.airF,c.dewF,c.windMph,c.gustMph,c.pressIn,c.wxStation,c.wxTime]
+        .map(v=>{
+          v=v==null?"":String(v);
+          if(/^[\t\r\n ]*[=+\-@]/.test(v)) v="'"+v;
+          return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;
+        });
+      lines.push(row.join(","));
+    }
+  }
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([lines.join("\n")],{type:"text/csv"}));
+  a.download="fishtagged_"+(species==="All"?"all":species.toLowerCase().replace(/ /g,""))+(retOnly?"_recaptured":"")+".csv";
+  a.click(); URL.revokeObjectURL(a.href);
+}
+document.querySelectorAll(".lvl").forEach(b=>b.onclick=()=>requestLevel(b.dataset.go));
+document.getElementById("loginForm").onsubmit=signIn;
+document.getElementById("loginCancel").onclick=closeLogin;
+document.getElementById("createAccountBtn").onclick=toggleCreateAccount;
+document.getElementById("verifyEmailBtn").onclick=sendVerification;
+document.getElementById("resetPasswordBtn").onclick=sendPasswordReset;
+document.getElementById("previewLogin").onclick=previewLevel;
+document.getElementById("staySignedIn").onclick=staySignedIn;
+document.getElementById("login").onclick=e=>{ if(e.target.id==="login") closeLogin(); };
+function closeQuick(){
+  byId("quickPop").hidden=true;
+  byId("quickBtn").setAttribute("aria-expanded","false");
+}
+byId("quickBtn").onclick=()=>{
+  const opening=byId("quickPop").hidden;
+  byId("quickPop").hidden=!opening;
+  byId("quickBtn").setAttribute("aria-expanded",String(opening));
+};
+document.addEventListener("click",event=>{
+  if(!event.target.closest(".quickmenu")) closeQuick();
+});
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Escape") return;
+  if(byId("login").classList.contains("on")) closeLogin();
+  closeQuick();
+  if(byId("app").classList.contains("on")) showPane(false);
+});
+["mousemove","mousedown","keydown","touchstart","scroll"].forEach(event=>{
+  window.addEventListener(event,noteActivity,{passive:true});
+});
+
+document.getElementById("leaveBtn").onclick=async ()=>{
+  closeQuick();
+  if(role==="l2" || role==="l3") await recordSessionEvent("level_leave",role);
+  stopIdle();
+  document.getElementById("app").classList.remove("on");
+  document.getElementById("gate").style.display="block";
+  clearPick();
+  if(map){ map.remove(); map=null; scaleCtl=null; fitted=false; }
+};
+document.getElementById("logoutBtn").onclick=()=>{ closeQuick(); logoutSession(false); };
+document.getElementById("baseBtn").onclick=()=>{
+  closeQuick();
+  base = base==="light" ? "sat" : "light";
+  document.getElementById("baseBtn").textContent = base==="light" ? "Satellite view" : "Plain map";
+  if(map.getLayer("satellite-base")){
+    map.setLayoutProperty("satellite-base","visibility",base==="sat"?"visible":"none");
+  }
+};
+function hideVeil(){ const v=document.getElementById("veil"); if(v) v.classList.add("off"); }
+function byId(id){ return document.getElementById(id); }
+function set(id,v){ const e=byId(id); if(e) e.textContent=v; }
+function val(id,v){ const e=byId(id); if(v!=null) e.value=v; return e?e.value:""; }
+</script>
+</body>
+</html>
