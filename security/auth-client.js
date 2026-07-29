@@ -51,7 +51,7 @@ function accountError(error) {
     case "auth/network-request-failed":
       return new Error("The account service could not be reached. Check your connection and try again.");
     default:
-      return new Error("The account could not be created. Contact an administrator.");
+      return new Error(`The account could not be created (${error?.code || "unknown error"}).`);
   }
 }
 
