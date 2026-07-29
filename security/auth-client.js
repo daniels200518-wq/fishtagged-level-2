@@ -33,6 +33,28 @@ function genericError() {
   return new Error("Sign-in failed. Check your information and try again.");
 }
 
+function accountError(error) {
+  switch (error?.code) {
+    case "auth/email-already-in-use":
+      return new Error("This email already has an account. Sign in or use Forgot password.");
+    case "auth/invalid-email":
+      return new Error("Enter a valid email address.");
+    case "auth/weak-password":
+    case "auth/password-does-not-meet-requirements":
+      return new Error("Use a password with at least 12 characters.");
+    case "auth/operation-not-allowed":
+      return new Error("New account registration is not enabled.");
+    case "auth/unauthorized-domain":
+      return new Error("Account registration is not authorized from this website address.");
+    case "auth/too-many-requests":
+      return new Error("Too many attempts were made. Wait a few minutes and try again.");
+    case "auth/network-request-failed":
+      return new Error("The account service could not be reached. Check your connection and try again.");
+    default:
+      return new Error("The account could not be created. Contact an administrator.");
+  }
+}
+
 window.FT_AUTH = Object.freeze({
   configured,
 
@@ -57,10 +79,7 @@ window.FT_AUTH = Object.freeze({
       const credential = await createUserWithEmailAndPassword(auth, email, password);
       return credential.user;
     } catch (error) {
-      if (error?.code === "auth/weak-password") {
-        throw new Error("Use a password with at least 12 characters.");
-      }
-      throw new Error("The account could not be created. Try signing in or resetting the password.");
+      throw accountError(error);
     }
   },
 
