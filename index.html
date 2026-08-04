@@ -99,25 +99,27 @@
   .quick-pop button:hover,.quick-pop button:focus-visible{ background:var(--field); outline:none; }
   .quick-pop button + button{ border-top:1px solid var(--hair); border-top-left-radius:0; border-top-right-radius:0; }
 
-  .tool-dock{ position:absolute; top:64px; left:12px; z-index:11; width:116px; height:116px; }
-  .wheel{ --dial-angle:0deg; position:relative; width:116px; height:116px; border-radius:50%;
+  .tool-dock{ position:absolute; top:64px; left:12px; z-index:11; width:132px; height:132px; }
+  .wheel{ --dial-angle:0deg; position:relative; width:132px; height:132px; border-radius:50%;
           border:1px solid #d9ded8; box-shadow:0 6px 22px rgba(23,34,31,.18);
-          background:
-            radial-gradient(circle at center,#fafbf8 0 calc(50% - 8px),transparent calc(50% - 7px)),
-            conic-gradient(from var(--dial-angle),var(--green) 0 10deg,#f5f7f3 10deg 360deg);
+          background:#f5f7f3;
           user-select:none; touch-action:none; transition:transform .16s ease; }
   .wheel:hover{ transform:translateY(-1px); }
-  .wheel::after{ content:""; position:absolute; inset:5px; border:1px solid rgba(111,140,120,.23);
+  .wheel::before{ content:""; position:absolute; inset:0; border-radius:50%; pointer-events:none;
+                  background:conic-gradient(from var(--dial-angle),var(--green) 0 9deg,transparent 9deg 360deg);
+                  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px));
+                  mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px)); }
+  .wheel::after{ content:""; position:absolute; inset:8px; border:1px solid rgba(111,140,120,.23);
                  border-radius:50%; pointer-events:none; }
   .wheel-key,.wheel-center{ position:absolute; z-index:2; display:flex; align-items:center; justify-content:center;
                             border:0; color:#59635f; background:transparent; font-family:inherit; cursor:pointer; }
   .wheel-key{ width:27px; height:27px; border-radius:50%; font-size:15px; font-weight:800; }
   .wheel-key:hover,.wheel-key:focus-visible{ background:#fff; color:var(--green-dk); outline:none; }
-  .wheel-key.prev{ top:6px; left:44px; }
-  .wheel-key.next{ bottom:6px; left:44px; }
-  .wheel-key.hide{ top:44px; left:6px; font-size:17px; }
-  .wheel-key.open{ top:44px; right:6px; font-size:20px; }
-  .wheel-center{ top:32px; left:32px; width:52px; height:52px; flex-direction:column; border-radius:50%;
+  .wheel-key.prev{ top:10px; left:52px; }
+  .wheel-key.next{ bottom:10px; left:52px; }
+  .wheel-key.hide{ top:52px; left:10px; font-size:17px; }
+  .wheel-key.open{ top:52px; right:10px; font-size:20px; }
+  .wheel-center{ top:40px; left:40px; width:52px; height:52px; flex-direction:column; border-radius:50%;
                  background:#fff; border:1px solid #d9ded8; box-shadow:inset 0 1px 0 #fff,0 1px 4px rgba(25,34,32,.12);
                  line-height:1.05; }
   .wheel-center:hover,.wheel-center:focus-visible{ border-color:var(--green); outline:none; }
@@ -125,7 +127,7 @@
   .wheel-center small{ display:block; max-width:38px; margin-top:2px; overflow:hidden; text-overflow:ellipsis;
                        white-space:nowrap; color:var(--green-dk); font-size:7px; }
 
-  .pane{ position:absolute; top:64px; left:138px; width:264px; background:rgba(255,255,255,.97);
+  .pane{ position:absolute; top:64px; left:154px; width:264px; background:rgba(255,255,255,.97);
          border:1px solid var(--hair); border-radius:10px; box-shadow:0 6px 24px rgba(20,33,31,.16);
          z-index:10; max-height:calc(100% - 78px); overflow:hidden; backdrop-filter:blur(9px); }
   .pane.hidden{ display:none; }
@@ -349,17 +351,17 @@
     .quickmenu{ top:8px; right:8px; }
     .quick-trigger{ height:34px; min-width:67px; }
     .quick-pop{ top:40px; }
-    .tool-dock{ top:auto; bottom:42px; left:8px; width:104px; height:104px; }
-    .wheel{ width:104px; height:104px; }
-    .wheel-key.prev{ top:5px; left:38px; }
-    .wheel-key.next{ bottom:5px; left:38px; }
-    .wheel-key.hide{ top:38px; left:5px; }
-    .wheel-key.open{ top:38px; right:5px; }
-    .wheel-center{ top:29px; left:29px; width:46px; height:46px; }
-    .pane{ top:auto; right:8px; bottom:152px; left:8px; width:auto; max-height:52vh; }
+    .tool-dock{ top:auto; bottom:42px; left:8px; width:114px; height:114px; }
+    .wheel{ width:114px; height:114px; }
+    .wheel-key.prev{ top:7px; left:43px; }
+    .wheel-key.next{ bottom:7px; left:43px; }
+    .wheel-key.hide{ top:43px; left:7px; }
+    .wheel-key.open{ top:43px; right:7px; }
+    .wheel-center{ top:33px; left:33px; width:48px; height:48px; }
+    .pane{ top:auto; right:8px; bottom:162px; left:8px; width:auto; max-height:52vh; }
     .panebody{ max-height:calc(52vh - 35px); }
-    .idlewarn{ left:8px; right:8px; bottom:152px; width:auto; }
-    .maplibregl-ctrl-bottom-left{ left:108px; }
+    .idlewarn{ left:8px; right:8px; bottom:162px; width:auto; }
+    .maplibregl-ctrl-bottom-left{ left:118px; }
   }
 </style>
 </head>
