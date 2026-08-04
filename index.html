@@ -25,7 +25,7 @@
 <link href="https://unpkg.com/maplibre-gl@6.0.0/dist/maplibre-gl.css" rel="stylesheet">
 <script type="module" src="assets/maplibre-loader.js"></script>
 <script src="security/auth-config.js"></script>
-<script type="module" src="security/auth-client.js?v=20260729c"></script>
+<script type="module" src="security/auth-client.js?v=20260804a"></script>
 
 <style>
   :root{
@@ -99,12 +99,12 @@
   .quick-pop button:hover,.quick-pop button:focus-visible{ background:var(--field); outline:none; }
   .quick-pop button + button{ border-top:1px solid var(--hair); border-top-left-radius:0; border-top-right-radius:0; }
 
-  .tool-dock{ position:absolute; top:64px; left:12px; z-index:11; width:104px; height:104px; }
-  .wheel{ --dial-angle:0deg; position:relative; width:104px; height:104px; border-radius:50%;
+  .tool-dock{ position:absolute; top:64px; left:12px; z-index:11; width:116px; height:116px; }
+  .wheel{ --dial-angle:0deg; position:relative; width:116px; height:116px; border-radius:50%;
           border:1px solid #d9ded8; box-shadow:0 6px 22px rgba(23,34,31,.18);
           background:
-            radial-gradient(circle at center,#fafbf8 0 38%,transparent 39%),
-            conic-gradient(from var(--dial-angle),var(--rust) 0 12deg,#f5f7f3 12deg 360deg);
+            radial-gradient(circle at center,#fafbf8 0 calc(50% - 8px),transparent calc(50% - 7px)),
+            conic-gradient(from var(--dial-angle),var(--green) 0 10deg,#f5f7f3 10deg 360deg);
           user-select:none; touch-action:none; transition:transform .16s ease; }
   .wheel:hover{ transform:translateY(-1px); }
   .wheel::after{ content:""; position:absolute; inset:5px; border:1px solid rgba(111,140,120,.23);
@@ -112,12 +112,12 @@
   .wheel-key,.wheel-center{ position:absolute; z-index:2; display:flex; align-items:center; justify-content:center;
                             border:0; color:#59635f; background:transparent; font-family:inherit; cursor:pointer; }
   .wheel-key{ width:27px; height:27px; border-radius:50%; font-size:15px; font-weight:800; }
-  .wheel-key:hover,.wheel-key:focus-visible{ background:#fff; color:var(--rust-dk); outline:none; }
-  .wheel-key.prev{ top:5px; left:38px; }
-  .wheel-key.next{ bottom:5px; left:38px; }
-  .wheel-key.hide{ top:38px; left:5px; font-size:17px; }
-  .wheel-key.open{ top:38px; right:5px; font-size:20px; }
-  .wheel-center{ top:29px; left:29px; width:46px; height:46px; flex-direction:column; border-radius:50%;
+  .wheel-key:hover,.wheel-key:focus-visible{ background:#fff; color:var(--green-dk); outline:none; }
+  .wheel-key.prev{ top:6px; left:44px; }
+  .wheel-key.next{ bottom:6px; left:44px; }
+  .wheel-key.hide{ top:44px; left:6px; font-size:17px; }
+  .wheel-key.open{ top:44px; right:6px; font-size:20px; }
+  .wheel-center{ top:32px; left:32px; width:52px; height:52px; flex-direction:column; border-radius:50%;
                  background:#fff; border:1px solid #d9ded8; box-shadow:inset 0 1px 0 #fff,0 1px 4px rgba(25,34,32,.12);
                  line-height:1.05; }
   .wheel-center:hover,.wheel-center:focus-visible{ border-color:var(--green); outline:none; }
@@ -125,7 +125,7 @@
   .wheel-center small{ display:block; max-width:38px; margin-top:2px; overflow:hidden; text-overflow:ellipsis;
                        white-space:nowrap; color:var(--green-dk); font-size:7px; }
 
-  .pane{ position:absolute; top:64px; left:126px; width:264px; background:rgba(255,255,255,.97);
+  .pane{ position:absolute; top:64px; left:138px; width:264px; background:rgba(255,255,255,.97);
          border:1px solid var(--hair); border-radius:10px; box-shadow:0 6px 24px rgba(20,33,31,.16);
          z-index:10; max-height:calc(100% - 78px); overflow:hidden; backdrop-filter:blur(9px); }
   .pane.hidden{ display:none; }
@@ -288,7 +288,12 @@
   .loginbox input:focus{ outline:none; border-color:var(--ink); }
   .login-note{ margin:12px 0 0; padding:9px 10px; background:var(--field); color:var(--label);
                font-size:10.5px; line-height:1.4; }
-  .mfa-step[hidden], .credential-fields[hidden], .signup-fields[hidden]{ display:none; }
+  .mfa-step[hidden], .email-code-step[hidden], .credential-fields[hidden], .signup-fields[hidden]{ display:none; }
+  .password-field{ position:relative; }
+  .password-field input{ padding-right:44px; }
+  .password-show{ position:absolute; right:5px; top:8px; width:34px; height:28px; border:0; border-radius:4px;
+                  background:transparent; color:var(--label); font:700 10px inherit; cursor:pointer; }
+  .password-show:hover,.password-show:focus-visible{ background:var(--field); color:var(--ink); outline:none; }
   .login-actions{ display:flex; gap:8px; margin-top:16px; }
   .login-actions button{ flex:1; }
   .loginmsg{ min-height:17px; margin-top:10px; color:#9a3318; font-size:11.5px; }
@@ -320,6 +325,14 @@
   .recent-row b{ display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .recent-row span{ color:var(--label); }
   .report-buttons{ display:grid; gap:6px; margin-top:10px; }
+  .account-list{ margin-top:10px; border-top:1px solid var(--hair); }
+  .account-row{ padding:9px 0; border-bottom:1px solid var(--hair); }
+  .account-row b{ display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px; }
+  .account-meta{ margin:3px 0 6px; color:var(--label); font-size:9.5px; line-height:1.35; }
+  .account-controls{ display:flex; gap:5px; }
+  .account-controls select{ flex:1; min-width:0; height:31px; border:1px solid var(--hair); background:#fff;
+                            color:var(--ink); font:11px inherit; padding:0 5px; }
+  .account-controls button{ height:31px; padding:0 9px; }
   .idlewarn{ position:absolute; right:14px; bottom:74px; z-index:12; display:none; width:280px;
              background:#fff; border:1px solid var(--hair); border-left:4px solid var(--rust);
              box-shadow:0 8px 28px rgba(20,29,29,.2); padding:12px; }
@@ -336,17 +349,17 @@
     .quickmenu{ top:8px; right:8px; }
     .quick-trigger{ height:34px; min-width:67px; }
     .quick-pop{ top:40px; }
-    .tool-dock{ top:auto; bottom:42px; left:8px; width:92px; height:92px; }
-    .wheel{ width:92px; height:92px; }
-    .wheel-key.prev{ top:3px; left:33px; }
-    .wheel-key.next{ bottom:3px; left:33px; }
-    .wheel-key.hide{ top:33px; left:3px; }
-    .wheel-key.open{ top:33px; right:3px; }
-    .wheel-center{ top:25px; left:25px; width:42px; height:42px; }
-    .pane{ top:auto; right:8px; bottom:140px; left:8px; width:auto; max-height:52vh; }
+    .tool-dock{ top:auto; bottom:42px; left:8px; width:104px; height:104px; }
+    .wheel{ width:104px; height:104px; }
+    .wheel-key.prev{ top:5px; left:38px; }
+    .wheel-key.next{ bottom:5px; left:38px; }
+    .wheel-key.hide{ top:38px; left:5px; }
+    .wheel-key.open{ top:38px; right:5px; }
+    .wheel-center{ top:29px; left:29px; width:46px; height:46px; }
+    .pane{ top:auto; right:8px; bottom:152px; left:8px; width:auto; max-height:52vh; }
     .panebody{ max-height:calc(52vh - 35px); }
-    .idlewarn{ left:8px; right:8px; bottom:140px; width:auto; }
-    .maplibregl-ctrl-bottom-left{ left:96px; }
+    .idlewarn{ left:8px; right:8px; bottom:152px; width:auto; }
+    .maplibregl-ctrl-bottom-left{ left:108px; }
   }
 </style>
 </head>
@@ -450,10 +463,16 @@
         <label for="loginEmail">Email</label>
         <input id="loginEmail" type="email" autocomplete="username" required>
         <label for="loginPassword">Password</label>
-        <input id="loginPassword" type="password" autocomplete="current-password" required>
+        <div class="password-field">
+          <input id="loginPassword" type="password" autocomplete="current-password" required>
+          <button class="password-show" type="button" data-password="loginPassword" aria-label="Show password">Show</button>
+        </div>
         <div class="signup-fields" id="signupFields" hidden>
           <label for="signupPasswordConfirm">Confirm password</label>
-          <input id="signupPasswordConfirm" type="password" autocomplete="new-password">
+          <div class="password-field">
+            <input id="signupPasswordConfirm" type="password" autocomplete="new-password">
+            <button class="password-show" type="button" data-password="signupPasswordConfirm" aria-label="Show confirmation password">Show</button>
+          </div>
           <label for="signupPhone">Phone number</label>
           <input id="signupPhone" type="tel" inputmode="tel" autocomplete="tel"
             maxlength="18" placeholder="+13015550123">
@@ -462,9 +481,16 @@
         </div>
       </div>
       <div class="mfa-step" id="mfaStep" hidden>
-        <label for="loginMfa">Security code</label>
+        <label for="loginMfa">Authenticator code</label>
         <input id="loginMfa" type="text" inputmode="numeric" autocomplete="one-time-code"
           maxlength="8" pattern="[0-9 ]{6,8}">
+      </div>
+      <div class="email-code-step" id="emailCodeStep" hidden>
+        <label for="loginEmailCode">Code from your email</label>
+        <input id="loginEmailCode" type="text" inputmode="numeric" autocomplete="one-time-code"
+          maxlength="6" pattern="[0-9]{6}">
+        <div class="phone-note" id="emailCodeNote">The code expires after 10 minutes.</div>
+        <button class="mfa-setup" id="resendEmailCodeBtn" type="button">Send a new code</button>
       </div>
       <div class="phone-step" id="phoneStep" hidden>
         <label for="loginPhone">Phone number</label>
@@ -478,9 +504,6 @@
         <button class="flat" type="submit" id="loginSubmit">Sign in</button>
       </div>
       <div class="loginmsg" id="loginMsg" aria-live="polite"></div>
-      <a class="mfa-setup" id="mfaSetupLink" href="security/enroll-mfa.html" hidden>
-        Set up a security code
-      </a>
       <button class="mfa-setup" id="verifyEmailBtn" type="button" hidden>
         Send verification email
       </button>
@@ -501,7 +524,7 @@
 
 <script>
 const HERE = location.href.replace(/[^/]*$/,"");
-const DATA_VERSION = "20260729b";
+const DATA_VERSION = "20260729a";
 const DATA_FILE = "fish_index-20260701.json";
 const TILE_ROOT = "tiles-20260701";
 const PUBLIC_META_FILE = "public-meta-20260701.json";
@@ -519,6 +542,9 @@ const ADMIN_TILE_ROOT = AUTH_URL ? AUTH_URL+"/v1/admin/tiles" : "";
 const PROFILE_URL = AUTH_URL ? AUTH_URL+"/v1/profile" : "";
 const FEEDBACK_URL = AUTH_URL ? AUTH_URL+"/v1/feedback" : "";
 const ADMIN_OVERVIEW_URL = AUTH_URL ? AUTH_URL+"/v1/admin/overview" : "";
+const ADMIN_ACCOUNTS_URL = AUTH_URL ? AUTH_URL+"/v1/admin/accounts" : "";
+const LEVEL3_CODE_REQUEST_URL = AUTH_URL ? AUTH_URL+"/v1/level3/code/request" : "";
+const LEVEL3_CODE_VERIFY_URL = AUTH_URL ? AUTH_URL+"/v1/level3/code/verify" : "";
 const LOCAL_PREVIEW = ["localhost","127.0.0.1"].includes(location.hostname) &&
   SECURITY.localDemoData===true;
 const IDLE_TIME = 5*60*1000;
@@ -591,8 +617,9 @@ let picked=null, fitted=false, units="mi";
 let pendingRole=null;
 let toolIndex=0, wheelMotion=0, wheelTimer=null;
 let verifiedSession=null, activeToken="", authWait=null;
-let mfaPending=false, phonePending=false, signupMode=false;
+let mfaPending=false, emailCodePending=false, phonePending=false, signupMode=false;
 let feedbackRating=0;
+let adminAccountsCache=[];
 let idleTimer=null, idleLogoutTimer=null, idleTick=null, idleDeadline=0, lastActivity=0;
 const dmi=v=>{ const m=parseFloat(v); return isNaN(m) ? "—" :
   (units==="km" ? (m<.125 ? Math.round(m*1609.34)+" m" : (m*1.60934).toFixed(1)+" km") :
@@ -638,10 +665,12 @@ function authClient(){
 }
 function resetLoginStep(){
   mfaPending=false;
+  emailCodePending=false;
   phonePending=false;
   signupMode=false;
   byId("credentialFields").hidden=false;
   byId("mfaStep").hidden=true;
+  byId("emailCodeStep").hidden=true;
   byId("phoneStep").hidden=true;
   byId("signupFields").hidden=true;
   byId("loginEmail").required=true;
@@ -649,13 +678,14 @@ function resetLoginStep(){
   byId("loginPassword").autocomplete="current-password";
   byId("loginMfa").required=false;
   byId("loginMfa").value="";
+  byId("loginEmailCode").required=false;
+  byId("loginEmailCode").value="";
   byId("loginPhone").required=false;
   byId("loginPhone").value="";
   byId("signupPasswordConfirm").required=false;
   byId("signupPasswordConfirm").value="";
   byId("signupPhone").required=false;
   byId("signupPhone").value="";
-  byId("mfaSetupLink").hidden=true;
   byId("verifyEmailBtn").hidden=true;
   byId("resetPasswordBtn").hidden=false;
   byId("createAccountBtn").hidden=false;
@@ -698,9 +728,11 @@ function toggleCreateAccount(){
   }
   signupMode=true;
   mfaPending=false;
+  emailCodePending=false;
   phonePending=false;
   byId("credentialFields").hidden=false;
   byId("mfaStep").hidden=true;
+  byId("emailCodeStep").hidden=true;
   byId("phoneStep").hidden=true;
   byId("signupFields").hidden=false;
   byId("loginPassword").autocomplete="new-password";
@@ -709,11 +741,18 @@ function toggleCreateAccount(){
   byId("resetPasswordBtn").hidden=true;
   byId("verifyEmailBtn").hidden=true;
   set("loginTitle","Create account");
-  set("loginIntro","Create an account, verify your email, and wait for Level 2 approval.");
+  set("loginIntro","Create an account and verify your email. No administrator approval is needed for Level 2.");
   set("loginSubmit","Create account");
   set("createAccountBtn","Back to sign in");
   set("loginMsg","");
   byId("loginEmail").focus();
+}
+function protectedHeaders(token, json=false){
+  const headers={"Authorization":"Bearer "+token};
+  const device=window.FT_AUTH?.trustedBrowserToken?.()||"";
+  if(device) headers["X-Fishtagged-Device"]=device;
+  if(json) headers["Content-Type"]="application/json";
+  return headers;
 }
 async function authorizeLevel(level){
   const client=await authClient();
@@ -723,7 +762,7 @@ async function authorizeLevel(level){
   const token=await client.token();
   const response=await fetchTimed(AUTH_URL+"/v1/access",{
     method:"POST",
-    headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},
+    headers:protectedHeaders(token,true),
     body:JSON.stringify({level})
   });
   let result={};
@@ -741,18 +780,84 @@ async function authorizeLevel(level){
   activeToken=token;
   return verifiedSession;
 }
+async function requestLevel3Code(){
+  const client=await authClient();
+  const token=await client.token();
+  const response=await fetchTimed(LEVEL3_CODE_REQUEST_URL,{
+    method:"POST",
+    headers:protectedHeaders(token,true),
+    body:"{}"
+  });
+  let result={};
+  try{ result=await response.json(); }catch(e){}
+  if(!response.ok || !result.sent){
+    const error=new Error(result.message||"The security code could not be sent.");
+    error.code=result.code||"code_send_failed";
+    throw error;
+  }
+  return result;
+}
+async function showEmailCodeStep(send=true){
+  emailCodePending=true;
+  mfaPending=false;
+  phonePending=false;
+  signupMode=false;
+  byId("credentialFields").hidden=true;
+  byId("mfaStep").hidden=true;
+  byId("emailCodeStep").hidden=false;
+  byId("phoneStep").hidden=true;
+  byId("loginEmail").required=false;
+  byId("loginPassword").required=false;
+  byId("loginMfa").required=false;
+  byId("loginEmailCode").required=true;
+  byId("resetPasswordBtn").hidden=true;
+  byId("createAccountBtn").hidden=true;
+  set("loginTitle","Check your email");
+  set("loginIntro","Enter the six-digit code to trust this browser for 30 days.");
+  set("loginSubmit","Verify code");
+  if(send){
+    set("loginMsg","Sending a six-digit code…");
+    const result=await requestLevel3Code();
+    set("emailCodeNote",`Code sent to ${result.destination||"your verified email"}. It expires after 10 minutes.`);
+    set("loginMsg","");
+  }
+  setTimeout(()=>byId("loginEmailCode").focus(),0);
+}
+async function verifyLevel3Code(){
+  const client=await authClient();
+  const token=await client.token();
+  const code=val("loginEmailCode").replace(/\s/g,"");
+  if(!/^\d{6}$/.test(code)) throw new Error("Enter the six-digit code from the email.");
+  const response=await fetchTimed(LEVEL3_CODE_VERIFY_URL,{
+    method:"POST",
+    headers:protectedHeaders(token,true),
+    body:JSON.stringify({code})
+  });
+  let result={};
+  try{ result=await response.json(); }catch(e){}
+  if(!response.ok || !result.verified){
+    const error=new Error(result.message||"That code was not accepted.");
+    error.code=result.code||"code_invalid";
+    throw error;
+  }
+  client.trustBrowser(result.deviceToken);
+}
 function showPhoneStep(){
   phonePending=true;
   mfaPending=false;
+  emailCodePending=false;
+  signupMode=false;
   byId("credentialFields").hidden=true;
   byId("mfaStep").hidden=true;
+  byId("emailCodeStep").hidden=true;
   byId("phoneStep").hidden=false;
   byId("loginEmail").required=false;
   byId("loginPassword").required=false;
   byId("loginMfa").required=false;
+  byId("loginEmailCode").required=false;
   byId("loginPhone").required=true;
-  byId("mfaSetupLink").hidden=true;
   byId("resetPasswordBtn").hidden=true;
+  byId("createAccountBtn").hidden=true;
   set("loginIntro","Add a phone number to finish setting up this account.");
   set("loginSubmit","Save phone number");
   set("loginMsg","");
@@ -777,7 +882,7 @@ async function savePhone(inputId="loginPhone"){
   const token=await client.token();
   const response=await fetchTimed(PROFILE_URL,{
     method:"POST",
-    headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},
+    headers:protectedHeaders(token,true),
     body:JSON.stringify({phone})
   });
   let result={};
@@ -802,6 +907,22 @@ async function sendVerification(){
     button.disabled=false;
   }
 }
+async function resendEmailCode(){
+  const button=byId("resendEmailCodeBtn");
+  button.disabled=true;
+  set("loginMsg","Sending a new code…");
+  try{
+    const result=await requestLevel3Code();
+    set("emailCodeNote",`New code sent to ${result.destination||"your verified email"}. It expires after 10 minutes.`);
+    set("loginMsg","");
+    byId("loginEmailCode").value="";
+    byId("loginEmailCode").focus();
+  }catch(error){
+    set("loginMsg",error.message||"The security code could not be sent.");
+  }finally{
+    button.disabled=false;
+  }
+}
 async function sendPasswordReset(){
   const email=val("loginEmail").trim();
   if(!email){
@@ -816,7 +937,7 @@ async function sendPasswordReset(){
     const client=await authClient();
     await client.sendPasswordReset(email);
   }catch(error){}
-  set("loginMsg","If that approved account exists, a password reset email has been sent.");
+  set("loginMsg","If that account exists, a password reset email has been sent.");
   button.disabled=false;
 }
 async function requestLevel(level){
@@ -833,8 +954,12 @@ async function requestLevel(level){
       showPhoneStep();
       return;
     }
+    if(error.code==="email_code_required"){
+      try{ await showEmailCodeStep(true); }
+      catch(codeError){ set("loginMsg",codeError.message||"The security code could not be sent."); }
+      return;
+    }
     set("loginMsg",error.message||"Sign in to continue.");
-    byId("mfaSetupLink").hidden=error.code!=="mfa_required";
     byId("verifyEmailBtn").hidden=error.code!=="email_not_verified";
     return;
   }
@@ -844,7 +969,9 @@ async function signIn(e){
   e.preventDefault();
   const submit=byId("loginSubmit");
   submit.disabled=true;
-  set("loginMsg",phonePending?"Saving phone number…":mfaPending?"Checking code…":"Signing in…");
+  set("loginMsg",phonePending?"Saving phone number…":
+    emailCodePending?"Checking the emailed code…":mfaPending?"Checking code…":
+      signupMode?"Creating account…":"Signing in…");
   try{
     const client=await authClient();
     if(!client?.configured || !AUTH_URL){
@@ -859,38 +986,40 @@ async function signIn(e){
       enter(level);
       return;
     }
+    if(emailCodePending){
+      await verifyLevel3Code();
+      const level=pendingRole;
+      const session=await authorizeLevel(level);
+      if(!canOpen(level,session)) throw new Error("This account cannot open that level.");
+      closeLogin();
+      enter(level);
+      return;
+    }
     if(signupMode){
       const email=val("loginEmail").trim();
       const password=val("loginPassword");
       const confirmation=val("signupPasswordConfirm");
       if(password.length<12) throw new Error("Use a password with at least 12 characters.");
       if(password!==confirmation) throw new Error("The two passwords do not match.");
-      cleanPhone(val("signupPhone"));
       const phone=cleanPhone(val("signupPhone"));
       if(!/^\+[1-9]\d{7,14}$/.test(phone)){
         throw new Error("Enter a valid phone number with its country code.");
       }
       await client.createAccount(email,password);
       let profileSaved=true;
-      try{
-        await savePhone("signupPhone");
-      }catch(error){
-        profileSaved=false;
-      }
-      try{
-        await client.sendVerificationEmail();
-      }finally{
-        await client.signOut();
-      }
+      try{ await savePhone("signupPhone"); }
+      catch(error){ profileSaved=false; }
+      try{ await client.sendVerificationEmail(); }
+      finally{ await client.signOut(); }
       resetLoginStep();
       byId("createAccountBtn").hidden=false;
       byId("loginEmail").value=email;
       byId("loginPassword").value="";
       set("loginTitle","Check your email");
-      set("loginIntro","Open the verification email, then return here after an administrator approves Level 2 access.");
+      set("loginIntro","Open the verification email. After you verify the address, return here and sign in to Level 2.");
       set("loginMsg",profileSaved
-        ?"Account created. Verify your email before signing in."
-        :"Account created, but the phone number could not be saved. Contact an administrator.");
+        ?"Account created. Verify your email, then sign in. No administrator approval is needed."
+        :"Account created, but the phone number could not be saved. Sign in after verification to finish setup.");
       return;
     }
     const result=mfaPending
@@ -911,7 +1040,15 @@ async function signIn(e){
       return;
     }
     const level=pendingRole;
-    const session=await authorizeLevel(level);
+    let session;
+    try{ session=await authorizeLevel(level); }
+    catch(error){
+      if(error.code==="email_code_required"){
+        await showEmailCodeStep(true);
+        return;
+      }
+      throw error;
+    }
     if(!canOpen(level,session)) throw new Error("This account cannot open that level.");
     closeLogin();
     enter(level);
@@ -920,8 +1057,12 @@ async function signIn(e){
       showPhoneStep();
       return;
     }
+    if(error.code==="email_code_required"){
+      try{ await showEmailCodeStep(true); }
+      catch(codeError){ set("loginMsg",codeError.message||"The security code could not be sent."); }
+      return;
+    }
     set("loginMsg",error.message||"Sign-in failed. Check your information and try again.");
-    byId("mfaSetupLink").hidden=error.code!=="mfa_required";
     byId("verifyEmailBtn").hidden=error.code!=="email_not_verified";
   }finally{
     submit.disabled=false;
@@ -981,9 +1122,10 @@ async function recordSessionEvent(event,level){
   try{
     const client=await authClient();
     const token=await client.token();
+    activeToken=token;
     await fetchTimed(AUTH_URL+"/v1/audit",{
       method:"POST",
-      headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},
+      headers:protectedHeaders(token,true),
       body:JSON.stringify({event,level}),
       keepalive:true
     },4000);
@@ -1023,7 +1165,7 @@ async function loadIndex(){
     const url=key==="admin"?ADMIN_INDEX_URL:LEVEL2_SUMMARY_URL;
     if(!url || !activeToken) throw new Error("Private data service is not configured.");
     response=await fetchTimed(url,{
-      headers:{"Authorization":"Bearer "+activeToken}
+      headers:protectedHeaders(activeToken)
     });
   }else{
     response=await fetchTimed(HERE+(key==="local"?DATA_FILE:PUBLIC_META_FILE)+"?v="+DATA_VERSION);
@@ -1069,7 +1211,9 @@ async function lookupTag(n){
   const cached=findCachedTag(n);
   if(cached) return cached;
   if(!TAG_URL) throw new Error("The tag search service is not configured.");
-  const response=await fetchTimed(TAG_URL+"?n="+encodeURIComponent(n));
+  const options=(role==="l2" || role==="l3") && activeToken
+    ? {headers:protectedHeaders(activeToken)} : {};
+  const response=await fetchTimed(TAG_URL+"?n="+encodeURIComponent(n),options);
   if(!response.ok) throw new Error("Tag search is temporarily unavailable.");
   const result=await response.json();
   if(!result.found || !result.tag) return null;
@@ -1332,7 +1476,8 @@ function captureFeature(t,c,i,caps){
     totalLeg:i>0 ? totalStraight.toFixed(4) : "",
     totalRiv:i>0 && allRiver ? totalRiver.toFixed(4) : "",
     tF:c.tF??"", lvl:c.lvl??"", turb:c.turb??"", do:c.do??"", cfs:c.cfs??"",
-    airF:c.airF??"", windMph:c.windMph??"", pressIn:c.pressIn??"", wxStation:c.wxStation||""
+    airF:c.airF??"", dewF:c.dewF??"", windDir:c.windDir||"", windMph:c.windMph??"",
+    gustMph:c.gustMph??"", pressIn:c.pressIn??"", wx:c.wx||"", wxStation:c.wxStation||"", wxTime:c.wxTime||""
   }};
 }
 function journeyLegs(caps){
@@ -1375,13 +1520,19 @@ function drawJourney(t, ready){
   const tok=++journeyToken;
   riverNetwork().then(()=>{
     if(tok!==journeyToken || picked!==t.num) return;
-    const snaps=caps.map(c=>riverSnap([c.lng,c.lat]));
-    for(let i=1;i<caps.length;i++){
-      caps[i]._river=riverLeg(
-        [caps[i-1].lng,caps[i-1].lat],
-        [caps[i].lng,caps[i].lat],
-        snaps[i-1],snaps[i]
-      );
+    for(const capture of caps) delete capture._river;
+    const sequence=riverSequence(caps);
+    if(sequence){
+      for(let i=1;i<caps.length;i++) caps[i]._river=sequence.routes[i];
+    }else{
+      const snaps=caps.map(c=>riverSnap([c.lng,c.lat]));
+      for(let i=1;i<caps.length;i++){
+        caps[i]._river=riverLeg(
+          [caps[i-1].lng,caps[i-1].lat],
+          [caps[i].lng,caps[i].lat],
+          snaps[i-1],snaps[i]
+        );
+      }
     }
     paint();
     if(ready) ready();
@@ -1397,6 +1548,9 @@ function pathMiles(caps){
   let m=0;
   for(let i=1;i<caps.length;i++) m+=milesBetween([caps[i-1].lng,caps[i-1].lat],[caps[i].lng,caps[i].lat]);
   return m;
+}
+function riverDistanceEnabled(){
+  return role==="l2" || role==="l3";
 }
 function riverMiles(caps){
   let total=0;
@@ -1456,9 +1610,9 @@ function riverCandidates(pt){
   }
   return found;
 }
-function riverSnap(pt){
+function riverSnapCandidates(pt,limit=4){
   const ky=69, kx=69*Math.cos(pt[1]*Math.PI/180);
-  let best=null;
+  const edgeBest=new Map();
   for(const edgeIndex of riverCandidates(pt)){
     const edge=RIVER.edges[edgeIndex];
     for(let i=1;i<edge.coords.length;i++){
@@ -1468,15 +1622,23 @@ function riverSnap(pt){
       const dx=bx-ax, dy=by-ay, len=dx*dx+dy*dy;
       const amount=len?Math.max(0,Math.min(1,-(ax*dx+ay*dy)/len)):0;
       const off=Math.hypot(ax+amount*dx,ay+amount*dy);
-      if(!best || off<best.off){
+      const previous=edgeBest.get(edgeIndex);
+      if(!previous || off<previous.off){
         const point=[p0[0]+amount*(p1[0]-p0[0]),p0[1]+amount*(p1[1]-p0[1])];
         const alongRaw=edge.cum[i-1]+amount*(edge.cum[i]-edge.cum[i-1]);
         const along=edge.total ? edge.miles*alongRaw/edge.total : 0;
-        best={edge,seg:i-1,amount,point,along,off};
+        edgeBest.set(edgeIndex,{edge,seg:i-1,amount,point,along,off});
       }
     }
   }
-  return best && best.off<=1 ? best : null;
+  const sorted=[...edgeBest.values()].filter(item=>item.off<=1).sort((a,b)=>
+    a.off-b.off || Number(b.edge.order||0)-Number(a.edge.order||0));
+  if(!sorted.length) return [];
+  const nearby=sorted.filter(item=>item.off<=Math.min(1,sorted[0].off+.22));
+  return nearby.slice(0,limit);
+}
+function riverSnap(pt){
+  return riverSnapCandidates(pt,1)[0]||null;
 }
 function heapPush(heap,item){
   let i=heap.length;
@@ -1575,6 +1737,48 @@ function riverLeg(aPoint,bPoint,aSnap,bSnap){
   }
   return route;
 }
+function snapCost(snap){
+  const order=Number(snap?.edge?.order||0);
+  return snap.off*6+Math.max(0,4-order)*.08;
+}
+function riverSequence(caps){
+  const points=caps.map(capture=>[capture.lng,capture.lat]);
+  const candidates=points.map(point=>riverSnapCandidates(point,4));
+  if(candidates.some(list=>!list.length)) return null;
+  const layers=[candidates[0].map(snap=>({snap,cost:snapCost(snap),previous:-1,route:null}))];
+  for(let i=1;i<candidates.length;i++){
+    const straight=milesBetween(points[i-1],points[i]);
+    const layer=candidates[i].map(current=>{
+      let best=null;
+      for(let p=0;p<layers[i-1].length;p++){
+        const prior=layers[i-1][p];
+        const route=riverLeg(points[i-1],points[i],prior.snap,current);
+        if(!route) continue;
+        const ratio=straight>.05 ? route.waterMiles/straight : 1;
+        const detour=ratio>8 ? (ratio-8)*2 : 0;
+        const sameName=prior.snap.edge.name && prior.snap.edge.name===current.edge.name ? -.05 : 0;
+        const cost=prior.cost+route.miles+snapCost(current)+detour+sameName;
+        if(!best || cost<best.cost) best={snap:current,cost,previous:p,route};
+      }
+      return best;
+    }).filter(Boolean);
+    if(!layer.length) return null;
+    layers.push(layer);
+  }
+  const lastLayer=layers[layers.length-1];
+  let choice=0;
+  for(let i=1;i<lastLayer.length;i++){
+    if(lastLayer[i].cost<lastLayer[choice].cost) choice=i;
+  }
+  const snaps=Array(caps.length),routes=Array(caps.length).fill(null);
+  for(let i=layers.length-1;i>=0;i--){
+    const state=layers[i][choice];
+    snaps[i]=state.snap;
+    routes[i]=state.route;
+    choice=state.previous;
+  }
+  return {snaps,routes};
+}
 function riverRoute(aPoint,bPoint){
   if(!RIVER) return null;
   return riverLeg(aPoint,bPoint,riverSnap(aPoint),riverSnap(bPoint));
@@ -1593,7 +1797,7 @@ function measureCancel(){
   map.getSource("meas").setData(empty()); map.getSource("measln").setData(empty());
   mSay("");
   const b=document.getElementById("mGo");
-  if(b){ b.textContent="Click two points on the "+(role==="l2"?"river":"map"); b.onclick=measureStart; }
+  if(b){ b.textContent="Click two points on the "+(riverDistanceEnabled()?"river":"map"); b.onclick=measureStart; }
 }
 async function measureClick(e){
   if(!measuring) return;
@@ -1603,12 +1807,12 @@ async function measureClick(e){
   if(mPts.length===1){ mSay("…now the second point"); return; }
   measuring=false; map.getCanvas().style.cursor="";
   const b=document.getElementById("mGo");
-  if(b){ b.textContent="Click two points on the "+(role==="l2"?"river":"map"); b.onclick=measureStart; }
+  if(b){ b.textContent="Click two points on the "+(riverDistanceEnabled()?"river":"map"); b.onclick=measureStart; }
   measureShow();
 }
 async function measureShow(){
   if(mPts.length<2) return;
-  const mode=val("mMode")||(role==="l2"?"river":"straight"), unit=val("mUnit")||"mi";
+  const mode=val("mMode")||(riverDistanceEnabled()?"river":"straight"), unit=val("mUnit")||"mi";
   const cv=m=>unit==="km" ? (m*1.60934).toFixed(1)+" km" : m.toFixed(1)+" mi";
   const straight=milesBetween(mPts[0],mPts[1]);
   if(mode==="straight"){
@@ -1636,7 +1840,7 @@ function showSearchResult(hit){
   if(picked!==hit.t.num) return;
   const caps=hit.t.caps, more=hit.others ? "  (+"+hit.others+" more on this number)" : "";
   if(caps.length>1){
-    const mi=pathMiles(caps).toFixed(1), river=role==="l2"?riverMiles(caps):null, d=daysOut(caps);
+    const mi=pathMiles(caps).toFixed(1), river=riverDistanceEnabled()?riverMiles(caps):null, d=daysOut(caps);
     say(`Tag ${hit.t.num} — caught ${caps.length} times, ${hit.rc} recapture${hit.rc===1?"":"s"}. Straight line ${dmi(mi)}`+
         (river!=null?`, river ${dmi(river.toFixed(1))}`:"")+(d!=null?` over ${d} days.`:".")+more,"good");
   }else{
@@ -1683,14 +1887,16 @@ function capHTML(p){
   const idx=+p.idx, n=idx+1, count=+p.count||1, file=p.file||"";
   const label = idx===0 ? "Tagged" : "Recaptured";
   const legRow = p.leg ? `<div class="r"><span class="k">Straight Line Traveled</span><span class="v">+${dmi(p.leg)}</span></div>` : "";
-  const rivRow = role==="l2" && p.riv ? `<div class="r"><span class="k">River Distance</span><span class="v">+${dmi(p.riv)}</span></div>` : "";
-  const totalMiles = role==="l2" && p.totalRiv ? p.totalRiv : p.totalLeg;
-  const totalRow = idx>1 ? `<div class="r"><span class="k">Total Through Capture ${n}</span><span class="v">${dmi(totalMiles)}${role==="l2"&&p.totalRiv?" river":" straight"}</span></div>` : "";
+  const rivRow = riverDistanceEnabled() && p.riv ? `<div class="r"><span class="k">River Distance</span><span class="v">+${dmi(p.riv)}</span></div>` : "";
+  const totalMiles = riverDistanceEnabled() && p.totalRiv ? p.totalRiv : p.totalLeg;
+  const totalRow = idx>1 ? `<div class="r"><span class="k">Total Through Capture ${n}</span><span class="v">${dmi(totalMiles)}${riverDistanceEnabled()&&p.totalRiv?" river":" straight"}</span></div>` : "";
   const len = (p.inch||p.mm) ? `<div class="r"><span class="k">Length</span><span class="v">${p.inch?esc(p.inch)+'"':""}${p.mm?" · "+esc(p.mm)+" mm":""}</span></div>` : "";
   const extra = role==="l1" ? "" : [
     ["Water temp",p.tF,"°F"],["River level",p.lvl,"ft"],["Turbidity",p.turb,"FNU"],
     ["Oxygen",p.do,"mg/L"],["Flow",p.cfs,"CFS"],["Air temp",p.airF,"°F"],
-    ["Wind",p.windMph,"mph"],["Pressure",p.pressIn,"inHg"],["Weather station",p.wxStation,""]
+    ["Dew point",p.dewF,"°F"],["Wind direction",p.windDir,""],["Wind",p.windMph,"mph"],
+    ["Wind gust",p.gustMph,"mph"],["Pressure",p.pressIn,"inHg"],["Weather",p.wx,""],
+    ["Weather station",p.wxStation,""],["Weather observed",p.wxTime,""]
   ].map(([k,v,u])=>(v==null||v===""||+v<0)?"":`<div class="r"><span class="k">${k}</span><span class="v">${esc(v)} ${u}</span></div>`).join("");
   const shot = file ? `<div class="shot-wrap" id="capShot"></div>` : "";
   const nav = count<2 ? "" : `<div class="capnav">
@@ -1878,6 +2084,12 @@ function adminRecordsBlock(){
   return fold("Account records",`
       <div id="adminOverview" class="form-msg">Loading account activity…</div>
       <div id="recentAccess" class="recent-access"></div>
+      <div class="seek mini" style="margin-top:11px">
+        <input id="accountSearch" type="search" placeholder="find an email">
+        <button id="refreshAccounts" type="button">Refresh</button>
+      </div>
+      <div id="accountList" class="account-list"><div class="form-msg">Loading users…</div></div>
+      <div class="form-msg" id="accountMsg" aria-live="polite">Level 2 is automatic after email verification. Use this list to grant Level 3 or block protected access.</div>
       <div class="report-buttons">
         <button class="flat" id="usersReport" type="button">Download users CSV</button>
         <button class="flat" id="accessReport" type="button">Download access CSV</button>
@@ -1945,14 +2157,14 @@ function panel(){
       </select>`, false);
   const measure = fold("Measure", `
       <select id="mMode" class="sel" style="margin-top:8px">
-        ${role==="l2"?'<option value="river">By river distance</option>':""}
+        ${riverDistanceEnabled()?'<option value="river">By river distance</option>':""}
         <option value="straight">Straight line, as the crow flies</option>
       </select>
       <select id="mUnit" class="sel">
         <option value="mi">miles</option>
         <option value="km">kilometers</option>
       </select>
-      <button class="flat" id="mGo" style="width:100%;margin-top:8px">Click two points on the ${role==="l2"?"river":"map"}</button>
+      <button class="flat" id="mGo" style="width:100%;margin-top:8px">Click two points on the ${riverDistanceEnabled()?"river":"map"}</button>
       <div class="ingest" id="mOut" style="margin-top:7px"></div>`, false);
 
   const recap = fold("Show", `
@@ -2092,7 +2304,7 @@ async function sendFeedback(){
     const token=await client.token();
     const response=await fetchTimed(FEEDBACK_URL,{
       method:"POST",
-      headers:{"Authorization":"Bearer "+token,"Content-Type":"application/json"},
+      headers:protectedHeaders(token,true),
       body:JSON.stringify({
         level:role,
         rating:feedbackRating,
@@ -2125,7 +2337,7 @@ async function downloadReport(path,filename,button){
     const client=await authClient();
     const token=await client.token();
     const response=await fetchTimed(AUTH_URL+path,{
-      headers:{"Authorization":"Bearer "+token}
+      headers:protectedHeaders(token)
     },30000);
     if(!response.ok){
       let result={};
@@ -2159,7 +2371,7 @@ async function loadAdminOverview(){
     const client=await authClient();
     const token=await client.token();
     const response=await fetchTimed(ADMIN_OVERVIEW_URL,{
-      headers:{"Authorization":"Bearer "+token}
+      headers:protectedHeaders(token)
     });
     let result={};
     try{ result=await response.json(); }catch(e){}
@@ -2181,6 +2393,91 @@ async function loadAdminOverview(){
       : '<div class="form-msg">No successful level access has been recorded yet.</div>';
   }catch(error){
     formMessage("adminOverview",error.message||"Account records are unavailable.","bad");
+  }
+}
+function accountLevel(roleName){
+  return roleName==="admin"?"admin":roleName==="none"?"none":"level2";
+}
+function renderAdminAccounts(){
+  const output=byId("accountList");
+  if(!output) return;
+  const query=(val("accountSearch")||"").trim().toLowerCase();
+  const accounts=adminAccountsCache.filter(account=>
+    !query || String(account.email||"").toLowerCase().includes(query) ||
+      String(account.displayName||"").toLowerCase().includes(query));
+  if(!accounts.length){
+    output.innerHTML='<div class="form-msg">No matching accounts.</div>';
+    return;
+  }
+  output.innerHTML=accounts.map(account=>{
+    const level=accountLevel(account.role);
+    const status=[account.emailVerified?"email verified":"email not verified",
+      account.profileComplete?"phone saved":"phone missing",
+      account.disabled?"disabled":"active"].join(" · ");
+    return `<div class="account-row" data-uid="${esc(account.uid)}">
+      <b>${esc(account.email||"No email")}${account.current?" · you":""}</b>
+      <div class="account-meta">${esc(status)}</div>
+      <div class="account-controls">
+        <select aria-label="Access for ${esc(account.email||"account")}" ${account.current?"disabled":""}>
+          <option value="level2"${level==="level2"?" selected":""}>Level 2</option>
+          <option value="admin"${level==="admin"?" selected":""}>Level 3</option>
+          <option value="none"${level==="none"?" selected":""}>No access</option>
+        </select>
+        <button class="flat save-account" type="button" ${account.current?"disabled":""}>Save</button>
+      </div>
+    </div>`;
+  }).join("");
+  output.querySelectorAll(".save-account").forEach(button=>button.onclick=()=>changeAdminAccount(button));
+}
+async function loadAdminAccounts(){
+  const output=byId("accountList");
+  if(!output) return;
+  if(LOCAL_PREVIEW){
+    output.innerHTML='<div class="form-msg">Live user management is available after the secure cloud service is connected.</div>';
+    return;
+  }
+  output.innerHTML='<div class="form-msg">Loading users…</div>';
+  try{
+    const client=await authClient();
+    const token=await client.token();
+    const response=await fetchTimed(ADMIN_ACCOUNTS_URL,{headers:protectedHeaders(token)},20000);
+    let result={};
+    try{ result=await response.json(); }catch(e){}
+    if(!response.ok || !Array.isArray(result.accounts)){
+      throw new Error(result.message||"The account list could not be loaded.");
+    }
+    adminAccountsCache=result.accounts;
+    renderAdminAccounts();
+  }catch(error){
+    output.innerHTML=`<div class="form-msg bad">${esc(error.message||"The account list could not be loaded.")}</div>`;
+  }
+}
+async function changeAdminAccount(button){
+  const row=button.closest(".account-row");
+  const uid=row?.dataset.uid||"";
+  const selected=row?.querySelector("select")?.value||"";
+  if(!uid) return;
+  button.disabled=true;
+  formMessage("accountMsg","Saving access…");
+  try{
+    const client=await authClient();
+    const token=await client.token();
+    const response=await fetchTimed(ADMIN_ACCOUNTS_URL+"/role",{
+      method:"POST",
+      headers:protectedHeaders(token,true),
+      body:JSON.stringify({uid,role:selected})
+    },20000);
+    let result={};
+    try{ result=await response.json(); }catch(e){}
+    if(!response.ok || !result.saved) throw new Error(result.message||"Access could not be changed.");
+    const account=adminAccountsCache.find(item=>item.uid===uid);
+    if(account) account.role=selected;
+    renderAdminAccounts();
+    formMessage("accountMsg","Access updated. That user must sign in again.","good");
+    loadAdminOverview();
+  }catch(error){
+    formMessage("accountMsg",error.message||"Access could not be changed.","bad");
+    button.disabled=false;
   }
 }
 function wire(){
@@ -2221,7 +2518,12 @@ function wire(){
     downloadReport("/v1/admin/access.csv","fishtagged-access-log.csv",event.currentTarget);
   if(byId("feedbackReport")) byId("feedbackReport").onclick=event=>
     downloadReport("/v1/admin/feedback.csv","fishtagged-feedback.csv",event.currentTarget);
-  if(byId("adminOverview")) loadAdminOverview();
+  if(byId("adminOverview")){
+    loadAdminOverview();
+    loadAdminAccounts();
+    byId("refreshAccounts").onclick=loadAdminAccounts;
+    byId("accountSearch").oninput=renderAdminAccounts;
+  }
 
   const h=document.getElementById("hydro");
   if(h) h.addEventListener("change",()=>{
@@ -2305,7 +2607,7 @@ async function enter(r){
       zoom:9,
       transformRequest:url=>activeToken &&
         [ADMIN_TILE_ROOT,LEVEL2_TILE_API].some(root=>root && url.startsWith(root))
-        ? {url,headers:{"Authorization":"Bearer "+activeToken}}
+        ? {url,headers:protectedHeaders(activeToken)}
         : {url}
     });
     map.addControl(new maplibregl.NavigationControl({showCompass:false}),"bottom-right");
@@ -2361,10 +2663,18 @@ document.getElementById("loginForm").onsubmit=signIn;
 document.getElementById("loginCancel").onclick=closeLogin;
 document.getElementById("createAccountBtn").onclick=toggleCreateAccount;
 document.getElementById("verifyEmailBtn").onclick=sendVerification;
+document.getElementById("resendEmailCodeBtn").onclick=resendEmailCode;
 document.getElementById("resetPasswordBtn").onclick=sendPasswordReset;
 document.getElementById("previewLogin").onclick=previewLevel;
 document.getElementById("staySignedIn").onclick=staySignedIn;
 document.getElementById("login").onclick=e=>{ if(e.target.id==="login") closeLogin(); };
+document.querySelectorAll("[data-password]").forEach(button=>button.onclick=()=>{
+  const input=byId(button.dataset.password);
+  const showing=input.type==="text";
+  input.type=showing?"password":"text";
+  button.textContent=showing?"Show":"Hide";
+  button.setAttribute("aria-label",showing?"Show password":"Hide password");
+});
 function closeQuick(){
   byId("quickPop").hidden=true;
   byId("quickBtn").setAttribute("aria-expanded","false");
