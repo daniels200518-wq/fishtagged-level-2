@@ -902,7 +902,7 @@ async function sendVerification(){
   try{
     const client=await authClient();
     await client.sendVerificationEmail();
-    set("loginMsg","Verification email sent. Open it, verify the address, then sign in again.");
+    set("loginMsg","Verification email sent. Check your Inbox, Spam, or Junk folder. If it is in Spam, mark it as Not spam, verify the address, then sign in again.");
   }catch(error){
     set("loginMsg",error.message||"The verification email could not be sent.");
   }finally{
@@ -1018,10 +1018,10 @@ async function signIn(e){
       byId("loginEmail").value=email;
       byId("loginPassword").value="";
       set("loginTitle","Check your email");
-      set("loginIntro","Open the verification email. After you verify the address, return here and sign in to Level 2.");
+      set("loginIntro","Open the verification email, then return here and sign in to Level 2. If you do not see it, check your Spam or Junk folder and mark it as Not spam.");
       set("loginMsg",profileSaved
         ?"Account created. Verify your email, then sign in. No administrator approval is needed."
-        :"Account created, but the phone number could not be saved. Sign in after verification to finish setup.");
+        :"Account created, but the phone number could not be saved. Check your Inbox, Spam, or Junk folder and sign in after verification to finish setup.");
       return;
     }
     const result=mfaPending
