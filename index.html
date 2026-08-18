@@ -1560,7 +1560,6 @@ function bars(){
 function clearPick(){
   picked=null;
   if(map) ["line","jstr","pts","ring"].forEach(s=>map.getSource(s) && map.getSource(s).setData(empty()));
-  if(capPop){ capPop.remove(); capPop=null; capPinned=false; }
   clearCapPanel();
 }
 let journeyToken=0;
@@ -1969,7 +1968,6 @@ async function search(n, fly){
   if(!hit){ say("Tag "+n+" isn't in the data.","bad"); clearPick(); return; }
   const caps=hit.t.caps, last=caps[caps.length-1];
   picked=n;
-  if(capPop){ capPop.remove(); capPop=null; capPinned=false; }
   clearCapPanel();
   map.getSource("ring").setData(captureFeature(hit.t,last,caps.length-1,caps));
   drawJourney(hit.t,()=>showSearchResult(hit));
@@ -1987,7 +1985,7 @@ async function search(n, fly){
 
 const shortDateTime = s=>{ const d=new Date(s); return isNaN(d)?s:
   d.toLocaleString("en-US",{month:"numeric",day:"2-digit",year:"numeric",hour:"numeric",minute:"2-digit"}); };
-let capPop=null, capPinned=false;
+let capPinned=false;
 function capHTML(p, inPanel=false){
   const idx=+p.idx, n=idx+1, count=+p.count||1, file=p.file||"";
   const label = idx===0 ? "Tagged" : "Recaptured";
@@ -2071,33 +2069,7 @@ function showCapPanel(f,pin){
   }
 }
 function showCap(f, pin){
-  if(role==="l1"){
-    showCapPanel(f,pin);
-    return;
-  }
-  if(capPop) capPop.remove();
-  const p=f.properties;
-  const screenPoint=map.project(f.geometry.coordinates);
-  const canvas=map.getCanvas();
-  const side=screenPoint.x<canvas.clientWidth/2?"left":"right";
-  const anchor=canvas.clientWidth<=520
-    ? (screenPoint.y<canvas.clientHeight/2?"top":"bottom")
-    : (screenPoint.y<235?"top-"+side:
-      (screenPoint.y>canvas.clientHeight-235?"bottom-"+side:side));
-  const next=new maplibregl.Popup({offset:11, anchor, closeButton:pin, closeOnClick:false, maxWidth:"210px"})
-    .setLngLat(f.geometry.coordinates).setHTML(capHTML(p)).addTo(map);
-  capPop=next;
-  capPinned=pin;
-  next.on("close",()=>{
-    if(capPop===next) capPop=null;
-    capPinned=false;
-  });
-  const tag=captureTag(p);
-  const openCapture=index=>{
-    if(!tag || !tag.caps[index]) return;
-    showCap(captureFeature(tag,tag.caps[index],index,tag.caps),true);
-  };
-  wireCaptureCard(next.getElement(),p,openCapture);
+  showCapPanel(f,pin);
 }
 
 function captureAt(point){
@@ -2274,6 +2246,8 @@ function panel(){
         <div class="scale" id="legScale"></div>
         <div class="ret"><span class="dot-ret"></span> rust ring / line = a fish caught again</div></div>`, false);
 
+  const selectedFish=`<div class="capture-panel" id="capturePanel" hidden><div id="capturePanelBody"></div></div>`;
+
   if(role==="l1"){
     const searchBlock=fold("Search a tag",`<div class="seek mini">
       <div class="cap" style="align-self:center;flex:none">Tag #</div>
@@ -2285,7 +2259,6 @@ function panel(){
       <div class="said" id="said"></div>
       <div class="hint"><span class="hdot">1</span> Click a numbered capture to view that catch</div>
     `,true);
-    const selectedFish=`<div class="capture-panel" id="capturePanel" hidden><div id="capturePanelBody"></div></div>`;
     const level2Preview=fold("Available with Level 2",`<div class="locked-list">
       <button class="locked-feature" type="button" data-open-level2><span class="lock">&#128274;</span>Heatmaps<span>Sign up</span></button>
       <button class="locked-feature" type="button" data-open-level2><span class="lock">&#128274;</span>River and weather conditions<span>Sign up</span></button>
@@ -2346,7 +2319,7 @@ function panel(){
     </div>`,false);
 
   if(role==="l2"){
-    return seek + speciesChips + hydroMenu + referenceLayers + measure + weatherHTML() + astroHTML() +
+    return seek + selectedFish + speciesChips + hydroMenu + referenceLayers + measure + weatherHTML() + astroHTML() +
       recap + numbers + spots + legendBlk + feedbackBlock();
   }
   const feed = fold("Tile feed",`<div class="ingest" style="margin-top:8px">
@@ -2355,7 +2328,7 @@ function panel(){
         exact point access · administrator only
       </div>
       <button class="flat" id="csv" style="width:100%;margin-top:9px">Export this view (CSV)</button>`,false);
-  return seek + viewSeg + speciesChips + hydroMenu + referenceLayers + measure + weatherHTML() + astroHTML() +
+  return seek + selectedFish + viewSeg + speciesChips + hydroMenu + referenceLayers + measure + weatherHTML() + astroHTML() +
     recap + numbers + spots + feed + legendBlk + adminRecordsBlock() + feedbackBlock();
 }
 
@@ -2669,7 +2642,7 @@ function wire(){
   if(rs) rs.onchange=()=>{ retOnly=(rs.value==="ret"); applyFilter(); stats(); };
   const us=byId("unitSel");
   if(us) us.onchange=()=>{ units=us.value; scaleCtl.setUnit(units==="km"?"metric":"imperial");
-    if(capPop){ capPop.remove(); capPop=null; capPinned=false; } stats(); };
+    clearCapPanel(); stats(); };
   feedbackRating=0;
   document.querySelectorAll("#feedbackStars button").forEach(button=>{
     button.onclick=()=>{
