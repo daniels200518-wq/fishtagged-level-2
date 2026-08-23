@@ -126,9 +126,9 @@
   .wheel-center small{ display:block; max-width:38px; margin-top:2px; overflow:hidden; text-overflow:ellipsis;
                        white-space:nowrap; color:var(--green-dk); font-size:7px; }
 
-  .pane{ position:absolute; top:204px; left:12px; width:264px; background:rgba(255,255,255,.97);
-         border:1px solid var(--hair); border-radius:10px; box-shadow:0 6px 24px rgba(20,33,31,.16);
-         z-index:10; max-height:calc(100% - 254px); overflow:hidden; backdrop-filter:blur(9px); }
+  .pane{ position:absolute; top:198px; left:12px; width:230px; background:rgba(255,255,255,.97);
+         border:1px solid var(--hair); border-radius:3px; box-shadow:0 4px 16px rgba(20,33,31,.14);
+         z-index:10; max-height:calc(100% - 248px); overflow:hidden; backdrop-filter:blur(9px); }
   .pane.hidden{ display:none; }
   .panehead{ height:35px; display:flex; align-items:center; gap:8px; padding:0 8px 0 12px;
              border-bottom:1px solid var(--hair); }
@@ -137,7 +137,7 @@
   .panehead button{ width:25px; height:25px; border:0; border-radius:50%; background:transparent;
                     color:var(--label); font-size:18px; cursor:pointer; }
   .panehead button:hover,.panehead button:focus-visible{ background:var(--field); color:var(--ink); outline:none; }
-  .panebody{ max-height:calc(100vh - 289px); overflow:auto; overscroll-behavior:contain; }
+  .panebody{ max-height:calc(100vh - 283px); overflow:auto; overscroll-behavior:contain; }
   .foldcap{ display:flex; justify-content:space-between; align-items:center; width:100%; border:0; background:none;
             padding:0; font-family:inherit; cursor:pointer; user-select:none; text-align:left; }
   .foldcap .chev{ font-size:9px; color:var(--label); transition:transform .15s; }
@@ -147,6 +147,7 @@
   .blk:first-child{ border-top:0; }
   .blk:not(.closed){ background:linear-gradient(90deg,rgba(111,140,120,.12),rgba(255,255,255,0) 75%); }
   .blk:not(.closed) > .foldcap{ color:var(--green-dk); }
+  .pane[data-level="l1"] .panebody > .blk:first-child > .foldcap{ display:none; }
 
   .seek{ display:flex; gap:7px; align-items:center; }
   .seek input{ flex:1; min-width:0; height:31px; border:1px solid var(--hair); border-radius:4px; padding:0 10px;
@@ -2259,14 +2260,14 @@ function panel(){
       <div class="said" id="said"></div>
       <div class="hint"><span class="hdot">1</span> Click a numbered capture to view that catch</div>
     `,true);
-    const level2Preview=fold("Available with Level 2",`<div class="locked-list">
+    const level2Preview=fold("Level 2 sign up",`<div class="locked-list">
       <button class="locked-feature" type="button" data-open-level2><span class="lock">&#128274;</span>Heatmaps<span>Sign up</span></button>
       <button class="locked-feature" type="button" data-open-level2><span class="lock">&#128274;</span>River and weather conditions<span>Sign up</span></button>
       <button class="locked-feature" type="button" data-open-level2><span class="lock">&#128274;</span>River miles and places<span>Sign up</span></button>
-    </div><div class="level-note">Create an account, verify the email address, and Level 2 opens without staff approval.</div>`,true,"data-open-level2");
+    </div><div class="level-note">Create an account, verify the email address, and Level 2 opens without staff approval.</div>`,false,"data-open-level2");
     const help=fold("How to use this map",`<div class="level-note" style="margin-top:8px">
       Search one tag number. Numbered circles show the catch sequence. Hover or tap a circle to open that catch; a line appears only when the data contains a confirmed recapture.
-    </div>`,true);
+    </div>`,false);
     return searchBlock+selectedFish+level2Preview+help;
   }
 
@@ -2354,7 +2355,7 @@ function showPane(show){
 }
 function mapPanePadding(top=66,bottom=62){
   const paneOpen=!byId("pane").classList.contains("hidden");
-  return {top,left:paneOpen?294:152,right:42,bottom};
+  return {top,left:paneOpen?260:152,right:42,bottom};
 }
 function chooseTool(index,reveal=true){
   const blocks=toolBlocks();
@@ -2730,6 +2731,7 @@ async function enter(r){
   if(r!=="l1") await loadReferenceData();
 
   const pane=document.getElementById("pane");
+  pane.dataset.level=r;
   document.getElementById("paneBody").innerHTML=panel();
   toolIndex=0;
   pane.classList.toggle("hidden",r!=="l1");
