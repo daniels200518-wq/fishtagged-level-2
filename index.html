@@ -43,7 +43,7 @@
   .num{ font-variant-numeric:tabular-nums; }
   .cap{ font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--label); font-weight:bold; }
 
-  #gate{ position:fixed; inset:0; background:var(--paper); overflow:auto; z-index:40; }
+  #gate{ position:fixed; inset:0; display:none; background:var(--paper); overflow:auto; z-index:40; }
   .brandbar{ display:flex; align-items:center; gap:12px; padding:15px clamp(16px,5vw,46px); border-bottom:1px solid var(--hair); }
   .logo{ display:flex; align-items:center; gap:9px; font-weight:800; font-size:17px; letter-spacing:.03em; }
   .navlinks{ margin-left:auto; display:flex; align-items:center; gap:24px; font-size:14px; }
@@ -88,7 +88,7 @@
              font-family:inherit; cursor:pointer; }
   .mapstamp img{ display:block; width:auto; height:25px; }
   .mapstamp .lvlname{ max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-                      font-size:11px; font-weight:700; color:#46504c; }
+                      font-size:12.5px; font-weight:700; color:#46504c; }
   .mapstamp .chev{ font-size:9px; color:var(--label); transition:transform .15s; }
   .mapstamp[aria-expanded="true"] .chev{ transform:rotate(180deg); }
   .level-pop{ position:absolute; top:45px; left:0; width:214px; padding:5px; background:#fff;
@@ -98,8 +98,8 @@
                      color:var(--ink); text-align:left; font-family:inherit; cursor:pointer; }
   .level-pop button:hover,.level-pop button:focus-visible{ background:var(--field); outline:none; }
   .level-pop button + button{ border-top:1px solid var(--hair); border-top-left-radius:0; border-top-right-radius:0; }
-  .level-pop b{ display:block; font-size:12px; }
-  .level-pop small{ display:block; margin-top:2px; color:var(--label); font-size:9.5px; letter-spacing:.02em;
+  .level-pop b{ display:block; font-size:13.5px; }
+  .level-pop small{ display:block; margin-top:2px; color:var(--label); font-size:10.5px; letter-spacing:.02em;
                     text-transform:uppercase; }
   .level-pop button.on b{ color:var(--green-dk); }
 
@@ -145,14 +145,14 @@
   .wheel-center small{ display:block; max-width:38px; margin-top:2px; overflow:hidden; text-overflow:ellipsis;
                        white-space:nowrap; color:var(--green-dk); font-size:7px; }
 
-  .pane{ position:absolute; top:198px; left:12px; width:230px; background:rgba(255,255,255,.97);
+  .pane{ position:absolute; top:198px; left:12px; width:248px; background:rgba(255,255,255,.97);
          border:1px solid var(--hair); border-radius:3px; box-shadow:0 4px 16px rgba(20,33,31,.14);
          z-index:10; max-height:calc(100% - 248px); overflow:hidden; backdrop-filter:blur(9px); }
   .pane.hidden{ display:none; }
   .panehead{ height:35px; display:flex; align-items:center; gap:8px; padding:0 8px 0 12px;
              border-bottom:1px solid var(--hair); }
   .panehead span{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-                  font-size:11px; font-weight:750; color:#46504c; }
+                  font-size:12.5px; font-weight:750; color:#46504c; }
   .panehead button{ width:25px; height:25px; border:0; border-radius:50%; background:transparent;
                     color:var(--label); font-size:18px; cursor:pointer; }
   .panehead button:hover,.panehead button:focus-visible{ background:var(--field); color:var(--ink); outline:none; }
@@ -218,7 +218,7 @@
   .locked-feature .lock{ width:17px; height:17px; display:flex; align-items:center; justify-content:center;
                          border:1px solid #cdd3cd; border-radius:50%; background:#fff; font-size:9px; flex:none; }
   .locked-feature span:last-child{ margin-left:auto; color:var(--green-dk); font-size:10px; font-weight:700; }
-  .level-note{ margin-top:8px; color:var(--label); font-size:11px; line-height:1.45; }
+  .level-note{ margin-top:8px; color:var(--label); font-size:12px; line-height:1.45; }
   .capture-panel{ border-top:1px solid var(--hair); background:#fff; }
   .capture-panel[hidden]{ display:none; }
   .capture-panel .card{ width:auto; }
@@ -230,15 +230,15 @@
   .layer-list{ display:grid; gap:8px; margin-top:8px; }
   .layer-row{ display:grid; grid-template-columns:1fr auto; gap:9px; align-items:center; padding:9px 10px;
               border:1px solid var(--hair); border-radius:7px; background:#fff; }
-  .layer-row b{ display:block; font-size:12px; }
-  .layer-row small{ display:block; margin-top:2px; color:var(--label); font-size:10.5px; line-height:1.35; }
+  .layer-row b{ display:block; font-size:13px; }
+  .layer-row small{ display:block; margin-top:2px; color:var(--label); font-size:11.5px; line-height:1.35; }
   .layer-row button,.layer-row a{ min-width:58px; padding:6px 8px; border:1px solid var(--hair); border-radius:5px;
                                  background:var(--field); color:var(--ink); text-align:center; text-decoration:none;
                                  font:11px inherit; cursor:pointer; }
   .layer-row button.on{ background:var(--green); border-color:var(--green); color:#fff; }
   .layer-row button:disabled{ cursor:not-allowed; color:#9aa09d; }
   .place-key{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px 8px; margin-top:8px;
-              color:#555f5b; font-size:10.5px; }
+              color:#555f5b; font-size:11.5px; }
   .place-key span{ display:flex; align-items:center; gap:5px; min-width:0; }
   .place-mark{ width:17px; text-align:center; color:var(--green-dk); font-weight:800; }
 
@@ -329,23 +329,23 @@
   .login{ position:fixed; inset:0; z-index:90; display:none; align-items:center; justify-content:center;
           padding:20px; background:rgba(25,34,34,.48); }
   .login.on{ display:flex; }
-  .loginbox{ width:min(360px,100%); background:#fff; border:1px solid var(--hair); border-radius:10px;
+  .loginbox{ width:min(400px,100%); background:#fff; border:1px solid var(--hair); border-radius:10px;
              box-shadow:0 16px 48px rgba(20,29,29,.25); padding:22px; }
-  .loginbox h2{ margin:0; font-size:21px; }
-  .loginbox p{ margin:6px 0 17px; color:var(--label); font-size:12.5px; line-height:1.45; }
+  .loginbox h2{ margin:0; font-size:25px; }
+  .loginbox p{ margin:7px 0 18px; color:var(--label); font-size:14px; line-height:1.5; }
   .account-switch{ display:flex; margin:0 0 14px; border:1px solid var(--hair); border-radius:5px; overflow:hidden; }
   .account-switch[hidden]{ display:none; }
   .account-switch button{ flex:1; height:38px; border:0; border-left:1px solid var(--hair); background:#fff;
-                          color:var(--green-dk); font:800 11px inherit; letter-spacing:.04em; text-transform:uppercase;
+                          color:var(--green-dk); font:800 12.5px inherit; letter-spacing:.025em; text-transform:uppercase;
                           cursor:pointer; }
   .account-switch button:first-child{ border-left:0; }
   .account-switch button.on{ background:var(--green); color:#fff; }
-  .loginbox label{ display:block; margin-top:10px; color:var(--label); font-size:11px; font-weight:700; }
-  .loginbox input{ width:100%; height:38px; margin-top:4px; border:1px solid var(--hair); border-radius:4px;
-                   padding:0 10px; font:13px inherit; color:var(--ink); }
+  .loginbox label{ display:block; margin-top:11px; color:var(--label); font-size:12.5px; font-weight:700; }
+  .loginbox input{ width:100%; height:42px; margin-top:4px; border:1px solid var(--hair); border-radius:4px;
+                   padding:0 10px; font:15px inherit; color:var(--ink); }
   .loginbox input:focus{ outline:none; border-color:var(--ink); }
   .login-note{ margin:12px 0 0; padding:9px 10px; background:var(--field); color:var(--label);
-               font-size:10.5px; line-height:1.4; }
+               font-size:11.5px; line-height:1.45; }
   .mfa-step[hidden], .email-code-step[hidden], .credential-fields[hidden], .signup-fields[hidden]{ display:none; }
   .password-field{ position:relative; }
   .password-field input{ padding-right:44px; }
@@ -353,12 +353,12 @@
                   background:transparent; color:var(--label); font:700 10px inherit; cursor:pointer; }
   .password-show:hover,.password-show:focus-visible{ background:var(--field); color:var(--ink); outline:none; }
   .login-actions{ display:flex; gap:8px; margin-top:16px; }
-  .login-actions button{ flex:1; }
-  .loginmsg{ min-height:17px; margin-top:10px; color:#9a3318; font-size:11.5px; }
+  .login-actions button{ flex:1; font-size:14px; }
+  .loginmsg{ min-height:18px; margin-top:10px; color:#9a3318; font-size:12.5px; }
   .preview-login{ display:none; width:100%; margin-top:8px; border:0; background:none; color:var(--green-dk);
                   text-decoration:underline; font:12px inherit; cursor:pointer; }
   .phone-step[hidden]{ display:none; }
-  .phone-note{ margin-top:8px; color:var(--label); font-size:10.5px; line-height:1.4; }
+  .phone-note{ margin-top:8px; color:var(--label); font-size:11.5px; line-height:1.45; }
   .mfa-setup{ display:block; margin-top:8px; color:var(--green-dk); text-align:center;
               font-size:12px; }
   button.mfa-setup{ width:100%; border:0; background:none; text-decoration:underline; cursor:pointer; }
@@ -533,8 +533,8 @@
     <h2 id="loginTitle">Level 2 account</h2>
     <p id="loginIntro">Account required. Log in or create an account.</p>
     <div class="account-switch" id="accountSwitch">
-      <button type="button" id="loginModeBtn" class="on">Log in</button>
       <button type="button" id="createModeBtn">Create account</button>
+      <button type="button" id="loginModeBtn" class="on">Log in</button>
     </div>
     <form id="loginForm">
       <div class="credential-fields" id="credentialFields">
@@ -599,7 +599,7 @@
 
 <script>
 const HERE = location.href.replace(/[^/]*$/,"");
-const DATA_VERSION = "20260906a";
+const DATA_VERSION = "20260906c";
 const DATA_FILE = "fish_index-20260701.json";
 const TILE_ROOT = "tiles-20260701";
 const PUBLIC_META_FILE = "public-meta-20260701.json";
@@ -795,8 +795,8 @@ function closeLogin(){
 function openLogin(level,mode="login"){
   pendingRole=level;
   resetLoginStep();
-  set("loginTitle",level==="l3"?"Level 3 staff access":"Level 2 account");
-  set("loginIntro",level==="l3"?"Administrator account required.":"Account required. Log in or create an account.");
+  set("loginTitle",level==="l3"?"Level 3 staff access":"For Level 2: log in");
+  set("loginIntro",level==="l3"?"Administrator account required.":"New here? Create an account. Email verification is required.");
   byId("accountSwitch").hidden=level==="l3";
   const preview=byId("previewLogin");
   preview.style.display=LOCAL_PREVIEW?"block":"none";
@@ -811,8 +811,8 @@ function toggleCreateAccount(force){
   const create=typeof force==="boolean" ? force : !signupMode;
   if(!create){
     resetLoginStep();
-    set("loginTitle","Level 2 account");
-    set("loginIntro","Account required. Log in or create an account.");
+    set("loginTitle","For Level 2: log in");
+    set("loginIntro","New here? Create an account. Email verification is required.");
     set("loginMsg","");
     byId("loginEmail").focus();
     return;
@@ -834,8 +834,8 @@ function toggleCreateAccount(force){
   byId("accountSwitch").hidden=false;
   byId("loginModeBtn").classList.remove("on");
   byId("createModeBtn").classList.add("on");
-  set("loginTitle","Level 2 account");
-  set("loginIntro","Create an account, then verify your email to open Level 2.");
+  set("loginTitle","Create a Level 2 account");
+  set("loginIntro","Create your account, then verify your email before signing in.");
   set("loginSubmit","Create account");
   set("loginMsg","");
   byId("loginEmail").focus();
@@ -1234,8 +1234,7 @@ async function logoutSession(timedOut){
   }catch(e){}
   verifiedSession=null;
   activeToken="";
-  byId("app").classList.remove("on");
-  byId("gate").style.display="block";
+  byId("gate").style.display="none";
   clearPick();
   if(level==="l2" || level==="l3"){
     TAGS=[];
@@ -1245,6 +1244,7 @@ async function logoutSession(timedOut){
     LEVEL2_SUMMARY=null;
     if(map){ map.remove(); map=null; scaleCtl=null; fitted=false; }
   }
+  await enter("l1");
   if(timedOut){
     openLogin(level);
     set("loginMsg","You were logged out because the inactivity warning expired.");
@@ -1346,6 +1346,12 @@ function placeFilter(category){
   const types=PLACE_GROUPS[category]||[];
   return ["in",["get","type"],["literal",types]];
 }
+function placeIcon(category){
+  if(category==="all") return "×";
+  return ["match",["get","type"],
+    "Island","I","Spot","•","Boat ramp","R","Primitive launch","P",
+    "Dam","D","Public access","A","Landmark","L","Location","L","Confluence","C","Tributary","T","L"];
+}
 function setPlaces(category){
   placesCategory=(PLACE_GROUPS[category] || category==="all") ? category : "off";
   const visible=placesCategory!=="off";
@@ -1353,6 +1359,10 @@ function setPlaces(category){
     if(!map?.getLayer(layer)) continue;
     map.setLayoutProperty(layer,"visibility",visible?"visible":"none");
     map.setFilter(layer,visible?placeFilter(placesCategory):["==",["get","type"],"__hidden__"]);
+  }
+  if(map?.getLayer("places-icon")){
+    map.setLayoutProperty("places-icon","text-field",placeIcon(placesCategory));
+    map.setLayoutProperty("places-icon","text-size",placesCategory==="all"?15:["interpolate",["linear"],["zoom"],7,9,12,12]);
   }
   const select=byId("placesCategory");
   if(select) select.value=placesCategory;
@@ -1390,10 +1400,8 @@ function addLayers(){
   });
   if(!map.getLayer("places-icon")) map.addLayer({
     id:"places-icon",type:"symbol",source:"places",filter:placesFilter,layout:{visibility:placesVisible?"visible":"none",
-      "text-field":["match",["get","type"],
-        "Island","I","Spot","•","Boat ramp","R","Primitive launch","P",
-        "Dam","D","Public access","A","Landmark","L","Location","L","Confluence","C","Tributary","T","L"],
-      "text-size":["interpolate",["linear"],["zoom"],7,8,12,11],"text-allow-overlap":true},
+      "text-field":placeIcon(placesCategory),
+      "text-size":placesCategory==="all"?15:["interpolate",["linear"],["zoom"],7,9,12,12],"text-allow-overlap":true},
     paint:{"text-color":"#fff","text-halo-color":"rgba(0,0,0,.16)","text-halo-width":.4}
   });
   if(!map.getLayer("places-label")) map.addLayer({
@@ -2285,7 +2293,7 @@ function adminRecordsBlock(){
         <button id="refreshAccounts" type="button">Refresh</button>
       </div>
       <div id="accountList" class="account-list"><div class="form-msg">Loading users…</div></div>
-      <div class="form-msg" id="accountMsg" aria-live="polite">Level 2 is automatic after email verification. Level 3 staff can change access; Level 4 super administrators can also remove accounts.</div>
+      <div class="form-msg" id="accountMsg" aria-live="polite">Level 2 is automatic after email verification. Level 3 staff can change access and delete other accounts. You cannot delete the account you are using.</div>
       <div class="report-buttons">
         <button class="flat" id="usersReport" type="button">Download users CSV</button>
         <button class="flat" id="accessReport" type="button">Download access CSV</button>
@@ -2342,7 +2350,8 @@ function panel(){
       <option value="launches"${placesCategory==="launches"?" selected":""}>Primitive launch</option>
     </select>
     <div class="place-key">
-      <span><b class="place-mark">L</b>landmark</span><span><b class="place-mark">I</b>island</span>
+      <span><b class="place-mark">×</b>all places</span><span><b class="place-mark">L</b>landmark</span>
+      <span><b class="place-mark">I</b>island</span><span><b class="place-mark">•</b>spot</span>
       <span><b class="place-mark">R</b>boat ramp</span><span><b class="place-mark">P</b>primitive launch</span>
     </div>
     <div class="level-note">Select a category, then click a map symbol for details and a Google Maps link.</div>`,false);
@@ -2646,7 +2655,7 @@ function renderAdminAccounts(){
   output.innerHTML=accounts.map(account=>{
     const level=accountLevel(account.role);
     const locked=account.current || (level==="superadmin" && adminManagerRole!=="superadmin");
-    const canDelete=adminManagerRole==="superadmin" && !account.current;
+    const canDelete=(adminManagerRole==="admin" || adminManagerRole==="superadmin") && !account.current;
     const status=[account.emailVerified?"email verified":"email not verified",
       account.profileComplete?"phone saved":"phone missing",
       account.disabled?"disabled":"active"].join(" · ");
@@ -2953,14 +2962,6 @@ function exportCSV(){
 document.querySelectorAll(".lvl[data-go]").forEach(button=>button.onclick=()=>requestLevel(button.dataset.go));
 document.querySelectorAll("[data-level-account]").forEach(button=>button.onclick=()=>
   openLogin("l2",button.dataset.levelAccount));
-(async()=>{
-  try{
-    const response=await fetchTimed(HERE+PUBLIC_META_FILE+"?v="+DATA_VERSION);
-    if(!response.ok) return;
-    const data=await response.json(), count=Number(data?.meta?.count);
-    if(Number.isFinite(count) && count>0) set("gateN",count.toLocaleString()+" captures · 2020–2026");
-  }catch(error){}
-})();
 document.getElementById("loginForm").onsubmit=signIn;
 document.getElementById("loginCancel").onclick=closeLogin;
 document.getElementById("loginModeBtn").onclick=()=>toggleCreateAccount(false);
@@ -3029,6 +3030,7 @@ function hideVeil(){ const v=document.getElementById("veil"); if(v) v.classList.
 function byId(id){ return document.getElementById(id); }
 function set(id,v){ const e=byId(id); if(e) e.textContent=v; }
 function val(id,v){ const e=byId(id); if(v!=null) e.value=v; return e?e.value:""; }
+(async()=>{ await enter("l1"); })();
 </script>
 </body>
 </html>
