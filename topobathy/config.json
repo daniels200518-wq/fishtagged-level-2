@@ -1,0 +1,8 @@
+{
+  "ready": false,
+  "tiles": [],
+  "tileSize": 256,
+  "sourceUrl": "https://www.usgs.gov/data/potomac-river-pilot-topobathymetric-digital-elevation-model-1979-2025",
+  "sourceDoi": "https://doi.org/10.5066/P13BBWDB",
+  "note": "USGS publishes the Potomac pilot as an 18.7 GB, 1-meter Cloud Optimized GeoTIFF. Set ready to true and add raster tile URLs only after that source has been rendered into web tiles."
+}

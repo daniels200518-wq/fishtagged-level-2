@@ -1,0 +1,4217 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.826664,
+          39.494441
+        ]
+      },
+      "properties": {
+        "name": "Shepherdstown Dam",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Potomac  River Dams.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Potomac  River Dams"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.804247,
+          39.490469
+        ]
+      },
+      "properties": {
+        "name": "Sheperds Island Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Shepherds Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Shepherds Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.79395,
+          39.490722
+        ]
+      },
+      "properties": {
+        "name": "Sheperds Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Shepherds Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Shepherds Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.76812,
+          39.498392
+        ]
+      },
+      "properties": {
+        "name": "Class I/II Rapids",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.764354,
+          39.493862
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.765574,
+          39.493499
+        ]
+      },
+      "properties": {
+        "name": "Ledges",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.774292,
+          39.499446
+        ]
+      },
+      "properties": {
+        "name": "Island AAA(Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.771264,
+          39.499058
+        ]
+      },
+      "properties": {
+        "name": "Island AAA(Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.752602,
+          39.422594
+        ]
+      },
+      "properties": {
+        "name": "Knott Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Knott Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Knott Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.744292,
+          39.409979
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.745617,
+          39.408778
+        ]
+      },
+      "properties": {
+        "name": "Knott Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Knott Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Knott Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.751245,
+          39.380452
+        ]
+      },
+      "properties": {
+        "name": "Island AA (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.751385,
+          39.379025
+        ]
+      },
+      "properties": {
+        "name": "Island AA (Downtream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.751932,
+          39.378138
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.750127,
+          39.334391
+        ]
+      },
+      "properties": {
+        "name": "The Needles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.751932,
+          39.334848
+        ]
+      },
+      "properties": {
+        "name": "Dam 3 Ruins",
+        "type": "Location",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.745142,
+          39.331751
+        ]
+      },
+      "properties": {
+        "name": "Byrnes Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Byrnes Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Byrnes Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.741138,
+          39.332361
+        ]
+      },
+      "properties": {
+        "name": "Leftys Hole",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.738029,
+          39.331588
+        ]
+      },
+      "properties": {
+        "name": "Catfish Hole",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.736511,
+          39.330725
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.732219,
+          39.327873
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.733342,
+          39.327451
+        ]
+      },
+      "properties": {
+        "name": "Byrnes Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Byrnes Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Byrnes Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.724439,
+          39.323168
+        ]
+      },
+      "properties": {
+        "name": "Maddog Rapids (Class III)",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.722986,
+          39.322151
+        ]
+      },
+      "properties": {
+        "name": "100 Yard Dash",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.72253,
+          39.323122
+        ]
+      },
+      "properties": {
+        "name": "White Horse Rapids  (Class III/IV)",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.727358,
+          39.323546
+        ]
+      },
+      "properties": {
+        "name": "Bridge Ruins",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.722058,
+          39.321843
+        ]
+      },
+      "properties": {
+        "name": "Washing Machine",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.718453,
+          39.321482
+        ]
+      },
+      "properties": {
+        "name": "Bass Rock",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.709098,
+          39.324143
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.703788,
+          39.321717
+        ]
+      },
+      "properties": {
+        "name": "Birds Sancutary Islands (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.692921,
+          39.322676
+        ]
+      },
+      "properties": {
+        "name": "Millers Hole",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.690154,
+          39.320113
+        ]
+      },
+      "properties": {
+        "name": "Birds Sanctuary Islands (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.689437,
+          39.322474
+        ]
+      },
+      "properties": {
+        "name": "Paridise",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.680468,
+          39.326225
+        ]
+      },
+      "properties": {
+        "name": "Weverton Rapids (Class II)",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.678322,
+          39.326341
+        ]
+      },
+      "properties": {
+        "name": "Old Mill Rapids (Class III)",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.673215,
+          39.325794
+        ]
+      },
+      "properties": {
+        "name": "Knoxville Falls",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.670965,
+          39.327422
+        ]
+      },
+      "properties": {
+        "name": "Colonial Island/Paynes Landing(Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Colonial Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Colonial Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.672404,
+          39.325674
+        ]
+      },
+      "properties": {
+        "name": "Fall Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.670155,
+          39.322427
+        ]
+      },
+      "properties": {
+        "name": "Fall Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.665515,
+          39.321264
+        ]
+      },
+      "properties": {
+        "name": "Colonial Island/Paynes Landing (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Colonial Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Colonial Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.657343,
+          39.316028
+        ]
+      },
+      "properties": {
+        "name": "Ledges/Rocks",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.646671,
+          39.309906
+        ]
+      },
+      "properties": {
+        "name": "Island A (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.640846,
+          39.308962
+        ]
+      },
+      "properties": {
+        "name": "Island A (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.627461,
+          39.309576
+        ]
+      },
+      "properties": {
+        "name": "Log Jam",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.627602,
+          39.307649
+        ]
+      },
+      "properties": {
+        "name": "Island B (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.626988,
+          39.307175
+        ]
+      },
+      "properties": {
+        "name": "Island B (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.609269,
+          39.304831
+        ]
+      },
+      "properties": {
+        "name": "Gravel Point",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.581123,
+          39.305566
+        ]
+      },
+      "properties": {
+        "name": "The Fence",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.568427,
+          39.307319
+        ]
+      },
+      "properties": {
+        "name": "Luckets Ferry",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Virginia. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Virginia",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.568288,
+          39.308088
+        ]
+      },
+      "properties": {
+        "name": "Tombston Rocks",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.572572,
+          39.308746
+        ]
+      },
+      "properties": {
+        "name": "Little Catoctin Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.572341,
+          39.307453
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.565503,
+          39.307972
+        ]
+      },
+      "properties": {
+        "name": "Little Catoctin Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.562616,
+          39.304999
+        ]
+      },
+      "properties": {
+        "name": "Twin Sisters Rocks",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.561579,
+          39.305221
+        ]
+      },
+      "properties": {
+        "name": "Hales Pond",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.564484,
+          39.305066
+        ]
+      },
+      "properties": {
+        "name": "Deadmans Islands (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.562598,
+          39.303663
+        ]
+      },
+      "properties": {
+        "name": "Deadmans Islands (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.561649,
+          39.302284
+        ]
+      },
+      "properties": {
+        "name": "Bald Eagle Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.559474,
+          39.297069
+        ]
+      },
+      "properties": {
+        "name": "Huffmans Rocks",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.561195,
+          39.293119
+        ]
+      },
+      "properties": {
+        "name": "Bald Eagle Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.561154,
+          39.292675
+        ]
+      },
+      "properties": {
+        "name": "Duck Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.561154,
+          39.292026
+        ]
+      },
+      "properties": {
+        "name": "Duck Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.560434,
+          39.291101
+        ]
+      },
+      "properties": {
+        "name": "Broken Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.558269,
+          39.289667
+        ]
+      },
+      "properties": {
+        "name": "Hooks Falls",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.553353,
+          39.282377
+        ]
+      },
+      "properties": {
+        "name": "Broken Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.555218,
+          39.285799
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.551786,
+          39.281386
+        ]
+      },
+      "properties": {
+        "name": "Paton Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Paton Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Paton Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.545705,
+          39.273887
+        ]
+      },
+      "properties": {
+        "name": "Paton Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Paton Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Paton Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.545335,
+          39.274669
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.543044,
+          39.272878
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.540383,
+          39.272067
+        ]
+      },
+      "properties": {
+        "name": "Island C (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.541756,
+          39.271098
+        ]
+      },
+      "properties": {
+        "name": "Heaters Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Heaters Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Heaters Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.536939,
+          39.271164
+        ]
+      },
+      "properties": {
+        "name": "Island C (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.535975,
+          39.270499
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.531399,
+          39.269832
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.518942,
+          39.259988
+        ]
+      },
+      "properties": {
+        "name": "Heaters Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Heaters Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Heaters Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.520334,
+          39.258318
+        ]
+      },
+      "properties": {
+        "name": "Mason Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Mason Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Mason Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.520334,
+          39.258318
+        ]
+      },
+      "properties": {
+        "name": "Mason Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Mason Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Mason Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.497802,
+          39.253316
+        ]
+      },
+      "properties": {
+        "name": "Nolands Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Nolands Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Nolands Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.488803,
+          39.249563
+        ]
+      },
+      "properties": {
+        "name": "Island D (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.488471,
+          39.248877
+        ]
+      },
+      "properties": {
+        "name": "Island E (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.486771,
+          39.248846
+        ]
+      },
+      "properties": {
+        "name": "Island D (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.487174,
+          39.247755
+        ]
+      },
+      "properties": {
+        "name": "Meadow Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Meadow Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Meadow Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.485745,
+          39.248034
+        ]
+      },
+      "properties": {
+        "name": "Island E (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.479937,
+          39.244824
+        ]
+      },
+      "properties": {
+        "name": "Nolands Island",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Nolands Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Nolands Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.487455,
+          39.247403
+        ]
+      },
+      "properties": {
+        "name": "Meadow Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.484527,
+          39.245702
+        ]
+      },
+      "properties": {
+        "name": "Meadow Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.478685,
+          39.244205
+        ]
+      },
+      "properties": {
+        "name": "Island G  (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.478505,
+          39.242943
+        ]
+      },
+      "properties": {
+        "name": "Birdsaw Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.477918,
+          39.243343
+        ]
+      },
+      "properties": {
+        "name": "Island G  (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.475683,
+          39.243174
+        ]
+      },
+      "properties": {
+        "name": "Island H (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.474668,
+          39.242198
+        ]
+      },
+      "properties": {
+        "name": "Island H (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.476758,
+          39.239002
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.474807,
+          39.240224
+        ]
+      },
+      "properties": {
+        "name": "Birdsaw Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Birdsaw Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Birdsaw Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.472113,
+          39.23628
+        ]
+      },
+      "properties": {
+        "name": "Eagle Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.468822,
+          39.235551
+        ]
+      },
+      "properties": {
+        "name": "Birdsaw Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Birdsaw Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Birdsaw Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.468971,
+          39.235075
+        ]
+      },
+      "properties": {
+        "name": "Cox Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Cox Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Cox Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.469081,
+          39.234351
+        ]
+      },
+      "properties": {
+        "name": "Eagle Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.462527,
+          39.231056
+        ]
+      },
+      "properties": {
+        "name": "Cox Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Cox Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Cox Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.469965,
+          39.207476
+        ]
+      },
+      "properties": {
+        "name": "Warm Water Discharge",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.479111,
+          39.186502
+        ]
+      },
+      "properties": {
+        "name": "Mason Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Mason Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Mason Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.519344,
+          39.141046
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.514975,
+          39.169402
+        ]
+      },
+      "properties": {
+        "name": "Mason Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Mason Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Mason Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.516208,
+          39.169727
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.513021,
+          39.169721
+        ]
+      },
+      "properties": {
+        "name": "Fish Traps",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.520089,
+          39.164132
+        ]
+      },
+      "properties": {
+        "name": "Sink Hole",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.518872,
+          39.163826
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.523849,
+          39.148252
+        ]
+      },
+      "properties": {
+        "name": "Harrison Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Harrison Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Harrison Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.524517,
+          39.147679
+        ]
+      },
+      "properties": {
+        "name": "Ralph's Rock",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.519304,
+          39.141012
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.524324,
+          39.130358
+        ]
+      },
+      "properties": {
+        "name": "Little Harrison Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.522412,
+          39.125942
+        ]
+      },
+      "properties": {
+        "name": "Little Harrison Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.511022,
+          39.120284
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.511961,
+          39.119016
+        ]
+      },
+      "properties": {
+        "name": "Harrison Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Harrison Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Harrison Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.467595,
+          39.087415
+        ]
+      },
+      "properties": {
+        "name": "Selden Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Seden Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Seden Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.456917,
+          39.073568
+        ]
+      },
+      "properties": {
+        "name": "Old Bridge Ruins",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.433847,
+          39.075582
+        ]
+      },
+      "properties": {
+        "name": "Horseshoe Hole",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.429495,
+          39.072784
+        ]
+      },
+      "properties": {
+        "name": "Van Deventer Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Van Deventer Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Van Deventer Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.428748,
+          39.069138
+        ]
+      },
+      "properties": {
+        "name": "Selden Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physcial Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physcial Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.394751,
+          39.065775
+        ]
+      },
+      "properties": {
+        "name": "Van Deventer Island (Downtream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Van Deventer Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Van Deventer Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.392803,
+          39.065789
+        ]
+      },
+      "properties": {
+        "name": "Tenfoot Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Tenfoot Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Tenfoot Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.383337,
+          39.064003
+        ]
+      },
+      "properties": {
+        "name": "Deep Hole",
+        "type": "Spot",
+        "description": "Potomac \u00b7 Maryland. Source: Physcial Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physcial Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.381593,
+          39.065053
+        ]
+      },
+      "properties": {
+        "name": "Tenfoot Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Tenfoot Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Tenfoot Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.374933,
+          39.064816
+        ]
+      },
+      "properties": {
+        "name": "Sharpshin Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Sharpshin Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Sharpshin Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.367482,
+          39.064781
+        ]
+      },
+      "properties": {
+        "name": "Sharpshin Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Sharpshin Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Sharpshin Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.357211,
+          39.066507
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.331507,
+          39.064122
+        ]
+      },
+      "properties": {
+        "name": "C&O Canal Dam #2",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.367858,
+          39.061833
+        ]
+      },
+      "properties": {
+        "name": "Lowes Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Virginia. Source: Lowes Island.",
+        "river": "Potomac",
+        "state": "Virginia",
+        "source": "Lowes Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.328355,
+          39.057693
+        ]
+      },
+      "properties": {
+        "name": "Lowes Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Virginia. Source: Lowes Island.",
+        "river": "Potomac",
+        "state": "Virginia",
+        "source": "Lowes Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.325472,
+          39.062626
+        ]
+      },
+      "properties": {
+        "name": "Pond Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Pond Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Pond Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.323567,
+          39.060492
+        ]
+      },
+      "properties": {
+        "name": "Class I/II Rapids",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.320607,
+          39.059646
+        ]
+      },
+      "properties": {
+        "name": "Pond Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Pond Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Pond Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.326721,
+          39.057453
+        ]
+      },
+      "properties": {
+        "name": "Patowmack Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Patowmack Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Patowmack Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.326026,
+          39.058085
+        ]
+      },
+      "properties": {
+        "name": "Beech Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.317912,
+          39.054819
+        ]
+      },
+      "properties": {
+        "name": "Beech Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.315423,
+          39.052424
+        ]
+      },
+      "properties": {
+        "name": "Patowmack Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Patowmack Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Patowmack Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.317185,
+          39.055011
+        ]
+      },
+      "properties": {
+        "name": "Elm Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Elm Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Elm Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.307921,
+          39.052884
+        ]
+      },
+      "properties": {
+        "name": "Elm Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Elm Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Elm Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.308118,
+          39.054378
+        ]
+      },
+      "properties": {
+        "name": "Grapevine Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Grapevine Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Grapevine Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.306535,
+          39.054599
+        ]
+      },
+      "properties": {
+        "name": "Watkins Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Watkins Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Watkins Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.303664,
+          39.055417
+        ]
+      },
+      "properties": {
+        "name": "Katie Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Katie Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Katie Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.296472,
+          39.050143
+        ]
+      },
+      "properties": {
+        "name": "Grapevine Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Grapevine Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Grapevine Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.287259,
+          39.050903
+        ]
+      },
+      "properties": {
+        "name": "Norbell Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.285702,
+          39.050264
+        ]
+      },
+      "properties": {
+        "name": "Norbell Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.289958,
+          39.050828
+        ]
+      },
+      "properties": {
+        "name": "Torpedo Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.285496,
+          39.048011
+        ]
+      },
+      "properties": {
+        "name": "Torpedo Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.28198,
+          39.04057
+        ]
+      },
+      "properties": {
+        "name": "Clagett Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Clagett Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Clagett Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.275853,
+          39.042427
+        ]
+      },
+      "properties": {
+        "name": "Sycamore Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Sycamore Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Sycamore Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.270631,
+          39.041118
+        ]
+      },
+      "properties": {
+        "name": "Sycamore Island  (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Sycamore Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Sycamore Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.263559,
+          39.032438
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.261398,
+          39.032996
+        ]
+      },
+      "properties": {
+        "name": "Clagett Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Clagett Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Clagett Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.260797,
+          39.032236
+        ]
+      },
+      "properties": {
+        "name": "Riffles",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.255948,
+          39.036482
+        ]
+      },
+      "properties": {
+        "name": "Ledeges",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.249309,
+          39.030342
+        ]
+      },
+      "properties": {
+        "name": "Gladys Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Gladys Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Gladys Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.244289,
+          39.030331
+        ]
+      },
+      "properties": {
+        "name": "Lock Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.252221,
+          39.034712
+        ]
+      },
+      "properties": {
+        "name": "Rocks",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.244606,
+          39.027742
+        ]
+      },
+      "properties": {
+        "name": "Gladys Island (Downtream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Gladys Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Gladys Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.241805,
+          39.027091
+        ]
+      },
+      "properties": {
+        "name": "Lock Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Google Maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.243437,
+          39.028665
+        ]
+      },
+      "properties": {
+        "name": "Rocks",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Physical Map"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.245233,
+          39.026226
+        ]
+      },
+      "properties": {
+        "name": "Minnehaha Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Minnehaha Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Minnehaha Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.243782,
+          39.023273
+        ]
+      },
+      "properties": {
+        "name": "Minnehaha Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Minnehaha Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Minnehaha Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.241661,
+          39.024973
+        ]
+      },
+      "properties": {
+        "name": "Bealls Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Bealls Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Bealls Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.241095,
+          39.020448
+        ]
+      },
+      "properties": {
+        "name": "Bealls Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Bealls Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Bealls Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.244014,
+          39.019561
+        ]
+      },
+      "properties": {
+        "name": "Powhatan Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Powhatan Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Powhatan Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.244087,
+          39.019141
+        ]
+      },
+      "properties": {
+        "name": "Powhatan Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Powhatan Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Powhatan Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.248122,
+          39.010583
+        ]
+      },
+      "properties": {
+        "name": "Conn Island (Upstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Conn Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Conn Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.251136,
+          39.004377
+        ]
+      },
+      "properties": {
+        "name": "Conn Island (Downstream)",
+        "type": "Island",
+        "description": "Potomac \u00b7 Maryland. Source: Conn Island.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Conn Island"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.250531,
+          39.003546
+        ]
+      },
+      "properties": {
+        "name": "Potomac River Dam",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: Potomac  River Dams.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Potomac  River Dams"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.245609,
+          39.018248
+        ]
+      },
+      "properties": {
+        "name": "Riverbend Park",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Virginia. Source: Riverbend Park Boat Ramp.",
+        "river": "Potomac",
+        "state": "Virginia",
+        "source": "Riverbend Park Boat Ramp"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.243559,
+          39.031556
+        ]
+      },
+      "properties": {
+        "name": "C and O Canal Lock 21 (Swain's Lock)",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: Swains Lock.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Swains Lock"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.293783,
+          39.057102
+        ]
+      },
+      "properties": {
+        "name": "Pennyfield Conservation Area Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Pennyfield Conservation Area.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Pennyfield Conservation Area"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.328687,
+          39.06738
+        ]
+      },
+      "properties": {
+        "name": "Violette's Lock Boat Launch",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: Violette's Lock.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Violette's Lock"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.340961,
+          39.072495
+        ]
+      },
+      "properties": {
+        "name": "Seneca Landing Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Seneca Landing.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Seneca Landing"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.37837,
+          39.062499
+        ]
+      },
+      "properties": {
+        "name": "Algonkian Regional Park Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Virginia. Source: Algonkian Regional Park.",
+        "river": "Potomac",
+        "state": "Virginia",
+        "source": "Algonkian Regional Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.419715,
+          39.076792
+        ]
+      },
+      "properties": {
+        "name": "Sycamore Landing",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: Sycamore Landing.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Sycamore Landing"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.494668,
+          39.099268
+        ]
+      },
+      "properties": {
+        "name": "Riverpoint Drive Trail",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Virginia. Source: Riverpoint Drive Trail.",
+        "river": "Potomac",
+        "state": "Virginia",
+        "source": "Riverpoint Drive Trail"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.473496,
+          39.103273
+        ]
+      },
+      "properties": {
+        "name": "Edwards Ferry",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Edwards Ferry.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Edwards Ferry"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.518876,
+          39.154871
+        ]
+      },
+      "properties": {
+        "name": "Whites Ferry",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Whites Ferry.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Whites Ferry"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.449963,
+          39.224518
+        ]
+      },
+      "properties": {
+        "name": "Mouth of Monocay",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Mouth of Monocay.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Mouth of Monocay"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.481071,
+          39.248132
+        ]
+      },
+      "properties": {
+        "name": "Nolands Ferry",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Nolands Ferry.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Nolands Ferry"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.547066,
+          39.27232
+        ]
+      },
+      "properties": {
+        "name": "Point of Rocks VA (McKimmey)",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Virginia. Source: Point of Rocks VA.",
+        "river": "Potomac",
+        "state": "Virginia",
+        "source": "Point of Rocks VA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.5403,
+          39.2736
+        ]
+      },
+      "properties": {
+        "name": "Point of Rocks",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Point of Rocks.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Point of Rocks"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.560487,
+          39.305202
+        ]
+      },
+      "properties": {
+        "name": "Lander",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Lander.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Lander"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.6306,
+          39.3109
+        ]
+      },
+      "properties": {
+        "name": "Brunswick",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Brunswick.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Brunswick"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.681861,
+          39.329951
+        ]
+      },
+      "properties": {
+        "name": "C and O canal Lockhouse 31",
+        "type": "Public access",
+        "description": "Potomac \u00b7 Maryland. Source: C and O Canal Lockhouse 31.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "C and O Canal Lockhouse 31"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.710935,
+          39.320481
+        ]
+      },
+      "properties": {
+        "name": "Patoma Wayside",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Virginia. Source: Patoma Wayside.",
+        "river": "Potomac",
+        "state": "Virginia",
+        "source": "Patoma Wayside"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.726286,
+          39.324109
+        ]
+      },
+      "properties": {
+        "name": "Lock 33 Access",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: Appalachian Trail and Towpath.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Appalachian Trail and Towpath"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.751268,
+          39.336181
+        ]
+      },
+      "properties": {
+        "name": "Dam no. 3",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: Dam no. 3.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Dam no. 3"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.739998,
+          39.363997
+        ]
+      },
+      "properties": {
+        "name": "Dargan Bend",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Dargan Bend.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Dargan Bend"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.733914,
+          39.38626
+        ]
+      },
+      "properties": {
+        "name": "Lock 37 Access",
+        "type": "Public access",
+        "description": "Potomac \u00b7 Maryland. Source: Lock 37.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Lock 37"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.801414,
+          39.434814
+        ]
+      },
+      "properties": {
+        "name": "Shepherdstown Boat Launch",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 West Virginia. Source: Shepherdstown Boat Launch.",
+        "river": "Potomac",
+        "state": "West Virginia",
+        "source": "Shepherdstown Boat Launch"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.778007,
+          39.465245
+        ]
+      },
+      "properties": {
+        "name": "Snyders Landing Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Snyders Landing Boat Ramp.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Snyders Landing Boat Ramp"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.7878,
+          39.5097
+        ]
+      },
+      "properties": {
+        "name": "Taylors Landing",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Taylors Landing.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Taylors Landing"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.847505,
+          39.503347
+        ]
+      },
+      "properties": {
+        "name": "Big Slackwater Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 West Virginia. Source: Big Slackwater Boat Ramp.",
+        "river": "Potomac",
+        "state": "West Virginia",
+        "source": "Big Slackwater Boat Ramp"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.8475,
+          39.6092
+        ]
+      },
+      "properties": {
+        "name": "Williamsport",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Williamsport.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Williamsport"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.946328,
+          39.614473
+        ]
+      },
+      "properties": {
+        "name": "Four Locks Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Four Locks Boat Ramp.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Four Locks Boat Ramp"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.968682,
+          39.607973
+        ]
+      },
+      "properties": {
+        "name": "McCoys Ferry Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: McCoys Ferry Boat Ramp.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "McCoys Ferry Boat Ramp"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.004156,
+          39.602056
+        ]
+      },
+      "properties": {
+        "name": "Fort Frederick State Park",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: Fort Frederick State Park.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Fort Frederick State Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.113299,
+          39.684854
+        ]
+      },
+      "properties": {
+        "name": "Little Pool Campground",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: Little Pool Campground.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Little Pool Campground"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.182,
+          39.6973
+        ]
+      },
+      "properties": {
+        "name": "Hancock",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Little Tonoloway.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Little Tonoloway"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.209675,
+          39.677727
+        ]
+      },
+      "properties": {
+        "name": "White Rock Hiker-Biker Campsite",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: White Rock Hiker-Biker Campsite.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "White Rock Hiker-Biker Campsite"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.240081,
+          39.652113
+        ]
+      },
+      "properties": {
+        "name": "Leopards Mill Hiker-Biker Campsite",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: Leopards Mill Hiker-Biker Campsite.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Leopards Mill Hiker-Biker Campsite"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.282336,
+          39.621988
+        ]
+      },
+      "properties": {
+        "name": "Cacapon Junction Hiker-Biker Campsite",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: Cacapon Junction Hiker-Biker Campsite.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Cacapon Junction Hiker-Biker Campsite"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.3848,
+          39.6247
+        ]
+      },
+      "properties": {
+        "name": "Fifteen Mile Creek",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Fifteen Mile Creek.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Fifteen Mile Creek"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.412382,
+          39.580532
+        ]
+      },
+      "properties": {
+        "name": "Bonds Landing Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 Maryland. Source: Bonds Landing Boat Ramp.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Bonds Landing Boat Ramp"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.45486,
+          39.537883
+        ]
+      },
+      "properties": {
+        "name": "Paw Paw Access",
+        "type": "Boat ramp",
+        "description": "Potomac \u00b7 West Virginia. Source: Paw Paw River Access.",
+        "river": "Potomac",
+        "state": "West Virginia",
+        "source": "Paw Paw River Access"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.544043,
+          39.523371
+        ]
+      },
+      "properties": {
+        "name": "Green Ridge/Town Creek Access",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: Green Ridge/Town Creek Access.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Green Ridge/Town Creek Access"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.48316,
+          39.187395
+        ]
+      },
+      "properties": {
+        "name": "Piscataway Crossing Kayak Launch",
+        "type": "Primitive launch",
+        "description": "Potomac \u00b7 Maryland. Source: Piscataway Crossing Kayak Launch.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "Piscataway Crossing Kayak Launch"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.299521,
+          39.62349
+        ]
+      },
+      "properties": {
+        "name": "Mumma Ford Road Launch",
+        "type": "Boat ramp",
+        "description": "Monocacy \u00b7 Maryland. Source: Mumma Ford Road Launch.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "Mumma Ford Road Launch"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.2937,
+          39.6036
+        ]
+      },
+      "properties": {
+        "name": "Rocky Ridge Road Access",
+        "type": "Primitive launch",
+        "description": "Monocacy \u00b7 Maryland. Source: Rocky Ridge Road Access.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "Rocky Ridge Road Access"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.3517,
+          39.5637
+        ]
+      },
+      "properties": {
+        "name": "Creagerstown Park Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Monocacy \u00b7 Maryland. Source: Creagerstown Park Boat Ramp.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "Creagerstown Park Boat Ramp"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.3775,
+          39.5073
+        ]
+      },
+      "properties": {
+        "name": "Devilbiss Bridge Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Monocacy \u00b7 Maryland. Source: Devilbiss Bridge Boat Ramp.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "Devilbiss Bridge Boat Ramp"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.3829,
+          39.4439
+        ]
+      },
+      "properties": {
+        "name": "Riverside Park Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Monocacy \u00b7 Maryland. Source: Riverside Park Boat Ramp.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "Riverside Park Boat Ramp"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.378655,
+          39.389246
+        ]
+      },
+      "properties": {
+        "name": "Pinecliff Park Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Monocacy \u00b7 Maryland. Source: Pinecliff Park Boat Ramp.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "Pinecliff Park Boat Ramp"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.436375,
+          39.262824
+        ]
+      },
+      "properties": {
+        "name": "Park Mills Boat Ramp",
+        "type": "Boat ramp",
+        "description": "Monocacy \u00b7 Maryland. Source: Park Mills Boat Ramp.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "Park Mills Boat Ramp"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          39.2245
+        ]
+      },
+      "properties": {
+        "name": "Monocacy Aqueduct Launch Site",
+        "type": "Boat ramp",
+        "description": "Monocacy \u00b7 Maryland. Source: Monocacy Aqueduct Launch Site.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "Monocacy Aqueduct Launch Site"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.786726,
+          39.274856
+        ]
+      },
+      "properties": {
+        "name": "Milleville Tailrace access point",
+        "type": "Boat ramp",
+        "description": "Shenandoah \u00b7 West Virginia. Source: Milleville Tailrace access point.",
+        "river": "Shenandoah",
+        "state": "West Virginia",
+        "source": "Milleville Tailrace access point"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.756697,
+          39.316699
+        ]
+      },
+      "properties": {
+        "name": "Cavalier Heights visitor center",
+        "type": "Public access",
+        "description": "Shenandoah \u00b7 West Virginia. Source: Cavalier Heights.",
+        "river": "Shenandoah",
+        "state": "West Virginia",
+        "source": "Cavalier Heights"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.731816,
+          39.450641
+        ]
+      },
+      "properties": {
+        "name": "Historic Burnside stone bridge",
+        "type": "Primitive launch",
+        "description": "Antietam Creek \u00b7 Maryland. Source: Historic Burnside stone bridge.",
+        "river": "Antietam Creek",
+        "state": "Maryland",
+        "source": "Historic Burnside stone bridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.725123,
+          39.465516
+        ]
+      },
+      "properties": {
+        "name": "Antietam creek access",
+        "type": "Primitive launch",
+        "description": "Antietam Creek \u00b7 Maryland. Source: Antietam creek access.",
+        "river": "Antietam Creek",
+        "state": "Maryland",
+        "source": "Antietam creek access"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.713938,
+          39.487999
+        ]
+      },
+      "properties": {
+        "name": "Hitt bridge",
+        "type": "Primitive launch",
+        "description": "Antietam Creek \u00b7 Maryland. Source: Hitt Bridge.",
+        "river": "Antietam Creek",
+        "state": "Maryland",
+        "source": "Hitt Bridge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.709819,
+          39.538525
+        ]
+      },
+      "properties": {
+        "name": "Devils backbone County Park",
+        "type": "Primitive launch",
+        "description": "Antietam Creek \u00b7 Maryland. Source: Devil's Backbone County Park.",
+        "river": "Antietam Creek",
+        "state": "Maryland",
+        "source": "Devil's Backbone County Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.816483,
+          39.623468
+        ]
+      },
+      "properties": {
+        "name": "Kemp's Mill Access",
+        "type": "Primitive launch",
+        "description": "Conococheague \u00b7 Maryland. Source: Kemp's Mill Access.",
+        "river": "Conococheague",
+        "state": "Maryland",
+        "source": "Kemp's Mill Access"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.848299,
+          39.658116
+        ]
+      },
+      "properties": {
+        "name": "Wilson Bridge Park",
+        "type": "Primitive launch",
+        "description": "Conococheague \u00b7 Maryland. Source: Wilson Bridge Park.",
+        "river": "Conococheague",
+        "state": "Maryland",
+        "source": "Wilson Bridge Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.832939,
+          39.708306
+        ]
+      },
+      "properties": {
+        "name": "Fairview Rd. Launch Site",
+        "type": "Primitive launch",
+        "description": "Conococheague \u00b7 Maryland. Source: Fairview Rd. Launch Site.",
+        "river": "Conococheague",
+        "state": "Maryland",
+        "source": "Fairview Rd. Launch Site"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.828311,
+          39.715054
+        ]
+      },
+      "properties": {
+        "name": "Wishard Road Access",
+        "type": "Primitive launch",
+        "description": "Conococheague \u00b7 Maryland. Source: Wishard Road Access.",
+        "river": "Conococheague",
+        "state": "Maryland",
+        "source": "Wishard Road Access"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.543109,
+          39.273598
+        ]
+      },
+      "properties": {
+        "name": "USGS Point of Rocks",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: USGS Point of Rocks.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "USGS Point of Rocks"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.455618,
+          39.538881
+        ]
+      },
+      "properties": {
+        "name": "USGS Paw Paw",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: USGS Paw Paw Monitoring.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "USGS Paw Paw Monitoring"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.801387,
+          39.43476
+        ]
+      },
+      "properties": {
+        "name": "USGS Shepherdstown",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 West Virginia. Source: USGS Shepherdstown.",
+        "river": "Potomac",
+        "state": "West Virginia",
+        "source": "USGS Shepherdstown"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.177917,
+          39.697595
+        ]
+      },
+      "properties": {
+        "name": "USGS Williamsport",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: USGS Williamsport.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "USGS Williamsport"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.234,
+          39.679
+        ]
+      },
+      "properties": {
+        "name": "Monocacy River At Bridgeport MD (USGS 01639000)",
+        "type": "Landmark",
+        "description": "Monocacy \u00b7 Maryland",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.38804,
+          39.479824
+        ]
+      },
+      "properties": {
+        "name": "MONOCACY RIVER NEAR WALKERSVILLE, MD (USGS 01641810)",
+        "type": "Landmark",
+        "description": "Monocacy \u00b7 Maryland",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.382278,
+          39.443583
+        ]
+      },
+      "properties": {
+        "name": "MONOCACY RIVER AT MONOCACY BLVD AT FREDERICK, MD (USGS 01642190)",
+        "type": "Landmark",
+        "description": "Monocacy \u00b7 Maryland",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": ""
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.366083,
+          39.402833
+        ]
+      },
+      "properties": {
+        "name": "MONOCACY RIVER AT JUG BRIDGE NEAR FREDERICK, MD (USGS 01643000)",
+        "type": "Landmark",
+        "description": "Monocacy \u00b7 Maryland",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": ""
+      }
+    }
+  ]
+}

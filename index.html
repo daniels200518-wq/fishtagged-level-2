@@ -67,6 +67,11 @@
   .lvl p{ margin:0; font-size:13.5px; color:#52595d; line-height:1.45; max-width:560px; }
   .lvl .who{ margin-left:auto; flex:none; font-size:11px; color:var(--label); border:1px solid var(--hair);
              padding:4px 11px; border-radius:20px; white-space:nowrap; }
+  .lvl-actions{ margin-left:auto; display:flex; gap:7px; flex:none; }
+  .lvl-actions button{ min-height:34px; padding:0 12px; border:1px solid var(--green); border-radius:5px;
+                       background:#fff; color:var(--green-dk); font:700 11px inherit; cursor:pointer; }
+  .lvl-actions button:last-child{ background:var(--green); color:#fff; }
+  .lvl-actions button:hover,.lvl-actions button:focus-visible{ border-color:var(--green-dk); outline:none; }
 
   button.flat{ height:38px; border:1px solid var(--hair); background:#fff; color:var(--ink); font-family:inherit;
                font-size:13px; cursor:pointer; padding:0 14px; }
@@ -76,13 +81,27 @@
   #app.on{ display:block; }
   #map{ position:absolute; inset:0; background:#dfe4e2; }
 
-  .mapstamp{ position:absolute; top:12px; left:12px; z-index:6; height:38px; display:flex;
-             align-items:center; gap:9px; padding:5px 10px 5px 7px; background:rgba(255,255,255,.94);
-             border:1px solid var(--hair); border-radius:20px; box-shadow:0 3px 14px rgba(20,33,31,.12);
-             backdrop-filter:blur(8px); }
+  .levelmenu{ position:absolute; top:12px; left:12px; z-index:14; }
+  .mapstamp{ height:38px; display:flex; align-items:center; gap:9px; padding:5px 10px 5px 7px;
+             background:rgba(255,255,255,.94); color:var(--ink); border:1px solid var(--hair);
+             border-radius:20px; box-shadow:0 3px 14px rgba(20,33,31,.12); backdrop-filter:blur(8px);
+             font-family:inherit; cursor:pointer; }
   .mapstamp img{ display:block; width:auto; height:25px; }
   .mapstamp .lvlname{ max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
                       font-size:11px; font-weight:700; color:#46504c; }
+  .mapstamp .chev{ font-size:9px; color:var(--label); transition:transform .15s; }
+  .mapstamp[aria-expanded="true"] .chev{ transform:rotate(180deg); }
+  .level-pop{ position:absolute; top:45px; left:0; width:214px; padding:5px; background:#fff;
+              border:1px solid var(--hair); border-radius:10px; box-shadow:0 9px 28px rgba(20,33,31,.18); }
+  .level-pop[hidden]{ display:none; }
+  .level-pop button{ width:100%; min-height:42px; padding:7px 9px; border:0; border-radius:6px; background:#fff;
+                     color:var(--ink); text-align:left; font-family:inherit; cursor:pointer; }
+  .level-pop button:hover,.level-pop button:focus-visible{ background:var(--field); outline:none; }
+  .level-pop button + button{ border-top:1px solid var(--hair); border-top-left-radius:0; border-top-right-radius:0; }
+  .level-pop b{ display:block; font-size:12px; }
+  .level-pop small{ display:block; margin-top:2px; color:var(--label); font-size:9.5px; letter-spacing:.02em;
+                    text-transform:uppercase; }
+  .level-pop button.on b{ color:var(--green-dk); }
 
   .quickmenu{ position:absolute; top:12px; right:12px; z-index:14; }
   .quick-trigger{ height:38px; min-width:76px; display:flex; align-items:center; justify-content:center; gap:7px;
@@ -218,6 +237,10 @@
                                  font:11px inherit; cursor:pointer; }
   .layer-row button.on{ background:var(--green); border-color:var(--green); color:#fff; }
   .layer-row button:disabled{ cursor:not-allowed; color:#9aa09d; }
+  .place-key{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px 8px; margin-top:8px;
+              color:#555f5b; font-size:10.5px; }
+  .place-key span{ display:flex; align-items:center; gap:5px; min-width:0; }
+  .place-mark{ width:17px; text-align:center; color:var(--green-dk); font-weight:800; }
 
   .legend .lt{ font-size:12.5px; font-weight:bold; }
   .legend .ls{ font-size:11px; color:var(--label); margin:1px 0 8px; }
@@ -310,6 +333,13 @@
              box-shadow:0 16px 48px rgba(20,29,29,.25); padding:22px; }
   .loginbox h2{ margin:0; font-size:21px; }
   .loginbox p{ margin:6px 0 17px; color:var(--label); font-size:12.5px; line-height:1.45; }
+  .account-switch{ display:flex; margin:0 0 14px; border:1px solid var(--hair); border-radius:5px; overflow:hidden; }
+  .account-switch[hidden]{ display:none; }
+  .account-switch button{ flex:1; height:38px; border:0; border-left:1px solid var(--hair); background:#fff;
+                          color:var(--green-dk); font:800 11px inherit; letter-spacing:.04em; text-transform:uppercase;
+                          cursor:pointer; }
+  .account-switch button:first-child{ border-left:0; }
+  .account-switch button.on{ background:var(--green); color:#fff; }
   .loginbox label{ display:block; margin-top:10px; color:var(--label); font-size:11px; font-weight:700; }
   .loginbox input{ width:100%; height:38px; margin-top:4px; border:1px solid var(--hair); border-radius:4px;
                    padding:0 10px; font:13px inherit; color:var(--ink); }
@@ -343,7 +373,7 @@
   .form-msg{ min-height:16px; margin-top:7px; color:var(--label); font-size:10.5px; line-height:1.35; }
   .form-msg.bad{ color:#96391f; }
   .form-msg.good{ color:#2f6a45; }
-  .admin-counts{ display:grid; grid-template-columns:repeat(3,1fr); gap:5px; margin-top:8px; }
+  .admin-counts{ display:grid; grid-template-columns:repeat(2,1fr); gap:5px; margin-top:8px; }
   .admin-counts div{ padding:7px 5px; border:1px solid var(--hair); background:var(--field); text-align:center; }
   .admin-counts b{ display:block; font:700 15px Verdana,sans-serif; }
   .admin-counts span{ color:var(--label); font-size:9px; text-transform:uppercase; letter-spacing:.04em; }
@@ -361,6 +391,7 @@
   .account-controls select{ flex:1; min-width:0; height:31px; border:1px solid var(--hair); background:#fff;
                             color:var(--ink); font:11px inherit; padding:0 5px; }
   .account-controls button{ height:31px; padding:0 9px; }
+  .account-controls .delete-account{ border-color:#d8b7aa; color:#96391f; }
   .idlewarn{ position:absolute; right:14px; bottom:74px; z-index:12; display:none; width:280px;
              background:#fff; border:1px solid var(--hair); border-left:4px solid var(--rust);
              box-shadow:0 8px 28px rgba(20,29,29,.2); padding:12px; }
@@ -371,9 +402,11 @@
 
   @media (max-width:680px){
     .legend{ display:none; }
-    .mapstamp{ top:8px; left:8px; height:34px; max-width:195px; padding-right:9px; }
+    .levelmenu{ top:8px; left:8px; }
+    .mapstamp{ height:34px; max-width:205px; padding-right:9px; }
     .mapstamp img{ height:22px; }
     .mapstamp .lvlname{ max-width:126px; font-size:10px; }
+    .level-pop{ top:40px; width:205px; }
     .quickmenu{ top:8px; right:8px; }
     .quick-trigger{ height:34px; min-width:67px; }
     .quick-pop{ top:40px; }
@@ -388,6 +421,9 @@
     .panebody{ max-height:calc(52vh - 35px); }
     .idlewarn{ left:8px; right:8px; bottom:162px; width:auto; }
     .maplibregl-ctrl-bottom-left{ left:118px; }
+    .lvl{ align-items:flex-start; flex-wrap:wrap; }
+    .lvl-actions{ width:100%; margin-left:48px; }
+    .lvl-actions button{ flex:1; }
   }
 </style>
 </head>
@@ -418,12 +454,15 @@
           it came back, and the path from one catch to the next. Free for anyone.</p></span>
         <span class="who">open</span>
       </button>
-      <button class="lvl" data-go="l2">
+      <div class="lvl">
         <span class="n">2</span>
         <span><h3>River conditions beta</h3><p>All species as generalised heatmaps. Remap the
           heat by water data or nearby-airport weather from each catch time.</p></span>
-        <span class="who">login</span>
-      </button>
+        <span class="lvl-actions">
+          <button type="button" data-level-account="create">Create account</button>
+          <button type="button" data-level-account="login">Log in</button>
+        </span>
+      </div>
       <button class="lvl" data-go="l3">
         <span class="n">3</span>
         <span><h3>Staff</h3><p>Full access — individual fish points and exact locations, all species,
@@ -437,9 +476,18 @@
 <div id="app">
   <div id="map"></div>
 
-  <div class="mapstamp">
-    <img src="assets/fishtagged-logo.png" alt="Fishtagged">
-    <span class="lvlname" id="lvlName"></span>
+  <div class="levelmenu">
+    <button class="mapstamp" id="levelBtn" type="button" aria-expanded="false" aria-controls="levelPop">
+      <img src="assets/fishtagged-logo.png" alt="Fishtagged">
+      <span class="lvlname" id="lvlName">Level 1 · search a tag</span>
+      <span class="chev" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="level-pop" id="levelPop" hidden>
+      <button type="button" data-map-level="l1"><b>Level 1 Search</b><small>No login required</small></button>
+      <button type="button" data-map-level="l2"><b>Level 2 Search</b><small>Account required</small></button>
+      <button type="button" data-map-level="l3"><b>Level 3</b><small>Admin use only</small></button>
+      <button type="button" id="headerLogout" hidden><b>Log out</b><small>End this account session</small></button>
+    </div>
   </div>
 
   <div class="quickmenu">
@@ -447,8 +495,6 @@
       aria-controls="quickPop">Map <span class="chev" aria-hidden="true">&#9660;</span></button>
     <div class="quick-pop" id="quickPop" hidden>
       <button id="baseBtn" type="button">Satellite view</button>
-      <button id="leaveBtn" type="button">Change level</button>
-      <button id="logoutBtn" type="button" style="display:none">Log out</button>
     </div>
   </div>
 
@@ -484,8 +530,12 @@
 
 <div class="login" id="login" aria-hidden="true">
   <div class="loginbox" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-    <h2 id="loginTitle">Account login</h2>
-    <p id="loginIntro">Sign in to open the protected map tools.</p>
+    <h2 id="loginTitle">Level 2 account</h2>
+    <p id="loginIntro">Account required. Log in or create an account.</p>
+    <div class="account-switch" id="accountSwitch">
+      <button type="button" id="loginModeBtn" class="on">Log in</button>
+      <button type="button" id="createModeBtn">Create account</button>
+    </div>
     <form id="loginForm">
       <div class="credential-fields" id="credentialFields">
         <label for="loginEmail">Email</label>
@@ -538,9 +588,6 @@
       <button class="mfa-setup" id="resetPasswordBtn" type="button">
         Forgot password?
       </button>
-      <button class="mfa-setup" id="createAccountBtn" type="button">
-        Create account
-      </button>
     </form>
     <div class="login-note">Sign-in is handled by Google Identity Platform. Fishtagged does not
       receive or store your password.</div>
@@ -552,7 +599,7 @@
 
 <script>
 const HERE = location.href.replace(/[^/]*$/,"");
-const DATA_VERSION = "20260818b";
+const DATA_VERSION = "20260906a";
 const DATA_FILE = "fish_index-20260701.json";
 const TILE_ROOT = "tiles-20260701";
 const PUBLIC_META_FILE = "public-meta-20260701.json";
@@ -644,7 +691,7 @@ function metricValue(field,value){
 let map, META, TAGS=[], BYNUM={}, LEVEL2_SUMMARY=null, DATA_KEY=null, scaleCtl=null;
 let role, base="light", view="points", hydro=null, species="All", retOnly=false;
 let picked=null, fitted=false, units="mi";
-let PLACES={type:"FeatureCollection",features:[]}, placesOn=false, placesLoaded=false, placesEventsBound=false;
+let PLACES={type:"FeatureCollection",features:[]}, placesCategory="off", placesLoaded=false, placesEventsBound=false;
 let TOPOBATHY={ready:false,tiles:[],sourceUrl:"https://www.usgs.gov/data/potomac-river-pilot-topobathymetric-digital-elevation-model-1979-2025"};
 let topobathyOn=false;
 let pendingRole=null;
@@ -653,6 +700,7 @@ let verifiedSession=null, activeToken="", authWait=null;
 let mfaPending=false, emailCodePending=false, phonePending=false, signupMode=false;
 let feedbackRating=0;
 let adminAccountsCache=[];
+let adminManagerRole="admin";
 let idleTimer=null, idleLogoutTimer=null, idleTick=null, idleDeadline=0, lastActivity=0;
 const dmi=v=>{ const m=parseFloat(v); return isNaN(m) ? "—" :
   (units==="km" ? (m<.125 ? Math.round(m*1609.34)+" m" : (m*1.60934).toFixed(1)+" km") :
@@ -668,14 +716,22 @@ async function fetchTimed(url,options={},timeout=12000){
   }
 }
 
-const LEVELS = { l1:"Level 1 · search a tag", l2:"Level 2 · beta", l3:"Level 3 · staff" };
+const LEVELS = { l1:"Level 1 · search a tag", l2:"Level 2 · search", l3:"Level 3 · staff" };
+const PLACE_GROUPS = {
+  landmarks:["Landmark","Dam","Public access","Location","Confluence","Tributary"],
+  islands:["Island"],
+  spots:["Spot"],
+  ramps:["Boat ramp"],
+  launches:["Primitive launch"]
+};
 function authSession(){
   return verifiedSession;
 }
 function canOpen(level,session){
   if(level==="l1") return true;
   if(!session) return false;
-  return level==="l2" ? ["level2","account","admin"].includes(session.role) : session.role==="admin";
+  return level==="l2" ? ["level2","account","admin","superadmin"].includes(session.role) :
+    ["admin","superadmin"].includes(session.role);
 }
 function authClient(){
   if(window.FT_AUTH) return Promise.resolve(window.FT_AUTH);
@@ -721,9 +777,10 @@ function resetLoginStep(){
   byId("signupPhone").value="";
   byId("verifyEmailBtn").hidden=true;
   byId("resetPasswordBtn").hidden=false;
-  byId("createAccountBtn").hidden=false;
-  set("createAccountBtn","Create account");
-  set("loginSubmit","Sign in");
+  byId("accountSwitch").hidden=false;
+  byId("loginModeBtn").classList.add("on");
+  byId("createModeBtn").classList.remove("on");
+  set("loginSubmit","Log in");
   if(window.FT_AUTH) window.FT_AUTH.cancelMfa();
 }
 function closeLogin(){
@@ -735,26 +792,27 @@ function closeLogin(){
   set("loginMsg","");
   pendingRole=null;
 }
-function openLogin(level){
+function openLogin(level,mode="login"){
   pendingRole=level;
   resetLoginStep();
-  set("loginTitle",level==="l3"?"Staff login":"Account login");
-  set("loginIntro",level==="l3"?"Sign in with a staff account to open exact locations and administration tools.":
-    "Sign in to open river conditions and river-mile tools.");
-  byId("createAccountBtn").hidden=level==="l3";
+  set("loginTitle",level==="l3"?"Level 3 staff access":"Level 2 account");
+  set("loginIntro",level==="l3"?"Administrator account required.":"Account required. Log in or create an account.");
+  byId("accountSwitch").hidden=level==="l3";
   const preview=byId("previewLogin");
   preview.style.display=LOCAL_PREVIEW?"block":"none";
   const box=byId("login");
   box.classList.add("on");
   box.setAttribute("aria-hidden","false");
+  if(mode==="create" && level==="l2") toggleCreateAccount(true);
   setTimeout(()=>byId("loginEmail").focus(),0);
 }
-function toggleCreateAccount(){
+function toggleCreateAccount(force){
   if(pendingRole==="l3") return;
-  if(signupMode){
+  const create=typeof force==="boolean" ? force : !signupMode;
+  if(!create){
     resetLoginStep();
-    set("loginTitle","Account login");
-    set("loginIntro","Sign in to open river conditions and river-mile tools.");
+    set("loginTitle","Level 2 account");
+    set("loginIntro","Account required. Log in or create an account.");
     set("loginMsg","");
     byId("loginEmail").focus();
     return;
@@ -773,10 +831,12 @@ function toggleCreateAccount(){
   byId("signupPhone").required=true;
   byId("resetPasswordBtn").hidden=true;
   byId("verifyEmailBtn").hidden=true;
-  set("loginTitle","Create account");
-  set("loginIntro","Create an account and verify your email. No administrator approval is needed for Level 2.");
+  byId("accountSwitch").hidden=false;
+  byId("loginModeBtn").classList.remove("on");
+  byId("createModeBtn").classList.add("on");
+  set("loginTitle","Level 2 account");
+  set("loginIntro","Create an account, then verify your email to open Level 2.");
   set("loginSubmit","Create account");
-  set("createAccountBtn","Back to sign in");
   set("loginMsg","");
   byId("loginEmail").focus();
 }
@@ -844,7 +904,7 @@ async function showEmailCodeStep(send=true){
   byId("loginMfa").required=false;
   byId("loginEmailCode").required=true;
   byId("resetPasswordBtn").hidden=true;
-  byId("createAccountBtn").hidden=true;
+  byId("accountSwitch").hidden=true;
   set("loginTitle","Check your email");
   set("loginIntro","Enter the six-digit code to trust this browser for 30 days.");
   set("loginSubmit","Verify code");
@@ -890,7 +950,7 @@ function showPhoneStep(){
   byId("loginEmailCode").required=false;
   byId("loginPhone").required=true;
   byId("resetPasswordBtn").hidden=true;
-  byId("createAccountBtn").hidden=true;
+  byId("accountSwitch").hidden=true;
   set("loginIntro","Add a phone number to finish setting up this account.");
   set("loginSubmit","Save phone number");
   set("loginMsg","");
@@ -1045,7 +1105,6 @@ async function signIn(e){
       try{ await client.sendVerificationEmail(); }
       finally{ await client.signOut(); }
       resetLoginStep();
-      byId("createAccountBtn").hidden=false;
       byId("loginEmail").value=email;
       byId("loginPassword").value="";
       set("loginTitle","Check your email");
@@ -1063,6 +1122,7 @@ async function signIn(e){
       byId("credentialFields").hidden=true;
       byId("mfaStep").hidden=false;
       byId("resetPasswordBtn").hidden=true;
+      byId("accountSwitch").hidden=true;
       byId("loginEmail").required=false;
       byId("loginPassword").required=false;
       byId("loginMfa").required=true;
@@ -1281,12 +1341,21 @@ async function loadReferenceData(){
     TOPOBATHY={...TOPOBATHY,...config,ready:config.ready===true && Array.isArray(config.tiles) && config.tiles.length>0};
   }
 }
-function setPlaces(show){
-  placesOn=Boolean(show);
-  if(map?.getLayer("places-label")) map.setLayoutProperty("places-label","visibility",placesOn?"visible":"none");
-  if(map?.getLayer("places-dot")) map.setLayoutProperty("places-dot","visibility",placesOn?"visible":"none");
-  const button=byId("placesToggle");
-  if(button){ button.classList.toggle("on",placesOn); button.textContent=placesOn?"On":"Off"; }
+function placeFilter(category){
+  if(category==="all") return null;
+  const types=PLACE_GROUPS[category]||[];
+  return ["in",["get","type"],["literal",types]];
+}
+function setPlaces(category){
+  placesCategory=(PLACE_GROUPS[category] || category==="all") ? category : "off";
+  const visible=placesCategory!=="off";
+  for(const layer of ["places-dot","places-icon","places-label"]){
+    if(!map?.getLayer(layer)) continue;
+    map.setLayoutProperty(layer,"visibility",visible?"visible":"none");
+    map.setFilter(layer,visible?placeFilter(placesCategory):["==",["get","type"],"__hidden__"]);
+  }
+  const select=byId("placesCategory");
+  if(select) select.value=placesCategory;
 }
 function setTopobathy(show){
   if(!TOPOBATHY.ready) return;
@@ -1308,17 +1377,27 @@ function addLayers(){
     layout:{visibility:base==="sat"?"visible":"none"}
   });
   if(!map.getSource("places")) map.addSource("places",{type:"geojson",data:PLACES});
+  const placesVisible=placesCategory!=="off";
+  const placesFilter=placesVisible?placeFilter(placesCategory):["==",["get","type"],"__hidden__"];
   if(!map.getLayer("places-dot")) map.addLayer({
-    id:"places-dot",type:"circle",source:"places",layout:{visibility:placesOn?"visible":"none"},
-    paint:{"circle-radius":["interpolate",["linear"],["zoom"],7,3.5,12,6.5],
+    id:"places-dot",type:"circle",source:"places",filter:placesFilter,layout:{visibility:placesVisible?"visible":"none"},
+    paint:{"circle-radius":["interpolate",["linear"],["zoom"],7,7,12,10],
       "circle-color":["match",["get","type"],
         "Dam","#8f4a1f","Island","#c38b24","Boat ramp","#247e8a",
         "Primitive launch","#4e8d78","Public access","#526fa4",
         "Spot","#7656a4","Confluence","#2f6fb0","Tributary","#5a7765","#596260"],
-      "circle-stroke-color":"#fff","circle-stroke-width":1.6}
+      "circle-opacity":.9,"circle-stroke-color":"#fff","circle-stroke-width":1.8}
+  });
+  if(!map.getLayer("places-icon")) map.addLayer({
+    id:"places-icon",type:"symbol",source:"places",filter:placesFilter,layout:{visibility:placesVisible?"visible":"none",
+      "text-field":["match",["get","type"],
+        "Island","I","Spot","•","Boat ramp","R","Primitive launch","P",
+        "Dam","D","Public access","A","Landmark","L","Location","L","Confluence","C","Tributary","T","L"],
+      "text-size":["interpolate",["linear"],["zoom"],7,8,12,11],"text-allow-overlap":true},
+    paint:{"text-color":"#fff","text-halo-color":"rgba(0,0,0,.16)","text-halo-width":.4}
   });
   if(!map.getLayer("places-label")) map.addLayer({
-    id:"places-label",type:"symbol",source:"places",minzoom:10,layout:{visibility:placesOn?"visible":"none",
+    id:"places-label",type:"symbol",source:"places",filter:placesFilter,minzoom:10,layout:{visibility:placesVisible?"visible":"none",
       "text-field":["get","name"],"text-size":11,"text-offset":[0,1.05],"text-anchor":"top","text-allow-overlap":false},
     paint:{"text-color":"#20292b","text-halo-color":"rgba(255,255,255,.94)","text-halo-width":1.5}
   });
@@ -1334,11 +1413,14 @@ function addLayers(){
       const feature=event.features?.[0];
       if(!feature) return;
       const properties=feature.properties||{};
+      const coordinates=feature.geometry.coordinates;
+      const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coordinates[1]+","+coordinates[0])}`;
       new maplibregl.Popup({offset:10,maxWidth:"260px"})
-        .setLngLat(feature.geometry.coordinates)
+        .setLngLat(coordinates)
         .setHTML(`<div style="padding:10px 12px"><b>${esc(properties.name||"River place")}</b>`+
           `<div style="margin-top:3px;color:#69736f;font-size:12px">${esc(properties.type||"")}</div>`+
-          (properties.description?`<div style="margin-top:6px;font-size:12px;line-height:1.4">${esc(properties.description)}</div>`:"")+`</div>`)
+          (properties.description?`<div style="margin-top:6px;font-size:12px;line-height:1.4">${esc(properties.description)}</div>`:"")+
+          `<a href="${mapsUrl}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;color:#5a7765;font-size:12px">Open in Google Maps</a></div>`)
         .addTo(map);
     });
     map.on("mouseenter","places-dot",()=>map.getCanvas().style.cursor="pointer");
@@ -1961,6 +2043,7 @@ let searchToken=0;
 async function search(n, fly){
   n=(n||"").replace(/\D/g,"");
   if(!n){ say("Type a tag number first.","bad"); return; }
+  if(byId("seek")) byId("seek").value=n;
   const token=++searchToken;
   let hit;
   try{ hit=await lookupTag(n); }
@@ -2202,7 +2285,7 @@ function adminRecordsBlock(){
         <button id="refreshAccounts" type="button">Refresh</button>
       </div>
       <div id="accountList" class="account-list"><div class="form-msg">Loading users…</div></div>
-      <div class="form-msg" id="accountMsg" aria-live="polite">Level 2 is automatic after email verification. Use this list to grant Level 3 or block protected access.</div>
+      <div class="form-msg" id="accountMsg" aria-live="polite">Level 2 is automatic after email verification. Level 3 staff can change access; Level 4 super administrators can also remove accounts.</div>
       <div class="report-buttons">
         <button class="flat" id="usersReport" type="button">Download users CSV</button>
         <button class="flat" id="accessReport" type="button">Download access CSV</button>
@@ -2249,6 +2332,27 @@ function panel(){
 
   const selectedFish=`<div class="capture-panel" id="capturePanel" hidden><div id="capturePanelBody"></div></div>`;
 
+  const placesMenu=fold("Places",`<select id="placesCategory" class="sel" style="margin-top:8px">
+      <option value="off"${placesCategory==="off"?" selected":""}>Off</option>
+      <option value="all"${placesCategory==="all"?" selected":""}>All</option>
+      <option value="landmarks"${placesCategory==="landmarks"?" selected":""}>Landmarks</option>
+      <option value="islands"${placesCategory==="islands"?" selected":""}>Islands</option>
+      <option value="spots"${placesCategory==="spots"?" selected":""}>Spots</option>
+      <option value="ramps"${placesCategory==="ramps"?" selected":""}>Boat ramps</option>
+      <option value="launches"${placesCategory==="launches"?" selected":""}>Primitive launch</option>
+    </select>
+    <div class="place-key">
+      <span><b class="place-mark">L</b>landmark</span><span><b class="place-mark">I</b>island</span>
+      <span><b class="place-mark">R</b>boat ramp</span><span><b class="place-mark">P</b>primitive launch</span>
+    </div>
+    <div class="level-note">Select a category, then click a map symbol for details and a Google Maps link.</div>`,false);
+
+  const sourceMenu=fold("USGS / NOAA",`<div class="layer-list">
+      <div class="layer-row"><div><b>USGS riverbed model</b><small>${TOPOBATHY.ready?"Tiled Potomac topobathymetry.":"Source information is available while the browser layer is prepared."}</small></div>
+        ${TOPOBATHY.ready?`<button id="topobathyToggle" type="button" class="${topobathyOn?"on":""}">${topobathyOn?"On":"Off"}</button>`:
+          `<a href="${esc(TOPOBATHY.sourceUrl)}" target="_blank" rel="noopener">USGS</a>`}</div>
+    </div><div class="level-note">NOAA/NWS observations used by the weather controls are refreshed when the map opens.</div>`,false);
+
   if(role==="l1"){
     const searchBlock=fold("Search a tag",`<div class="seek mini">
       <div class="cap" style="align-self:center;flex:none">Tag #</div>
@@ -2268,7 +2372,7 @@ function panel(){
     const help=fold("How to use this map",`<div class="level-note" style="margin-top:8px">
       Search one tag number. Numbered circles show the catch sequence. Hover or tap a circle to open that catch; a line appears only when the data contains a confirmed recapture.
     </div>`,false);
-    return searchBlock+selectedFish+level2Preview+help;
+    return searchBlock+selectedFish+placesMenu+sourceMenu+level2Preview+help;
   }
 
   const hydroRows = [['tF','Water temperature','°F'],['lvl','River level','ft'],
@@ -2311,16 +2415,8 @@ function panel(){
       <div id="bars" style="margin-top:10px"></div>
     </div>`,false);
 
-  const referenceLayers=fold("Reference layers",`<div class="layer-list">
-      <div class="layer-row"><div><b>River places</b><small>Islands, access points, dams, and river landmarks from the FT places workbook.</small></div>
-        <button id="placesToggle" type="button" class="${placesOn?"on":""}">${placesOn?"On":"Off"}</button></div>
-      <div class="layer-row"><div><b>USGS riverbed model</b><small>${TOPOBATHY.ready?"Tiled Potomac topobathymetry.":"The 1 m source is ready for tile preparation, not direct browser use."}</small></div>
-        ${TOPOBATHY.ready?`<button id="topobathyToggle" type="button" class="${topobathyOn?"on":""}">${topobathyOn?"On":"Off"}</button>`:
-          `<a href="${esc(TOPOBATHY.sourceUrl)}" target="_blank" rel="noopener">USGS</a>`}</div>
-    </div>`,false);
-
   if(role==="l2"){
-    return seek + selectedFish + speciesChips + hydroMenu + referenceLayers + measure + weatherHTML() + astroHTML() +
+    return seek + selectedFish + speciesChips + hydroMenu + placesMenu + sourceMenu + measure + weatherHTML() + astroHTML() +
       recap + numbers + spots + legendBlk + feedbackBlock();
   }
   const feed = fold("Tile feed",`<div class="ingest" style="margin-top:8px">
@@ -2329,7 +2425,7 @@ function panel(){
         exact point access · administrator only
       </div>
       <button class="flat" id="csv" style="width:100%;margin-top:9px">Export this view (CSV)</button>`,false);
-  return seek + selectedFish + viewSeg + speciesChips + hydroMenu + referenceLayers + measure + weatherHTML() + astroHTML() +
+  return seek + selectedFish + viewSeg + speciesChips + hydroMenu + placesMenu + sourceMenu + measure + weatherHTML() + astroHTML() +
     recap + numbers + spots + feed + legendBlk + adminRecordsBlock() + feedbackBlock();
 }
 
@@ -2407,7 +2503,7 @@ function wireToolDock(){
 }
 
 function defaults(){
-  if(role==="l1"){ view="points"; hydro=null; species="All"; retOnly=false; placesOn=false; topobathyOn=false; }
+  if(role==="l1"){ view="points"; hydro=null; species="All"; retOnly=false; placesCategory="off"; topobathyOn=false; }
   if(role==="l2"){ view="heat";   hydro=null; species="All"; retOnly=false; }
   if(role==="l3"){ view="points"; hydro=null; species="All"; retOnly=false; }
 }
@@ -2519,6 +2615,7 @@ async function loadAdminOverview(){
       <div><b>${Number(counts.total||0).toLocaleString()}</b><span>accounts</span></div>
       <div><b>${Number(counts.level2||0).toLocaleString()}</b><span>level 2</span></div>
       <div><b>${Number(counts.admin||0).toLocaleString()}</b><span>staff</span></div>
+      <div><b>${Number(counts.superadmin||0).toLocaleString()}</b><span>level 4</span></div>
     </div><div class="form-msg">${Number(counts.disabled||0).toLocaleString()} disabled account${Number(counts.disabled)===1?"":"s"}.</div>`;
     const recent=Array.isArray(result.recent)?result.recent:[];
     byId("recentAccess").innerHTML=recent.length
@@ -2533,7 +2630,7 @@ async function loadAdminOverview(){
   }
 }
 function accountLevel(roleName){
-  return roleName==="admin"?"admin":roleName==="none"?"none":"level2";
+  return roleName==="superadmin"?"superadmin":roleName==="admin"?"admin":roleName==="none"?"none":"level2";
 }
 function renderAdminAccounts(){
   const output=byId("accountList");
@@ -2548,6 +2645,8 @@ function renderAdminAccounts(){
   }
   output.innerHTML=accounts.map(account=>{
     const level=accountLevel(account.role);
+    const locked=account.current || (level==="superadmin" && adminManagerRole!=="superadmin");
+    const canDelete=adminManagerRole==="superadmin" && !account.current;
     const status=[account.emailVerified?"email verified":"email not verified",
       account.profileComplete?"phone saved":"phone missing",
       account.disabled?"disabled":"active"].join(" · ");
@@ -2555,16 +2654,19 @@ function renderAdminAccounts(){
       <b>${esc(account.email||"No email")}${account.current?" · you":""}</b>
       <div class="account-meta">${esc(status)}</div>
       <div class="account-controls">
-        <select aria-label="Access for ${esc(account.email||"account")}" ${account.current?"disabled":""}>
+        <select aria-label="Access for ${esc(account.email||"account")}" ${locked?"disabled":""}>
           <option value="level2"${level==="level2"?" selected":""}>Level 2</option>
           <option value="admin"${level==="admin"?" selected":""}>Level 3</option>
+          ${adminManagerRole==="superadmin"?`<option value="superadmin"${level==="superadmin"?" selected":""}>Level 4</option>`:""}
           <option value="none"${level==="none"?" selected":""}>No access</option>
         </select>
-        <button class="flat save-account" type="button" ${account.current?"disabled":""}>Save</button>
+        <button class="flat save-account" type="button" ${locked?"disabled":""}>Save</button>
+        ${canDelete?'<button class="flat delete-account" type="button">Delete</button>':""}
       </div>
     </div>`;
   }).join("");
   output.querySelectorAll(".save-account").forEach(button=>button.onclick=()=>changeAdminAccount(button));
+  output.querySelectorAll(".delete-account").forEach(button=>button.onclick=()=>deleteAdminAccount(button));
 }
 async function loadAdminAccounts(){
   const output=byId("accountList");
@@ -2584,9 +2686,38 @@ async function loadAdminAccounts(){
       throw new Error(result.message||"The account list could not be loaded.");
     }
     adminAccountsCache=result.accounts;
+    adminManagerRole=result.managerRole||verifiedSession?.role||"admin";
     renderAdminAccounts();
   }catch(error){
     output.innerHTML=`<div class="form-msg bad">${esc(error.message||"The account list could not be loaded.")}</div>`;
+  }
+}
+async function deleteAdminAccount(button){
+  const row=button.closest(".account-row");
+  const uid=row?.dataset.uid||"";
+  const account=adminAccountsCache.find(item=>item.uid===uid);
+  if(!uid || !account) return;
+  if(!confirm(`Delete ${account.email||"this account"}? This removes the sign-in and cannot be undone.`)) return;
+  button.disabled=true;
+  formMessage("accountMsg","Deleting account…");
+  try{
+    const client=await authClient();
+    const token=await client.token();
+    const response=await fetchTimed(ADMIN_ACCOUNTS_URL+"/delete",{
+      method:"POST",
+      headers:protectedHeaders(token,true),
+      body:JSON.stringify({uid})
+    },20000);
+    let result={};
+    try{ result=await response.json(); }catch(e){}
+    if(!response.ok || !result.deleted) throw new Error(result.message||"The account could not be deleted.");
+    adminAccountsCache=adminAccountsCache.filter(item=>item.uid!==uid);
+    renderAdminAccounts();
+    formMessage("accountMsg","Account deleted.","good");
+    loadAdminOverview();
+  }catch(error){
+    formMessage("accountMsg",error.message||"The account could not be deleted.","bad");
+    button.disabled=false;
   }
 }
 async function changeAdminAccount(button){
@@ -2624,7 +2755,7 @@ function wire(){
   if(s) s.addEventListener("keydown",e=>{ if(e.key==="Enter") search(s.value,true); });
   document.querySelectorAll(".tries a").forEach(a=>a.onclick=()=>{ s.value=a.dataset.n; search(a.dataset.n,true); });
   document.querySelectorAll("[data-open-level2]").forEach(button=>button.onclick=()=>requestLevel("l2"));
-  if(byId("placesToggle")) byId("placesToggle").onclick=()=>setPlaces(!placesOn);
+  if(byId("placesCategory")) byId("placesCategory").onchange=event=>setPlaces(event.target.value);
   if(byId("topobathyToggle")) byId("topobathyToggle").onclick=()=>setTopobathy(!topobathyOn);
 
   bindSeg("viewSeg","v", v=>setView(v));
@@ -2718,17 +2849,29 @@ async function enter(r){
       '<span style="max-width:320px;text-align:center;line-height:1.5">The map could not start. Check the connection and reload this page.</span>';
     return;
   }
+  const previousRole=role;
+  if(map && previousRole && previousRole!==r){
+    map.remove();
+    map=null;
+    scaleCtl=null;
+    fitted=false;
+    clearPick();
+  }
   role=r; defaults();
   document.getElementById("lvlName").textContent=LEVELS[r];
+  document.querySelectorAll("[data-map-level]").forEach(button=>
+    button.classList.toggle("on",button.dataset.mapLevel===r));
+  byId("headerLogout").hidden=!verifiedSession;
   document.getElementById("gate").style.display="none";
   document.getElementById("app").classList.add("on");
-  document.getElementById("logoutBtn").style.display = r==="l1" ? "none" : "block";
 
   try{ await loadIndex(); }
   catch(e){ document.getElementById("veil").innerHTML=
     '<span style="max-width:320px;text-align:center;line-height:1.5">Open this site through GitHub Pages or a local web server. The map data cannot load from a file:// page.</span>';
     return; }
-  if(r!=="l1") await loadReferenceData();
+  await loadReferenceData();
+  picked="841";
+  capPinned=false;
 
   const pane=document.getElementById("pane");
   pane.dataset.level=r;
@@ -2776,8 +2919,10 @@ async function enter(r){
     });
   } else if(map.isStyleLoaded()){
     refreshFishTiles();
-    clearPick(); applyFilter(); setView(view); setHydro(hydro); stats();
-    fitAll();
+    clearPick();
+    picked="841";
+    applyFilter(); setView(view); setHydro(hydro); stats();
+    search("841",true);
     hideVeil();
   }
   armIdle();
@@ -2805,7 +2950,9 @@ function exportCSV(){
   a.download="fishtagged_"+(species==="All"?"all":species.toLowerCase().replace(/ /g,""))+(retOnly?"_recaptured":"")+".csv";
   a.click(); URL.revokeObjectURL(a.href);
 }
-document.querySelectorAll(".lvl").forEach(b=>b.onclick=()=>requestLevel(b.dataset.go));
+document.querySelectorAll(".lvl[data-go]").forEach(button=>button.onclick=()=>requestLevel(button.dataset.go));
+document.querySelectorAll("[data-level-account]").forEach(button=>button.onclick=()=>
+  openLogin("l2",button.dataset.levelAccount));
 (async()=>{
   try{
     const response=await fetchTimed(HERE+PUBLIC_META_FILE+"?v="+DATA_VERSION);
@@ -2816,7 +2963,8 @@ document.querySelectorAll(".lvl").forEach(b=>b.onclick=()=>requestLevel(b.datase
 })();
 document.getElementById("loginForm").onsubmit=signIn;
 document.getElementById("loginCancel").onclick=closeLogin;
-document.getElementById("createAccountBtn").onclick=toggleCreateAccount;
+document.getElementById("loginModeBtn").onclick=()=>toggleCreateAccount(false);
+document.getElementById("createModeBtn").onclick=()=>toggleCreateAccount(true);
 document.getElementById("verifyEmailBtn").onclick=sendVerification;
 document.getElementById("resendEmailCodeBtn").onclick=resendEmailCode;
 document.getElementById("resetPasswordBtn").onclick=sendPasswordReset;
@@ -2834,34 +2982,41 @@ function closeQuick(){
   byId("quickPop").hidden=true;
   byId("quickBtn").setAttribute("aria-expanded","false");
 }
+function closeLevelMenu(){
+  byId("levelPop").hidden=true;
+  byId("levelBtn").setAttribute("aria-expanded","false");
+}
 byId("quickBtn").onclick=()=>{
   const opening=byId("quickPop").hidden;
   byId("quickPop").hidden=!opening;
   byId("quickBtn").setAttribute("aria-expanded",String(opening));
 };
+byId("levelBtn").onclick=()=>{
+  const opening=byId("levelPop").hidden;
+  byId("levelPop").hidden=!opening;
+  byId("levelBtn").setAttribute("aria-expanded",String(opening));
+};
+document.querySelectorAll("[data-map-level]").forEach(button=>button.onclick=()=>{
+  const next=button.dataset.mapLevel;
+  closeLevelMenu();
+  if(next!==role) requestLevel(next);
+});
 document.addEventListener("click",event=>{
   if(!event.target.closest(".quickmenu")) closeQuick();
+  if(!event.target.closest(".levelmenu")) closeLevelMenu();
 });
 document.addEventListener("keydown",e=>{
   if(e.key!=="Escape") return;
   if(byId("login").classList.contains("on")) closeLogin();
   closeQuick();
+  closeLevelMenu();
   if(byId("app").classList.contains("on")) showPane(false);
 });
 ["mousemove","mousedown","keydown","touchstart","scroll"].forEach(event=>{
   window.addEventListener(event,noteActivity,{passive:true});
 });
 
-document.getElementById("leaveBtn").onclick=async ()=>{
-  closeQuick();
-  if(role==="l2" || role==="l3") await recordSessionEvent("level_leave",role);
-  stopIdle();
-  document.getElementById("app").classList.remove("on");
-  document.getElementById("gate").style.display="block";
-  clearPick();
-  if(map){ map.remove(); map=null; scaleCtl=null; fitted=false; }
-};
-document.getElementById("logoutBtn").onclick=()=>{ closeQuick(); logoutSession(false); };
+document.getElementById("headerLogout").onclick=()=>{ closeLevelMenu(); logoutSession(false); };
 document.getElementById("baseBtn").onclick=()=>{
   closeQuick();
   base = base==="light" ? "sat" : "light";
