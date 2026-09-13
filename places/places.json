@@ -282,7 +282,7 @@
       },
       "properties": {
         "name": "Dam 3 Ruins",
-        "type": "Location",
+        "type": "Landmark",
         "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
@@ -930,7 +930,7 @@
       },
       "properties": {
         "name": "Riffles",
-        "type": "Spot",
+        "type": "Landmark",
         "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
@@ -1182,7 +1182,7 @@
       },
       "properties": {
         "name": "Riffles",
-        "type": "Spot",
+        "type": "Landmark",
         "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
@@ -1392,8 +1392,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -77.520334,
-          39.258318
+          -77.497962,
+          39.251706
         ]
       },
       "properties": {
@@ -3876,6 +3876,42 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -77.438945,
+          39.288801
+        ]
+      },
+      "properties": {
+        "name": "Powerline",
+        "type": "Landmark",
+        "description": "Monocacy \u00b7 Maryland. Source: Below Green Field.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "Below Green Field"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.414975,
+          39.3271
+        ]
+      },
+      "properties": {
+        "name": "Buckeystown Park",
+        "type": "Primitive launch",
+        "description": "Monocacy \u00b7 Maryland. Source: BuckeysTown Park.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "BuckeysTown Park"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -77.45,
           39.2245
         ]
@@ -4110,6 +4146,24 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -77.847537,
+          39.608998
+        ]
+      },
+      "properties": {
+        "name": "NOAA Williamsport",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: NOAA at Williamsport.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "NOAA at Williamsport"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -77.801387,
           39.43476
         ]
@@ -4128,17 +4182,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -78.177917,
-          39.697595
+          -78.177889,
+          39.697556
         ]
       },
       "properties": {
-        "name": "USGS Williamsport",
+        "name": "USGS Hancock",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: USGS Williamsport.",
+        "description": "Potomac \u00b7 Maryland. Source: USGS Hancock.",
         "river": "Potomac",
         "state": "Maryland",
-        "source": "USGS Williamsport"
+        "source": "USGS Hancock"
       }
     },
     {
@@ -4146,17 +4200,89 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -77.234,
-          39.679
+          -77.728611,
+          39.323611
         ]
       },
       "properties": {
-        "name": "Monocacy River At Bridgeport MD (USGS 01639000)",
+        "name": "USGS Harpers Ferry",
         "type": "Landmark",
-        "description": "Monocacy \u00b7 Maryland",
+        "description": "Potomac \u00b7 Maryland. Source: USGS Harpers Ferry.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "USGS Harpers Ferry"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.543108,
+          39.273615
+        ]
+      },
+      "properties": {
+        "name": "USGS Point of Rocks",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: USGS Point of Rocks.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "USGS Point of Rocks"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47125,
+          39.098639
+        ]
+      },
+      "properties": {
+        "name": "USGS Edwards Ferry",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: USGS Edwards Ferry.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "USGS Edwards Ferry"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.127639,
+          38.949778
+        ]
+      },
+      "properties": {
+        "name": "USGS Little Falls",
+        "type": "Landmark",
+        "description": "Potomac \u00b7 Maryland. Source: USGS Little Falls.",
+        "river": "Potomac",
+        "state": "Maryland",
+        "source": "USGS Little Falls"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.234528,
+          39.679056
+        ]
+      },
+      "properties": {
+        "name": "Bridgeport Gauge",
+        "type": "Landmark",
+        "description": "Monocacy \u00b7 Maryland. Source: Bridgeport Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
-        "source": ""
+        "source": "Bridgeport Gauge"
       }
     },
     {
@@ -4169,12 +4295,12 @@
         ]
       },
       "properties": {
-        "name": "MONOCACY RIVER NEAR WALKERSVILLE, MD (USGS 01641810)",
+        "name": "Walkersville Gauge",
         "type": "Landmark",
-        "description": "Monocacy \u00b7 Maryland",
+        "description": "Monocacy \u00b7 Maryland. Source: Walkersville Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
-        "source": ""
+        "source": "Walkersville Gauge"
       }
     },
     {
@@ -4187,12 +4313,30 @@
         ]
       },
       "properties": {
-        "name": "MONOCACY RIVER AT MONOCACY BLVD AT FREDERICK, MD (USGS 01642190)",
+        "name": "Bruceville Gauge",
         "type": "Landmark",
-        "description": "Monocacy \u00b7 Maryland",
+        "description": "Monocacy \u00b7 Maryland. Source: Bruceville Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
-        "source": ""
+        "source": "Bruceville Gauge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.382278,
+          39.443583
+        ]
+      },
+      "properties": {
+        "name": "Monocacy Blvd Gauge",
+        "type": "Landmark",
+        "description": "Monocacy \u00b7 Maryland. Source: Monocacy Blvd Gauge.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "Monocacy Blvd Gauge"
       }
     },
     {
@@ -4205,12 +4349,48 @@
         ]
       },
       "properties": {
-        "name": "MONOCACY RIVER AT JUG BRIDGE NEAR FREDERICK, MD (USGS 01643000)",
+        "name": "Jug Bridge Gauge",
         "type": "Landmark",
-        "description": "Monocacy \u00b7 Maryland",
+        "description": "Monocacy \u00b7 Maryland. Source: Jug Bridge Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
-        "source": ""
+        "source": "Jug Bridge Gauge"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.407083,
+          39.294139
+        ]
+      },
+      "properties": {
+        "name": "Bennett Creek Gauge",
+        "type": "Landmark",
+        "description": "Bennett Creek \u00b7 Maryland. Source: USGS Bennett Creek.",
+        "river": "Bennett Creek",
+        "state": "Maryland",
+        "source": "USGS Bennett Creek"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.4357,
+          39.2633
+        ]
+      },
+      "properties": {
+        "name": "Monocacy River Gauge",
+        "type": "Landmark",
+        "description": "Monocacy \u00b7 Maryland. Source: Mononcay River.",
+        "river": "Monocacy",
+        "state": "Maryland",
+        "source": "Mononcay River"
       }
     }
   ]
