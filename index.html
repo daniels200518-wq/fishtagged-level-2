@@ -20,7 +20,7 @@
   base-uri 'self';
   form-action 'self';
 ">
-<link rel="icon" href="assets/fishtagged-logo.png">
+<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon-upside-down.png?v=20260913">
 
 <link href="https://unpkg.com/maplibre-gl@6.0.0/dist/maplibre-gl.css" rel="stylesheet">
 <script type="module" src="assets/maplibre-loader.js"></script>
@@ -81,7 +81,7 @@
   #app.on{ display:block; }
   #map{ position:absolute; inset:0; background:#dfe4e2; }
 
-  .levelmenu{ position:absolute; top:12px; left:12px; z-index:14; }
+  .levelmenu{ position:absolute; top:12px; left:12px; z-index:14; display:flex; align-items:flex-start; gap:7px; }
   .mapstamp{ height:38px; display:flex; align-items:center; gap:9px; padding:5px 10px 5px 7px;
              background:rgba(255,255,255,.94); color:var(--ink); border:1px solid var(--hair);
              border-radius:20px; box-shadow:0 3px 14px rgba(20,33,31,.12); backdrop-filter:blur(8px);
@@ -91,6 +91,13 @@
                       font-size:12.5px; font-weight:700; color:#46504c; }
   .mapstamp .chev{ font-size:9px; color:var(--label); transition:transform .15s; }
   .mapstamp[aria-expanded="true"] .chev{ transform:rotate(180deg); }
+  .back-search{ height:38px; display:flex; align-items:center; gap:6px; padding:0 12px;
+                border:1px solid var(--hair); border-radius:20px; background:rgba(255,255,255,.95);
+                color:var(--ink); box-shadow:0 3px 14px rgba(20,33,31,.12); font:700 12px inherit;
+                cursor:pointer; backdrop-filter:blur(8px); }
+  .back-search:hover,.back-search:focus-visible{ border-color:var(--green); color:var(--green-dk); outline:none; }
+  .back-search[hidden]{ display:none; }
+  .back-search .arrow{ font-size:18px; line-height:1; font-weight:400; }
   .level-pop{ position:absolute; top:45px; left:0; width:214px; padding:5px; background:#fff;
               border:1px solid var(--hair); border-radius:10px; box-shadow:0 9px 28px rgba(20,33,31,.18); }
   .level-pop[hidden]{ display:none; }
@@ -118,36 +125,9 @@
   .quick-pop button:hover,.quick-pop button:focus-visible{ background:var(--field); outline:none; }
   .quick-pop button + button{ border-top:1px solid var(--hair); border-top-left-radius:0; border-top-right-radius:0; }
 
-  .tool-dock{ position:absolute; top:64px; left:12px; z-index:11; width:132px; height:132px; }
-  .wheel{ --dial-angle:0deg; position:relative; width:132px; height:132px; border-radius:50%;
-          border:1px solid #d9ded8; box-shadow:0 6px 22px rgba(23,34,31,.18);
-          background:#f5f7f3;
-          user-select:none; touch-action:none; transition:transform .16s ease; }
-  .wheel::before{ content:""; position:absolute; inset:0; border-radius:50%; pointer-events:none;
-                  background:conic-gradient(from var(--dial-angle),var(--green) 0 9deg,transparent 9deg 360deg);
-                  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px));
-                  mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px)); }
-  .wheel::after{ content:""; position:absolute; inset:8px; border:1px solid rgba(111,140,120,.23);
-                 border-radius:50%; pointer-events:none; }
-  .wheel-key,.wheel-center{ position:absolute; z-index:2; display:flex; align-items:center; justify-content:center;
-                            border:0; color:#59635f; background:transparent; font-family:inherit; cursor:pointer; }
-  .wheel-key{ width:27px; height:27px; border-radius:50%; font-size:15px; font-weight:800; }
-  .wheel-key:hover,.wheel-key:focus-visible{ background:#fff; color:var(--green-dk); outline:none; }
-  .wheel-key.prev{ top:10px; left:52px; }
-  .wheel-key.next{ bottom:10px; left:52px; }
-  .wheel-key.hide{ top:52px; left:10px; font-size:17px; }
-  .wheel-key.open{ top:52px; right:10px; font-size:20px; }
-  .wheel-center{ top:40px; left:40px; width:52px; height:52px; flex-direction:column; border-radius:50%;
-                 background:#fff; border:1px solid #d9ded8; box-shadow:inset 0 1px 0 #fff,0 1px 4px rgba(25,34,32,.12);
-                 line-height:1.05; }
-  .wheel-center:hover,.wheel-center:focus-visible{ border-color:var(--green); outline:none; }
-  .wheel-center strong{ font-size:8px; letter-spacing:.08em; }
-  .wheel-center small{ display:block; max-width:38px; margin-top:2px; overflow:hidden; text-overflow:ellipsis;
-                       white-space:nowrap; color:var(--green-dk); font-size:7px; }
-
-  .pane{ position:absolute; top:198px; left:12px; width:248px; background:rgba(255,255,255,.97);
+  .pane{ position:absolute; top:64px; left:12px; width:248px; background:rgba(255,255,255,.97);
          border:1px solid var(--hair); border-radius:3px; box-shadow:0 4px 16px rgba(20,33,31,.14);
-         z-index:10; max-height:calc(100% - 248px); overflow:hidden; backdrop-filter:blur(9px); }
+         z-index:10; max-height:calc(100% - 114px); overflow:hidden; backdrop-filter:blur(9px); }
   .pane.hidden{ display:none; }
   .panehead{ height:35px; display:flex; align-items:center; gap:8px; padding:0 8px 0 12px;
              border-bottom:1px solid var(--hair); }
@@ -156,7 +136,7 @@
   .panehead button{ width:25px; height:25px; border:0; border-radius:50%; background:transparent;
                     color:var(--label); font-size:18px; cursor:pointer; }
   .panehead button:hover,.panehead button:focus-visible{ background:var(--field); color:var(--ink); outline:none; }
-  .panebody{ max-height:calc(100vh - 283px); overflow:auto; overscroll-behavior:contain; }
+  .panebody{ max-height:calc(100vh - 149px); overflow:auto; overscroll-behavior:contain; }
   .foldcap{ display:flex; justify-content:space-between; align-items:center; width:100%; border:0; background:none;
             padding:0; font-family:inherit; cursor:pointer; user-select:none; text-align:left; }
   .foldcap .chev{ font-size:9px; color:var(--label); transition:transform .15s; }
@@ -240,7 +220,13 @@
   .place-key{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px 8px; margin-top:8px;
               color:#555f5b; font-size:11.5px; }
   .place-key span{ display:flex; align-items:center; gap:5px; min-width:0; }
-  .place-mark{ width:17px; text-align:center; color:var(--green-dk); font-weight:800; }
+  .place-mark{ display:inline-flex; align-items:center; justify-content:center; flex:0 0 18px;
+               width:18px; height:18px; border-radius:50%; color:#fff; font:700 10px/1 Arial,sans-serif; }
+  .place-mark.landmark{ background:#596260; }
+  .place-mark.island{ background:#b8872b; }
+  .place-mark.spot{ background:#7656a4; }
+  .place-mark.ramp{ background:#247e8a; }
+  .place-mark.launch{ background:#4e8d78; }
 
   .legend .lt{ font-size:12.5px; font-weight:bold; }
   .legend .ls{ font-size:11px; color:var(--label); margin:1px 0 8px; }
@@ -403,24 +389,18 @@
   @media (max-width:680px){
     .legend{ display:none; }
     .levelmenu{ top:8px; left:8px; }
-    .mapstamp{ height:34px; max-width:205px; padding-right:9px; }
+    .mapstamp{ height:34px; max-width:174px; padding-right:9px; }
     .mapstamp img{ height:22px; }
-    .mapstamp .lvlname{ max-width:126px; font-size:10px; }
+    .mapstamp .lvlname{ max-width:96px; font-size:10px; }
+    .back-search{ width:34px; height:34px; justify-content:center; padding:0; }
+    .back-search .label{ display:none; }
     .level-pop{ top:40px; width:205px; }
     .quickmenu{ top:8px; right:8px; }
     .quick-trigger{ height:34px; min-width:67px; }
     .quick-pop{ top:40px; }
-    .tool-dock{ top:auto; bottom:42px; left:8px; width:114px; height:114px; }
-    .wheel{ width:114px; height:114px; }
-    .wheel-key.prev{ top:7px; left:43px; }
-    .wheel-key.next{ bottom:7px; left:43px; }
-    .wheel-key.hide{ top:43px; left:7px; }
-    .wheel-key.open{ top:43px; right:7px; }
-    .wheel-center{ top:33px; left:33px; width:48px; height:48px; }
-    .pane{ top:auto; right:8px; bottom:162px; left:8px; width:auto; max-height:52vh; }
-    .panebody{ max-height:calc(52vh - 35px); }
-    .idlewarn{ left:8px; right:8px; bottom:162px; width:auto; }
-    .maplibregl-ctrl-bottom-left{ left:118px; }
+    .pane{ top:58px; right:8px; bottom:42px; left:8px; width:auto; max-height:none; }
+    .panebody{ max-height:calc(100vh - 135px); }
+    .idlewarn{ left:8px; right:8px; bottom:42px; width:auto; }
     .lvl{ align-items:flex-start; flex-wrap:wrap; }
     .lvl-actions{ width:100%; margin-left:48px; }
     .lvl-actions button{ flex:1; }
@@ -482,8 +462,11 @@
       <span class="lvlname" id="lvlName">Level 1 · search a tag</span>
       <span class="chev" aria-hidden="true">&#9660;</span>
     </button>
+    <button class="back-search" id="backSearch" type="button" title="Back to search" hidden>
+      <span class="arrow" aria-hidden="true">&#8592;</span><span class="label">Back to search</span>
+    </button>
     <div class="level-pop" id="levelPop" hidden>
-      <button type="button" data-map-level="l1"><b>Level 1 Search</b><small>No login required</small></button>
+      <button type="button" id="levelOneButton" data-map-level="l1"><b>Level 1 Search</b><small>No login required</small></button>
       <button type="button" data-map-level="l2"><b>Level 2 Search</b><small>Account required</small></button>
       <button type="button" data-map-level="l3"><b>Level 3</b><small>Admin use only</small></button>
       <button type="button" id="headerLogout" hidden><b>Log out</b><small>End this account session</small></button>
@@ -494,19 +477,8 @@
     <button class="quick-trigger" id="quickBtn" type="button" aria-expanded="false"
       aria-controls="quickPop">Map <span class="chev" aria-hidden="true">&#9660;</span></button>
     <div class="quick-pop" id="quickPop" hidden>
+      <button id="quickTools" type="button">Hide tools</button>
       <button id="baseBtn" type="button">Satellite view</button>
-    </div>
-  </div>
-
-  <div class="tool-dock">
-    <div class="wheel" id="toolWheel" role="group" aria-label="Map tool selector">
-      <button class="wheel-key prev" id="toolPrev" type="button" aria-label="Previous tool">&#9650;</button>
-      <button class="wheel-key next" id="toolNext" type="button" aria-label="Next tool">&#9660;</button>
-      <button class="wheel-key hide" id="toolHide" type="button" aria-label="Close tools">&times;</button>
-      <button class="wheel-key open" id="toolOpen" type="button" aria-label="Open selected tool">&#8250;</button>
-      <button class="wheel-center" id="menuBtn" type="button" aria-expanded="false" aria-controls="pane">
-        <strong>TOOLS</strong><small id="wheelLabel">Search</small>
-      </button>
     </div>
   </div>
 
@@ -530,8 +502,8 @@
 
 <div class="login" id="login" aria-hidden="true">
   <div class="loginbox" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-    <h2 id="loginTitle">Level 2 account</h2>
-    <p id="loginIntro">Account required. Log in or create an account.</p>
+    <h2 id="loginTitle">For Level 2: log in</h2>
+    <p id="loginIntro">No account yet? Create an account first. Email verification is required.</p>
     <div class="account-switch" id="accountSwitch">
       <button type="button" id="createModeBtn">Create account</button>
       <button type="button" id="loginModeBtn" class="on">Log in</button>
@@ -599,7 +571,7 @@
 
 <script>
 const HERE = location.href.replace(/[^/]*$/,"");
-const DATA_VERSION = "20260906c";
+const DATA_VERSION = "20260927a";
 const DATA_FILE = "fish_index-20260701.json";
 const TILE_ROOT = "tiles-20260701";
 const PUBLIC_META_FILE = "public-meta-20260701.json";
@@ -695,7 +667,6 @@ let PLACES={type:"FeatureCollection",features:[]}, placesCategory="off", placesL
 let TOPOBATHY={ready:false,tiles:[],sourceUrl:"https://www.usgs.gov/data/potomac-river-pilot-topobathymetric-digital-elevation-model-1979-2025"};
 let topobathyOn=false;
 let pendingRole=null;
-let toolIndex=0, wheelMotion=0, wheelTimer=null;
 let verifiedSession=null, activeToken="", authWait=null;
 let mfaPending=false, emailCodePending=false, phonePending=false, signupMode=false;
 let feedbackRating=0;
@@ -796,7 +767,7 @@ function openLogin(level,mode="login"){
   pendingRole=level;
   resetLoginStep();
   set("loginTitle",level==="l3"?"Level 3 staff access":"For Level 2: log in");
-  set("loginIntro",level==="l3"?"Administrator account required.":"New here? Create an account. Email verification is required.");
+  set("loginIntro",level==="l3"?"Administrator account required.":"No account yet? Create an account first. Email verification is required.");
   byId("accountSwitch").hidden=level==="l3";
   const preview=byId("previewLogin");
   preview.style.display=LOCAL_PREVIEW?"block":"none";
@@ -812,7 +783,7 @@ function toggleCreateAccount(force){
   if(!create){
     resetLoginStep();
     set("loginTitle","For Level 2: log in");
-    set("loginIntro","New here? Create an account. Email verification is required.");
+    set("loginIntro","No account yet? Create an account first. Email verification is required.");
     set("loginMsg","");
     byId("loginEmail").focus();
     return;
@@ -1346,23 +1317,61 @@ function placeFilter(category){
   const types=PLACE_GROUPS[category]||[];
   return ["in",["get","type"],["literal",types]];
 }
-function placeIcon(category){
-  if(category==="all") return "×";
+function placeImage(category){
   return ["match",["get","type"],
-    "Island","I","Spot","•","Boat ramp","R","Primitive launch","P",
-    "Dam","D","Public access","A","Landmark","L","Location","L","Confluence","C","Tributary","T","L"];
+    "Island","place-island","Spot","place-spot","Boat ramp","place-ramp",
+    "Primitive launch","place-launch","place-landmark"];
+}
+function placeMarker(kind,color){
+  const size=48, canvas=document.createElement("canvas");
+  canvas.width=size; canvas.height=size;
+  const ctx=canvas.getContext("2d");
+  ctx.clearRect(0,0,size,size);
+  ctx.beginPath(); ctx.arc(24,24,18,0,Math.PI*2);
+  ctx.fillStyle=color; ctx.fill();
+  ctx.strokeStyle="#fff"; ctx.lineWidth=3; ctx.stroke();
+  ctx.strokeStyle="#fff"; ctx.fillStyle="#fff"; ctx.lineWidth=3;
+  ctx.lineCap="round"; ctx.lineJoin="round";
+  if(kind==="landmark"){
+    ctx.beginPath(); ctx.moveTo(19,32); ctx.lineTo(19,16); ctx.lineTo(31,20); ctx.lineTo(19,24); ctx.stroke();
+  }else if(kind==="island"){
+    ctx.beginPath(); ctx.ellipse(24,21,9,5,0,0,Math.PI*2); ctx.fill();
+    ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(15,30); ctx.quadraticCurveTo(19,27,23,30);
+    ctx.quadraticCurveTo(27,33,33,29); ctx.stroke();
+  }else if(kind==="spot"){
+    ctx.beginPath(); ctx.arc(24,24,6,0,Math.PI*2); ctx.fill();
+  }else if(kind==="ramp"){
+    ctx.beginPath(); ctx.moveTo(17,30); ctx.lineTo(30,18); ctx.moveTo(17,31); ctx.lineTo(33,31);
+    ctx.moveTo(22,26); ctx.lineTo(32,26); ctx.stroke();
+  }else{
+    ctx.beginPath(); ctx.moveTo(18,31); ctx.lineTo(29,18); ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(31,16,4,6,.7,0,Math.PI*2); ctx.fill();
+  }
+  return ctx.getImageData(0,0,size,size);
+}
+function addPlaceMarkerImages(){
+  const markers={
+    "place-landmark":["landmark","#596260"],
+    "place-island":["island","#b8872b"],
+    "place-spot":["spot","#7656a4"],
+    "place-ramp":["ramp","#247e8a"],
+    "place-launch":["launch","#4e8d78"]
+  };
+  for(const [name,[kind,color]] of Object.entries(markers)){
+    if(!map.hasImage(name)) map.addImage(name,placeMarker(kind,color),{pixelRatio:2});
+  }
 }
 function setPlaces(category){
   placesCategory=(PLACE_GROUPS[category] || category==="all") ? category : "off";
   const visible=placesCategory!=="off";
-  for(const layer of ["places-dot","places-icon","places-label"]){
+  for(const layer of ["places-dot","places-label"]){
     if(!map?.getLayer(layer)) continue;
     map.setLayoutProperty(layer,"visibility",visible?"visible":"none");
     map.setFilter(layer,visible?placeFilter(placesCategory):["==",["get","type"],"__hidden__"]);
   }
-  if(map?.getLayer("places-icon")){
-    map.setLayoutProperty("places-icon","text-field",placeIcon(placesCategory));
-    map.setLayoutProperty("places-icon","text-size",placesCategory==="all"?15:["interpolate",["linear"],["zoom"],7,9,12,12]);
+  if(map?.getLayer("places-dot")){
+    map.setLayoutProperty("places-dot","icon-image",placeImage(placesCategory));
+    map.setLayoutProperty("places-dot","icon-allow-overlap",["step",["zoom"],false,11,true]);
   }
   const select=byId("placesCategory");
   if(select) select.value=placesCategory;
@@ -1387,22 +1396,14 @@ function addLayers(){
     layout:{visibility:base==="sat"?"visible":"none"}
   });
   if(!map.getSource("places")) map.addSource("places",{type:"geojson",data:PLACES});
+  addPlaceMarkerImages();
   const placesVisible=placesCategory!=="off";
   const placesFilter=placesVisible?placeFilter(placesCategory):["==",["get","type"],"__hidden__"];
   if(!map.getLayer("places-dot")) map.addLayer({
-    id:"places-dot",type:"circle",source:"places",filter:placesFilter,layout:{visibility:placesVisible?"visible":"none"},
-    paint:{"circle-radius":["interpolate",["linear"],["zoom"],7,7,12,10],
-      "circle-color":["match",["get","type"],
-        "Dam","#8f4a1f","Island","#c38b24","Boat ramp","#247e8a",
-        "Primitive launch","#4e8d78","Public access","#526fa4",
-        "Spot","#7656a4","Confluence","#2f6fb0","Tributary","#5a7765","#596260"],
-      "circle-opacity":.9,"circle-stroke-color":"#fff","circle-stroke-width":1.8}
-  });
-  if(!map.getLayer("places-icon")) map.addLayer({
-    id:"places-icon",type:"symbol",source:"places",filter:placesFilter,layout:{visibility:placesVisible?"visible":"none",
-      "text-field":placeIcon(placesCategory),
-      "text-size":placesCategory==="all"?15:["interpolate",["linear"],["zoom"],7,9,12,12],"text-allow-overlap":true},
-    paint:{"text-color":"#fff","text-halo-color":"rgba(0,0,0,.16)","text-halo-width":.4}
+    id:"places-dot",type:"symbol",source:"places",filter:placesFilter,layout:{visibility:placesVisible?"visible":"none",
+      "icon-image":placeImage(placesCategory),"icon-size":["interpolate",["linear"],["zoom"],7,.78,12,1.08],
+      "icon-allow-overlap":["step",["zoom"],false,11,true],
+      "icon-ignore-placement":false,"icon-padding":2}
   });
   if(!map.getLayer("places-label")) map.addLayer({
     id:"places-label",type:"symbol",source:"places",filter:placesFilter,minzoom:10,layout:{visibility:placesVisible?"visible":"none",
@@ -2350,17 +2351,11 @@ function panel(){
       <option value="launches"${placesCategory==="launches"?" selected":""}>Primitive launch</option>
     </select>
     <div class="place-key">
-      <span><b class="place-mark">×</b>all places</span><span><b class="place-mark">L</b>landmark</span>
-      <span><b class="place-mark">I</b>island</span><span><b class="place-mark">•</b>spot</span>
-      <span><b class="place-mark">R</b>boat ramp</span><span><b class="place-mark">P</b>primitive launch</span>
+      <span><b class="place-mark landmark">⚑</b>landmark</span>
+      <span><b class="place-mark island">I</b>island</span><span><b class="place-mark spot">•</b>spot</span>
+      <span><b class="place-mark ramp">↘</b>boat ramp</span><span><b class="place-mark launch">P</b>primitive launch</span>
     </div>
-    <div class="level-note">Select a category, then click a map symbol for details and a Google Maps link.</div>`,false);
-
-  const sourceMenu=fold("USGS / NOAA",`<div class="layer-list">
-      <div class="layer-row"><div><b>USGS riverbed model</b><small>${TOPOBATHY.ready?"Tiled Potomac topobathymetry.":"Source information is available while the browser layer is prepared."}</small></div>
-        ${TOPOBATHY.ready?`<button id="topobathyToggle" type="button" class="${topobathyOn?"on":""}">${topobathyOn?"On":"Off"}</button>`:
-          `<a href="${esc(TOPOBATHY.sourceUrl)}" target="_blank" rel="noopener">USGS</a>`}</div>
-    </div><div class="level-note">NOAA/NWS observations used by the weather controls are refreshed when the map opens.</div>`,false);
+    <div class="level-note">Select a category, then click a map symbol for details and a Google Maps link. Zoom in to separate nearby places.</div>`,false);
 
   if(role==="l1"){
     const searchBlock=fold("Search a tag",`<div class="seek mini">
@@ -2381,7 +2376,7 @@ function panel(){
     const help=fold("How to use this map",`<div class="level-note" style="margin-top:8px">
       Search one tag number. Numbered circles show the catch sequence. Hover or tap a circle to open that catch; a line appears only when the data contains a confirmed recapture.
     </div>`,false);
-    return searchBlock+selectedFish+placesMenu+sourceMenu+level2Preview+help;
+    return searchBlock+selectedFish+placesMenu+level2Preview+help;
   }
 
   const hydroRows = [['tF','Water temperature','°F'],['lvl','River level','ft'],
@@ -2425,7 +2420,7 @@ function panel(){
     </div>`,false);
 
   if(role==="l2"){
-    return seek + selectedFish + speciesChips + hydroMenu + placesMenu + sourceMenu + measure + weatherHTML() + astroHTML() +
+    return seek + selectedFish + speciesChips + hydroMenu + placesMenu + measure + weatherHTML() + astroHTML() +
       recap + numbers + spots + legendBlk + feedbackBlock();
   }
   const feed = fold("Tile feed",`<div class="ingest" style="margin-top:8px">
@@ -2434,81 +2429,19 @@ function panel(){
         exact point access · administrator only
       </div>
       <button class="flat" id="csv" style="width:100%;margin-top:9px">Export this view (CSV)</button>`,false);
-  return seek + selectedFish + viewSeg + speciesChips + hydroMenu + placesMenu + sourceMenu + measure + weatherHTML() + astroHTML() +
+  return seek + selectedFish + viewSeg + speciesChips + hydroMenu + placesMenu + measure + weatherHTML() + astroHTML() +
     recap + numbers + spots + feed + legendBlk + adminRecordsBlock() + feedbackBlock();
 }
 
-function toolBlocks(){
-  return [...document.querySelectorAll("#paneBody .fold")];
-}
-function toolName(block){
-  return block?.querySelector(".foldcap span")?.textContent.trim() || "Map tools";
-}
-function syncToolDial(){
-  const blocks=toolBlocks();
-  if(!blocks.length) return;
-  toolIndex=(toolIndex+blocks.length)%blocks.length;
-  const name=toolName(blocks[toolIndex]);
-  set("wheelLabel",name);
-  set("paneLabel",name);
-  byId("toolWheel").style.setProperty("--dial-angle",(toolIndex/blocks.length*360)+"deg");
-}
 function showPane(show){
   const pane=byId("pane");
   pane.classList.toggle("hidden",!show);
-  byId("menuBtn").setAttribute("aria-expanded",String(show));
+  const toolsButton=byId("quickTools");
+  if(toolsButton) toolsButton.textContent=show?"Hide tools":"Show tools";
 }
 function mapPanePadding(top=66,bottom=62){
   const paneOpen=!byId("pane").classList.contains("hidden");
-  return {top,left:paneOpen?260:152,right:42,bottom};
-}
-function chooseTool(index,reveal=true){
-  const blocks=toolBlocks();
-  if(!blocks.length) return;
-  toolIndex=(index+blocks.length)%blocks.length;
-  blocks.forEach((block,i)=>{
-    const open=i===toolIndex;
-    block.classList.toggle("closed",!open);
-    block.querySelector(".foldcap")?.setAttribute("aria-expanded",String(open));
-  });
-  syncToolDial();
-  if(reveal){
-    showPane(true);
-    const body=byId("paneBody");
-    body.scrollTop=Math.max(0,blocks[toolIndex].offsetTop-body.offsetTop);
-  }
-}
-function stepTool(amount){
-  chooseTool(toolIndex+amount,true);
-}
-function wireToolDock(){
-  byId("toolPrev").onclick=()=>stepTool(-1);
-  byId("toolNext").onclick=()=>stepTool(1);
-  byId("toolOpen").onclick=()=>chooseTool(toolIndex,true);
-  byId("toolHide").onclick=()=>showPane(false);
-  byId("paneClose").onclick=()=>showPane(false);
-  byId("menuBtn").onclick=()=>{
-    if(byId("pane").classList.contains("hidden")) chooseTool(toolIndex,true);
-    else showPane(false);
-  };
-  const wheel=byId("toolWheel");
-  if(!wheel._wired){
-    wheel._wired=true;
-    wheel.addEventListener("wheel",event=>{
-      event.preventDefault();
-      wheelMotion+=event.deltaY;
-      clearTimeout(wheelTimer);
-      wheelTimer=setTimeout(()=>{ wheelMotion=0; },180);
-      if(Math.abs(wheelMotion)<24) return;
-      stepTool(wheelMotion<0?-1:1);
-      wheelMotion=0;
-    },{passive:false});
-    wheel.addEventListener("keydown",event=>{
-      if(event.key==="ArrowUp" || event.key==="ArrowLeft"){ event.preventDefault(); stepTool(-1); }
-      if(event.key==="ArrowDown" || event.key==="ArrowRight"){ event.preventDefault(); stepTool(1); }
-      if(event.key==="Escape"){ event.preventDefault(); showPane(false); }
-    });
-  }
+  return {top,left:paneOpen?272:42,right:42,bottom};
 }
 
 function defaults(){
@@ -2770,14 +2703,10 @@ function wire(){
   bindSeg("viewSeg","v", v=>setView(v));
   document.querySelectorAll("#paneBody .foldcap").forEach(c=>c.onclick=()=>{
     if(c.hasAttribute("data-open-level2")){ requestLevel("l2"); return; }
-    const block=c.closest(".fold"), blocks=toolBlocks(), index=blocks.indexOf(block);
-    if(block.classList.contains("closed")) chooseTool(index,true);
-    else{
-      toolIndex=index;
-      block.classList.add("closed");
-      c.setAttribute("aria-expanded","false");
-      syncToolDial();
-    }
+    const block=c.closest(".fold");
+    const opening=block.classList.contains("closed");
+    block.classList.toggle("closed",!opening);
+    c.setAttribute("aria-expanded",String(opening));
   });
   const rs=byId("retSel");
   if(rs) rs.onchange=()=>{ retOnly=(rs.value==="ret"); applyFilter(); stats(); };
@@ -2868,9 +2797,12 @@ async function enter(r){
   }
   role=r; defaults();
   document.getElementById("lvlName").textContent=LEVELS[r];
+  const levelOneLabel=byId("levelOneButton")?.querySelector("b");
+  if(levelOneLabel) levelOneLabel.textContent=r==="l1"?"Level 1 Search":"Back to Level 1 Search";
   document.querySelectorAll("[data-map-level]").forEach(button=>
     button.classList.toggle("on",button.dataset.mapLevel===r));
   byId("headerLogout").hidden=!verifiedSession;
+  byId("backSearch").hidden=r==="l1";
   document.getElementById("gate").style.display="none";
   document.getElementById("app").classList.add("on");
 
@@ -2885,12 +2817,9 @@ async function enter(r){
   const pane=document.getElementById("pane");
   pane.dataset.level=r;
   document.getElementById("paneBody").innerHTML=panel();
-  toolIndex=0;
-  pane.classList.toggle("hidden",r!=="l1");
+  pane.classList.remove("hidden");
   wire();
-  wireToolDock();
-  syncToolDial();
-  document.getElementById("menuBtn").setAttribute("aria-expanded",String(!pane.classList.contains("hidden")));
+  showPane(true);
   if(r!=="l1") loadLiveWeather();
 
   if(!map){
@@ -2992,10 +2921,20 @@ byId("quickBtn").onclick=()=>{
   byId("quickPop").hidden=!opening;
   byId("quickBtn").setAttribute("aria-expanded",String(opening));
 };
+byId("quickTools").onclick=()=>{
+  showPane(byId("pane").classList.contains("hidden"));
+  closeQuick();
+};
+byId("paneClose").onclick=()=>showPane(false);
 byId("levelBtn").onclick=()=>{
   const opening=byId("levelPop").hidden;
   byId("levelPop").hidden=!opening;
   byId("levelBtn").setAttribute("aria-expanded",String(opening));
+};
+byId("backSearch").onclick=()=>{
+  closeLevelMenu();
+  closeQuick();
+  requestLevel("l1");
 };
 document.querySelectorAll("[data-map-level]").forEach(button=>button.onclick=()=>{
   const next=button.dataset.mapLevel;
