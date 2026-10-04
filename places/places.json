@@ -13,7 +13,7 @@
       "properties": {
         "name": "Shepherdstown Dam",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Potomac  River Dams.",
+        "description": "Potomac · Maryland. Source: Potomac  River Dams.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Potomac  River Dams"
@@ -31,7 +31,7 @@
       "properties": {
         "name": "Sheperds Island Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Shepherds Island.",
+        "description": "Potomac · Maryland. Source: Shepherds Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Shepherds Island"
@@ -49,7 +49,7 @@
       "properties": {
         "name": "Sheperds Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Shepherds Island.",
+        "description": "Potomac · Maryland. Source: Shepherds Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Shepherds Island"
@@ -67,7 +67,7 @@
       "properties": {
         "name": "Class I/II Rapids",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -85,7 +85,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -103,7 +103,7 @@
       "properties": {
         "name": "Ledges",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -121,7 +121,7 @@
       "properties": {
         "name": "Island AAA(Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -139,7 +139,7 @@
       "properties": {
         "name": "Island AAA(Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -157,7 +157,7 @@
       "properties": {
         "name": "Knott Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Knott Island.",
+        "description": "Potomac · Maryland. Source: Knott Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Knott Island"
@@ -175,7 +175,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -193,7 +193,7 @@
       "properties": {
         "name": "Knott Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Knott Island.",
+        "description": "Potomac · Maryland. Source: Knott Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Knott Island"
@@ -211,7 +211,7 @@
       "properties": {
         "name": "Island AA (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -229,7 +229,7 @@
       "properties": {
         "name": "Island AA (Downtream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -247,7 +247,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -265,7 +265,7 @@
       "properties": {
         "name": "The Needles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -283,7 +283,7 @@
       "properties": {
         "name": "Dam 3 Ruins",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -301,7 +301,7 @@
       "properties": {
         "name": "Byrnes Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Byrnes Island.",
+        "description": "Potomac · Maryland. Source: Byrnes Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Byrnes Island"
@@ -319,7 +319,7 @@
       "properties": {
         "name": "Leftys Hole",
         "type": "Spot",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -337,7 +337,7 @@
       "properties": {
         "name": "Catfish Hole",
         "type": "Spot",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -355,7 +355,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -373,7 +373,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -391,7 +391,7 @@
       "properties": {
         "name": "Byrnes Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Byrnes Island.",
+        "description": "Potomac · Maryland. Source: Byrnes Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Byrnes Island"
@@ -409,7 +409,7 @@
       "properties": {
         "name": "Maddog Rapids (Class III)",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -427,7 +427,7 @@
       "properties": {
         "name": "100 Yard Dash",
         "type": "Spot",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -445,7 +445,7 @@
       "properties": {
         "name": "White Horse Rapids  (Class III/IV)",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -463,7 +463,7 @@
       "properties": {
         "name": "Bridge Ruins",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -481,7 +481,7 @@
       "properties": {
         "name": "Washing Machine",
         "type": "Spot",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -499,7 +499,7 @@
       "properties": {
         "name": "Bass Rock",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -517,7 +517,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -535,7 +535,7 @@
       "properties": {
         "name": "Birds Sancutary Islands (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -553,7 +553,7 @@
       "properties": {
         "name": "Millers Hole",
         "type": "Spot",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -571,7 +571,7 @@
       "properties": {
         "name": "Birds Sanctuary Islands (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -589,7 +589,7 @@
       "properties": {
         "name": "Paridise",
         "type": "Spot",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -607,7 +607,7 @@
       "properties": {
         "name": "Weverton Rapids (Class II)",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -625,7 +625,7 @@
       "properties": {
         "name": "Old Mill Rapids (Class III)",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -643,7 +643,7 @@
       "properties": {
         "name": "Knoxville Falls",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -661,7 +661,7 @@
       "properties": {
         "name": "Colonial Island/Paynes Landing(Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Colonial Island.",
+        "description": "Potomac · Maryland. Source: Colonial Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Colonial Island"
@@ -679,7 +679,7 @@
       "properties": {
         "name": "Fall Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -697,7 +697,7 @@
       "properties": {
         "name": "Fall Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -715,7 +715,7 @@
       "properties": {
         "name": "Colonial Island/Paynes Landing (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Colonial Island.",
+        "description": "Potomac · Maryland. Source: Colonial Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Colonial Island"
@@ -733,7 +733,7 @@
       "properties": {
         "name": "Ledges/Rocks",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -751,7 +751,7 @@
       "properties": {
         "name": "Island A (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -769,7 +769,7 @@
       "properties": {
         "name": "Island A (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -787,7 +787,7 @@
       "properties": {
         "name": "Log Jam",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -805,7 +805,7 @@
       "properties": {
         "name": "Island B (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -823,7 +823,7 @@
       "properties": {
         "name": "Island B (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -841,7 +841,7 @@
       "properties": {
         "name": "Gravel Point",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -859,7 +859,7 @@
       "properties": {
         "name": "The Fence",
         "type": "Spot",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -877,7 +877,7 @@
       "properties": {
         "name": "Luckets Ferry",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Virginia. Source: Physical Map.",
+        "description": "Potomac · Virginia. Source: Physical Map.",
         "river": "Potomac",
         "state": "Virginia",
         "source": "Physical Map"
@@ -895,7 +895,7 @@
       "properties": {
         "name": "Tombston Rocks",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -913,7 +913,7 @@
       "properties": {
         "name": "Little Catoctin Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -931,7 +931,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -949,7 +949,7 @@
       "properties": {
         "name": "Little Catoctin Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -967,7 +967,7 @@
       "properties": {
         "name": "Twin Sisters Rocks",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -985,7 +985,7 @@
       "properties": {
         "name": "Hales Pond",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1003,7 +1003,7 @@
       "properties": {
         "name": "Deadmans Islands (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1021,7 +1021,7 @@
       "properties": {
         "name": "Deadmans Islands (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1039,7 +1039,7 @@
       "properties": {
         "name": "Bald Eagle Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1057,7 +1057,7 @@
       "properties": {
         "name": "Huffmans Rocks",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1075,7 +1075,7 @@
       "properties": {
         "name": "Bald Eagle Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1093,7 +1093,7 @@
       "properties": {
         "name": "Duck Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1111,7 +1111,7 @@
       "properties": {
         "name": "Duck Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1129,7 +1129,7 @@
       "properties": {
         "name": "Broken Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1147,7 +1147,7 @@
       "properties": {
         "name": "Hooks Falls",
         "type": "Spot",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1165,7 +1165,7 @@
       "properties": {
         "name": "Broken Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1183,7 +1183,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1201,7 +1201,7 @@
       "properties": {
         "name": "Paton Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Paton Island.",
+        "description": "Potomac · Maryland. Source: Paton Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Paton Island"
@@ -1219,7 +1219,7 @@
       "properties": {
         "name": "Paton Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Paton Island.",
+        "description": "Potomac · Maryland. Source: Paton Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Paton Island"
@@ -1237,7 +1237,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1255,7 +1255,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1273,7 +1273,7 @@
       "properties": {
         "name": "Island C (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -1291,7 +1291,7 @@
       "properties": {
         "name": "Heaters Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Heaters Island.",
+        "description": "Potomac · Maryland. Source: Heaters Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Heaters Island"
@@ -1309,7 +1309,7 @@
       "properties": {
         "name": "Island C (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -1327,7 +1327,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1345,7 +1345,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1363,7 +1363,7 @@
       "properties": {
         "name": "Heaters Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Heaters Island.",
+        "description": "Potomac · Maryland. Source: Heaters Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Heaters Island"
@@ -1381,7 +1381,7 @@
       "properties": {
         "name": "Mason Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Mason Island.",
+        "description": "Potomac · Maryland. Source: Mason Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Mason Island"
@@ -1399,7 +1399,7 @@
       "properties": {
         "name": "Mason Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Mason Island.",
+        "description": "Potomac · Maryland. Source: Mason Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Mason Island"
@@ -1417,7 +1417,7 @@
       "properties": {
         "name": "Nolands Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Nolands Island.",
+        "description": "Potomac · Maryland. Source: Nolands Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Nolands Island"
@@ -1435,7 +1435,7 @@
       "properties": {
         "name": "Island D (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -1453,7 +1453,7 @@
       "properties": {
         "name": "Island E (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -1471,7 +1471,7 @@
       "properties": {
         "name": "Island D (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -1489,7 +1489,7 @@
       "properties": {
         "name": "Meadow Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Meadow Island.",
+        "description": "Potomac · Maryland. Source: Meadow Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Meadow Island"
@@ -1507,7 +1507,7 @@
       "properties": {
         "name": "Island E (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -1525,7 +1525,7 @@
       "properties": {
         "name": "Nolands Island",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Nolands Island.",
+        "description": "Potomac · Maryland. Source: Nolands Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Nolands Island"
@@ -1543,7 +1543,7 @@
       "properties": {
         "name": "Meadow Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1561,7 +1561,7 @@
       "properties": {
         "name": "Meadow Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1579,7 +1579,7 @@
       "properties": {
         "name": "Island G  (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -1597,7 +1597,7 @@
       "properties": {
         "name": "Birdsaw Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -1615,7 +1615,7 @@
       "properties": {
         "name": "Island G  (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -1633,7 +1633,7 @@
       "properties": {
         "name": "Island H (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -1651,7 +1651,7 @@
       "properties": {
         "name": "Island H (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -1669,7 +1669,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1687,7 +1687,7 @@
       "properties": {
         "name": "Birdsaw Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Birdsaw Island.",
+        "description": "Potomac · Maryland. Source: Birdsaw Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Birdsaw Island"
@@ -1705,7 +1705,7 @@
       "properties": {
         "name": "Eagle Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1723,7 +1723,7 @@
       "properties": {
         "name": "Birdsaw Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Birdsaw Island.",
+        "description": "Potomac · Maryland. Source: Birdsaw Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Birdsaw Island"
@@ -1741,7 +1741,7 @@
       "properties": {
         "name": "Cox Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Cox Island.",
+        "description": "Potomac · Maryland. Source: Cox Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Cox Island"
@@ -1759,7 +1759,7 @@
       "properties": {
         "name": "Eagle Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1777,7 +1777,7 @@
       "properties": {
         "name": "Cox Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Cox Island.",
+        "description": "Potomac · Maryland. Source: Cox Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Cox Island"
@@ -1795,7 +1795,7 @@
       "properties": {
         "name": "Warm Water Discharge",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1813,7 +1813,7 @@
       "properties": {
         "name": "Mason Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Mason Island.",
+        "description": "Potomac · Maryland. Source: Mason Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Mason Island"
@@ -1831,7 +1831,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1849,7 +1849,7 @@
       "properties": {
         "name": "Mason Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Mason Island.",
+        "description": "Potomac · Maryland. Source: Mason Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Mason Island"
@@ -1867,7 +1867,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1885,7 +1885,7 @@
       "properties": {
         "name": "Fish Traps",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1903,7 +1903,7 @@
       "properties": {
         "name": "Sink Hole",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1921,7 +1921,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1939,7 +1939,7 @@
       "properties": {
         "name": "Harrison Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Harrison Island.",
+        "description": "Potomac · Maryland. Source: Harrison Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Harrison Island"
@@ -1957,7 +1957,7 @@
       "properties": {
         "name": "Ralph's Rock",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1975,7 +1975,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -1993,7 +1993,7 @@
       "properties": {
         "name": "Little Harrison Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2011,7 +2011,7 @@
       "properties": {
         "name": "Little Harrison Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2029,7 +2029,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2047,7 +2047,7 @@
       "properties": {
         "name": "Harrison Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Harrison Island.",
+        "description": "Potomac · Maryland. Source: Harrison Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Harrison Island"
@@ -2065,7 +2065,7 @@
       "properties": {
         "name": "Selden Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Seden Island.",
+        "description": "Potomac · Maryland. Source: Seden Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Seden Island"
@@ -2083,7 +2083,7 @@
       "properties": {
         "name": "Old Bridge Ruins",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2101,7 +2101,7 @@
       "properties": {
         "name": "Horseshoe Hole",
         "type": "Spot",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2119,7 +2119,7 @@
       "properties": {
         "name": "Van Deventer Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Van Deventer Island.",
+        "description": "Potomac · Maryland. Source: Van Deventer Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Van Deventer Island"
@@ -2137,7 +2137,7 @@
       "properties": {
         "name": "Selden Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physcial Map.",
+        "description": "Potomac · Maryland. Source: Physcial Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physcial Map"
@@ -2155,7 +2155,7 @@
       "properties": {
         "name": "Van Deventer Island (Downtream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Van Deventer Island.",
+        "description": "Potomac · Maryland. Source: Van Deventer Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Van Deventer Island"
@@ -2173,7 +2173,7 @@
       "properties": {
         "name": "Tenfoot Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Tenfoot Island.",
+        "description": "Potomac · Maryland. Source: Tenfoot Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Tenfoot Island"
@@ -2191,7 +2191,7 @@
       "properties": {
         "name": "Deep Hole",
         "type": "Spot",
-        "description": "Potomac \u00b7 Maryland. Source: Physcial Map.",
+        "description": "Potomac · Maryland. Source: Physcial Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physcial Map"
@@ -2209,7 +2209,7 @@
       "properties": {
         "name": "Tenfoot Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Tenfoot Island.",
+        "description": "Potomac · Maryland. Source: Tenfoot Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Tenfoot Island"
@@ -2227,7 +2227,7 @@
       "properties": {
         "name": "Sharpshin Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Sharpshin Island.",
+        "description": "Potomac · Maryland. Source: Sharpshin Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Sharpshin Island"
@@ -2245,7 +2245,7 @@
       "properties": {
         "name": "Sharpshin Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Sharpshin Island.",
+        "description": "Potomac · Maryland. Source: Sharpshin Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Sharpshin Island"
@@ -2263,7 +2263,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2281,7 +2281,7 @@
       "properties": {
         "name": "C&O Canal Dam #2",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2299,7 +2299,7 @@
       "properties": {
         "name": "Lowes Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Virginia. Source: Lowes Island.",
+        "description": "Potomac · Virginia. Source: Lowes Island.",
         "river": "Potomac",
         "state": "Virginia",
         "source": "Lowes Island"
@@ -2317,7 +2317,7 @@
       "properties": {
         "name": "Lowes Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Virginia. Source: Lowes Island.",
+        "description": "Potomac · Virginia. Source: Lowes Island.",
         "river": "Potomac",
         "state": "Virginia",
         "source": "Lowes Island"
@@ -2335,7 +2335,7 @@
       "properties": {
         "name": "Pond Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Pond Island.",
+        "description": "Potomac · Maryland. Source: Pond Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Pond Island"
@@ -2353,7 +2353,7 @@
       "properties": {
         "name": "Class I/II Rapids",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Island.",
+        "description": "Potomac · Maryland. Source: Physical Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Island"
@@ -2371,7 +2371,7 @@
       "properties": {
         "name": "Pond Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Pond Island.",
+        "description": "Potomac · Maryland. Source: Pond Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Pond Island"
@@ -2389,7 +2389,7 @@
       "properties": {
         "name": "Patowmack Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Patowmack Island.",
+        "description": "Potomac · Maryland. Source: Patowmack Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Patowmack Island"
@@ -2407,7 +2407,7 @@
       "properties": {
         "name": "Beech Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -2425,7 +2425,7 @@
       "properties": {
         "name": "Beech Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -2443,7 +2443,7 @@
       "properties": {
         "name": "Patowmack Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Patowmack Island.",
+        "description": "Potomac · Maryland. Source: Patowmack Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Patowmack Island"
@@ -2461,7 +2461,7 @@
       "properties": {
         "name": "Elm Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Elm Island.",
+        "description": "Potomac · Maryland. Source: Elm Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Elm Island"
@@ -2479,7 +2479,7 @@
       "properties": {
         "name": "Elm Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Elm Island.",
+        "description": "Potomac · Maryland. Source: Elm Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Elm Island"
@@ -2497,7 +2497,7 @@
       "properties": {
         "name": "Grapevine Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Grapevine Island.",
+        "description": "Potomac · Maryland. Source: Grapevine Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Grapevine Island"
@@ -2515,7 +2515,7 @@
       "properties": {
         "name": "Watkins Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Watkins Island.",
+        "description": "Potomac · Maryland. Source: Watkins Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Watkins Island"
@@ -2533,7 +2533,7 @@
       "properties": {
         "name": "Katie Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Katie Island.",
+        "description": "Potomac · Maryland. Source: Katie Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Katie Island"
@@ -2551,7 +2551,7 @@
       "properties": {
         "name": "Grapevine Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Grapevine Island.",
+        "description": "Potomac · Maryland. Source: Grapevine Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Grapevine Island"
@@ -2569,7 +2569,7 @@
       "properties": {
         "name": "Norbell Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2587,7 +2587,7 @@
       "properties": {
         "name": "Norbell Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2605,7 +2605,7 @@
       "properties": {
         "name": "Torpedo Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -2623,7 +2623,7 @@
       "properties": {
         "name": "Torpedo Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -2641,7 +2641,7 @@
       "properties": {
         "name": "Clagett Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Clagett Island.",
+        "description": "Potomac · Maryland. Source: Clagett Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Clagett Island"
@@ -2659,7 +2659,7 @@
       "properties": {
         "name": "Sycamore Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Sycamore Island.",
+        "description": "Potomac · Maryland. Source: Sycamore Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Sycamore Island"
@@ -2677,7 +2677,7 @@
       "properties": {
         "name": "Sycamore Island  (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Sycamore Island.",
+        "description": "Potomac · Maryland. Source: Sycamore Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Sycamore Island"
@@ -2695,7 +2695,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2713,7 +2713,7 @@
       "properties": {
         "name": "Clagett Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Clagett Island.",
+        "description": "Potomac · Maryland. Source: Clagett Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Clagett Island"
@@ -2731,7 +2731,7 @@
       "properties": {
         "name": "Riffles",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2749,7 +2749,7 @@
       "properties": {
         "name": "Ledeges",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2767,7 +2767,7 @@
       "properties": {
         "name": "Gladys Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Gladys Island.",
+        "description": "Potomac · Maryland. Source: Gladys Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Gladys Island"
@@ -2785,7 +2785,7 @@
       "properties": {
         "name": "Lock Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -2803,7 +2803,7 @@
       "properties": {
         "name": "Rocks",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2821,7 +2821,7 @@
       "properties": {
         "name": "Gladys Island (Downtream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Gladys Island.",
+        "description": "Potomac · Maryland. Source: Gladys Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Gladys Island"
@@ -2839,7 +2839,7 @@
       "properties": {
         "name": "Lock Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Google Maps.",
+        "description": "Potomac · Maryland. Source: Google Maps.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Google Maps"
@@ -2857,7 +2857,7 @@
       "properties": {
         "name": "Rocks",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Physical Map.",
+        "description": "Potomac · Maryland. Source: Physical Map.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Physical Map"
@@ -2875,7 +2875,7 @@
       "properties": {
         "name": "Minnehaha Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Minnehaha Island.",
+        "description": "Potomac · Maryland. Source: Minnehaha Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Minnehaha Island"
@@ -2893,7 +2893,7 @@
       "properties": {
         "name": "Minnehaha Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Minnehaha Island.",
+        "description": "Potomac · Maryland. Source: Minnehaha Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Minnehaha Island"
@@ -2911,7 +2911,7 @@
       "properties": {
         "name": "Bealls Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Bealls Island.",
+        "description": "Potomac · Maryland. Source: Bealls Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Bealls Island"
@@ -2929,7 +2929,7 @@
       "properties": {
         "name": "Bealls Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Bealls Island.",
+        "description": "Potomac · Maryland. Source: Bealls Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Bealls Island"
@@ -2947,7 +2947,7 @@
       "properties": {
         "name": "Powhatan Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Powhatan Island.",
+        "description": "Potomac · Maryland. Source: Powhatan Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Powhatan Island"
@@ -2965,7 +2965,7 @@
       "properties": {
         "name": "Powhatan Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Powhatan Island.",
+        "description": "Potomac · Maryland. Source: Powhatan Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Powhatan Island"
@@ -2983,7 +2983,7 @@
       "properties": {
         "name": "Conn Island (Upstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Conn Island.",
+        "description": "Potomac · Maryland. Source: Conn Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Conn Island"
@@ -3001,7 +3001,7 @@
       "properties": {
         "name": "Conn Island (Downstream)",
         "type": "Island",
-        "description": "Potomac \u00b7 Maryland. Source: Conn Island.",
+        "description": "Potomac · Maryland. Source: Conn Island.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Conn Island"
@@ -3019,7 +3019,7 @@
       "properties": {
         "name": "Potomac River Dam",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: Potomac  River Dams.",
+        "description": "Potomac · Maryland. Source: Potomac  River Dams.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Potomac  River Dams"
@@ -3037,7 +3037,7 @@
       "properties": {
         "name": "Riverbend Park",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Virginia. Source: Riverbend Park Boat Ramp.",
+        "description": "Potomac · Virginia. Source: Riverbend Park Boat Ramp.",
         "river": "Potomac",
         "state": "Virginia",
         "source": "Riverbend Park Boat Ramp"
@@ -3055,7 +3055,7 @@
       "properties": {
         "name": "C and O Canal Lock 21 (Swain's Lock)",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: Swains Lock.",
+        "description": "Potomac · Maryland. Source: Swains Lock.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Swains Lock"
@@ -3073,7 +3073,7 @@
       "properties": {
         "name": "Pennyfield Conservation Area Boat Ramp",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Pennyfield Conservation Area.",
+        "description": "Potomac · Maryland. Source: Pennyfield Conservation Area.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Pennyfield Conservation Area"
@@ -3091,7 +3091,7 @@
       "properties": {
         "name": "Violette's Lock Boat Launch",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: Violette's Lock.",
+        "description": "Potomac · Maryland. Source: Violette's Lock.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Violette's Lock"
@@ -3109,7 +3109,7 @@
       "properties": {
         "name": "Seneca Landing Boat Ramp",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Seneca Landing.",
+        "description": "Potomac · Maryland. Source: Seneca Landing.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Seneca Landing"
@@ -3127,7 +3127,7 @@
       "properties": {
         "name": "Algonkian Regional Park Boat Ramp",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Virginia. Source: Algonkian Regional Park.",
+        "description": "Potomac · Virginia. Source: Algonkian Regional Park.",
         "river": "Potomac",
         "state": "Virginia",
         "source": "Algonkian Regional Park"
@@ -3145,7 +3145,7 @@
       "properties": {
         "name": "Sycamore Landing",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: Sycamore Landing.",
+        "description": "Potomac · Maryland. Source: Sycamore Landing.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Sycamore Landing"
@@ -3163,7 +3163,7 @@
       "properties": {
         "name": "Riverpoint Drive Trail",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Virginia. Source: Riverpoint Drive Trail.",
+        "description": "Potomac · Virginia. Source: Riverpoint Drive Trail.",
         "river": "Potomac",
         "state": "Virginia",
         "source": "Riverpoint Drive Trail"
@@ -3181,7 +3181,7 @@
       "properties": {
         "name": "Edwards Ferry",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Edwards Ferry.",
+        "description": "Potomac · Maryland. Source: Edwards Ferry.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Edwards Ferry"
@@ -3199,7 +3199,7 @@
       "properties": {
         "name": "Whites Ferry",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Whites Ferry.",
+        "description": "Potomac · Maryland. Source: Whites Ferry.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Whites Ferry"
@@ -3217,7 +3217,7 @@
       "properties": {
         "name": "Mouth of Monocay",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Mouth of Monocay.",
+        "description": "Potomac · Maryland. Source: Mouth of Monocay.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Mouth of Monocay"
@@ -3235,7 +3235,7 @@
       "properties": {
         "name": "Nolands Ferry",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Nolands Ferry.",
+        "description": "Potomac · Maryland. Source: Nolands Ferry.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Nolands Ferry"
@@ -3253,7 +3253,7 @@
       "properties": {
         "name": "Point of Rocks VA (McKimmey)",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Virginia. Source: Point of Rocks VA.",
+        "description": "Potomac · Virginia. Source: Point of Rocks VA.",
         "river": "Potomac",
         "state": "Virginia",
         "source": "Point of Rocks VA"
@@ -3271,7 +3271,7 @@
       "properties": {
         "name": "Point of Rocks",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Point of Rocks.",
+        "description": "Potomac · Maryland. Source: Point of Rocks.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Point of Rocks"
@@ -3289,7 +3289,7 @@
       "properties": {
         "name": "Lander",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Lander.",
+        "description": "Potomac · Maryland. Source: Lander.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Lander"
@@ -3307,7 +3307,7 @@
       "properties": {
         "name": "Brunswick",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Brunswick.",
+        "description": "Potomac · Maryland. Source: Brunswick.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Brunswick"
@@ -3325,7 +3325,7 @@
       "properties": {
         "name": "C and O canal Lockhouse 31",
         "type": "Public access",
-        "description": "Potomac \u00b7 Maryland. Source: C and O Canal Lockhouse 31.",
+        "description": "Potomac · Maryland. Source: C and O Canal Lockhouse 31.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "C and O Canal Lockhouse 31"
@@ -3343,7 +3343,7 @@
       "properties": {
         "name": "Patoma Wayside",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Virginia. Source: Patoma Wayside.",
+        "description": "Potomac · Virginia. Source: Patoma Wayside.",
         "river": "Potomac",
         "state": "Virginia",
         "source": "Patoma Wayside"
@@ -3361,7 +3361,7 @@
       "properties": {
         "name": "Lock 33 Access",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: Appalachian Trail and Towpath.",
+        "description": "Potomac · Maryland. Source: Appalachian Trail and Towpath.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Appalachian Trail and Towpath"
@@ -3379,7 +3379,7 @@
       "properties": {
         "name": "Dam no. 3",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: Dam no. 3.",
+        "description": "Potomac · Maryland. Source: Dam no. 3.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Dam no. 3"
@@ -3397,7 +3397,7 @@
       "properties": {
         "name": "Dargan Bend",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Dargan Bend.",
+        "description": "Potomac · Maryland. Source: Dargan Bend.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Dargan Bend"
@@ -3415,7 +3415,7 @@
       "properties": {
         "name": "Lock 37 Access",
         "type": "Public access",
-        "description": "Potomac \u00b7 Maryland. Source: Lock 37.",
+        "description": "Potomac · Maryland. Source: Lock 37.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Lock 37"
@@ -3433,7 +3433,7 @@
       "properties": {
         "name": "Shepherdstown Boat Launch",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 West Virginia. Source: Shepherdstown Boat Launch.",
+        "description": "Potomac · West Virginia. Source: Shepherdstown Boat Launch.",
         "river": "Potomac",
         "state": "West Virginia",
         "source": "Shepherdstown Boat Launch"
@@ -3451,7 +3451,7 @@
       "properties": {
         "name": "Snyders Landing Boat Ramp",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Snyders Landing Boat Ramp.",
+        "description": "Potomac · Maryland. Source: Snyders Landing Boat Ramp.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Snyders Landing Boat Ramp"
@@ -3469,7 +3469,7 @@
       "properties": {
         "name": "Taylors Landing",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Taylors Landing.",
+        "description": "Potomac · Maryland. Source: Taylors Landing.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Taylors Landing"
@@ -3487,7 +3487,7 @@
       "properties": {
         "name": "Big Slackwater Boat Ramp",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 West Virginia. Source: Big Slackwater Boat Ramp.",
+        "description": "Potomac · West Virginia. Source: Big Slackwater Boat Ramp.",
         "river": "Potomac",
         "state": "West Virginia",
         "source": "Big Slackwater Boat Ramp"
@@ -3505,7 +3505,7 @@
       "properties": {
         "name": "Williamsport",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Williamsport.",
+        "description": "Potomac · Maryland. Source: Williamsport.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Williamsport"
@@ -3523,7 +3523,7 @@
       "properties": {
         "name": "Four Locks Boat Ramp",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Four Locks Boat Ramp.",
+        "description": "Potomac · Maryland. Source: Four Locks Boat Ramp.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Four Locks Boat Ramp"
@@ -3541,7 +3541,7 @@
       "properties": {
         "name": "McCoys Ferry Boat Ramp",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: McCoys Ferry Boat Ramp.",
+        "description": "Potomac · Maryland. Source: McCoys Ferry Boat Ramp.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "McCoys Ferry Boat Ramp"
@@ -3559,7 +3559,7 @@
       "properties": {
         "name": "Fort Frederick State Park",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: Fort Frederick State Park.",
+        "description": "Potomac · Maryland. Source: Fort Frederick State Park.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Fort Frederick State Park"
@@ -3577,7 +3577,7 @@
       "properties": {
         "name": "Little Pool Campground",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: Little Pool Campground.",
+        "description": "Potomac · Maryland. Source: Little Pool Campground.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Little Pool Campground"
@@ -3595,7 +3595,7 @@
       "properties": {
         "name": "Hancock",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Little Tonoloway.",
+        "description": "Potomac · Maryland. Source: Little Tonoloway.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Little Tonoloway"
@@ -3613,7 +3613,7 @@
       "properties": {
         "name": "White Rock Hiker-Biker Campsite",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: White Rock Hiker-Biker Campsite.",
+        "description": "Potomac · Maryland. Source: White Rock Hiker-Biker Campsite.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "White Rock Hiker-Biker Campsite"
@@ -3631,7 +3631,7 @@
       "properties": {
         "name": "Leopards Mill Hiker-Biker Campsite",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: Leopards Mill Hiker-Biker Campsite.",
+        "description": "Potomac · Maryland. Source: Leopards Mill Hiker-Biker Campsite.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Leopards Mill Hiker-Biker Campsite"
@@ -3649,7 +3649,7 @@
       "properties": {
         "name": "Cacapon Junction Hiker-Biker Campsite",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: Cacapon Junction Hiker-Biker Campsite.",
+        "description": "Potomac · Maryland. Source: Cacapon Junction Hiker-Biker Campsite.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Cacapon Junction Hiker-Biker Campsite"
@@ -3667,7 +3667,7 @@
       "properties": {
         "name": "Fifteen Mile Creek",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Fifteen Mile Creek.",
+        "description": "Potomac · Maryland. Source: Fifteen Mile Creek.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Fifteen Mile Creek"
@@ -3685,7 +3685,7 @@
       "properties": {
         "name": "Bonds Landing Boat Ramp",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 Maryland. Source: Bonds Landing Boat Ramp.",
+        "description": "Potomac · Maryland. Source: Bonds Landing Boat Ramp.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Bonds Landing Boat Ramp"
@@ -3703,7 +3703,7 @@
       "properties": {
         "name": "Paw Paw Access",
         "type": "Boat ramp",
-        "description": "Potomac \u00b7 West Virginia. Source: Paw Paw River Access.",
+        "description": "Potomac · West Virginia. Source: Paw Paw River Access.",
         "river": "Potomac",
         "state": "West Virginia",
         "source": "Paw Paw River Access"
@@ -3721,7 +3721,7 @@
       "properties": {
         "name": "Green Ridge/Town Creek Access",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: Green Ridge/Town Creek Access.",
+        "description": "Potomac · Maryland. Source: Green Ridge/Town Creek Access.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Green Ridge/Town Creek Access"
@@ -3739,7 +3739,7 @@
       "properties": {
         "name": "Piscataway Crossing Kayak Launch",
         "type": "Primitive launch",
-        "description": "Potomac \u00b7 Maryland. Source: Piscataway Crossing Kayak Launch.",
+        "description": "Potomac · Maryland. Source: Piscataway Crossing Kayak Launch.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "Piscataway Crossing Kayak Launch"
@@ -3757,7 +3757,7 @@
       "properties": {
         "name": "Mumma Ford Road Launch",
         "type": "Boat ramp",
-        "description": "Monocacy \u00b7 Maryland. Source: Mumma Ford Road Launch.",
+        "description": "Monocacy · Maryland. Source: Mumma Ford Road Launch.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Mumma Ford Road Launch"
@@ -3775,7 +3775,7 @@
       "properties": {
         "name": "Rocky Ridge Road Access",
         "type": "Primitive launch",
-        "description": "Monocacy \u00b7 Maryland. Source: Rocky Ridge Road Access.",
+        "description": "Monocacy · Maryland. Source: Rocky Ridge Road Access.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Rocky Ridge Road Access"
@@ -3793,7 +3793,7 @@
       "properties": {
         "name": "Creagerstown Park Boat Ramp",
         "type": "Boat ramp",
-        "description": "Monocacy \u00b7 Maryland. Source: Creagerstown Park Boat Ramp.",
+        "description": "Monocacy · Maryland. Source: Creagerstown Park Boat Ramp.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Creagerstown Park Boat Ramp"
@@ -3811,7 +3811,7 @@
       "properties": {
         "name": "Devilbiss Bridge Boat Ramp",
         "type": "Boat ramp",
-        "description": "Monocacy \u00b7 Maryland. Source: Devilbiss Bridge Boat Ramp.",
+        "description": "Monocacy · Maryland. Source: Devilbiss Bridge Boat Ramp.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Devilbiss Bridge Boat Ramp"
@@ -3829,7 +3829,7 @@
       "properties": {
         "name": "Riverside Park Boat Ramp",
         "type": "Boat ramp",
-        "description": "Monocacy \u00b7 Maryland. Source: Riverside Park Boat Ramp.",
+        "description": "Monocacy · Maryland. Source: Riverside Park Boat Ramp.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Riverside Park Boat Ramp"
@@ -3847,7 +3847,7 @@
       "properties": {
         "name": "Pinecliff Park Boat Ramp",
         "type": "Boat ramp",
-        "description": "Monocacy \u00b7 Maryland. Source: Pinecliff Park Boat Ramp.",
+        "description": "Monocacy · Maryland. Source: Pinecliff Park Boat Ramp.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Pinecliff Park Boat Ramp"
@@ -3865,7 +3865,7 @@
       "properties": {
         "name": "Park Mills Boat Ramp",
         "type": "Boat ramp",
-        "description": "Monocacy \u00b7 Maryland. Source: Park Mills Boat Ramp.",
+        "description": "Monocacy · Maryland. Source: Park Mills Boat Ramp.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Park Mills Boat Ramp"
@@ -3883,7 +3883,7 @@
       "properties": {
         "name": "Powerline",
         "type": "Landmark",
-        "description": "Monocacy \u00b7 Maryland. Source: Below Green Field.",
+        "description": "Monocacy · Maryland. Source: Below Green Field.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Below Green Field"
@@ -3901,7 +3901,7 @@
       "properties": {
         "name": "Buckeystown Park",
         "type": "Primitive launch",
-        "description": "Monocacy \u00b7 Maryland. Source: BuckeysTown Park.",
+        "description": "Monocacy · Maryland. Source: BuckeysTown Park.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "BuckeysTown Park"
@@ -3919,7 +3919,7 @@
       "properties": {
         "name": "Monocacy Aqueduct Launch Site",
         "type": "Boat ramp",
-        "description": "Monocacy \u00b7 Maryland. Source: Monocacy Aqueduct Launch Site.",
+        "description": "Monocacy · Maryland. Source: Monocacy Aqueduct Launch Site.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Monocacy Aqueduct Launch Site"
@@ -3937,7 +3937,7 @@
       "properties": {
         "name": "Milleville Tailrace access point",
         "type": "Boat ramp",
-        "description": "Shenandoah \u00b7 West Virginia. Source: Milleville Tailrace access point.",
+        "description": "Shenandoah · West Virginia. Source: Milleville Tailrace access point.",
         "river": "Shenandoah",
         "state": "West Virginia",
         "source": "Milleville Tailrace access point"
@@ -3955,7 +3955,7 @@
       "properties": {
         "name": "Cavalier Heights visitor center",
         "type": "Public access",
-        "description": "Shenandoah \u00b7 West Virginia. Source: Cavalier Heights.",
+        "description": "Shenandoah · West Virginia. Source: Cavalier Heights.",
         "river": "Shenandoah",
         "state": "West Virginia",
         "source": "Cavalier Heights"
@@ -3973,7 +3973,7 @@
       "properties": {
         "name": "Historic Burnside stone bridge",
         "type": "Primitive launch",
-        "description": "Antietam Creek \u00b7 Maryland. Source: Historic Burnside stone bridge.",
+        "description": "Antietam Creek · Maryland. Source: Historic Burnside stone bridge.",
         "river": "Antietam Creek",
         "state": "Maryland",
         "source": "Historic Burnside stone bridge"
@@ -3991,7 +3991,7 @@
       "properties": {
         "name": "Antietam creek access",
         "type": "Primitive launch",
-        "description": "Antietam Creek \u00b7 Maryland. Source: Antietam creek access.",
+        "description": "Antietam Creek · Maryland. Source: Antietam creek access.",
         "river": "Antietam Creek",
         "state": "Maryland",
         "source": "Antietam creek access"
@@ -4009,7 +4009,7 @@
       "properties": {
         "name": "Hitt bridge",
         "type": "Primitive launch",
-        "description": "Antietam Creek \u00b7 Maryland. Source: Hitt Bridge.",
+        "description": "Antietam Creek · Maryland. Source: Hitt Bridge.",
         "river": "Antietam Creek",
         "state": "Maryland",
         "source": "Hitt Bridge"
@@ -4027,7 +4027,7 @@
       "properties": {
         "name": "Devils backbone County Park",
         "type": "Primitive launch",
-        "description": "Antietam Creek \u00b7 Maryland. Source: Devil's Backbone County Park.",
+        "description": "Antietam Creek · Maryland. Source: Devil's Backbone County Park.",
         "river": "Antietam Creek",
         "state": "Maryland",
         "source": "Devil's Backbone County Park"
@@ -4045,7 +4045,7 @@
       "properties": {
         "name": "Kemp's Mill Access",
         "type": "Primitive launch",
-        "description": "Conococheague \u00b7 Maryland. Source: Kemp's Mill Access.",
+        "description": "Conococheague · Maryland. Source: Kemp's Mill Access.",
         "river": "Conococheague",
         "state": "Maryland",
         "source": "Kemp's Mill Access"
@@ -4063,7 +4063,7 @@
       "properties": {
         "name": "Wilson Bridge Park",
         "type": "Primitive launch",
-        "description": "Conococheague \u00b7 Maryland. Source: Wilson Bridge Park.",
+        "description": "Conococheague · Maryland. Source: Wilson Bridge Park.",
         "river": "Conococheague",
         "state": "Maryland",
         "source": "Wilson Bridge Park"
@@ -4081,7 +4081,7 @@
       "properties": {
         "name": "Fairview Rd. Launch Site",
         "type": "Primitive launch",
-        "description": "Conococheague \u00b7 Maryland. Source: Fairview Rd. Launch Site.",
+        "description": "Conococheague · Maryland. Source: Fairview Rd. Launch Site.",
         "river": "Conococheague",
         "state": "Maryland",
         "source": "Fairview Rd. Launch Site"
@@ -4099,7 +4099,7 @@
       "properties": {
         "name": "Wishard Road Access",
         "type": "Primitive launch",
-        "description": "Conococheague \u00b7 Maryland. Source: Wishard Road Access.",
+        "description": "Conococheague · Maryland. Source: Wishard Road Access.",
         "river": "Conococheague",
         "state": "Maryland",
         "source": "Wishard Road Access"
@@ -4116,8 +4116,8 @@
       },
       "properties": {
         "name": "USGS Point of Rocks",
-        "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: USGS Point of Rocks.",
+        "type": "H2O gauge",
+        "description": "Potomac · Maryland. Source: USGS Point of Rocks.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "USGS Point of Rocks"
@@ -4134,8 +4134,8 @@
       },
       "properties": {
         "name": "USGS Paw Paw",
-        "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: USGS Paw Paw Monitoring.",
+        "type": "H2O gauge",
+        "description": "Potomac · Maryland. Source: USGS Paw Paw Monitoring.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "USGS Paw Paw Monitoring"
@@ -4153,7 +4153,7 @@
       "properties": {
         "name": "NOAA Williamsport",
         "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: NOAA at Williamsport.",
+        "description": "Potomac · Maryland. Source: NOAA at Williamsport.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "NOAA at Williamsport"
@@ -4170,8 +4170,8 @@
       },
       "properties": {
         "name": "USGS Shepherdstown",
-        "type": "Landmark",
-        "description": "Potomac \u00b7 West Virginia. Source: USGS Shepherdstown.",
+        "type": "H2O gauge",
+        "description": "Potomac · West Virginia. Source: USGS Shepherdstown.",
         "river": "Potomac",
         "state": "West Virginia",
         "source": "USGS Shepherdstown"
@@ -4188,8 +4188,8 @@
       },
       "properties": {
         "name": "USGS Hancock",
-        "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: USGS Hancock.",
+        "type": "H2O gauge",
+        "description": "Potomac · Maryland. Source: USGS Hancock.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "USGS Hancock"
@@ -4206,8 +4206,8 @@
       },
       "properties": {
         "name": "USGS Harpers Ferry",
-        "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: USGS Harpers Ferry.",
+        "type": "H2O gauge",
+        "description": "Potomac · Maryland. Source: USGS Harpers Ferry.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "USGS Harpers Ferry"
@@ -4224,8 +4224,8 @@
       },
       "properties": {
         "name": "USGS Point of Rocks",
-        "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: USGS Point of Rocks.",
+        "type": "H2O gauge",
+        "description": "Potomac · Maryland. Source: USGS Point of Rocks.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "USGS Point of Rocks"
@@ -4242,8 +4242,8 @@
       },
       "properties": {
         "name": "USGS Edwards Ferry",
-        "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: USGS Edwards Ferry.",
+        "type": "H2O gauge",
+        "description": "Potomac · Maryland. Source: USGS Edwards Ferry.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "USGS Edwards Ferry"
@@ -4260,8 +4260,8 @@
       },
       "properties": {
         "name": "USGS Little Falls",
-        "type": "Landmark",
-        "description": "Potomac \u00b7 Maryland. Source: USGS Little Falls.",
+        "type": "H2O gauge",
+        "description": "Potomac · Maryland. Source: USGS Little Falls.",
         "river": "Potomac",
         "state": "Maryland",
         "source": "USGS Little Falls"
@@ -4279,7 +4279,7 @@
       "properties": {
         "name": "Bridgeport Gauge",
         "type": "Landmark",
-        "description": "Monocacy \u00b7 Maryland. Source: Bridgeport Gauge.",
+        "description": "Monocacy · Maryland. Source: Bridgeport Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Bridgeport Gauge"
@@ -4297,7 +4297,7 @@
       "properties": {
         "name": "Walkersville Gauge",
         "type": "Landmark",
-        "description": "Monocacy \u00b7 Maryland. Source: Walkersville Gauge.",
+        "description": "Monocacy · Maryland. Source: Walkersville Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Walkersville Gauge"
@@ -4315,7 +4315,7 @@
       "properties": {
         "name": "Bruceville Gauge",
         "type": "Landmark",
-        "description": "Monocacy \u00b7 Maryland. Source: Bruceville Gauge.",
+        "description": "Monocacy · Maryland. Source: Bruceville Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Bruceville Gauge"
@@ -4333,7 +4333,7 @@
       "properties": {
         "name": "Monocacy Blvd Gauge",
         "type": "Landmark",
-        "description": "Monocacy \u00b7 Maryland. Source: Monocacy Blvd Gauge.",
+        "description": "Monocacy · Maryland. Source: Monocacy Blvd Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Monocacy Blvd Gauge"
@@ -4351,7 +4351,7 @@
       "properties": {
         "name": "Jug Bridge Gauge",
         "type": "Landmark",
-        "description": "Monocacy \u00b7 Maryland. Source: Jug Bridge Gauge.",
+        "description": "Monocacy · Maryland. Source: Jug Bridge Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Jug Bridge Gauge"
@@ -4368,8 +4368,8 @@
       },
       "properties": {
         "name": "Bennett Creek Gauge",
-        "type": "Landmark",
-        "description": "Bennett Creek \u00b7 Maryland. Source: USGS Bennett Creek.",
+        "type": "H2O gauge",
+        "description": "Bennett Creek · Maryland. Source: USGS Bennett Creek.",
         "river": "Bennett Creek",
         "state": "Maryland",
         "source": "USGS Bennett Creek"
@@ -4387,7 +4387,7 @@
       "properties": {
         "name": "Monocacy River Gauge",
         "type": "Landmark",
-        "description": "Monocacy \u00b7 Maryland. Source: Mononcay River.",
+        "description": "Monocacy · Maryland. Source: Mononcay River.",
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Mononcay River"

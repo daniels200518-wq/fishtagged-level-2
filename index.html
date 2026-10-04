@@ -20,7 +20,7 @@
   base-uri 'self';
   form-action 'self';
 ">
-<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon-upside-down.png?v=20260913">
+<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon-upside-down.png?v=20261002">
 
 <link href="https://unpkg.com/maplibre-gl@6.0.0/dist/maplibre-gl.css" rel="stylesheet">
 <script type="module" src="assets/maplibre-loader.js"></script>
@@ -133,6 +133,7 @@
              border-bottom:1px solid var(--hair); }
   .panehead span{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
                   font-size:12.5px; font-weight:750; color:#46504c; }
+  .panehead small{ flex:none; color:var(--label); font-size:9.5px; font-weight:650; white-space:nowrap; }
   .panehead button{ width:25px; height:25px; border:0; border-radius:50%; background:transparent;
                     color:var(--label); font-size:18px; cursor:pointer; }
   .panehead button:hover,.panehead button:focus-visible{ background:var(--field); color:var(--ink); outline:none; }
@@ -163,7 +164,6 @@
   .said.bad{ background:#f7e9e6; color:#9a3318; }
   .seek.mini input{ height:31px; }
   .seek.mini button{ height:31px; }
-  .soon{ font-size:11.5px; color:var(--green-dk); margin-top:8px; font-weight:600; }
   .hint{ display:flex; align-items:center; gap:7px; margin-top:12px; font-size:11.5px; color:#c0402c; font-weight:600; }
   .hdot{ width:16px; height:16px; border-radius:50%; background:#c0402c; border:2px solid #fff;
          box-shadow:0 0 0 1px #d8dcd6; color:#fff; font-size:9.5px; font-weight:bold;
@@ -224,9 +224,12 @@
                width:18px; height:18px; border-radius:50%; color:#fff; font:700 10px/1 Arial,sans-serif; }
   .place-mark.landmark{ background:#596260; }
   .place-mark.island{ background:#b8872b; }
-  .place-mark.spot{ background:#7656a4; }
+  .place-mark.spot{ position:relative; background:#d62f2f; border-radius:50% 50% 50% 12%; transform:rotate(-45deg); }
+  .place-mark.spot::after{ content:""; width:7px; height:7px; border:1px solid #fff; border-radius:50%;
+                           background:#20292b; transform:rotate(45deg); }
   .place-mark.ramp{ background:#247e8a; }
   .place-mark.launch{ background:#4e8d78; }
+  .place-mark.gauge{ background:#466b79; font-size:11px; }
 
   .legend .lt{ font-size:12.5px; font-weight:bold; }
   .legend .ls{ font-size:11px; color:var(--label); margin:1px 0 8px; }
@@ -340,6 +343,9 @@
   .password-show:hover,.password-show:focus-visible{ background:var(--field); color:var(--ink); outline:none; }
   .login-actions{ display:flex; gap:8px; margin-top:16px; }
   .login-actions button{ flex:1; font-size:14px; }
+  #loginSubmit.busy{ display:flex; align-items:center; justify-content:center; gap:8px; }
+  #loginSubmit.busy::before{ content:""; width:13px; height:13px; border:2px solid rgba(32,41,43,.22);
+                             border-top-color:var(--green-dk); border-radius:50%; animation:spin .75s linear infinite; }
   .loginmsg{ min-height:18px; margin-top:10px; color:#9a3318; font-size:12.5px; }
   .preview-login{ display:none; width:100%; margin-top:8px; border:0; background:none; color:var(--green-dk);
                   text-decoration:underline; font:12px inherit; cursor:pointer; }
@@ -485,6 +491,7 @@
   <div class="pane hidden" id="pane" aria-label="Map tools">
     <div class="panehead">
       <span id="paneLabel">Map tools</span>
+      <small id="dataUpdated"></small>
       <button id="paneClose" type="button" aria-label="Close map tools">&times;</button>
     </div>
     <div class="panebody" id="paneBody"></div>
@@ -502,7 +509,7 @@
 
 <div class="login" id="login" aria-hidden="true">
   <div class="loginbox" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-    <h2 id="loginTitle">For Level 2: log in</h2>
+    <h2 id="loginTitle">Level 2 account</h2>
     <p id="loginIntro">No account yet? Create an account first. Email verification is required.</p>
     <div class="account-switch" id="accountSwitch">
       <button type="button" id="createModeBtn">Create account</button>
@@ -550,8 +557,8 @@
           This number is not displayed publicly or SMS-verified.</div>
       </div>
       <div class="login-actions">
-        <button class="flat" type="button" id="loginCancel">Cancel</button>
-        <button class="flat" type="submit" id="loginSubmit">Sign in</button>
+        <button class="flat" type="button" id="loginCancel">&larr; Back</button>
+        <button class="flat" type="submit" id="loginSubmit">Continue</button>
       </div>
       <div class="loginmsg" id="loginMsg" aria-live="polite"></div>
       <button class="mfa-setup" id="verifyEmailBtn" type="button" hidden>
@@ -570,8 +577,17 @@
 <div id="lightbox" onclick="this.classList.remove('on')"><img alt=""><div class="lb-cap"></div></div>
 
 <script>
-const HERE = location.href.replace(/[^/]*$/,"");
+const HERE = location.href.replace(/[^/]*$/,'');
 const DATA_VERSION = "20260927a";
+const SITE_UPDATED = "20261002";
+function updateDateLabel(...versions){
+  let latest="";
+  versions.forEach(version=>{
+    const match=String(version||"").match(/^(\d{4})(\d{2})(\d{2})/);
+    if(match && match[0]>latest) latest=match[0];
+  });
+  return latest ? `Updated ${latest.slice(4,6)}/${latest.slice(6,8)}/${latest.slice(0,4)}` : "";
+}
 const DATA_FILE = "fish_index-20260701.json";
 const TILE_ROOT = "tiles-20260701";
 const PUBLIC_META_FILE = "public-meta-20260701.json";
@@ -693,7 +709,8 @@ const PLACE_GROUPS = {
   islands:["Island"],
   spots:["Spot"],
   ramps:["Boat ramp"],
-  launches:["Primitive launch"]
+  launches:["Primitive launch"],
+  gauges:["H2O gauge"]
 };
 function authSession(){
   return verifiedSession;
@@ -751,7 +768,7 @@ function resetLoginStep(){
   byId("accountSwitch").hidden=false;
   byId("loginModeBtn").classList.add("on");
   byId("createModeBtn").classList.remove("on");
-  set("loginSubmit","Log in");
+  set("loginSubmit","Continue");
   if(window.FT_AUTH) window.FT_AUTH.cancelMfa();
 }
 function closeLogin(){
@@ -766,7 +783,7 @@ function closeLogin(){
 function openLogin(level,mode="login"){
   pendingRole=level;
   resetLoginStep();
-  set("loginTitle",level==="l3"?"Level 3 staff access":"For Level 2: log in");
+  set("loginTitle",level==="l3"?"Level 3 staff access":"Level 2 account");
   set("loginIntro",level==="l3"?"Administrator account required.":"No account yet? Create an account first. Email verification is required.");
   byId("accountSwitch").hidden=level==="l3";
   const preview=byId("previewLogin");
@@ -782,7 +799,7 @@ function toggleCreateAccount(force){
   const create=typeof force==="boolean" ? force : !signupMode;
   if(!create){
     resetLoginStep();
-    set("loginTitle","For Level 2: log in");
+    set("loginTitle","Level 2 account");
     set("loginIntro","No account yet? Create an account first. Email verification is required.");
     set("loginMsg","");
     byId("loginEmail").focus();
@@ -807,7 +824,7 @@ function toggleCreateAccount(force){
   byId("createModeBtn").classList.add("on");
   set("loginTitle","Create a Level 2 account");
   set("loginIntro","Create your account, then verify your email before signing in.");
-  set("loginSubmit","Create account");
+  set("loginSubmit","Continue");
   set("loginMsg","");
   byId("loginEmail").focus();
 }
@@ -1033,6 +1050,8 @@ async function signIn(e){
   e.preventDefault();
   const submit=byId("loginSubmit");
   submit.disabled=true;
+  submit.classList.add("busy");
+  submit.setAttribute("aria-busy","true");
   set("loginMsg",phonePending?"Saving phone number…":
     emailCodePending?"Checking the emailed code…":mfaPending?"Checking code…":
       signupMode?"Creating account…":"Signing in…");
@@ -1130,6 +1149,8 @@ async function signIn(e){
     byId("verifyEmailBtn").hidden=error.code!=="email_not_verified";
   }finally{
     submit.disabled=false;
+    submit.classList.remove("busy");
+    submit.removeAttribute("aria-busy");
   }
 }
 function previewLevel(){
@@ -1320,16 +1341,25 @@ function placeFilter(category){
 function placeImage(category){
   return ["match",["get","type"],
     "Island","place-island","Spot","place-spot","Boat ramp","place-ramp",
-    "Primitive launch","place-launch","place-landmark"];
+    "Primitive launch","place-launch","H2O gauge","place-gauge","place-landmark"];
 }
 function placeMarker(kind,color){
   const size=48, canvas=document.createElement("canvas");
   canvas.width=size; canvas.height=size;
   const ctx=canvas.getContext("2d");
   ctx.clearRect(0,0,size,size);
-  ctx.beginPath(); ctx.arc(24,24,18,0,Math.PI*2);
-  ctx.fillStyle=color; ctx.fill();
-  ctx.strokeStyle="#fff"; ctx.lineWidth=3; ctx.stroke();
+  ctx.fillStyle=color; ctx.strokeStyle="#fff"; ctx.lineWidth=3;
+  if(kind==="spot"){
+    ctx.beginPath();
+    ctx.moveTo(42,24);
+    ctx.bezierCurveTo(34,15,29,9,20,9);
+    ctx.bezierCurveTo(10,9,5,16,5,24);
+    ctx.bezierCurveTo(5,32,10,39,20,39);
+    ctx.bezierCurveTo(29,39,34,33,42,24);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+  }else{
+    ctx.beginPath(); ctx.arc(24,24,18,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  }
   ctx.strokeStyle="#fff"; ctx.fillStyle="#fff"; ctx.lineWidth=3;
   ctx.lineCap="round"; ctx.lineJoin="round";
   if(kind==="landmark"){
@@ -1339,10 +1369,16 @@ function placeMarker(kind,color){
     ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(15,30); ctx.quadraticCurveTo(19,27,23,30);
     ctx.quadraticCurveTo(27,33,33,29); ctx.stroke();
   }else if(kind==="spot"){
-    ctx.beginPath(); ctx.arc(24,24,6,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(20,24,7,0,Math.PI*2); ctx.fillStyle="#20292b"; ctx.fill();
+    ctx.strokeStyle="#fff"; ctx.lineWidth=2; ctx.stroke();
   }else if(kind==="ramp"){
     ctx.beginPath(); ctx.moveTo(17,30); ctx.lineTo(30,18); ctx.moveTo(17,31); ctx.lineTo(33,31);
     ctx.moveTo(22,26); ctx.lineTo(32,26); ctx.stroke();
+  }else if(kind==="gauge"){
+    ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.arc(24,27,9,Math.PI,0); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(24,27); ctx.lineTo(30,19); ctx.stroke();
+    ctx.beginPath(); ctx.arc(24,27,2.5,0,Math.PI*2); ctx.fill();
   }else{
     ctx.beginPath(); ctx.moveTo(18,31); ctx.lineTo(29,18); ctx.stroke();
     ctx.beginPath(); ctx.ellipse(31,16,4,6,.7,0,Math.PI*2); ctx.fill();
@@ -1353,9 +1389,10 @@ function addPlaceMarkerImages(){
   const markers={
     "place-landmark":["landmark","#596260"],
     "place-island":["island","#b8872b"],
-    "place-spot":["spot","#7656a4"],
+    "place-spot":["spot","#d62f2f"],
     "place-ramp":["ramp","#247e8a"],
-    "place-launch":["launch","#4e8d78"]
+    "place-launch":["launch","#4e8d78"],
+    "place-gauge":["gauge","#466b79"]
   };
   for(const [name,[kind,color]] of Object.entries(markers)){
     if(!map.hasImage(name)) map.addImage(name,placeMarker(kind,color),{pixelRatio:2});
@@ -2349,11 +2386,13 @@ function panel(){
       <option value="spots"${placesCategory==="spots"?" selected":""}>Spots</option>
       <option value="ramps"${placesCategory==="ramps"?" selected":""}>Boat ramps</option>
       <option value="launches"${placesCategory==="launches"?" selected":""}>Primitive launch</option>
+      <option value="gauges"${placesCategory==="gauges"?" selected":""}>H2O gauges</option>
     </select>
     <div class="place-key">
       <span><b class="place-mark landmark">⚑</b>landmark</span>
-      <span><b class="place-mark island">I</b>island</span><span><b class="place-mark spot">•</b>spot</span>
+      <span><b class="place-mark island">I</b>island</span><span><b class="place-mark spot"></b>spot</span>
       <span><b class="place-mark ramp">↘</b>boat ramp</span><span><b class="place-mark launch">P</b>primitive launch</span>
+      <span><b class="place-mark gauge">⌁</b>H2O gauge</span>
     </div>
     <div class="level-note">Select a category, then click a map symbol for details and a Google Maps link. Zoom in to separate nearby places.</div>`,false);
 
@@ -2364,7 +2403,6 @@ function panel(){
       <button id="seekGo">Search</button>
     </div>
       <div class="tries">View <a data-n="841">841</a> · <a data-n="304">304</a> · <a data-n="97">97</a> · <a data-n="1974">1974</a></div>
-      <div class="soon">More features coming soon.</div>
       <div class="said" id="said"></div>
       <div class="hint"><span class="hdot">1</span> Click a numbered capture to view that catch</div>
     `,true);
@@ -2797,6 +2835,7 @@ async function enter(r){
   }
   role=r; defaults();
   document.getElementById("lvlName").textContent=LEVELS[r];
+  set("dataUpdated",updateDateLabel(DATA_VERSION,SITE_UPDATED));
   const levelOneLabel=byId("levelOneButton")?.querySelector("b");
   if(levelOneLabel) levelOneLabel.textContent=r==="l1"?"Level 1 Search":"Back to Level 1 Search";
   document.querySelectorAll("[data-map-level]").forEach(button=>
