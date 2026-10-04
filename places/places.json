@@ -4116,7 +4116,7 @@
       },
       "properties": {
         "name": "USGS Point of Rocks",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Potomac \u00b7 Maryland. Source: USGS Point of Rocks.",
         "river": "Potomac",
         "state": "Maryland",
@@ -4134,7 +4134,7 @@
       },
       "properties": {
         "name": "USGS Paw Paw",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Potomac \u00b7 Maryland. Source: USGS Paw Paw Monitoring.",
         "river": "Potomac",
         "state": "Maryland",
@@ -4170,7 +4170,7 @@
       },
       "properties": {
         "name": "USGS Shepherdstown",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Potomac \u00b7 West Virginia. Source: USGS Shepherdstown.",
         "river": "Potomac",
         "state": "West Virginia",
@@ -4188,7 +4188,7 @@
       },
       "properties": {
         "name": "USGS Hancock",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Potomac \u00b7 Maryland. Source: USGS Hancock.",
         "river": "Potomac",
         "state": "Maryland",
@@ -4206,7 +4206,7 @@
       },
       "properties": {
         "name": "USGS Harpers Ferry",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Potomac \u00b7 Maryland. Source: USGS Harpers Ferry.",
         "river": "Potomac",
         "state": "Maryland",
@@ -4224,7 +4224,7 @@
       },
       "properties": {
         "name": "USGS Point of Rocks",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Potomac \u00b7 Maryland. Source: USGS Point of Rocks.",
         "river": "Potomac",
         "state": "Maryland",
@@ -4242,7 +4242,7 @@
       },
       "properties": {
         "name": "USGS Edwards Ferry",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Potomac \u00b7 Maryland. Source: USGS Edwards Ferry.",
         "river": "Potomac",
         "state": "Maryland",
@@ -4260,7 +4260,7 @@
       },
       "properties": {
         "name": "USGS Little Falls",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Potomac \u00b7 Maryland. Source: USGS Little Falls.",
         "river": "Potomac",
         "state": "Maryland",
@@ -4368,7 +4368,7 @@
       },
       "properties": {
         "name": "Bennett Creek Gauge",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Bennett Creek \u00b7 Maryland. Source: USGS Bennett Creek.",
         "river": "Bennett Creek",
         "state": "Maryland",
