@@ -1,5 +1,6 @@
 window.FISHTAGGED_SECURITY = Object.freeze({
   accessApi: "https://fishtagged-access-962471250542.us-east4.run.app",
+  dataUpdateApi: "https://fishtagged-data-update-962471250542.us-east4.run.app",
   localDemoData: false,
   firebaseConfig: Object.freeze({
     apiKey: "AIzaSyCK8bYVPsdOvHeYD70z3O-N8Fzu6aUSiO4",

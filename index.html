@@ -20,7 +20,7 @@
   base-uri 'self';
   form-action 'self';
 ">
-<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon-upside-down.png?v=20260913">
+<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon-upside-down.png?v=20261002">
 
 <link href="https://unpkg.com/maplibre-gl@6.0.0/dist/maplibre-gl.css" rel="stylesheet">
 <script type="module" src="assets/maplibre-loader.js"></script>
@@ -133,6 +133,7 @@
              border-bottom:1px solid var(--hair); }
   .panehead span{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
                   font-size:12.5px; font-weight:750; color:#46504c; }
+  .panehead small{ flex:none; color:var(--label); font-size:9.5px; font-weight:650; white-space:nowrap; }
   .panehead button{ width:25px; height:25px; border:0; border-radius:50%; background:transparent;
                     color:var(--label); font-size:18px; cursor:pointer; }
   .panehead button:hover,.panehead button:focus-visible{ background:var(--field); color:var(--ink); outline:none; }
@@ -163,7 +164,6 @@
   .said.bad{ background:#f7e9e6; color:#9a3318; }
   .seek.mini input{ height:31px; }
   .seek.mini button{ height:31px; }
-  .soon{ font-size:11.5px; color:var(--green-dk); margin-top:8px; font-weight:600; }
   .hint{ display:flex; align-items:center; gap:7px; margin-top:12px; font-size:11.5px; color:#c0402c; font-weight:600; }
   .hdot{ width:16px; height:16px; border-radius:50%; background:#c0402c; border:2px solid #fff;
          box-shadow:0 0 0 1px #d8dcd6; color:#fff; font-size:9.5px; font-weight:bold;
@@ -224,9 +224,12 @@
                width:18px; height:18px; border-radius:50%; color:#fff; font:700 10px/1 Arial,sans-serif; }
   .place-mark.landmark{ background:#596260; }
   .place-mark.island{ background:#b8872b; }
-  .place-mark.spot{ background:#7656a4; }
+  .place-mark.spot{ position:relative; background:#d62f2f; border-radius:50% 50% 50% 12%; transform:rotate(-45deg); }
+  .place-mark.spot::after{ content:""; width:7px; height:7px; border:1px solid #fff; border-radius:50%;
+                           background:#20292b; transform:rotate(45deg); }
   .place-mark.ramp{ background:#247e8a; }
   .place-mark.launch{ background:#4e8d78; }
+  .place-mark.gauge{ background:#466b79; font-size:11px; }
 
   .legend .lt{ font-size:12.5px; font-weight:bold; }
   .legend .ls{ font-size:11px; color:var(--label); margin:1px 0 8px; }
@@ -340,6 +343,9 @@
   .password-show:hover,.password-show:focus-visible{ background:var(--field); color:var(--ink); outline:none; }
   .login-actions{ display:flex; gap:8px; margin-top:16px; }
   .login-actions button{ flex:1; font-size:14px; }
+  #loginSubmit.busy{ display:flex; align-items:center; justify-content:center; gap:8px; }
+  #loginSubmit.busy::before{ content:""; width:13px; height:13px; border:2px solid rgba(32,41,43,.22);
+                             border-top-color:var(--green-dk); border-radius:50%; animation:spin .75s linear infinite; }
   .loginmsg{ min-height:18px; margin-top:10px; color:#9a3318; font-size:12.5px; }
   .preview-login{ display:none; width:100%; margin-top:8px; border:0; background:none; color:var(--green-dk);
                   text-decoration:underline; font:12px inherit; cursor:pointer; }
@@ -378,6 +384,30 @@
                             color:var(--ink); font:11px inherit; padding:0 5px; }
   .account-controls button{ height:31px; padding:0 9px; }
   .account-controls .delete-account{ border-color:#d8b7aa; color:#96391f; }
+  .data-update-intro{ margin:8px 0 10px; color:#4d5753; font-size:11.5px; line-height:1.5; }
+  .data-file{ display:block; margin-top:9px; color:var(--ink); font-size:11px; font-weight:700; }
+  .data-file small{ display:block; margin:2px 0 5px; color:var(--label); font-size:9.5px; font-weight:400; line-height:1.35; }
+  .data-file input{ display:block; width:100%; padding:6px; border:1px solid var(--hair); border-radius:4px;
+                    background:#fff; color:var(--label); font:10px inherit; }
+  .data-review{ margin-top:11px; padding-top:10px; border-top:1px solid var(--hair); }
+  .data-review[hidden]{ display:none; }
+  .data-summary{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:5px; margin-bottom:9px; }
+  .data-summary div{ min-width:0; padding:7px 5px; border:1px solid var(--hair); background:var(--field); text-align:center; }
+  .data-summary b{ display:block; overflow:hidden; text-overflow:ellipsis; font:700 14px Verdana,sans-serif; }
+  .data-summary span{ color:var(--label); font-size:8.5px; text-transform:uppercase; letter-spacing:.035em; }
+  .data-checks{ margin:7px 0; color:#4d5753; font-size:10.5px; line-height:1.55; }
+  .data-report{ margin:8px 0; }
+  .data-report summary{ color:var(--green-dk); font-size:11px; font-weight:700; cursor:pointer; }
+  .data-report pre{ max-height:220px; overflow:auto; margin:7px 0 0; padding:8px; border:1px solid var(--hair);
+                    background:#f7f8f5; color:#444d49; white-space:pre-wrap; word-break:break-word; font:9px/1.45 Menlo,monospace; }
+  .data-approval{ display:flex; align-items:flex-start; gap:7px; margin:9px 0; color:#39413e; font-size:10.5px; line-height:1.4; }
+  .data-approval input{ margin-top:2px; }
+  .publish-confirm{ width:100%; height:36px; border:1px solid var(--hair); border-radius:4px; padding:0 8px;
+                    color:var(--ink); font:12px inherit; text-transform:uppercase; }
+  .publish-confirm:focus{ outline:none; border-color:var(--ink); }
+  .data-action.busy{ display:flex; align-items:center; justify-content:center; gap:7px; }
+  .data-action.busy::before{ content:""; width:11px; height:11px; border:2px solid rgba(255,255,255,.45);
+                             border-top-color:#fff; border-radius:50%; animation:spin .75s linear infinite; }
   .idlewarn{ position:absolute; right:14px; bottom:74px; z-index:12; display:none; width:280px;
              background:#fff; border:1px solid var(--hair); border-left:4px solid var(--rust);
              box-shadow:0 8px 28px rgba(20,29,29,.2); padding:12px; }
@@ -485,6 +515,7 @@
   <div class="pane hidden" id="pane" aria-label="Map tools">
     <div class="panehead">
       <span id="paneLabel">Map tools</span>
+      <small id="dataUpdated"></small>
       <button id="paneClose" type="button" aria-label="Close map tools">&times;</button>
     </div>
     <div class="panebody" id="paneBody"></div>
@@ -502,7 +533,7 @@
 
 <div class="login" id="login" aria-hidden="true">
   <div class="loginbox" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-    <h2 id="loginTitle">For Level 2: log in</h2>
+    <h2 id="loginTitle">Level 2 account</h2>
     <p id="loginIntro">No account yet? Create an account first. Email verification is required.</p>
     <div class="account-switch" id="accountSwitch">
       <button type="button" id="createModeBtn">Create account</button>
@@ -550,8 +581,8 @@
           This number is not displayed publicly or SMS-verified.</div>
       </div>
       <div class="login-actions">
-        <button class="flat" type="button" id="loginCancel">Cancel</button>
-        <button class="flat" type="submit" id="loginSubmit">Sign in</button>
+        <button class="flat" type="button" id="loginCancel">&larr; Back</button>
+        <button class="flat" type="submit" id="loginSubmit">Continue</button>
       </div>
       <div class="loginmsg" id="loginMsg" aria-live="polite"></div>
       <button class="mfa-setup" id="verifyEmailBtn" type="button" hidden>
@@ -570,8 +601,17 @@
 <div id="lightbox" onclick="this.classList.remove('on')"><img alt=""><div class="lb-cap"></div></div>
 
 <script>
-const HERE = location.href.replace(/[^/]*$/,"");
+const HERE = location.href.replace(/[^/]*$/,'');
 const DATA_VERSION = "20261004";
+const SITE_UPDATED = "20261002";
+function updateDateLabel(...versions){
+  let latest="";
+  versions.forEach(version=>{
+    const match=String(version||"").match(/^(\d{4})(\d{2})(\d{2})/);
+    if(match && match[0]>latest) latest=match[0];
+  });
+  return latest ? `Updated ${latest.slice(4,6)}/${latest.slice(6,8)}/${latest.slice(0,4)}` : "";
+}
 const DATA_FILE = "fish_index-20260701.json";
 const TILE_ROOT = "tiles-20260701";
 const PUBLIC_META_FILE = "public-meta-20260701.json";
@@ -583,6 +623,10 @@ const PHOTO_PROXY = "https://fishtaggedfileproxy-840956266329.us-east4.run.app/r
 const SECURITY = window.FISHTAGGED_SECURITY || {};
 const AUTH_URL = typeof SECURITY.accessApi==="string" && !SECURITY.accessApi.includes("REPLACE_")
   ? SECURITY.accessApi.replace(/\/+$/,"") : "";
+const DATA_UPDATE_URL = typeof SECURITY.dataUpdateApi==="string" && !SECURITY.dataUpdateApi.includes("REPLACE_")
+  ? SECURITY.dataUpdateApi.replace(/\/+$/,"") : "";
+const PUBLIC_META_URL = AUTH_URL ? AUTH_URL+"/v1/public/meta" : "";
+const PUBLIC_PLACES_URL = AUTH_URL ? AUTH_URL+"/v1/public/places" : "";
 const TAG_URL = AUTH_URL ? AUTH_URL+"/v1/tag" : "";
 const LEVEL2_SUMMARY_URL = AUTH_URL ? AUTH_URL+"/v1/level2/summary" : "";
 const LEVEL2_TILE_API = AUTH_URL ? AUTH_URL+"/v1/level2/tiles" : "";
@@ -672,6 +716,7 @@ let mfaPending=false, emailCodePending=false, phonePending=false, signupMode=fal
 let feedbackRating=0;
 let adminAccountsCache=[];
 let adminManagerRole="admin";
+let dataUpdateJob=null;
 let idleTimer=null, idleLogoutTimer=null, idleTick=null, idleDeadline=0, lastActivity=0;
 const dmi=v=>{ const m=parseFloat(v); return isNaN(m) ? "—" :
   (units==="km" ? (m<.125 ? Math.round(m*1609.34)+" m" : (m*1.60934).toFixed(1)+" km") :
@@ -693,7 +738,8 @@ const PLACE_GROUPS = {
   islands:["Island"],
   spots:["Spot"],
   ramps:["Boat ramp"],
-  launches:["Primitive launch"]
+  launches:["Primitive launch"],
+  gauges:["H2O gauge"]
 };
 function authSession(){
   return verifiedSession;
@@ -751,7 +797,7 @@ function resetLoginStep(){
   byId("accountSwitch").hidden=false;
   byId("loginModeBtn").classList.add("on");
   byId("createModeBtn").classList.remove("on");
-  set("loginSubmit","Log in");
+  set("loginSubmit","Continue");
   if(window.FT_AUTH) window.FT_AUTH.cancelMfa();
 }
 function closeLogin(){
@@ -766,7 +812,7 @@ function closeLogin(){
 function openLogin(level,mode="login"){
   pendingRole=level;
   resetLoginStep();
-  set("loginTitle",level==="l3"?"Level 3 staff access":"For Level 2: log in");
+  set("loginTitle",level==="l3"?"Level 3 staff access":"Level 2 account");
   set("loginIntro",level==="l3"?"Administrator account required.":"No account yet? Create an account first. Email verification is required.");
   byId("accountSwitch").hidden=level==="l3";
   const preview=byId("previewLogin");
@@ -782,7 +828,7 @@ function toggleCreateAccount(force){
   const create=typeof force==="boolean" ? force : !signupMode;
   if(!create){
     resetLoginStep();
-    set("loginTitle","For Level 2: log in");
+    set("loginTitle","Level 2 account");
     set("loginIntro","No account yet? Create an account first. Email verification is required.");
     set("loginMsg","");
     byId("loginEmail").focus();
@@ -807,7 +853,7 @@ function toggleCreateAccount(force){
   byId("createModeBtn").classList.add("on");
   set("loginTitle","Create a Level 2 account");
   set("loginIntro","Create your account, then verify your email before signing in.");
-  set("loginSubmit","Create account");
+  set("loginSubmit","Continue");
   set("loginMsg","");
   byId("loginEmail").focus();
 }
@@ -838,6 +884,7 @@ async function authorizeLevel(level){
   }
   verifiedSession={
     role:result.role,
+    canUpdateData:result.canUpdateData===true,
     email:result.email||"",
     displayName:result.displayName||""
   };
@@ -1033,6 +1080,8 @@ async function signIn(e){
   e.preventDefault();
   const submit=byId("loginSubmit");
   submit.disabled=true;
+  submit.classList.add("busy");
+  submit.setAttribute("aria-busy","true");
   set("loginMsg",phonePending?"Saving phone number…":
     emailCodePending?"Checking the emailed code…":mfaPending?"Checking code…":
       signupMode?"Creating account…":"Signing in…");
@@ -1130,12 +1179,14 @@ async function signIn(e){
     byId("verifyEmailBtn").hidden=error.code!=="email_not_verified";
   }finally{
     submit.disabled=false;
+    submit.classList.remove("busy");
+    submit.removeAttribute("aria-busy");
   }
 }
 function previewLevel(){
   if(!LOCAL_PREVIEW || (pendingRole!=="l2" && pendingRole!=="l3")) return;
   const level=pendingRole;
-  verifiedSession={role:"admin",email:"local preview",localPreview:true};
+  verifiedSession={role:"superadmin",canUpdateData:true,email:"local preview",localPreview:true};
   activeToken="";
   closeLogin();
   enter(level);
@@ -1231,6 +1282,11 @@ async function loadIndex(){
     response=await fetchTimed(url,{
       headers:protectedHeaders(activeToken)
     });
+  }else if(key==="public" && PUBLIC_META_URL){
+    try{
+      response=await fetchTimed(PUBLIC_META_URL);
+    }catch(error){}
+    if(!response?.ok) response=await fetchTimed(HERE+PUBLIC_META_FILE+"?v="+DATA_VERSION);
   }else{
     response=await fetchTimed(HERE+(key==="local"?DATA_FILE:PUBLIC_META_FILE)+"?v="+DATA_VERSION);
   }
@@ -1251,6 +1307,7 @@ async function loadIndex(){
     LEVEL2_SUMMARY=null;
   }
   DATA_KEY=key;
+  set("dataUpdated",updateDateLabel(DATA_VERSION,SITE_UPDATED,META?.release));
   const g=byId("gateN"); if(g && META.count) g.textContent = META.count.toLocaleString()+" captures · 2020–2026";
 }
 function findCachedTag(n){
@@ -1294,11 +1351,17 @@ function fishTileURL(){
 async function loadReferenceData(){
   if(placesLoaded) return;
   placesLoaded=true;
+  const placesRequest=async()=>{
+    let response;
+    if(PUBLIC_PLACES_URL){
+      try{ response=await fetchTimed(PUBLIC_PLACES_URL); }catch(error){}
+    }
+    if(!response?.ok) response=await fetchTimed(HERE+PLACES_FILE+"?v="+DATA_VERSION);
+    if(!response.ok) throw new Error("places unavailable");
+    return response.json();
+  };
   const [placesResult,topobathyResult]=await Promise.allSettled([
-    fetchTimed(HERE+PLACES_FILE+"?v="+DATA_VERSION).then(response=>{
-      if(!response.ok) throw new Error("places unavailable");
-      return response.json();
-    }),
+    placesRequest(),
     fetchTimed(HERE+TOPOBATHY_CONFIG_FILE+"?v="+DATA_VERSION).then(response=>{
       if(!response.ok) throw new Error("topobathymetry configuration unavailable");
       return response.json();
@@ -1320,16 +1383,25 @@ function placeFilter(category){
 function placeImage(category){
   return ["match",["get","type"],
     "Island","place-island","Spot","place-spot","Boat ramp","place-ramp",
-    "Primitive launch","place-launch","place-landmark"];
+    "Primitive launch","place-launch","H2O gauge","place-gauge","place-landmark"];
 }
 function placeMarker(kind,color){
   const size=48, canvas=document.createElement("canvas");
   canvas.width=size; canvas.height=size;
   const ctx=canvas.getContext("2d");
   ctx.clearRect(0,0,size,size);
-  ctx.beginPath(); ctx.arc(24,24,18,0,Math.PI*2);
-  ctx.fillStyle=color; ctx.fill();
-  ctx.strokeStyle="#fff"; ctx.lineWidth=3; ctx.stroke();
+  ctx.fillStyle=color; ctx.strokeStyle="#fff"; ctx.lineWidth=3;
+  if(kind==="spot"){
+    ctx.beginPath();
+    ctx.moveTo(42,24);
+    ctx.bezierCurveTo(34,15,29,9,20,9);
+    ctx.bezierCurveTo(10,9,5,16,5,24);
+    ctx.bezierCurveTo(5,32,10,39,20,39);
+    ctx.bezierCurveTo(29,39,34,33,42,24);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+  }else{
+    ctx.beginPath(); ctx.arc(24,24,18,0,Math.PI*2); ctx.fill(); ctx.stroke();
+  }
   ctx.strokeStyle="#fff"; ctx.fillStyle="#fff"; ctx.lineWidth=3;
   ctx.lineCap="round"; ctx.lineJoin="round";
   if(kind==="landmark"){
@@ -1339,10 +1411,16 @@ function placeMarker(kind,color){
     ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(15,30); ctx.quadraticCurveTo(19,27,23,30);
     ctx.quadraticCurveTo(27,33,33,29); ctx.stroke();
   }else if(kind==="spot"){
-    ctx.beginPath(); ctx.arc(24,24,6,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(20,24,7,0,Math.PI*2); ctx.fillStyle="#20292b"; ctx.fill();
+    ctx.strokeStyle="#fff"; ctx.lineWidth=2; ctx.stroke();
   }else if(kind==="ramp"){
     ctx.beginPath(); ctx.moveTo(17,30); ctx.lineTo(30,18); ctx.moveTo(17,31); ctx.lineTo(33,31);
     ctx.moveTo(22,26); ctx.lineTo(32,26); ctx.stroke();
+  }else if(kind==="gauge"){
+    ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.arc(24,27,9,Math.PI,0); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(24,27); ctx.lineTo(30,19); ctx.stroke();
+    ctx.beginPath(); ctx.arc(24,27,2.5,0,Math.PI*2); ctx.fill();
   }else{
     ctx.beginPath(); ctx.moveTo(18,31); ctx.lineTo(29,18); ctx.stroke();
     ctx.beginPath(); ctx.ellipse(31,16,4,6,.7,0,Math.PI*2); ctx.fill();
@@ -1353,9 +1431,10 @@ function addPlaceMarkerImages(){
   const markers={
     "place-landmark":["landmark","#596260"],
     "place-island":["island","#b8872b"],
-    "place-spot":["spot","#7656a4"],
+    "place-spot":["spot","#d62f2f"],
     "place-ramp":["ramp","#247e8a"],
-    "place-launch":["launch","#4e8d78"]
+    "place-launch":["launch","#4e8d78"],
+    "place-gauge":["gauge","#466b79"]
   };
   for(const [name,[kind,color]] of Object.entries(markers)){
     if(!map.hasImage(name)) map.addImage(name,placeMarker(kind,color),{pixelRatio:2});
@@ -2294,13 +2373,45 @@ function adminRecordsBlock(){
         <button id="refreshAccounts" type="button">Refresh</button>
       </div>
       <div id="accountList" class="account-list"><div class="form-msg">Loading users…</div></div>
-      <div class="form-msg" id="accountMsg" aria-live="polite">Level 2 is automatic after email verification. Level 3 staff can change access and delete other accounts. You cannot delete the account you are using.</div>
+      <div class="form-msg" id="accountMsg" aria-live="polite">Level 2 is automatic after email verification. Level 3 staff can change access and delete other accounts. Level 3 + Data Update can also publish datasets. You cannot delete the account you are using.</div>
       <div class="report-buttons">
         <button class="flat" id="usersReport" type="button">Download users CSV</button>
         <button class="flat" id="accessReport" type="button">Download access CSV</button>
         <button class="flat" id="feedbackReport" type="button">Download feedback CSV</button>
       </div>
       <div class="form-msg" id="reportMsg" aria-live="polite">Each download is created from the current records.</div>
+    `,false);
+}
+function dataUpdateBlock(){
+  return fold("Data update",`
+      <div class="data-update-intro"><b>Level 3 + Data Update</b><br>
+        Choose the newest Core CSV. Add a Places spreadsheet only when places changed. Nothing becomes live until the review is approved and published.</div>
+      <label class="data-file">1. Core fish data (required)
+        <small>The newest full Core dataset in CSV format.</small>
+        <input id="dataCoreFile" type="file" accept=".csv,text/csv">
+      </label>
+      <label class="data-file">2. Places (optional)
+        <small>Leave empty to keep the current islands, dams, ramps, and other places.</small>
+        <input id="dataPlacesFile" type="file" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+      </label>
+      <button class="flat data-action" id="dataPreviewButton" type="button" style="width:100%;margin-top:10px">Check files</button>
+      <div class="form-msg" id="dataUpdateMsg" aria-live="polite">Checking creates a private preview. It does not update the live website.</div>
+      <div class="data-review" id="dataUpdateReview" hidden>
+        <div class="ssub">Review before publishing</div>
+        <div class="data-summary">
+          <div><b id="updateCaptures">—</b><span>captures</span></div>
+          <div><b id="updateRecaptures">—</b><span>recaptures</span></div>
+          <div><b id="updateJourneys">—</b><span>journeys</span></div>
+          <div><b id="updateLatest">—</b><span>latest catch</span></div>
+        </div>
+        <div class="data-checks" id="dataTagChecks"></div>
+        <details class="data-report"><summary>Open full validation report</summary><pre id="dataValidationReport"></pre></details>
+        <button class="flat" id="dataReviewDownload" type="button" style="width:100%;margin-bottom:4px">Download review</button>
+        <label class="data-approval"><input id="dataUpdateApproved" type="checkbox"> <span>I reviewed the totals, tag checks, and warnings.</span></label>
+        <input class="publish-confirm" id="dataUpdateConfirmation" autocomplete="off" placeholder="Type PUBLISH">
+        <button class="flat data-action" id="dataPublishButton" type="button" style="width:100%;margin-top:8px" disabled>Publish all three levels</button>
+        <div class="form-msg" id="dataPublishMsg" aria-live="polite">Publishing updates Search a Tag, Level 2, and Level 3 together.</div>
+      </div>
     `,false);
 }
 function panel(){
@@ -2349,11 +2460,13 @@ function panel(){
       <option value="spots"${placesCategory==="spots"?" selected":""}>Spots</option>
       <option value="ramps"${placesCategory==="ramps"?" selected":""}>Boat ramps</option>
       <option value="launches"${placesCategory==="launches"?" selected":""}>Primitive launch</option>
+      <option value="gauges"${placesCategory==="gauges"?" selected":""}>H2O gauges</option>
     </select>
     <div class="place-key">
       <span><b class="place-mark landmark">⚑</b>landmark</span>
-      <span><b class="place-mark island">I</b>island</span><span><b class="place-mark spot">•</b>spot</span>
+      <span><b class="place-mark island">I</b>island</span><span><b class="place-mark spot"></b>spot</span>
       <span><b class="place-mark ramp">↘</b>boat ramp</span><span><b class="place-mark launch">P</b>primitive launch</span>
+      <span><b class="place-mark gauge">⌁</b>H2O gauge</span>
     </div>
     <div class="level-note">Select a category, then click a map symbol for details and a Google Maps link. Zoom in to separate nearby places.</div>`,false);
 
@@ -2364,7 +2477,6 @@ function panel(){
       <button id="seekGo">Search</button>
     </div>
       <div class="tries">View <a data-n="841">841</a> · <a data-n="304">304</a> · <a data-n="97">97</a> · <a data-n="1974">1974</a></div>
-      <div class="soon">More features coming soon.</div>
       <div class="said" id="said"></div>
       <div class="hint"><span class="hdot">1</span> Click a numbered capture to view that catch</div>
     `,true);
@@ -2429,8 +2541,9 @@ function panel(){
         exact point access · administrator only
       </div>
       <button class="flat" id="csv" style="width:100%;margin-top:9px">Export this view (CSV)</button>`,false);
+  const updater=(verifiedSession?.canUpdateData || verifiedSession?.role==="superadmin") ? dataUpdateBlock() : "";
   return seek + selectedFish + viewSeg + speciesChips + hydroMenu + placesMenu + measure + weatherHTML() + astroHTML() +
-    recap + numbers + spots + feed + legendBlk + adminRecordsBlock() + feedbackBlock();
+    recap + numbers + spots + feed + legendBlk + updater + adminRecordsBlock() + feedbackBlock();
 }
 
 function showPane(show){
@@ -2557,7 +2670,7 @@ async function loadAdminOverview(){
       <div><b>${Number(counts.total||0).toLocaleString()}</b><span>accounts</span></div>
       <div><b>${Number(counts.level2||0).toLocaleString()}</b><span>level 2</span></div>
       <div><b>${Number(counts.admin||0).toLocaleString()}</b><span>staff</span></div>
-      <div><b>${Number(counts.superadmin||0).toLocaleString()}</b><span>level 4</span></div>
+      <div><b>${Number(counts.superadmin||0).toLocaleString()}</b><span>level 3 + updates</span></div>
     </div><div class="form-msg">${Number(counts.disabled||0).toLocaleString()} disabled account${Number(counts.disabled)===1?"":"s"}.</div>`;
     const recent=Array.isArray(result.recent)?result.recent:[];
     byId("recentAccess").innerHTML=recent.length
@@ -2599,7 +2712,7 @@ function renderAdminAccounts(){
         <select aria-label="Access for ${esc(account.email||"account")}" ${locked?"disabled":""}>
           <option value="level2"${level==="level2"?" selected":""}>Level 2</option>
           <option value="admin"${level==="admin"?" selected":""}>Level 3</option>
-          ${adminManagerRole==="superadmin"?`<option value="superadmin"${level==="superadmin"?" selected":""}>Level 4</option>`:""}
+          ${adminManagerRole==="superadmin"?`<option value="superadmin"${level==="superadmin"?" selected":""}>Level 3 + Data Update</option>`:""}
           <option value="none"${level==="none"?" selected":""}>No access</option>
         </select>
         <button class="flat save-account" type="button" ${locked?"disabled":""}>Save</button>
@@ -2690,6 +2803,127 @@ async function changeAdminAccount(button){
     button.disabled=false;
   }
 }
+function setDataAction(button,busy,busyText,readyText){
+  if(!button) return;
+  button.disabled=busy;
+  button.classList.toggle("busy",busy);
+  button.setAttribute("aria-busy",String(busy));
+  button.textContent=busy?busyText:readyText;
+}
+function refreshDataPublishButton(){
+  const button=byId("dataPublishButton");
+  if(!button) return;
+  const approved=byId("dataUpdateApproved")?.checked===true;
+  const confirmed=(val("dataUpdateConfirmation")||"").trim()==="PUBLISH";
+  button.disabled=!(dataUpdateJob && approved && confirmed);
+}
+function resetDataPreview(){
+  dataUpdateJob=null;
+  if(byId("dataUpdateReview")) byId("dataUpdateReview").hidden=true;
+  refreshDataPublishButton();
+  formMessage("dataUpdateMsg","Files changed. Click Check files to create a new private preview.");
+}
+function downloadDataReview(){
+  const report=byId("dataValidationReport")?.textContent||"";
+  if(!report) return;
+  const url=URL.createObjectURL(new Blob([report],{type:"text/plain;charset=utf-8"}));
+  const link=document.createElement("a");
+  link.href=url;
+  link.download=`fishtagged-review-${dataUpdateJob||"preview"}.txt`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+async function previewDataUpdate(){
+  const button=byId("dataPreviewButton");
+  const core=byId("dataCoreFile")?.files?.[0];
+  const places=byId("dataPlacesFile")?.files?.[0];
+  if(!core){
+    formMessage("dataUpdateMsg","Choose the newest Core CSV first.","bad");
+    return;
+  }
+  if(LOCAL_PREVIEW){
+    formMessage("dataUpdateMsg","The screen is ready. File checking uses the secure cloud service after deployment.","bad");
+    return;
+  }
+  if(!DATA_UPDATE_URL){
+    formMessage("dataUpdateMsg","The secure data-update service is not configured yet.","bad");
+    return;
+  }
+  dataUpdateJob=null;
+  byId("dataUpdateReview").hidden=true;
+  setDataAction(button,true,"Checking files…","Check files");
+  formMessage("dataUpdateMsg","Checking the data and building a private preview. This may take several minutes.");
+  try{
+    const client=await authClient();
+    const token=await client.token();
+    const body=new FormData();
+    body.append("core",core,core.name);
+    if(places) body.append("places",places,places.name);
+    const response=await fetchTimed(DATA_UPDATE_URL+"/v1/update/preview",{
+      method:"POST",
+      headers:protectedHeaders(token),
+      body
+    },15*60*1000);
+    let result={};
+    try{ result=await response.json(); }catch(error){}
+    if(!response.ok || !result.ready || !result.jobId){
+      throw new Error(result.message||"The files could not be checked.");
+    }
+    dataUpdateJob=result.jobId;
+    const summary=result.summary||{};
+    set("updateCaptures",Number(summary.captures||0).toLocaleString());
+    set("updateRecaptures",Number(summary.recaptures||0).toLocaleString());
+    set("updateJourneys",Number(summary.journeys||0).toLocaleString());
+    set("updateLatest",summary.latestCapture||"Unknown");
+    set("dataTagChecks",`Tag 2946: ${summary.tag2946||"not found"} · Tag 841: ${summary.tag841||"not found"} · ${Number(summary.sourceWarningCount||0).toLocaleString()} source warning${Number(summary.sourceWarningCount||0)===1?"":"s"}`);
+    set("dataValidationReport",[result.validationReport||"",result.placesReport||""].filter(Boolean).join("\n\n"));
+    byId("dataUpdateApproved").checked=false;
+    val("dataUpdateConfirmation","");
+    byId("dataUpdateReview").hidden=false;
+    refreshDataPublishButton();
+    formMessage("dataUpdateMsg","Private preview ready. Review the totals and warnings below.","good");
+  }catch(error){
+    const message=error.name==="AbortError" ? "The check took too long. Try it once more." : (error.message||"The files could not be checked.");
+    formMessage("dataUpdateMsg",message,"bad");
+  }finally{
+    setDataAction(button,false,"Checking files…","Check files");
+  }
+}
+async function publishDataUpdate(){
+  if(!dataUpdateJob || !byId("dataUpdateApproved")?.checked || (val("dataUpdateConfirmation")||"").trim()!=="PUBLISH"){
+    formMessage("dataPublishMsg","Review the results, check the box, and type PUBLISH.","bad");
+    return;
+  }
+  if(!confirm("Publish this data to Search a Tag, Level 2, and Level 3?")) return;
+  const button=byId("dataPublishButton");
+  setDataAction(button,true,"Publishing…","Publish all three levels");
+  formMessage("dataPublishMsg","Publishing the approved release…");
+  try{
+    const client=await authClient();
+    const token=await client.token();
+    const response=await fetchTimed(DATA_UPDATE_URL+"/v1/update/publish",{
+      method:"POST",
+      headers:protectedHeaders(token,true),
+      body:JSON.stringify({jobId:dataUpdateJob,confirmation:"PUBLISH"})
+    },60000);
+    let result={};
+    try{ result=await response.json(); }catch(error){}
+    if(!response.ok || !result.published) throw new Error(result.message||"The release could not be published.");
+    DATA_KEY=null;
+    placesLoaded=false;
+    formMessage("dataPublishMsg",`Release ${result.release} is live for all three levels. Reload the map after about one minute to see it.`,"good");
+    button.textContent="Published";
+    button.disabled=true;
+    byId("dataUpdateApproved").disabled=true;
+    byId("dataUpdateConfirmation").disabled=true;
+  }catch(error){
+    formMessage("dataPublishMsg",error.message||"The release could not be published.","bad");
+    setDataAction(button,false,"Publishing…","Publish all three levels");
+    refreshDataPublishButton();
+  }
+}
 function wire(){
   const g=document.getElementById("seekGo");
   if(g) g.onclick=()=>search(val("seek"),true);
@@ -2733,6 +2967,15 @@ function wire(){
     loadAdminAccounts();
     byId("refreshAccounts").onclick=loadAdminAccounts;
     byId("accountSearch").oninput=renderAdminAccounts;
+  }
+  if(byId("dataPreviewButton")){
+    byId("dataPreviewButton").onclick=previewDataUpdate;
+    byId("dataPublishButton").onclick=publishDataUpdate;
+    byId("dataReviewDownload").onclick=downloadDataReview;
+    byId("dataUpdateApproved").onchange=refreshDataPublishButton;
+    byId("dataUpdateConfirmation").oninput=refreshDataPublishButton;
+    byId("dataCoreFile").onchange=resetDataPreview;
+    byId("dataPlacesFile").onchange=resetDataPreview;
   }
 
   const h=document.getElementById("hydro");
@@ -2797,6 +3040,7 @@ async function enter(r){
   }
   role=r; defaults();
   document.getElementById("lvlName").textContent=LEVELS[r];
+  set("dataUpdated",updateDateLabel(DATA_VERSION,SITE_UPDATED));
   const levelOneLabel=byId("levelOneButton")?.querySelector("b");
   if(levelOneLabel) levelOneLabel.textContent=r==="l1"?"Level 1 Search":"Back to Level 1 Search";
   document.querySelectorAll("[data-map-level]").forEach(button=>
@@ -2807,8 +3051,11 @@ async function enter(r){
   document.getElementById("app").classList.add("on");
 
   try{ await loadIndex(); }
-  catch(e){ document.getElementById("veil").innerHTML=
-    '<span style="max-width:320px;text-align:center;line-height:1.5">Open this site through GitHub Pages or a local web server. The map data cannot load from a file:// page.</span>';
+  catch(e){
+    const localFile=location.protocol==="file:";
+    document.getElementById("veil").innerHTML=localFile
+      ? '<span style="max-width:320px;text-align:center;line-height:1.5">Open this site through GitHub Pages or a local web server. The map data cannot load from a file:// page.</span>'
+      : '<span style="max-width:320px;text-align:center;line-height:1.5">The map data could not be loaded. Check the connection and reload this page.</span>';
     return; }
   await loadReferenceData();
   picked="841";
