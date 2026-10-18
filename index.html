@@ -1324,7 +1324,23 @@ async function loadIndex(){
   }
   if(!response.ok) throw new Error("Map data could not be loaded.");
   const j=await response.json();
-  META=j.meta;
+  META=j.meta||{};
+  // Older Level 3 index files did not include the release label. Use the
+  // public metadata from the same published release so every level displays
+  // the same data-update date.
+  if(key==="admin" && !META.release){
+    try{
+      const releaseResponse=PUBLIC_META_URL
+        ? await fetchTimed(PUBLIC_META_URL)
+        : await fetchTimed(HERE+PUBLIC_META_FILE+"?v="+DATA_VERSION);
+      if(releaseResponse?.ok){
+        const releasePayload=await releaseResponse.json();
+        if(releasePayload?.meta?.release){
+          META={...META,release:releasePayload.meta.release};
+        }
+      }
+    }catch(error){}
+  }
   if(key==="public"){
     TAGS=[];
     BYNUM={};
@@ -3094,7 +3110,7 @@ async function enter(r){
   role=r; defaults();
   document.getElementById("lvlName").textContent=LEVELS[r];
   set("siteVersion","· "+SITE_VERSION);
-  set("dataUpdated",updateDateLabel(DATA_VERSION));
+  set("dataUpdated",updateDateLabel(DATA_VERSION,META?.release));
   const levelOneLabel=byId("levelOneButton")?.querySelector("b");
   if(levelOneLabel) levelOneLabel.textContent=r==="l1"?"Level 1 Search":"Back to Level 1 Search";
   document.querySelectorAll("[data-map-level]").forEach(button=>
