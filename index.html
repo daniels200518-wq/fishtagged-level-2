@@ -20,7 +20,7 @@
   base-uri 'self';
   form-action 'self';
 ">
-<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon-upside-down.png?v=20261002">
+<link rel="icon" type="image/png" sizes="128x128" href="assets/favicon-upside-down.png?v=20261018">
 
 <link href="https://unpkg.com/maplibre-gl@6.0.0/dist/maplibre-gl.css" rel="stylesheet">
 <script type="module" src="assets/maplibre-loader.js"></script>
@@ -133,6 +133,7 @@
              border-bottom:1px solid var(--hair); }
   .panehead span{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
                   font-size:12.5px; font-weight:750; color:#46504c; }
+  .pane-version{ color:var(--label); font-size:10px; font-weight:700; }
   .panehead small{ flex:none; color:var(--label); font-size:9.5px; font-weight:650; white-space:nowrap; }
   .panehead button{ width:25px; height:25px; border:0; border-radius:50%; background:transparent;
                     color:var(--label); font-size:18px; cursor:pointer; }
@@ -514,7 +515,7 @@
 
   <div class="pane hidden" id="pane" aria-label="Map tools">
     <div class="panehead">
-      <span id="paneLabel">Map tools</span>
+      <span id="paneLabel">Map tools <b class="pane-version" id="siteVersion"></b></span>
       <small id="dataUpdated"></small>
       <button id="paneClose" type="button" aria-label="Close map tools">&times;</button>
     </div>
@@ -603,7 +604,7 @@
 <script>
 const HERE = location.href.replace(/[^/]*$/,'');
 const DATA_VERSION = "20261004";
-const SITE_UPDATED = "20261002";
+const SITE_VERSION = "R5.1";
 function updateDateLabel(...versions){
   let latest="";
   versions.forEach(version=>{
@@ -649,6 +650,12 @@ const MAP_READY = window.maplibregl ? Promise.resolve() : new Promise((resolve,r
 const esc = value => String(value??"").replace(/[&<>"']/g,char=>({
   "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
 }[char]));
+const safeExternalUrl=value=>{
+  try{
+    const url=new URL(String(value||""));
+    return ["http:","https:"].includes(url.protocol)?url.href:"";
+  }catch(error){ return ""; }
+};
 const JOURNEY_COLOR = ["match",["get","to"],
   2,"#2f8f56",3,"#d89a24",4,"#2f6fb0",5,"#7656a4",6,"#258a8a","#b4622d"];
 const photoURL = file => PHOTO_PROXY + encodeURIComponent(file);
@@ -707,7 +714,12 @@ function metricValue(field,value){
 let map, META, TAGS=[], BYNUM={}, LEVEL2_SUMMARY=null, DATA_KEY=null, scaleCtl=null;
 let role, base="light", view="points", hydro=null, species="All", retOnly=false;
 let picked=null, fitted=false, units="mi";
-let PLACES={type:"FeatureCollection",features:[]}, placesCategory="off", placesLoaded=false, placesEventsBound=false;
+const PLACES_STORAGE_KEY="fishtagged.places.category";
+function savedPlacesCategory(){
+  try{ return window.localStorage.getItem(PLACES_STORAGE_KEY)||"gauges"; }
+  catch(error){ return "gauges"; }
+}
+let PLACES={type:"FeatureCollection",features:[]}, placesCategory=savedPlacesCategory(), placesLoaded=false, placesEventsBound=false;
 let TOPOBATHY={ready:false,tiles:[],sourceUrl:"https://www.usgs.gov/data/potomac-river-pilot-topobathymetric-digital-elevation-model-1979-2025"};
 let topobathyOn=false;
 let pendingRole=null;
@@ -741,6 +753,26 @@ const PLACE_GROUPS = {
   launches:["Primitive launch"],
   gauges:["H2O gauge"]
 };
+const POTOMAC_GAUGES_URL="http://shadfishing.com";
+const GAUGE_LINKS=Object.freeze({
+  "usgs paw paw":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01610000/"},
+  "usgs hancock":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01613000/"},
+  "usgs shepherdstown":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01618000/"},
+  "usgs harpers ferry":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01620000/"},
+  "usgs point of rocks":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01638500/"},
+  "usgs edwards ferry":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01644148/"},
+  "usgs little falls":{
+    gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01646500/",
+    noaaUrl:"https://water.noaa.gov/gauges/brkm2"
+  },
+  "noaa williamsport":{noaaUrl:"https://water.noaa.gov/gauges/wllm2"},
+  "usgs williamsport":{noaaUrl:"https://water.noaa.gov/gauges/wllm2"},
+  "bridgeport gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01639000/"},
+  "walkersville gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01641810/"},
+  "monocacy blvd gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01642190/"},
+  "jug bridge gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01643000/"},
+  "bennett creek gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01643500/"}
+});
 function authSession(){
   return verifiedSession;
 }
@@ -1307,7 +1339,7 @@ async function loadIndex(){
     LEVEL2_SUMMARY=null;
   }
   DATA_KEY=key;
-  set("dataUpdated",updateDateLabel(DATA_VERSION,SITE_UPDATED,META?.release));
+  set("dataUpdated",updateDateLabel(DATA_VERSION,META?.release));
   const g=byId("gateN"); if(g && META.count) g.textContent = META.count.toLocaleString()+" captures · 2020–2026";
 }
 function findCachedTag(n){
@@ -1442,6 +1474,8 @@ function addPlaceMarkerImages(){
 }
 function setPlaces(category){
   placesCategory=(PLACE_GROUPS[category] || category==="all") ? category : "off";
+  try{ window.localStorage.setItem(PLACES_STORAGE_KEY,placesCategory); }
+  catch(error){}
   const visible=placesCategory!=="off";
   for(const layer of ["places-dot","places-label"]){
     if(!map?.getLayer(layer)) continue;
@@ -1454,6 +1488,20 @@ function setPlaces(category){
   }
   const select=byId("placesCategory");
   if(select) select.value=placesCategory;
+}
+function placeLinks(properties){
+  if(properties.type!=="H2O gauge") return [];
+  const defaults=GAUGE_LINKS[String(properties.name||"").trim().toLowerCase()]||{};
+  const source=String(properties.source||"");
+  const gaugeUrl=safeExternalUrl(properties.gaugeUrl||properties.usgsUrl||properties.dataUrl||defaults.gaugeUrl);
+  const noaaUrl=safeExternalUrl(properties.noaaUrl||properties.forecastUrl||defaults.noaaUrl);
+  const allGaugesUrl=safeExternalUrl(properties.allGaugesUrl||
+    (String(properties.river||"").toLowerCase()==="potomac"?POTOMAC_GAUGES_URL:""));
+  const links=[];
+  if(gaugeUrl) links.push([/noaa/i.test(source)?"NOAA gauge data":"USGS gauge data",gaugeUrl]);
+  if(noaaUrl) links.push(["NOAA level forecast",noaaUrl]);
+  if(allGaugesUrl) links.push(["All Potomac gauges",allGaugesUrl]);
+  return links;
 }
 function setTopobathy(show){
   if(!TOPOBATHY.ready) return;
@@ -1503,12 +1551,16 @@ function addLayers(){
       const properties=feature.properties||{};
       const coordinates=feature.geometry.coordinates;
       const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coordinates[1]+","+coordinates[0])}`;
-      new maplibregl.Popup({offset:10,maxWidth:"260px"})
+      const gaugeLinks=placeLinks(properties).map(([label,url])=>
+        `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:7px;color:#355f49;font-size:12px;font-weight:650">${esc(label)} &#8599;</a>`
+      ).join("");
+      new maplibregl.Popup({offset:10,maxWidth:innerWidth<=420?"190px":"260px"})
         .setLngLat(coordinates)
         .setHTML(`<div style="padding:10px 12px"><b>${esc(properties.name||"River place")}</b>`+
           `<div style="margin-top:3px;color:#69736f;font-size:12px">${esc(properties.type||"")}</div>`+
           (properties.description?`<div style="margin-top:6px;font-size:12px;line-height:1.4">${esc(properties.description)}</div>`:"")+
-          `<a href="${mapsUrl}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;color:#5a7765;font-size:12px">Open in Google Maps</a></div>`)
+          gaugeLinks+
+          `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;color:#5a7765;font-size:12px">Open in Google Maps &#8599;</a></div>`)
         .addTo(map);
     });
     map.on("mouseenter","places-dot",()=>map.getCanvas().style.cursor="pointer");
@@ -2140,6 +2192,7 @@ async function search(n, fly){
   if(!hit){ say("Tag "+n+" isn't in the data.","bad"); clearPick(); return; }
   const caps=hit.t.caps, last=caps[caps.length-1];
   picked=n;
+  if(role==="l1") byId("backSearch").hidden=false;
   clearCapPanel();
   map.getSource("ring").setData(captureFeature(hit.t,last,caps.length-1,caps));
   drawJourney(hit.t,()=>showSearchResult(hit));
@@ -2468,7 +2521,7 @@ function panel(){
       <span><b class="place-mark ramp">↘</b>boat ramp</span><span><b class="place-mark launch">P</b>primitive launch</span>
       <span><b class="place-mark gauge">⌁</b>H2O gauge</span>
     </div>
-    <div class="level-note">Select a category, then click a map symbol for details and a Google Maps link. Zoom in to separate nearby places.</div>`,false);
+    <div class="level-note">Your choice stays selected. Click a symbol for details. Gauge popups include live-data links when available.</div>`,role==="l1" || role==="l2");
 
   if(role==="l1"){
     const searchBlock=fold("Search a tag",`<div class="seek mini">
@@ -2558,7 +2611,7 @@ function mapPanePadding(top=66,bottom=62){
 }
 
 function defaults(){
-  if(role==="l1"){ view="points"; hydro=null; species="All"; retOnly=false; placesCategory="off"; topobathyOn=false; }
+  if(role==="l1"){ view="points"; hydro=null; species="All"; retOnly=false; topobathyOn=false; }
   if(role==="l2"){ view="heat";   hydro=null; species="All"; retOnly=false; }
   if(role==="l3"){ view="points"; hydro=null; species="All"; retOnly=false; }
 }
@@ -3040,13 +3093,18 @@ async function enter(r){
   }
   role=r; defaults();
   document.getElementById("lvlName").textContent=LEVELS[r];
-  set("dataUpdated",updateDateLabel(DATA_VERSION,SITE_UPDATED));
+  set("siteVersion","· "+SITE_VERSION);
+  set("dataUpdated",updateDateLabel(DATA_VERSION));
   const levelOneLabel=byId("levelOneButton")?.querySelector("b");
   if(levelOneLabel) levelOneLabel.textContent=r==="l1"?"Level 1 Search":"Back to Level 1 Search";
   document.querySelectorAll("[data-map-level]").forEach(button=>
     button.classList.toggle("on",button.dataset.mapLevel===r));
   byId("headerLogout").hidden=!verifiedSession;
-  byId("backSearch").hidden=r==="l1";
+  const backSearch=byId("backSearch");
+  backSearch.hidden=r==="l1";
+  backSearch.title=r==="l1"?"Start a new tag search":"Back to Level 1 search";
+  backSearch.querySelector(".arrow").innerHTML=r==="l1"?"&#8635;":"&#8592;";
+  backSearch.querySelector(".label").textContent=r==="l1"?"Back to new entry":"Back to search";
   document.getElementById("gate").style.display="none";
   document.getElementById("app").classList.add("on");
 
@@ -3181,6 +3239,17 @@ byId("levelBtn").onclick=()=>{
 byId("backSearch").onclick=()=>{
   closeLevelMenu();
   closeQuick();
+  if(role==="l1"){
+    clearPick();
+    byId("backSearch").hidden=true;
+    const input=byId("seek");
+    if(input){ input.value=""; input.focus(); }
+    const result=byId("said");
+    if(result){ result.textContent=""; result.className="said"; }
+    fitAll();
+    showPane(true);
+    return;
+  }
   requestLevel("l1");
 };
 document.querySelectorAll("[data-map-level]").forEach(button=>button.onclick=()=>{

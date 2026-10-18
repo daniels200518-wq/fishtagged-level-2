@@ -4120,7 +4120,9 @@
         "description": "Potomac · Maryland. Source: USGS Point of Rocks.",
         "river": "Potomac",
         "state": "Maryland",
-        "source": "USGS Point of Rocks"
+        "source": "USGS Point of Rocks",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01638500/",
+        "allGaugesUrl": "http://shadfishing.com"
       }
     },
     {
@@ -4138,7 +4140,9 @@
         "description": "Potomac · Maryland. Source: USGS Paw Paw Monitoring.",
         "river": "Potomac",
         "state": "Maryland",
-        "source": "USGS Paw Paw Monitoring"
+        "source": "USGS Paw Paw Monitoring",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01610000/",
+        "allGaugesUrl": "http://shadfishing.com"
       }
     },
     {
@@ -4152,11 +4156,13 @@
       },
       "properties": {
         "name": "NOAA Williamsport",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Potomac · Maryland. Source: NOAA at Williamsport.",
         "river": "Potomac",
         "state": "Maryland",
-        "source": "NOAA at Williamsport"
+        "source": "NOAA at Williamsport",
+        "noaaUrl": "https://water.noaa.gov/gauges/wllm2",
+        "allGaugesUrl": "http://shadfishing.com"
       }
     },
     {
@@ -4174,7 +4180,9 @@
         "description": "Potomac · West Virginia. Source: USGS Shepherdstown.",
         "river": "Potomac",
         "state": "West Virginia",
-        "source": "USGS Shepherdstown"
+        "source": "USGS Shepherdstown",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01618000/",
+        "allGaugesUrl": "http://shadfishing.com"
       }
     },
     {
@@ -4192,7 +4200,9 @@
         "description": "Potomac · Maryland. Source: USGS Hancock.",
         "river": "Potomac",
         "state": "Maryland",
-        "source": "USGS Hancock"
+        "source": "USGS Hancock",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01613000/",
+        "allGaugesUrl": "http://shadfishing.com"
       }
     },
     {
@@ -4210,7 +4220,9 @@
         "description": "Potomac · Maryland. Source: USGS Harpers Ferry.",
         "river": "Potomac",
         "state": "Maryland",
-        "source": "USGS Harpers Ferry"
+        "source": "USGS Harpers Ferry",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01620000/",
+        "allGaugesUrl": "http://shadfishing.com"
       }
     },
     {
@@ -4228,7 +4240,9 @@
         "description": "Potomac · Maryland. Source: USGS Point of Rocks.",
         "river": "Potomac",
         "state": "Maryland",
-        "source": "USGS Point of Rocks"
+        "source": "USGS Point of Rocks",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01638500/",
+        "allGaugesUrl": "http://shadfishing.com"
       }
     },
     {
@@ -4246,7 +4260,9 @@
         "description": "Potomac · Maryland. Source: USGS Edwards Ferry.",
         "river": "Potomac",
         "state": "Maryland",
-        "source": "USGS Edwards Ferry"
+        "source": "USGS Edwards Ferry",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01644148/",
+        "allGaugesUrl": "http://shadfishing.com"
       }
     },
     {
@@ -4264,7 +4280,10 @@
         "description": "Potomac · Maryland. Source: USGS Little Falls.",
         "river": "Potomac",
         "state": "Maryland",
-        "source": "USGS Little Falls"
+        "source": "USGS Little Falls",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01646500/",
+        "noaaUrl": "https://water.noaa.gov/gauges/brkm2",
+        "allGaugesUrl": "http://shadfishing.com"
       }
     },
     {
@@ -4278,11 +4297,12 @@
       },
       "properties": {
         "name": "Bridgeport Gauge",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Monocacy · Maryland. Source: Bridgeport Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
-        "source": "Bridgeport Gauge"
+        "source": "Bridgeport Gauge",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01639000/"
       }
     },
     {
@@ -4296,11 +4316,12 @@
       },
       "properties": {
         "name": "Walkersville Gauge",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Monocacy · Maryland. Source: Walkersville Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
-        "source": "Walkersville Gauge"
+        "source": "Walkersville Gauge",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01641810/"
       }
     },
     {
@@ -4314,7 +4335,7 @@
       },
       "properties": {
         "name": "Bruceville Gauge",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Monocacy · Maryland. Source: Bruceville Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
@@ -4332,11 +4353,12 @@
       },
       "properties": {
         "name": "Monocacy Blvd Gauge",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Monocacy · Maryland. Source: Monocacy Blvd Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
-        "source": "Monocacy Blvd Gauge"
+        "source": "Monocacy Blvd Gauge",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01642190/"
       }
     },
     {
@@ -4350,11 +4372,12 @@
       },
       "properties": {
         "name": "Jug Bridge Gauge",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Monocacy · Maryland. Source: Jug Bridge Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
-        "source": "Jug Bridge Gauge"
+        "source": "Jug Bridge Gauge",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01643000/"
       }
     },
     {
@@ -4372,7 +4395,8 @@
         "description": "Bennett Creek · Maryland. Source: USGS Bennett Creek.",
         "river": "Bennett Creek",
         "state": "Maryland",
-        "source": "USGS Bennett Creek"
+        "source": "USGS Bennett Creek",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01643500/"
       }
     },
     {
@@ -4386,7 +4410,7 @@
       },
       "properties": {
         "name": "Monocacy River Gauge",
-        "type": "Landmark",
+        "type": "H2O gauge",
         "description": "Monocacy · Maryland. Source: Mononcay River.",
         "river": "Monocacy",
         "state": "Maryland",
