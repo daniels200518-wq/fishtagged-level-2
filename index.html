@@ -311,10 +311,10 @@
                        font:700 11px inherit; cursor:pointer; }
   .display-options{ display:grid; gap:8px; margin-top:8px; }
   .display-options label{ display:flex; align-items:center; gap:7px; color:#46504c; font-size:11.5px; }
-  .map-coordinates{ position:absolute; left:12px; bottom:33px; z-index:9; min-width:186px; padding:6px 9px;
+  .map-coordinates{ position:absolute; right:52px; bottom:10px; z-index:9; min-width:238px; padding:7px 9px;
                     border:1px solid var(--hair); border-radius:4px; background:rgba(255,255,255,.92);
                     box-shadow:0 2px 10px rgba(20,33,31,.1); color:#46504c; font:11px Verdana,sans-serif;
-                    font-variant-numeric:tabular-nums; pointer-events:none; backdrop-filter:blur(7px); }
+                    font-variant-numeric:tabular-nums; text-align:center; pointer-events:none; backdrop-filter:blur(7px); }
   .map-coordinates[hidden]{ display:none; }
   #lightbox{ position:fixed; inset:0; z-index:80; background:rgba(20,28,28,.86); display:none;
              align-items:center; justify-content:center; flex-direction:column; gap:10px; cursor:zoom-out; padding:24px; }
@@ -453,7 +453,7 @@
     .quick-pop{ top:40px; }
     .pane{ top:58px; right:8px; bottom:42px; left:8px; width:auto; max-height:none; }
     .panebody{ max-height:calc(100vh - 135px); }
-    .map-coordinates{ left:8px; bottom:8px; font-size:10px; min-width:170px; }
+    .map-coordinates{ right:48px; bottom:8px; font-size:9.5px; min-width:210px; padding:6px 7px; }
     .idlewarn{ left:8px; right:8px; bottom:42px; width:auto; }
     .lvl{ align-items:flex-start; flex-wrap:wrap; }
     .lvl-actions{ width:100%; margin-left:48px; }
@@ -534,6 +534,8 @@
     <div class="quick-pop" id="quickPop" hidden>
       <button id="quickTools" type="button">Hide tools</button>
       <button id="baseBtn" type="button">Satellite view</button>
+      <button id="coordinatesMapToggle" type="button">Cursor coordinates: On</button>
+      <button id="gridMapToggle" type="button">Lat/long lines: Off</button>
     </div>
   </div>
 
@@ -628,7 +630,7 @@
 <script>
 const HERE = location.href.replace(/[^/]*$/,'');
 const DATA_VERSION = "20261004";
-const SITE_VERSION = "R5.2";
+const SITE_VERSION = "R5.3";
 function updateDateLabel(...versions){
   let latest="";
   versions.forEach(version=>{
@@ -646,6 +648,10 @@ function updateClock(){
 function updateDisplayOptions(){
   const coordinates=byId("mapCoordinates");
   if(coordinates) coordinates.hidden=!showCoordinates;
+  const coordinatesToggle=byId("coordinatesMapToggle");
+  if(coordinatesToggle) coordinatesToggle.textContent=`Cursor coordinates: ${showCoordinates?"On":"Off"}`;
+  const gridToggle=byId("gridMapToggle");
+  if(gridToggle) gridToggle.textContent=`Lat/long lines: ${showCoordinateGrid?"On":"Off"}`;
   updateClock();
 }
 const DATA_FILE = "fish_index-20260701.json";
@@ -758,7 +764,7 @@ function metricValue(field,value){
 
 let map, META, TAGS=[], BYNUM={}, LEVEL2_SUMMARY=null, DATA_KEY=null, scaleCtl=null;
 let role, base="light", view="points", hydro=null, species="All", retOnly=false;
-let picked=null, fitted=false, units="mi", showClock=true, showCoordinates=true;
+let picked=null, fitted=false, units="mi", showClock=true, showCoordinates=true, showCoordinateGrid=false;
 const PLACES_STORAGE_KEY="fishtagged.places.category";
 function savedPlacesCategory(){
   try{ return window.localStorage.getItem(PLACES_STORAGE_KEY)||"gauges"; }
@@ -1576,6 +1582,34 @@ function setTopobathy(show){
   const button=byId("topobathyToggle");
   if(button){ button.classList.toggle("on",topobathyOn); button.textContent=topobathyOn?"On":"Off"; }
 }
+function coordinateGridData(){
+  const bounds=Array.isArray(META?.bounds) && META.bounds.length===4
+    ? META.bounds : [-79,38.5,-76.5,40];
+  const step=.25;
+  const minLng=Math.floor((bounds[0]-.15)/step)*step;
+  const maxLng=Math.ceil((bounds[2]+.15)/step)*step;
+  const minLat=Math.floor((bounds[1]-.15)/step)*step;
+  const maxLat=Math.ceil((bounds[3]+.15)/step)*step;
+  const features=[];
+  for(let lng=minLng;lng<=maxLng+.001;lng+=step){
+    const value=Number(lng.toFixed(4));
+    features.push({type:"Feature",properties:{axis:"longitude",value},
+      geometry:{type:"LineString",coordinates:[[value,minLat],[value,maxLat]]}});
+  }
+  for(let lat=minLat;lat<=maxLat+.001;lat+=step){
+    const value=Number(lat.toFixed(4));
+    features.push({type:"Feature",properties:{axis:"latitude",value},
+      geometry:{type:"LineString",coordinates:[[minLng,value],[maxLng,value]]}});
+  }
+  return {type:"FeatureCollection",features};
+}
+function setCoordinateGrid(show){
+  showCoordinateGrid=Boolean(show);
+  if(map?.getLayer("coordinate-grid")){
+    map.setLayoutProperty("coordinate-grid","visibility",showCoordinateGrid?"visible":"none");
+  }
+  updateDisplayOptions();
+}
 function refreshFishTiles(){
   const source=map?.getSource("fish");
   if(source?.setTiles) source.setTiles([fishTileURL()]);
@@ -1587,6 +1621,15 @@ function addLayers(){
   if(!map.getLayer("satellite-base")) map.addLayer({
     id:"satellite-base",type:"raster",source:"satellite",
     layout:{visibility:base==="sat"?"visible":"none"}
+  });
+  if(!map.getSource("coordinate-grid")) map.addSource("coordinate-grid",{
+    type:"geojson",data:coordinateGridData()
+  });
+  if(!map.getLayer("coordinate-grid")) map.addLayer({
+    id:"coordinate-grid",type:"line",source:"coordinate-grid",
+    layout:{visibility:showCoordinateGrid?"visible":"none"},
+    paint:{"line-color":"#4f6970","line-width":["interpolate",["linear"],["zoom"],7,.55,13,1.05],
+      "line-opacity":["interpolate",["linear"],["zoom"],7,.22,13,.42],"line-dasharray":[2,2]}
   });
   if(!map.getSource("places")) map.addSource("places",{type:"geojson",data:PLACES});
   addPlaceMarkerImages();
@@ -2525,7 +2568,7 @@ function dateLookupBlock(){
 function displayOptionsBlock(){
   return fold("Display options",`<div class="display-options">
       <label><input id="clockToggle" type="checkbox"${showClock?" checked":""}> Show live clock</label>
-      <label><input id="coordinatesToggle" type="checkbox"${showCoordinates?" checked":""}> Show mouse coordinates</label>
+      <div class="level-note">Coordinate and latitude/longitude line controls are in the Map menu on the right.</div>
     </div>`,false);
 }
 function runDateLookup(){
@@ -3144,7 +3187,11 @@ function wire(){
   if(byId("catchDateGo")) byId("catchDateGo").onclick=runDateLookup;
   if(byId("catchDate")) byId("catchDate").onkeydown=event=>{ if(event.key==="Enter") runDateLookup(); };
   if(byId("clockToggle")) byId("clockToggle").onchange=event=>{ showClock=event.target.checked; updateDisplayOptions(); };
-  if(byId("coordinatesToggle")) byId("coordinatesToggle").onchange=event=>{ showCoordinates=event.target.checked; updateDisplayOptions(); };
+  if(byId("coordinatesMapToggle")) byId("coordinatesMapToggle").onclick=()=>{
+    showCoordinates=!showCoordinates;
+    updateDisplayOptions();
+  };
+  if(byId("gridMapToggle")) byId("gridMapToggle").onclick=()=>setCoordinateGrid(!showCoordinateGrid);
 
   bindSeg("viewSeg","v", v=>setView(v));
   document.querySelectorAll("#paneBody .foldcap").forEach(c=>c.onclick=()=>{
@@ -3313,7 +3360,7 @@ async function enter(r){
     map.on("mousemove",event=>{
       const coordinates=byId("mapCoordinates");
       if(coordinates && showCoordinates){
-        coordinates.textContent=`${event.lngLat.lat.toFixed(5)}, ${event.lngLat.lng.toFixed(5)}`;
+        coordinates.textContent=`Latitude ${event.lngLat.lat.toFixed(5)} · Longitude ${event.lngLat.lng.toFixed(5)}`;
       }
     });
     if(r!=="l1"){
