@@ -125,7 +125,7 @@
   .quick-pop button:hover,.quick-pop button:focus-visible{ background:var(--field); outline:none; }
   .quick-pop button + button{ border-top:1px solid var(--hair); border-top-left-radius:0; border-top-right-radius:0; }
 
-  .pane{ position:absolute; top:64px; left:12px; width:248px; background:rgba(255,255,255,.97);
+  .pane{ position:absolute; top:64px; left:12px; width:268px; background:rgba(255,255,255,.97);
          border:1px solid var(--hair); border-radius:3px; box-shadow:0 4px 16px rgba(20,33,31,.14);
          z-index:10; max-height:calc(100% - 114px); overflow:hidden; backdrop-filter:blur(9px); }
   .pane.hidden{ display:none; }
@@ -134,7 +134,9 @@
   .panehead span{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
                   font-size:12.5px; font-weight:750; color:#46504c; }
   .pane-version{ color:var(--label); font-size:10px; font-weight:700; }
+  .panehead span small{ margin-left:6px; }
   .panehead small{ flex:none; color:var(--label); font-size:9.5px; font-weight:650; white-space:nowrap; }
+  .panehead .clock{ min-width:68px; text-align:right; font-variant-numeric:tabular-nums; }
   .panehead button{ width:25px; height:25px; border:0; border-radius:50%; background:transparent;
                     color:var(--label); font-size:18px; cursor:pointer; }
   .panehead button:hover,.panehead button:focus-visible{ background:var(--field); color:var(--ink); outline:none; }
@@ -294,6 +296,26 @@
   .card .noimg{ background:var(--field); border:1px dashed var(--hair); border-radius:8px; padding:14px;
                 text-align:center; font-size:12px; color:var(--label); }
   .card .noimg small{ display:block; margin-top:3px; font-size:10.5px; opacity:.8; }
+  .card-tools{ display:flex; gap:6px; margin-top:8px; }
+  .card-tools button{ flex:1; min-height:31px; border:1px solid var(--hair); border-radius:4px;
+                      background:#fff; color:var(--green-dk); font:700 10.5px inherit; cursor:pointer; }
+  .card-tools button:hover,.card-tools button:focus-visible{ border-color:var(--green); outline:none; }
+  .date-filter{ display:grid; grid-template-columns:1fr auto; gap:7px; margin-top:8px; }
+  .date-filter input{ min-width:0; height:34px; border:1px solid var(--hair); padding:0 7px; font:12px inherit; }
+  .date-filter button{ border:1px solid var(--green); border-radius:5px; background:var(--green); color:#fff;
+                       padding:0 10px; font:700 11px inherit; cursor:pointer; }
+  .date-results{ margin-top:8px; max-height:190px; overflow:auto; }
+  .date-result{ display:grid; grid-template-columns:1fr auto; gap:7px; align-items:center; padding:7px 0;
+                border-bottom:1px solid var(--hair); font-size:11px; }
+  .date-result button{ border:0; background:none; color:var(--green-dk); text-decoration:underline;
+                       font:700 11px inherit; cursor:pointer; }
+  .display-options{ display:grid; gap:8px; margin-top:8px; }
+  .display-options label{ display:flex; align-items:center; gap:7px; color:#46504c; font-size:11.5px; }
+  .map-coordinates{ position:absolute; left:12px; bottom:33px; z-index:9; min-width:186px; padding:6px 9px;
+                    border:1px solid var(--hair); border-radius:4px; background:rgba(255,255,255,.92);
+                    box-shadow:0 2px 10px rgba(20,33,31,.1); color:#46504c; font:11px Verdana,sans-serif;
+                    font-variant-numeric:tabular-nums; pointer-events:none; backdrop-filter:blur(7px); }
+  .map-coordinates[hidden]{ display:none; }
   #lightbox{ position:fixed; inset:0; z-index:80; background:rgba(20,28,28,.86); display:none;
              align-items:center; justify-content:center; flex-direction:column; gap:10px; cursor:zoom-out; padding:24px; }
   #lightbox.on{ display:flex; }
@@ -431,6 +453,7 @@
     .quick-pop{ top:40px; }
     .pane{ top:58px; right:8px; bottom:42px; left:8px; width:auto; max-height:none; }
     .panebody{ max-height:calc(100vh - 135px); }
+    .map-coordinates{ left:8px; bottom:8px; font-size:10px; min-width:170px; }
     .idlewarn{ left:8px; right:8px; bottom:42px; width:auto; }
     .lvl{ align-items:flex-start; flex-wrap:wrap; }
     .lvl-actions{ width:100%; margin-left:48px; }
@@ -486,6 +509,7 @@
 
 <div id="app">
   <div id="map"></div>
+  <div class="map-coordinates" id="mapCoordinates" aria-live="polite">Move over the map for coordinates</div>
 
   <div class="levelmenu">
     <button class="mapstamp" id="levelBtn" type="button" aria-expanded="false" aria-controls="levelPop">
@@ -515,8 +539,8 @@
 
   <div class="pane hidden" id="pane" aria-label="Map tools">
     <div class="panehead">
-      <span id="paneLabel">Map tools <b class="pane-version" id="siteVersion"></b></span>
-      <small id="dataUpdated"></small>
+      <span id="paneLabel"><b class="pane-version" id="siteVersion"></b><small id="dataUpdated"></small></span>
+      <small class="clock" id="siteClock"></small>
       <button id="paneClose" type="button" aria-label="Close map tools">&times;</button>
     </div>
     <div class="panebody" id="paneBody"></div>
@@ -604,7 +628,7 @@
 <script>
 const HERE = location.href.replace(/[^/]*$/,'');
 const DATA_VERSION = "20261004";
-const SITE_VERSION = "R5.1";
+const SITE_VERSION = "R5.2";
 function updateDateLabel(...versions){
   let latest="";
   versions.forEach(version=>{
@@ -612,6 +636,17 @@ function updateDateLabel(...versions){
     if(match && match[0]>latest) latest=match[0];
   });
   return latest ? `Updated ${latest.slice(4,6)}/${latest.slice(6,8)}/${latest.slice(0,4)}` : "";
+}
+function updateClock(){
+  const clock=byId("siteClock");
+  if(!clock) return;
+  clock.textContent=new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",second:"2-digit"});
+  clock.hidden=!showClock;
+}
+function updateDisplayOptions(){
+  const coordinates=byId("mapCoordinates");
+  if(coordinates) coordinates.hidden=!showCoordinates;
+  updateClock();
 }
 const DATA_FILE = "fish_index-20260701.json";
 const TILE_ROOT = "tiles-20260701";
@@ -660,13 +695,23 @@ const JOURNEY_COLOR = ["match",["get","to"],
   2,"#2f8f56",3,"#d89a24",4,"#2f6fb0",5,"#7656a4",6,"#258a8a","#b4622d"];
 const photoURL = file => PHOTO_PROXY + encodeURIComponent(file);
 function loadPhoto(wrap, file, tagNum){
+  if(!file){
+    wrap.innerHTML = '<div class="noimg">Photo filename missing in Core<small>Ask the data team to add the matching image name.</small></div>';
+    return;
+  }
   wrap.innerHTML = '<div class="shotload"><span class="sp2"></span> loading photo…</div>';
   const img = new Image();
+  const candidates=/\.[a-z0-9]{2,5}$/i.test(file) ? [file] : [file,file+".jpg",file+".jpeg",file+".png"];
+  let candidate=0;
   img.className = "shot"; img.alt = "tag "+tagNum;
   img.onload  = ()=>{ wrap.innerHTML = ""; wrap.appendChild(img); };
-  img.onerror = ()=>{ wrap.innerHTML = '<div class="noimg">No photo on file<small>'+esc(file)+'</small></div>'; };
+  img.onerror = ()=>{
+    candidate++;
+    if(candidate<candidates.length){ img.src=photoURL(candidates[candidate]); return; }
+    wrap.innerHTML = '<div class="noimg">Photo file could not be loaded<small>'+esc(file)+' · upload the matching image file or correct the Core filename</small></div>';
+  };
   img.onclick = ()=> openShot(img.src, file);
-  img.src = photoURL(file);
+  img.src = photoURL(candidates[candidate]);
 }
 function openShot(url, file){
   const lb = document.getElementById("lightbox");
@@ -675,7 +720,7 @@ function openShot(url, file){
   lb.classList.add("on");
 }
 
-const LIGHT = "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json";
+const LIGHT = "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json";
 const SAT_TILES = [
   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
 ];
@@ -713,7 +758,7 @@ function metricValue(field,value){
 
 let map, META, TAGS=[], BYNUM={}, LEVEL2_SUMMARY=null, DATA_KEY=null, scaleCtl=null;
 let role, base="light", view="points", hydro=null, species="All", retOnly=false;
-let picked=null, fitted=false, units="mi";
+let picked=null, fitted=false, units="mi", showClock=true, showCoordinates=true;
 const PLACES_STORAGE_KEY="fishtagged.places.category";
 function savedPlacesCategory(){
   try{ return window.localStorage.getItem(PLACES_STORAGE_KEY)||"gauges"; }
@@ -769,9 +814,13 @@ const GAUGE_LINKS=Object.freeze({
   "usgs williamsport":{noaaUrl:"https://water.noaa.gov/gauges/wllm2"},
   "bridgeport gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01639000/"},
   "walkersville gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01641810/"},
-  "monocacy blvd gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01642190/"},
+  "monocacy blvd gauge":{
+    gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01642190/",
+    noaaUrl:"https://water.noaa.gov/gauges/frmm2"
+  },
   "jug bridge gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01643000/"},
-  "bennett creek gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01643500/"}
+  "bennett creek gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01643500/"},
+  "monocacy river gauge":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01643580/"}
 });
 function authSession(){
   return verifiedSession;
@@ -1309,9 +1358,9 @@ async function loadIndex(){
   if(DATA_KEY===key) return;
   let response;
   if(key==="admin" || key==="level2"){
-    const url=key==="admin"?ADMIN_INDEX_URL:LEVEL2_SUMMARY_URL;
-    if(!url || !activeToken) throw new Error("Private data service is not configured.");
-    response=await fetchTimed(url,{
+    const baseUrl=key==="admin"?ADMIN_INDEX_URL:LEVEL2_SUMMARY_URL;
+    if(!baseUrl || !activeToken) throw new Error("Private data service is not configured.");
+    response=await fetchTimed(baseUrl+"?refresh="+Date.now(),{
       headers:protectedHeaders(activeToken)
     });
   }else if(key==="public" && PUBLIC_META_URL){
@@ -1393,8 +1442,9 @@ async function lookupTag(n){
 function fishTileURL(){
   if(LOCAL_PREVIEW && role==="l3") return HERE+TILE_ROOT+"/{z}/{x}/{y}.pbf?v="+DATA_VERSION;
   if(LOCAL_PREVIEW) return HERE+LEVEL2_TILE_ROOT+"/{z}/{x}/{y}.pbf?v="+DATA_VERSION;
-  if(role==="l3") return ADMIN_TILE_ROOT+"/{z}/{x}/{y}.pbf";
-  return LEVEL2_TILE_API+"/{z}/{x}/{y}.pbf";
+  const release=encodeURIComponent(META?.release||DATA_VERSION);
+  if(role==="l3") return ADMIN_TILE_ROOT+"/{z}/{x}/{y}.pbf?release="+release;
+  return LEVEL2_TILE_API+"/{z}/{x}/{y}.pbf?release="+release;
 }
 async function loadReferenceData(){
   if(placesLoaded) return;
@@ -1567,8 +1617,10 @@ function addLayers(){
       const properties=feature.properties||{};
       const coordinates=feature.geometry.coordinates;
       const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coordinates[1]+","+coordinates[0])}`;
-      const gaugeLinks=placeLinks(properties).map(([label,url])=>
-        `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:7px;color:#355f49;font-size:12px;font-weight:650">${esc(label)} &#8599;</a>`
+      const gaugeLinks=placeLinks(properties).map(([label,url])=>{
+        const agency=/NOAA/i.test(label)?"NOAA":(/USGS/i.test(label)?"USGS":"LIVE");
+        return `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:6px;margin-top:7px;color:#355f49;font-size:12px;font-weight:650;text-decoration:none"><span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:18px;padding:0 4px;border-radius:3px;background:#466b79;color:#fff;font-size:8px;letter-spacing:.04em">${agency}</span>${esc(label)} &#8599;</a>`;
+      }
       ).join("");
       new maplibregl.Popup({offset:10,maxWidth:innerWidth<=420?"190px":"260px"})
         .setLngLat(coordinates)
@@ -1813,7 +1865,7 @@ function captureFeature(t,c,i,caps){
     r:i===0?"start":"again", idx:i, n:i+1, count:caps.length, last:i===caps.length-1,
     from:i, to:i+1, num:t.num, color:t.color||"", alpha:t.alpha||"", sp:t.sp,
     dt:c.dt, spot:c.spot||"", file:c.file||"", rc:c.rc||"",
-    inch:c.in||"", mm:c.mm||"",
+    inch:c.in||"", mm:c.mm||"", cm:c.cm||"", lng:c.lng, lat:c.lat,
     leg:i>0 ? milesBetween([caps[i-1].lng,caps[i-1].lat],[c.lng,c.lat]).toFixed(4) : "",
     riv:i>0 && c._river ? c._river.miles.toFixed(4) : "",
     totalLeg:i>0 ? totalStraight.toFixed(4) : "",
@@ -2234,7 +2286,9 @@ function capHTML(p, inPanel=false){
   const rivRow = riverDistanceEnabled() && p.riv ? `<div class="r"><span class="k">River Distance</span><span class="v">+${dmi(p.riv)}</span></div>` : "";
   const totalMiles = riverDistanceEnabled() && p.totalRiv ? p.totalRiv : p.totalLeg;
   const totalRow = idx>1 ? `<div class="r"><span class="k">Total Through Capture ${n}</span><span class="v">${dmi(totalMiles)}${riverDistanceEnabled()&&p.totalRiv?" river":" straight"}</span></div>` : "";
-  const len = (p.inch||p.mm) ? `<div class="r"><span class="k">Length</span><span class="v">${p.inch?esc(p.inch)+'"':""}${p.mm?" · "+esc(p.mm)+" mm":""}</span></div>` : "";
+  const len = (p.inch||p.mm||p.cm) ? `<div class="r"><span class="k">Length</span><span class="v">${p.inch?esc(p.inch)+'"':""}${p.cm?" · "+esc(p.cm)+" cm":""}${p.mm?" · "+esc(p.mm)+" mm":""}</span></div>` : "";
+  const coordinates = role==="l3" ? `<div class="r"><span class="k">Latitude</span><span class="v">${Number(p.lat).toFixed(5)}</span></div>
+        <div class="r"><span class="k">Longitude</span><span class="v">${Number(p.lng).toFixed(5)}</span></div>` : "";
   const extra = role==="l1" ? "" : [
     ["Water temp",p.tF,"°F"],["River level",p.lvl,"ft"],["Turbidity",p.turb,"FNU"],
     ["Oxygen",p.do,"mg/L"],["Flow",p.cfs,"CFS"],["Air temp",p.airF,"°F"],
@@ -2242,7 +2296,11 @@ function capHTML(p, inPanel=false){
     ["Wind gust",p.gustMph,"mph"],["Pressure",p.pressIn,"inHg"],["Weather",p.wx,""],
     ["Weather station",p.wxStation,""],["Weather observed",p.wxTime,""]
   ].map(([k,v,u])=>(v==null||v===""||+v<0)?"":`<div class="r"><span class="k">${k}</span><span class="v">${esc(v)} ${u}</span></div>`).join("");
-  const shot = file ? `<div class="shot-wrap" data-cap-shot></div>` : "";
+  const shot = `<div class="shot-wrap" data-cap-shot></div>`;
+  const adminTools = role==="l3" ? `<div class="card-tools">
+      <button type="button" data-copy-coordinates>Copy coordinates</button>
+      <button type="button" data-location-review>Location correction row</button>
+    </div>` : "";
   const nav = count<2 ? "" : `<div class="capnav">
     ${idx>0?`<button data-cap-prev>← Capture ${idx}</button>`:"<span></span>"}
     <span>${n} / ${count}</span>
@@ -2260,8 +2318,9 @@ function capHTML(p, inPanel=false){
         <div class="r"><span class="k">Date and time</span><span class="v">${esc(shortDateTime(p.dt))}</span></div>
         ${idx>0?`<div class="r"><span class="k">Movement leg</span><span class="v">${idx} → ${n}</span></div>`:""}
         <div class="r"><span class="k">Location</span><span class="v">${esc(p.spot||"—")}</span></div>
-        ${legRow}${rivRow}${totalRow}${len}${extra}
+        ${coordinates}${legRow}${rivRow}${totalRow}${len}${extra}
       </div>
+      ${adminTools}
       ${nav}
     </div></div>`;
 }
@@ -2272,7 +2331,15 @@ function captureTag(p){
 }
 function wireCaptureCard(root,p,openCapture){
   const photo=root.querySelector("[data-cap-shot]");
-  if(photo && p.file) loadPhoto(photo,p.file,p.num+" capture "+p.n);
+  if(photo) loadPhoto(photo,p.file,p.num+" capture "+p.n);
+  const copyCoordinates=root.querySelector("[data-copy-coordinates]");
+  if(copyCoordinates) copyCoordinates.onclick=async()=>{
+    const value=`${Number(p.lat).toFixed(5)}, ${Number(p.lng).toFixed(5)}`;
+    try{ await navigator.clipboard.writeText(value); copyCoordinates.textContent="Copied"; }
+    catch(error){ copyCoordinates.textContent=value; }
+  };
+  const locationReview=root.querySelector("[data-location-review]");
+  if(locationReview) locationReview.onclick=()=>downloadLocationReview(p);
   const prev=root.querySelector("[data-cap-prev]");
   const next=root.querySelector("[data-cap-next]");
   if(prev) prev.onclick=()=>openCapture(+p.idx-1);
@@ -2285,6 +2352,20 @@ function wireCaptureCard(root,p,openCapture){
     toggle.setAttribute("aria-expanded",String(!open));
     details.hidden=open;
   };
+}
+function csvCell(value){
+  const text=String(value??"");
+  return /[",\n]/.test(text)?'"'+text.replace(/"/g,'""')+'"':text;
+}
+function downloadLocationReview(p){
+  const columns=["ColorTag","Alpha","NumberTag","TagDateTimeUTC","FileName","Latitude","Longitude","Proposed lat change","proposed long change","Reason"];
+  const row=[p.color,p.alpha,p.num,p.dt,p.file,p.lat,p.lng,"","","Verify camera location outlier"];
+  const blob=new Blob([columns.map(csvCell).join(",")+"\n"+row.map(csvCell).join(",")+"\n"],{type:"text/csv;charset=utf-8"});
+  const link=document.createElement("a");
+  link.href=URL.createObjectURL(blob);
+  link.download=`fishtagged-location-review-${p.num}-${p.n}.csv`;
+  link.click();
+  URL.revokeObjectURL(link.href);
 }
 function clearCapPanel(){
   const panel=byId("capturePanel"), body=byId("capturePanelBody");
@@ -2432,6 +2513,46 @@ function feedbackBlock(){
       <button class="flat" id="feedbackSend" type="button" style="width:100%;margin-top:8px">Submit feedback</button>
       <div class="form-msg" id="feedbackMsg" aria-live="polite">Sent with your signed-in account.</div>
     </div>`,false);
+}
+function dateLookupBlock(){
+  return fold("Find catches by date",`<div class="date-filter">
+      <input id="catchDate" type="date" aria-label="Catch date">
+      <button id="catchDateGo" type="button">Find</button>
+    </div>
+    <div class="level-note">Level 3 only. Finds fish tagged or recaptured on the selected date.</div>
+    <div class="date-results" id="catchDateResults"></div>`,false);
+}
+function displayOptionsBlock(){
+  return fold("Display options",`<div class="display-options">
+      <label><input id="clockToggle" type="checkbox"${showClock?" checked":""}> Show live clock</label>
+      <label><input id="coordinatesToggle" type="checkbox"${showCoordinates?" checked":""}> Show mouse coordinates</label>
+    </div>`,false);
+}
+function runDateLookup(){
+  const date=val("catchDate");
+  const results=byId("catchDateResults");
+  if(!results) return;
+  if(!date){ results.innerHTML='<div class="form-msg bad">Choose a date first.</div>'; return; }
+  const matches=[];
+  for(const tag of TAGS){
+    tag.caps.forEach((capture,index)=>{
+      const parsed=new Date(capture.dt);
+      if(isNaN(parsed)) return;
+      const local=[parsed.getFullYear(),String(parsed.getMonth()+1).padStart(2,"0"),String(parsed.getDate()).padStart(2,"0")].join("-");
+      if(local===date) matches.push({tag,capture,index});
+    });
+  }
+  results.innerHTML=matches.slice(0,200).map(({tag,capture,index})=>`<div class="date-result">
+      <span><b>Tag ${esc(tag.num)}</b><br>${esc(capture.rc||"Tagged")} · ${esc(shortDateTime(capture.dt))}</span>
+      <button type="button" data-date-tag="${esc(tag.num)}" data-date-capture="${index}">View</button>
+    </div>`).join("") || '<div class="form-msg">No catches were recorded on that date.</div>';
+  if(matches.length>200) results.insertAdjacentHTML("beforeend",`<div class="form-msg">Showing the first 200 of ${matches.length} results.</div>`);
+  results.querySelectorAll("[data-date-tag]").forEach(button=>button.onclick=async()=>{
+    await search(button.dataset.dateTag,true);
+    const hit=findCachedTag(button.dataset.dateTag);
+    const index=Number(button.dataset.dateCapture);
+    if(hit?.t?.caps?.[index]) showCap(captureFeature(hit.t,hit.t.caps[index],index,hit.t.caps),true);
+  });
 }
 function adminRecordsBlock(){
   return fold("Account records",`
@@ -2611,8 +2732,9 @@ function panel(){
       </div>
       <button class="flat" id="csv" style="width:100%;margin-top:9px">Export this view (CSV)</button>`,false);
   const updater=(verifiedSession?.canUpdateData || verifiedSession?.role==="superadmin") ? dataUpdateBlock() : "";
-  return seek + selectedFish + viewSeg + speciesChips + hydroMenu + placesMenu + measure + weatherHTML() + astroHTML() +
-    recap + numbers + spots + feed + legendBlk + updater + adminRecordsBlock() + feedbackBlock();
+  return seek + selectedFish + dateLookupBlock() + viewSeg + speciesChips + hydroMenu + placesMenu + measure +
+    displayOptionsBlock() + weatherHTML() + astroHTML() + recap + numbers + spots + feed + legendBlk + updater +
+    adminRecordsBlock() + feedbackBlock();
 }
 
 function showPane(show){
@@ -2623,13 +2745,13 @@ function showPane(show){
 }
 function mapPanePadding(top=66,bottom=62){
   const paneOpen=!byId("pane").classList.contains("hidden");
-  return {top,left:paneOpen?272:42,right:42,bottom};
+  return {top,left:paneOpen?292:42,right:42,bottom};
 }
 
 function defaults(){
-  if(role==="l1"){ view="points"; hydro=null; species="All"; retOnly=false; topobathyOn=false; }
-  if(role==="l2"){ view="heat";   hydro=null; species="All"; retOnly=false; }
-  if(role==="l3"){ view="points"; hydro=null; species="All"; retOnly=false; }
+  if(role==="l1"){ view="points"; hydro=null; species="All"; retOnly=false; topobathyOn=false; showClock=true; showCoordinates=true; }
+  if(role==="l2"){ view="heat";   hydro=null; species="All"; retOnly=false; showClock=true; showCoordinates=true; }
+  if(role==="l3"){ view="points"; hydro=null; species="All"; retOnly=false; showClock=true; showCoordinates=true; }
 }
 function formMessage(id,text,tone=""){
   const message=byId(id);
@@ -2980,18 +3102,35 @@ async function publishDataUpdate(){
     let result={};
     try{ result=await response.json(); }catch(error){}
     if(!response.ok || !result.published) throw new Error(result.message||"The release could not be published.");
+    META={...(META||{}),release:result.release};
+    set("dataUpdated",updateDateLabel(DATA_VERSION,result.release));
     DATA_KEY=null;
     placesLoaded=false;
-    formMessage("dataPublishMsg",`Release ${result.release} is live for all three levels. Reload the map after about one minute to see it.`,"good");
+    formMessage("dataPublishMsg",`Release ${result.release} is live for all three levels. Refreshing Level 3 now…`,"good");
     button.textContent="Published";
     button.disabled=true;
     byId("dataUpdateApproved").disabled=true;
     byId("dataUpdateConfirmation").disabled=true;
+    setTimeout(()=>refreshPublishedLevel3(result.release),1200);
   }catch(error){
     formMessage("dataPublishMsg",error.message||"The release could not be published.","bad");
     setDataAction(button,false,"Publishing…","Publish all three levels");
     refreshDataPublishButton();
   }
+}
+async function refreshPublishedLevel3(release){
+  if(role!=="l3") return;
+  META={...(META||{}),release};
+  DATA_KEY=null;
+  placesLoaded=false;
+  if(map){
+    map.remove();
+    map=null;
+    scaleCtl=null;
+    fitted=false;
+    placesEventsBound=false;
+  }
+  await enter("l3");
 }
 function wire(){
   const g=document.getElementById("seekGo");
@@ -3002,6 +3141,10 @@ function wire(){
   document.querySelectorAll("[data-open-level2]").forEach(button=>button.onclick=()=>requestLevel("l2"));
   if(byId("placesCategory")) byId("placesCategory").onchange=event=>setPlaces(event.target.value);
   if(byId("topobathyToggle")) byId("topobathyToggle").onclick=()=>setTopobathy(!topobathyOn);
+  if(byId("catchDateGo")) byId("catchDateGo").onclick=runDateLookup;
+  if(byId("catchDate")) byId("catchDate").onkeydown=event=>{ if(event.key==="Enter") runDateLookup(); };
+  if(byId("clockToggle")) byId("clockToggle").onchange=event=>{ showClock=event.target.checked; updateDisplayOptions(); };
+  if(byId("coordinatesToggle")) byId("coordinatesToggle").onchange=event=>{ showCoordinates=event.target.checked; updateDisplayOptions(); };
 
   bindSeg("viewSeg","v", v=>setView(v));
   document.querySelectorAll("#paneBody .foldcap").forEach(c=>c.onclick=()=>{
@@ -3065,6 +3208,7 @@ function wire(){
   if(byId("featN")) set("featN", META.count.toLocaleString());
   const cy=byId("cycle"); if(cy) cy.onchange=()=>bars();
   if(byId("csv")) document.getElementById("csv").onclick=exportCSV;
+  updateDisplayOptions();
 }
 function bindSeg(id,attr,fn){
   const el=document.getElementById(id); if(!el) return;
@@ -3100,16 +3244,18 @@ async function enter(r){
     return;
   }
   const previousRole=role;
+  const carryTag=String(picked||byId("seek")?.value||"").replace(/\D/g,"");
   if(map && previousRole && previousRole!==r){
     map.remove();
     map=null;
     scaleCtl=null;
     fitted=false;
+    placesEventsBound=false;
     clearPick();
   }
   role=r; defaults();
   document.getElementById("lvlName").textContent=LEVELS[r];
-  set("siteVersion","· "+SITE_VERSION);
+  set("siteVersion",SITE_VERSION);
   set("dataUpdated",updateDateLabel(DATA_VERSION,META?.release));
   const levelOneLabel=byId("levelOneButton")?.querySelector("b");
   if(levelOneLabel) levelOneLabel.textContent=r==="l1"?"Level 1 Search":"Back to Level 1 Search";
@@ -3132,12 +3278,13 @@ async function enter(r){
       : '<span style="max-width:320px;text-align:center;line-height:1.5">The map data could not be loaded. Check the connection and reload this page.</span>';
     return; }
   await loadReferenceData();
-  picked="841";
+  picked=carryTag||null;
   capPinned=false;
 
   const pane=document.getElementById("pane");
   pane.dataset.level=r;
   document.getElementById("paneBody").innerHTML=panel();
+  if(carryTag && byId("seek")) byId("seek").value=carryTag;
   pane.classList.remove("hidden");
   wire();
   showPane(true);
@@ -3163,6 +3310,12 @@ async function enter(r){
     map.on("click", measureClick);
     map.on("click", clickCapture);
     map.on("dblclick", clickCapture);
+    map.on("mousemove",event=>{
+      const coordinates=byId("mapCoordinates");
+      if(coordinates && showCoordinates){
+        coordinates.textContent=`${event.lngLat.lat.toFixed(5)}, ${event.lngLat.lng.toFixed(5)}`;
+      }
+    });
     if(r!=="l1"){
       map.on("click","dots",e=>{ if(!measuring) search(String(e.features[0].properties.tag), false); });
       map.on("mouseenter","dots",()=>map.getCanvas().style.cursor="pointer");
@@ -3178,24 +3331,24 @@ async function enter(r){
     });
   } else if(map.isStyleLoaded()){
     refreshFishTiles();
-    clearPick();
-    picked="841";
     applyFilter(); setView(view); setHydro(hydro); stats();
-    search("841",true);
+    if(carryTag){ picked=carryTag; search(carryTag,false); }
+    else clearPick();
     hideVeil();
   }
+  updateDisplayOptions();
   armIdle();
   setTimeout(hideVeil, 3000);
 }
 
 function exportCSV(){
-  const head=["num","color","alpha","sp","rc","dt","spot","lng","lat","tF","lvl","turb","do","cfs","airF","dewF","windMph","gustMph","pressIn","wxStation","wxTime"];
+  const head=["num","color","alpha","sp","rc","dt","spot","lng","lat","in","cm","mm","tF","lvl","turb","do","cfs","airF","dewF","windMph","gustMph","pressIn","wxStation","wxTime"];
   const lines=[head.join(",")];
   for(const t of TAGS){
     if(species!=="All" && t.sp!==species) continue;
     for(const c of t.caps){
       if(retOnly && c.rc!=="Recaptured") continue;
-      const row=[t.num,t.color,t.alpha,t.sp,c.rc,c.dt,c.spot,c.lng,c.lat,c.tF,c.lvl,c.turb,c.do,c.cfs,c.airF,c.dewF,c.windMph,c.gustMph,c.pressIn,c.wxStation,c.wxTime]
+      const row=[t.num,t.color,t.alpha,t.sp,c.rc,c.dt,c.spot,c.lng,c.lat,c.in,c.cm,c.mm,c.tF,c.lvl,c.turb,c.do,c.cfs,c.airF,c.dewF,c.windMph,c.gustMph,c.pressIn,c.wxStation,c.wxTime]
         .map(v=>{
           v=v==null?"":String(v);
           if(/^[\t\r\n ]*[=+\-@]/.test(v)) v="'"+v;
@@ -3287,6 +3440,8 @@ document.addEventListener("keydown",e=>{
 ["mousemove","mousedown","keydown","touchstart","scroll"].forEach(event=>{
   window.addEventListener(event,noteActivity,{passive:true});
 });
+updateClock();
+setInterval(updateClock,1000);
 
 document.getElementById("headerLogout").onclick=()=>{ closeLevelMenu(); logoutSession(false); };
 document.getElementById("baseBtn").onclick=()=>{

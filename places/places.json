@@ -4358,7 +4358,8 @@
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Monocacy Blvd Gauge",
-        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01642190/"
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01642190/",
+        "noaaUrl": "https://water.noaa.gov/gauges/frmm2"
       }
     },
     {
@@ -4414,7 +4415,8 @@
         "description": "Monocacy · Maryland. Source: Mononcay River.",
         "river": "Monocacy",
         "state": "Maryland",
-        "source": "Mononcay River"
+        "source": "Mononcay River",
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01643580/"
       }
     }
   ]
