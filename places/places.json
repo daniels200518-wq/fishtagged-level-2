@@ -4302,7 +4302,8 @@
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Bridgeport Gauge",
-        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01639000/"
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01639000/",
+        "allGaugesUrl": "https://shadfishing.com/monocacy.html"
       }
     },
     {
@@ -4321,7 +4322,8 @@
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Walkersville Gauge",
-        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01641810/"
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01641810/",
+        "allGaugesUrl": "https://shadfishing.com/monocacy.html"
       }
     },
     {
@@ -4329,8 +4331,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -77.382278,
-          39.443583
+          -77.237444,
+          39.612361
         ]
       },
       "properties": {
@@ -4339,7 +4341,8 @@
         "description": "Monocacy · Maryland. Source: Bruceville Gauge.",
         "river": "Monocacy",
         "state": "Maryland",
-        "source": "Bruceville Gauge"
+        "source": "Bruceville Gauge",
+        "allGaugesUrl": "https://shadfishing.com/monocacy.html"
       }
     },
     {
@@ -4359,7 +4362,8 @@
         "state": "Maryland",
         "source": "Monocacy Blvd Gauge",
         "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01642190/",
-        "noaaUrl": "https://water.noaa.gov/gauges/frmm2"
+        "noaaUrl": "https://water.noaa.gov/gauges/frmm2",
+        "allGaugesUrl": "https://shadfishing.com/monocacy.html"
       }
     },
     {
@@ -4378,7 +4382,8 @@
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Jug Bridge Gauge",
-        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01643000/"
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01643000/",
+        "allGaugesUrl": "https://shadfishing.com/monocacy.html"
       }
     },
     {
@@ -4397,7 +4402,8 @@
         "river": "Bennett Creek",
         "state": "Maryland",
         "source": "USGS Bennett Creek",
-        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01643500/"
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01643500/",
+        "allGaugesUrl": "https://shadfishing.com/monocacy.html"
       }
     },
     {
@@ -4416,7 +4422,8 @@
         "river": "Monocacy",
         "state": "Maryland",
         "source": "Mononcay River",
-        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01643580/"
+        "gaugeUrl": "https://waterdata.usgs.gov/monitoring-location/USGS-01643580/",
+        "allGaugesUrl": "https://shadfishing.com/monocacy.html"
       }
     }
   ]

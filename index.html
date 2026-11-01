@@ -630,7 +630,7 @@
 <script>
 const HERE = location.href.replace(/[^/]*$/,'');
 const DATA_VERSION = "20261004";
-const SITE_VERSION = "R5.3";
+const SITE_VERSION = "R5.4";
 function updateDateLabel(...versions){
   let latest="";
   versions.forEach(version=>{
@@ -642,7 +642,10 @@ function updateDateLabel(...versions){
 function updateClock(){
   const clock=byId("siteClock");
   if(!clock) return;
-  clock.textContent=new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",second:"2-digit"});
+  const now=new Date();
+  const date=now.toLocaleDateString("en-US",{month:"numeric",day:"numeric",year:"numeric"});
+  const time=now.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit",second:"2-digit"});
+  clock.textContent=`${date} · ${time}`;
   clock.hidden=!showClock;
 }
 function updateDisplayOptions(){
@@ -804,7 +807,11 @@ const PLACE_GROUPS = {
   launches:["Primitive launch"],
   gauges:["H2O gauge"]
 };
-const POTOMAC_GAUGES_URL="http://shadfishing.com";
+const ALL_GAUGES_URLS=Object.freeze({
+  potomac:"https://shadfishing.com",
+  monocacy:"https://shadfishing.com/monocacy.html",
+  "bennett creek":"https://shadfishing.com/monocacy.html"
+});
 const GAUGE_LINKS=Object.freeze({
   "usgs paw paw":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01610000/"},
   "usgs hancock":{gaugeUrl:"https://waterdata.usgs.gov/monitoring-location/USGS-01613000/"},
@@ -1455,14 +1462,47 @@ function fishTileURL(){
 async function loadReferenceData(){
   if(placesLoaded) return;
   placesLoaded=true;
+  const mergePlaces=(primary,fallback)=>{
+    const merged=[];
+    const positions=new Map();
+    const add=(collection,preferExisting)=>{
+      for(const feature of collection?.features||[]){
+        const properties=feature?.properties||{};
+        const coordinates=feature?.geometry?.coordinates||[];
+        const name=String(properties.name||"").trim().toLowerCase();
+        const type=String(properties.type||"").trim().toLowerCase();
+        const key=type==="h2o gauge" && name
+          ? `gauge:${name}`
+          : `${type}:${name}:${coordinates.map(value=>Number(value).toFixed(6)).join(",")}`;
+        if(!positions.has(key)){
+          positions.set(key,merged.length);
+          merged.push(feature);
+        }else if(preferExisting){
+          const index=positions.get(key);
+          merged[index]={
+            ...feature,
+            geometry:merged[index].geometry||feature.geometry,
+            properties:{...properties,...merged[index].properties}
+          };
+        }
+      }
+    };
+    add(primary,false);
+    add(fallback,true);
+    return {type:"FeatureCollection",features:merged};
+  };
   const placesRequest=async()=>{
-    let response;
+    const requests=[];
     if(PUBLIC_PLACES_URL){
-      try{ response=await fetchTimed(PUBLIC_PLACES_URL); }catch(error){}
+      requests.push(fetchTimed(PUBLIC_PLACES_URL)
+        .then(response=>response.ok?response.json():null).catch(()=>null));
     }
-    if(!response?.ok) response=await fetchTimed(HERE+PLACES_FILE+"?v="+DATA_VERSION);
-    if(!response.ok) throw new Error("places unavailable");
-    return response.json();
+    requests.push(fetchTimed(HERE+PLACES_FILE+"?v="+DATA_VERSION)
+      .then(response=>response.ok?response.json():null).catch(()=>null));
+    const collections=(await Promise.all(requests))
+      .filter(value=>value?.type==="FeatureCollection");
+    if(!collections.length) throw new Error("places unavailable");
+    return mergePlaces(collections[0],collections[1]);
   };
   const [placesResult,topobathyResult]=await Promise.allSettled([
     placesRequest(),
@@ -1567,12 +1607,12 @@ function placeLinks(properties){
   const source=String(properties.source||"");
   const gaugeUrl=safeExternalUrl(properties.gaugeUrl||properties.usgsUrl||properties.dataUrl||defaults.gaugeUrl);
   const noaaUrl=safeExternalUrl(properties.noaaUrl||properties.forecastUrl||defaults.noaaUrl);
-  const allGaugesUrl=safeExternalUrl(properties.allGaugesUrl||
-    (String(properties.river||"").toLowerCase()==="potomac"?POTOMAC_GAUGES_URL:""));
+  const river=String(properties.river||"").trim().toLowerCase();
+  const allGaugesUrl=safeExternalUrl(properties.allGaugesUrl||ALL_GAUGES_URLS[river]||"");
   const links=[];
   if(gaugeUrl) links.push([/noaa/i.test(source)?"NOAA gauge data":"USGS gauge data",gaugeUrl]);
   if(noaaUrl) links.push(["NOAA level forecast",noaaUrl]);
-  if(allGaugesUrl) links.push(["All Potomac gauges",allGaugesUrl]);
+  if(allGaugesUrl) links.push([river==="potomac"?"All Potomac gauges":"All Monocacy gauges",allGaugesUrl]);
   return links;
 }
 function setTopobathy(show){
