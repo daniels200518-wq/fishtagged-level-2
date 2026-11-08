@@ -300,10 +300,17 @@
   .card-tools button{ flex:1; min-height:31px; border:1px solid var(--hair); border-radius:4px;
                       background:#fff; color:var(--green-dk); font:700 10.5px inherit; cursor:pointer; }
   .card-tools button:hover,.card-tools button:focus-visible{ border-color:var(--green); outline:none; }
-  .date-filter{ display:grid; grid-template-columns:1fr auto; gap:7px; margin-top:8px; }
-  .date-filter input{ min-width:0; height:34px; border:1px solid var(--hair); padding:0 7px; font:12px inherit; }
-  .date-filter button{ border:1px solid var(--green); border-radius:5px; background:var(--green); color:#fff;
-                       padding:0 10px; font:700 11px inherit; cursor:pointer; }
+  .date-filter{ display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:8px; }
+  .date-filter label{ display:grid; gap:3px; color:var(--label); font-size:9.5px; font-weight:700;
+                      text-transform:uppercase; letter-spacing:.03em; }
+  .date-filter input,.date-filter select{ min-width:0; width:100%; height:34px; border:1px solid var(--hair);
+                                          border-radius:3px; background:#fff; padding:0 7px; color:var(--ink);
+                                          font:12px inherit; text-transform:none; letter-spacing:0; }
+  .date-actions{ display:flex; gap:7px; margin-top:8px; }
+  .date-actions button{ flex:1; min-height:34px; border:1px solid var(--green); border-radius:5px;
+                        background:var(--green); color:#fff; padding:0 10px; font:700 11px inherit; cursor:pointer; }
+  .date-actions button.secondary{ background:#fff; color:var(--green-dk); }
+  .date-actions button:disabled{ opacity:.45; cursor:not-allowed; }
   .date-results{ margin-top:8px; max-height:190px; overflow:auto; }
   .date-result{ display:grid; grid-template-columns:1fr auto; gap:7px; align-items:center; padding:7px 0;
                 border-bottom:1px solid var(--hair); font-size:11px; }
@@ -316,6 +323,8 @@
                     box-shadow:0 2px 10px rgba(20,33,31,.1); color:#46504c; font:11px Verdana,sans-serif;
                     font-variant-numeric:tabular-nums; text-align:center; pointer-events:none; backdrop-filter:blur(7px); }
   .map-coordinates[hidden]{ display:none; }
+  .tries a.demo-active{ color:#fff; background:var(--rust); border-radius:9px; padding:1px 5px;
+                        text-decoration:none; transition:background .2s,color .2s; }
   #lightbox{ position:fixed; inset:0; z-index:80; background:rgba(20,28,28,.86); display:none;
              align-items:center; justify-content:center; flex-direction:column; gap:10px; cursor:zoom-out; padding:24px; }
   #lightbox.on{ display:flex; }
@@ -509,7 +518,7 @@
 
 <div id="app">
   <div id="map"></div>
-  <div class="map-coordinates" id="mapCoordinates" aria-live="polite">Move over the map for coordinates</div>
+  <div class="map-coordinates" id="mapCoordinates" aria-live="polite">Move over the map for coordinates · right-click to copy</div>
 
   <div class="levelmenu">
     <button class="mapstamp" id="levelBtn" type="button" aria-expanded="false" aria-controls="levelPop">
@@ -630,7 +639,7 @@
 <script>
 const HERE = location.href.replace(/[^/]*$/,'');
 const DATA_VERSION = "20261004";
-const SITE_VERSION = "R5.4";
+const SITE_VERSION = "R5.5";
 function updateDateLabel(...versions){
   let latest="";
   versions.forEach(version=>{
@@ -766,7 +775,7 @@ function metricValue(field,value){
 }
 
 let map, META, TAGS=[], BYNUM={}, LEVEL2_SUMMARY=null, DATA_KEY=null, scaleCtl=null;
-let role, base="light", view="points", hydro=null, species="All", retOnly=false;
+let role, base="light", view="points", hydro=null, species="All", retOnly=false, catchMode="all";
 let picked=null, fitted=false, units="mi", showClock=true, showCoordinates=true, showCoordinateGrid=false;
 const PLACES_STORAGE_KEY="fishtagged.places.category";
 function savedPlacesCategory(){
@@ -784,6 +793,8 @@ let adminAccountsCache=[];
 let adminManagerRole="admin";
 let dataUpdateJob=null;
 let idleTimer=null, idleLogoutTimer=null, idleTick=null, idleDeadline=0, lastActivity=0;
+let dateLookupMatches=[];
+let demoTagTimer=null;
 const dmi=v=>{ const m=parseFloat(v); return isNaN(m) ? "—" :
   (units==="km" ? (m<.125 ? Math.round(m*1609.34)+" m" : (m*1.60934).toFixed(1)+" km") :
    (m<.1 ? Math.round(m*5280)+" ft" : m.toFixed(1)+" mi")); };
@@ -1459,6 +1470,22 @@ function fishTileURL(){
   if(role==="l3") return ADMIN_TILE_ROOT+"/{z}/{x}/{y}.pbf?release="+release;
   return LEVEL2_TILE_API+"/{z}/{x}/{y}.pbf?release="+release;
 }
+async function copyMapCoordinates(event){
+  event.originalEvent?.preventDefault?.();
+  const value=`${event.lngLat.lat.toFixed(5)}, ${event.lngLat.lng.toFixed(5)}`;
+  const coordinates=byId("mapCoordinates");
+  try{
+    await navigator.clipboard.writeText(value);
+    if(coordinates) coordinates.textContent=`Copied ${value}`;
+  }catch(error){
+    if(coordinates) coordinates.textContent=value;
+  }
+  if(coordinates) setTimeout(()=>{
+    if(coordinates.textContent===`Copied ${value}` || coordinates.textContent===value){
+      coordinates.textContent="Move over the map for coordinates · right-click to copy";
+    }
+  },1800);
+}
 async function loadReferenceData(){
   if(placesLoaded) return;
   placesLoaded=true;
@@ -1780,7 +1807,9 @@ function addLayers(){
 function tileFilter(layer){
   const f=["all"];
   if(species!=="All") f.push(["==",["get","sp"],species]);
-  if(retOnly) f.push(["==",["get","rc"],"Recaptured"]);
+  if(catchMode==="ret") f.push(["==",["get","rc"],"Recaptured"]);
+  if(catchMode==="tagged") f.push(["!=",["to-number",["get","untagged"],0],1]);
+  if(catchMode==="untagged") f.push(["==",["to-number",["get","untagged"],0],1]);
   if((layer==="heat" || layer==="condition") && hydro) f.push(["!=",["get",hydro],""]);
   return f.length>1 ? f : null;
 }
@@ -1846,7 +1875,8 @@ function legend(){
     R.className="ramp "+r.kind; C.innerHTML=r.scale.map(s=>"<span>"+s+"</span>").join("");
     return;
   }
-  T.textContent="Tagged catches"; S.textContent="each dot is one catch";
+  T.textContent=catchMode==="untagged"?"Accepted, not tagged":"Fish captures";
+  S.textContent="each dot is one catch";
   R.style.display="none"; C.innerHTML="";
 }
 function filteredCaps(){
@@ -1854,7 +1884,9 @@ function filteredCaps(){
   for(const t of TAGS){
     for(const c of t.caps){
       if(species!=="All" && (c.sp||t.sp)!==species) continue;
-      if(retOnly && c.rc!=="Recaptured") continue;
+      if(catchMode==="ret" && c.rc!=="Recaptured") continue;
+      if(catchMode==="tagged" && c.untagged) continue;
+      if(catchMode==="untagged" && !c.untagged) continue;
       out.push(c);
     }
   }
@@ -1862,7 +1894,7 @@ function filteredCaps(){
 }
 function summaryGroup(days=0){
   if(!LEVEL2_SUMMARY) return null;
-  return LEVEL2_SUMMARY[[species,retOnly?"ret":"all",String(days)].join("|")]||null;
+  return LEVEL2_SUMMARY[[species,catchMode,String(days)].join("|")]||null;
 }
 function stats(){
   const metric=hydro || "tF";
@@ -1870,6 +1902,7 @@ function stats(){
   if(summary){
     set("nCount",summary.count.toLocaleString());
     set("nRecap",summary.recaptures.toLocaleString());
+    set("nUntagged",Number(summary.untagged||0).toLocaleString());
     const average=summary.averages[metric];
     set("nTemp",average==null?"—":Number(average).toFixed(metric==="pressIn"?2:1));
     set("nTempK","avg "+RAMP[metric].unit+" "+RAMP[metric].title.toLowerCase());
@@ -1882,8 +1915,10 @@ function stats(){
   const caps=filteredCaps();
   const values=caps.map(c=>metricValue(metric,c[metric])).filter(value=>value!==null);
   const rec=caps.filter(c=>c.rc==="Recaptured").length;
+  const untagged=caps.filter(c=>c.untagged).length;
   set("nCount", caps.length.toLocaleString());
   set("nRecap", rec.toLocaleString());
+  set("nUntagged",untagged.toLocaleString());
   if(byId("nTemp")){
     set("nTemp", values.length ? (values.reduce((a,b)=>a+b,0)/values.length).toFixed(metric==="pressIn"?2:1) : "—");
     set("nTempK", "avg "+RAMP[metric].unit+" "+RAMP[metric].title.toLowerCase());
@@ -1892,6 +1927,7 @@ function stats(){
     let tot=0, cnt=0;
     for(const t of TAGS){
       if(species!=="All" && t.sp!==species) continue;
+      if(catchMode==="untagged" || (catchMode==="tagged" && t.caps[0]?.untagged)) continue;
       if(t.caps.length<2) continue;
       tot+=pathMiles(t.caps); cnt++;
     }
@@ -1928,7 +1964,8 @@ function bars(){
       <div class="bl"><span class="nm">${esc(nm)}</span><span class="vl">${v}</span></div>
       <div class="b-track"><div class="b-fill" style="width:${Math.round(v/max*100)}%"></div></div>
     </div>`).join("") || '<div class="ssub">no catches in this filter</div>';
-  const sub = retOnly ? "recaptures by location" : (species!=="All" ? species.toLowerCase()+" by location" : "captures by location");
+  const sub = catchMode==="ret" ? "recaptures by location" : catchMode==="untagged" ? "accepted, not tagged by location" :
+    (species!=="All" ? species.toLowerCase()+" by location" : "captures by location");
   set("sideSub", sub);
 }
 function clearPick(){
@@ -1947,7 +1984,8 @@ function captureFeature(t,c,i,caps){
   return {type:"Feature",geometry:{type:"Point",coordinates:[c.lng,c.lat]},properties:{
     r:i===0?"start":"again", idx:i, n:i+1, count:caps.length, last:i===caps.length-1,
     from:i, to:i+1, num:t.num, color:t.color||"", alpha:t.alpha||"", sp:t.sp,
-    dt:c.dt, spot:c.spot||"", file:c.file||"", rc:c.rc||"",
+    dt:c.dt, spot:c.spot||"", file:c.file||"", rc:c.rc||"", notes:c.notes||"",
+    untagged:c.untagged?1:0,
     inch:c.in||"", mm:c.mm||"", cm:c.cm||"", lng:c.lng, lat:c.lat,
     leg:i>0 ? milesBetween([caps[i-1].lng,caps[i-1].lat],[c.lng,c.lat]).toFixed(4) : "",
     riv:i>0 && c._river ? c._river.miles.toFixed(4) : "",
@@ -2317,7 +2355,9 @@ function daysOut(caps){
 function showSearchResult(hit){
   if(picked!==hit.t.num) return;
   const caps=hit.t.caps, more=hit.others ? "  (+"+hit.others+" more on this number)" : "";
-  if(caps.length>1){
+  if(caps[0]?.untagged){
+    say(`Accepted ${esc(hit.t.sp||"fish")} — not tagged · ${shortDateTime(caps[0].dt)}.`+more,"good");
+  }else if(caps.length>1){
     const mi=pathMiles(caps).toFixed(1), river=riverDistanceEnabled()?riverMiles(caps):null, d=daysOut(caps);
     say(`Tag ${hit.t.num} — caught ${caps.length} times, ${hit.rc} recapture${hit.rc===1?"":"s"}. Straight line ${dmi(mi)}`+
         (river!=null?`, river ${dmi(river.toFixed(1))}`:"")+(d!=null?` over ${d} days.`:".")+more,"good");
@@ -2332,7 +2372,8 @@ function showSearchResult(hit){
 
 let searchToken=0;
 async function search(n, fly){
-  n=(n||"").replace(/\D/g,"");
+  const raw=String(n||"").trim();
+  n=role==="l3" && /^NT-\d+$/i.test(raw) ? raw.toUpperCase() : raw.replace(/\D/g,"");
   if(!n){ say("Type a tag number first.","bad"); return; }
   if(byId("seek")) byId("seek").value=n;
   const token=++searchToken;
@@ -2364,7 +2405,8 @@ const shortDateTime = s=>{ const d=new Date(s); return isNaN(d)?s:
 let capPinned=false;
 function capHTML(p, inPanel=false){
   const idx=+p.idx, n=idx+1, count=+p.count||1, file=p.file||"";
-  const label = idx===0 ? "Tagged" : "Recaptured";
+  const untagged=Number(p.untagged)===1;
+  const label = untagged ? "Accepted, not tagged" : (idx===0 ? "Tagged" : "Recaptured");
   const legRow = p.leg ? `<div class="r"><span class="k">Straight Line Traveled</span><span class="v">+${dmi(p.leg)}</span></div>` : "";
   const rivRow = riverDistanceEnabled() && p.riv ? `<div class="r"><span class="k">River Distance</span><span class="v">+${dmi(p.riv)}</span></div>` : "";
   const totalMiles = riverDistanceEnabled() && p.totalRiv ? p.totalRiv : p.totalLeg;
@@ -2372,6 +2414,7 @@ function capHTML(p, inPanel=false){
   const len = (p.inch||p.mm||p.cm) ? `<div class="r"><span class="k">Length</span><span class="v">${p.inch?esc(p.inch)+'"':""}${p.cm?" · "+esc(p.cm)+" cm":""}${p.mm?" · "+esc(p.mm)+" mm":""}</span></div>` : "";
   const coordinates = role==="l3" ? `<div class="r"><span class="k">Latitude</span><span class="v">${Number(p.lat).toFixed(5)}</span></div>
         <div class="r"><span class="k">Longitude</span><span class="v">${Number(p.lng).toFixed(5)}</span></div>` : "";
+  const notes = role==="l3" && p.notes ? `<div class="r"><span class="k">Core notes</span><span class="v">${esc(p.notes)}</span></div>` : "";
   const extra = role==="l1" ? "" : [
     ["Water temp",p.tF,"°F"],["River level",p.lvl,"ft"],["Turbidity",p.turb,"FNU"],
     ["Oxygen",p.do,"mg/L"],["Flow",p.cfs,"CFS"],["Air temp",p.airF,"°F"],
@@ -2390,7 +2433,7 @@ function capHTML(p, inPanel=false){
     ${n<count?`<button data-cap-next>Capture ${n+1} →</button>`:"<span></span>"}
   </div>`;
   return `<div class="card${inPanel?" panel-card":""}">
-    <div class="top">${inPanel?'<button class="card-close" data-cap-close type="button" aria-label="Close fish details">&times;</button>':""}<div class="big">${esc(p.sp)}</div><div class="tg">Tag ${esc(p.num)}</div>
+    <div class="top">${inPanel?'<button class="card-close" data-cap-close type="button" aria-label="Close fish details">&times;</button>':""}<div class="big">${esc(p.sp)}</div><div class="tg">${untagged?"Not tagged":"Tag "+esc(p.num)}</div>
       <div class="mark ${idx===0?"t":"r"}">Capture ${n} of ${count} · ${label}</div></div>
     <div class="body">
       ${shot}
@@ -2401,7 +2444,7 @@ function capHTML(p, inPanel=false){
         <div class="r"><span class="k">Date and time</span><span class="v">${esc(shortDateTime(p.dt))}</span></div>
         ${idx>0?`<div class="r"><span class="k">Movement leg</span><span class="v">${idx} → ${n}</span></div>`:""}
         <div class="r"><span class="k">Location</span><span class="v">${esc(p.spot||"—")}</span></div>
-        ${coordinates}${legRow}${rivRow}${totalRow}${len}${extra}
+        ${coordinates}${legRow}${rivRow}${totalRow}${len}${notes}${extra}
       </div>
       ${adminTools}
       ${nav}
@@ -2437,7 +2480,8 @@ function wireCaptureCard(root,p,openCapture){
   };
 }
 function csvCell(value){
-  const text=String(value??"");
+  let text=String(value??"");
+  if(/^[\t\r\n ]*[=+\-@]/.test(text)) text="'"+text;
   return /[",\n]/.test(text)?'"'+text.replace(/"/g,'""')+'"':text;
 }
 function downloadLocationReview(p){
@@ -2598,11 +2642,21 @@ function feedbackBlock(){
     </div>`,false);
 }
 function dateLookupBlock(){
-  return fold("Find catches by date",`<div class="date-filter">
-      <input id="catchDate" type="date" aria-label="Catch date">
-      <button id="catchDateGo" type="button">Find</button>
+  const speciesOptions=["All",...Object.keys(META?.species||{}).filter(Boolean).sort()]
+    .map(name=>`<option value="${esc(name)}">${esc(name)}</option>`).join("");
+  return fold("Find catches by date and size",`<div class="date-filter">
+      <label>Start date<input id="catchDateStart" type="date" aria-label="Start date"></label>
+      <label>End date<input id="catchDateEnd" type="date" aria-label="End date"></label>
+      <label>Species<select id="catchSpecies" aria-label="Species">${speciesOptions}</select></label>
+      <label>Length unit<select id="catchSizeUnit" aria-label="Length unit">
+        <option value="in">inches</option><option value="cm">centimeters</option><option value="mm">millimeters</option>
+      </select></label>
+      <label>Minimum length<input id="catchSizeMin" type="number" min="0" step="0.1" inputmode="decimal" placeholder="optional"></label>
+      <label>Maximum length<input id="catchSizeMax" type="number" min="0" step="0.1" inputmode="decimal" placeholder="optional"></label>
     </div>
-    <div class="level-note">Level 3 only. Finds fish tagged or recaptured on the selected date.</div>
+    <div class="date-actions"><button id="catchDateGo" type="button">Find</button>
+      <button id="catchDateDownload" class="secondary" type="button" disabled>Download CSV</button></div>
+    <div class="level-note">Level 3 only. Date results include time of day. Date, species and size filters can be combined.</div>
     <div class="date-results" id="catchDateResults"></div>`,false);
 }
 function displayOptionsBlock(){
@@ -2611,24 +2665,72 @@ function displayOptionsBlock(){
       <div class="level-note">Coordinate and latitude/longitude line controls are in the Map menu on the right.</div>
     </div>`,false);
 }
+function captureLength(capture,unit){
+  const inches=Number(capture.in), centimeters=Number(capture.cm), millimeters=Number(capture.mm);
+  if(unit==="in"){
+    if(inches>0) return inches;
+    if(centimeters>0) return centimeters/2.54;
+    if(millimeters>0) return millimeters/25.4;
+  }else if(unit==="cm"){
+    if(centimeters>0) return centimeters;
+    if(millimeters>0) return millimeters/10;
+    if(inches>0) return inches*2.54;
+  }else{
+    if(millimeters>0) return millimeters;
+    if(centimeters>0) return centimeters*10;
+    if(inches>0) return inches*25.4;
+  }
+  return null;
+}
+function captureDateKey(value){
+  const parsed=new Date(value);
+  return isNaN(parsed)?"" : [parsed.getFullYear(),String(parsed.getMonth()+1).padStart(2,"0"),String(parsed.getDate()).padStart(2,"0")].join("-");
+}
 function runDateLookup(){
-  const date=val("catchDate");
+  let start=val("catchDateStart"), end=val("catchDateEnd");
+  const selectedSpecies=val("catchSpecies")||"All";
+  const unit=val("catchSizeUnit")||"in";
+  const minText=val("catchSizeMin"), maxText=val("catchSizeMax");
+  const minimum=minText===""?null:Number(minText), maximum=maxText===""?null:Number(maxText);
   const results=byId("catchDateResults");
   if(!results) return;
-  if(!date){ results.innerHTML='<div class="form-msg bad">Choose a date first.</div>'; return; }
+  dateLookupMatches=[];
+  const download=byId("catchDateDownload");
+  if(download) download.disabled=true;
+  if(!start && !end && minimum===null && maximum===null){
+    results.innerHTML='<div class="form-msg bad">Choose a date or enter a size filter first.</div>'; return;
+  }
+  if(!start) start=end;
+  if(!end) end=start;
+  if(start && end && start>end){ results.innerHTML='<div class="form-msg bad">The end date must be on or after the start date.</div>'; return; }
+  if((minimum!==null && (!Number.isFinite(minimum)||minimum<0)) ||
+      (maximum!==null && (!Number.isFinite(maximum)||maximum<0))){
+    results.innerHTML='<div class="form-msg bad">Lengths must be positive numbers.</div>'; return;
+  }
+  if(minimum!==null && maximum!==null && minimum>maximum){
+    results.innerHTML='<div class="form-msg bad">Maximum length must be at least the minimum length.</div>'; return;
+  }
   const matches=[];
   for(const tag of TAGS){
     tag.caps.forEach((capture,index)=>{
-      const parsed=new Date(capture.dt);
-      if(isNaN(parsed)) return;
-      const local=[parsed.getFullYear(),String(parsed.getMonth()+1).padStart(2,"0"),String(parsed.getDate()).padStart(2,"0")].join("-");
-      if(local===date) matches.push({tag,capture,index});
+      const date=captureDateKey(capture.dt);
+      if((start && date<start) || (end && date>end)) return;
+      if(selectedSpecies!=="All" && (capture.sp||tag.sp)!==selectedSpecies) return;
+      const length=captureLength(capture,unit);
+      if(minimum!==null && (length===null || length<minimum)) return;
+      if(maximum!==null && (length===null || length>maximum)) return;
+      matches.push({tag,capture,index,length});
     });
   }
-  results.innerHTML=matches.slice(0,200).map(({tag,capture,index})=>`<div class="date-result">
-      <span><b>Tag ${esc(tag.num)}</b><br>${esc(capture.rc||"Tagged")} · ${esc(shortDateTime(capture.dt))}</span>
+  matches.sort((a,b)=>new Date(a.capture.dt)-new Date(b.capture.dt));
+  dateLookupMatches=matches;
+  if(download) download.disabled=!matches.length;
+  const unitLabel={in:"in",cm:"cm",mm:"mm"}[unit];
+  results.innerHTML=`<div class="form-msg">${matches.length.toLocaleString()} matching catch${matches.length===1?"":"es"}.</div>`+
+    matches.slice(0,200).map(({tag,capture,index,length})=>`<div class="date-result">
+      <span><b>${capture.untagged?"Not tagged":"Tag "+esc(tag.num)}</b><br>${esc(capture.sp||tag.sp||"Unknown")} · ${esc(capture.rc||"Tagged")} · ${esc(shortDateTime(capture.dt))}${length==null?"":" · "+esc(length.toFixed(1))+" "+unitLabel}</span>
       <button type="button" data-date-tag="${esc(tag.num)}" data-date-capture="${index}">View</button>
-    </div>`).join("") || '<div class="form-msg">No catches were recorded on that date.</div>';
+    </div>`).join("");
   if(matches.length>200) results.insertAdjacentHTML("beforeend",`<div class="form-msg">Showing the first 200 of ${matches.length} results.</div>`);
   results.querySelectorAll("[data-date-tag]").forEach(button=>button.onclick=async()=>{
     await search(button.dataset.dateTag,true);
@@ -2636,6 +2738,20 @@ function runDateLookup(){
     const index=Number(button.dataset.dateCapture);
     if(hit?.t?.caps?.[index]) showCap(captureFeature(hit.t,hit.t.caps[index],index,hit.t.caps),true);
   });
+}
+function downloadDateLookup(){
+  if(!dateLookupMatches.length) return;
+  const columns=["Tag","Status","Date and time","Species","Location","Length inches","Length cm","Length mm","Latitude","Longitude","Core notes"];
+  const rows=dateLookupMatches.map(({tag,capture})=>[
+    capture.untagged?"Not Tagged":tag.num,capture.rc,capture.dt,capture.sp||tag.sp,capture.spot,
+    capture.in,capture.cm,capture.mm,capture.lat,capture.lng,capture.notes||"",
+  ]);
+  const blob=new Blob([[columns,...rows].map(row=>row.map(csvCell).join(",")).join("\n")+"\n"],{type:"text/csv;charset=utf-8"});
+  const link=document.createElement("a");
+  link.href=URL.createObjectURL(blob);
+  link.download="fishtagged-date-size-results.csv";
+  link.click();
+  setTimeout(()=>URL.revokeObjectURL(link.href),0);
 }
 function adminRecordsBlock(){
   return fold("Account records",`
@@ -2711,7 +2827,8 @@ function panel(){
   const numbers = fold("In view",`<div class="nums" style="margin-top:9px">
         <div class="one"><div class="v num" id="nCount">—</div><div class="k">catches</div></div>
         <div class="one"><div class="v num" id="nRecap">—</div><div class="k">recaptures</div></div>
-        ${role==="l1"?"":'<div class="one"><div class="v num" id="nTemp">—</div><div class="k" id="nTempK">avg °F water temperature</div></div>'+ 
+        ${role==="l1"?"":'<div class="one"><div class="v num" id="nUntagged">—</div><div class="k">accepted, not tagged</div></div>'+
+                         '<div class="one"><div class="v num" id="nTemp">—</div><div class="k" id="nTempK">avg °F water temperature</div></div>'+
                          '<div class="one"><div class="v num" id="nMiles">—</div><div class="k" id="nMilesK">avg mi moved</div></div>'}
       </div>`,false);
 
@@ -2786,8 +2903,10 @@ function panel(){
 
   const recap = fold("Show", `
       <select id="retSel" class="sel" style="margin-top:8px">
-        <option value="all"${retOnly?"":" selected"}>All catches</option>
-        <option value="ret"${retOnly?" selected":""}>Recaptured only</option>
+        <option value="all"${catchMode==="all"?" selected":""}>All catches</option>
+        <option value="tagged"${catchMode==="tagged"?" selected":""}>Tagged fish only</option>
+        <option value="untagged"${catchMode==="untagged"?" selected":""}>Accepted, not tagged only</option>
+        <option value="ret"${catchMode==="ret"?" selected":""}>Recaptured only</option>
       </select>
       <select id="unitSel" class="sel">
         <option value="mi"${units==="mi"?" selected":""}>miles</option>
@@ -2832,9 +2951,9 @@ function mapPanePadding(top=66,bottom=62){
 }
 
 function defaults(){
-  if(role==="l1"){ view="points"; hydro=null; species="All"; retOnly=false; topobathyOn=false; showClock=true; showCoordinates=true; }
-  if(role==="l2"){ view="heat";   hydro=null; species="All"; retOnly=false; showClock=true; showCoordinates=true; }
-  if(role==="l3"){ view="points"; hydro=null; species="All"; retOnly=false; showClock=true; showCoordinates=true; }
+  if(role==="l1"){ view="points"; hydro=null; species="All"; catchMode="all"; retOnly=false; topobathyOn=false; showClock=true; showCoordinates=true; }
+  if(role==="l2"){ view="heat";   hydro=null; species="All"; catchMode="all"; retOnly=false; showClock=true; showCoordinates=true; }
+  if(role==="l3"){ view="points"; hydro=null; species="All"; catchMode="all"; retOnly=false; showClock=true; showCoordinates=true; }
 }
 function formMessage(id,text,tone=""){
   const message=byId(id);
@@ -3215,17 +3334,30 @@ async function refreshPublishedLevel3(release){
   }
   await enter("l3");
 }
+function startDemoTagRotation(){
+  if(demoTagTimer){ clearInterval(demoTagTimer); demoTagTimer=null; }
+  const links=[...document.querySelectorAll(".tries a")];
+  if(links.length<2) return;
+  let active=0;
+  const paint=()=>links.forEach((link,index)=>link.classList.toggle("demo-active",index===active));
+  paint();
+  demoTagTimer=setInterval(()=>{ active=(active+1)%links.length; paint(); },3500);
+}
 function wire(){
   const g=document.getElementById("seekGo");
   if(g) g.onclick=()=>search(val("seek"),true);
   const s=document.getElementById("seek");
   if(s) s.addEventListener("keydown",e=>{ if(e.key==="Enter") search(s.value,true); });
   document.querySelectorAll(".tries a").forEach(a=>a.onclick=()=>{ s.value=a.dataset.n; search(a.dataset.n,true); });
+  startDemoTagRotation();
   document.querySelectorAll("[data-open-level2]").forEach(button=>button.onclick=()=>requestLevel("l2"));
   if(byId("placesCategory")) byId("placesCategory").onchange=event=>setPlaces(event.target.value);
   if(byId("topobathyToggle")) byId("topobathyToggle").onclick=()=>setTopobathy(!topobathyOn);
   if(byId("catchDateGo")) byId("catchDateGo").onclick=runDateLookup;
-  if(byId("catchDate")) byId("catchDate").onkeydown=event=>{ if(event.key==="Enter") runDateLookup(); };
+  if(byId("catchDateDownload")) byId("catchDateDownload").onclick=downloadDateLookup;
+  ["catchDateStart","catchDateEnd","catchSizeMin","catchSizeMax"].forEach(id=>{
+    if(byId(id)) byId(id).onkeydown=event=>{ if(event.key==="Enter") runDateLookup(); };
+  });
   if(byId("clockToggle")) byId("clockToggle").onchange=event=>{ showClock=event.target.checked; updateDisplayOptions(); };
   if(byId("coordinatesMapToggle")) byId("coordinatesMapToggle").onclick=()=>{
     showCoordinates=!showCoordinates;
@@ -3242,7 +3374,7 @@ function wire(){
     c.setAttribute("aria-expanded",String(opening));
   });
   const rs=byId("retSel");
-  if(rs) rs.onchange=()=>{ retOnly=(rs.value==="ret"); applyFilter(); stats(); };
+  if(rs) rs.onchange=()=>{ catchMode=rs.value||"all"; retOnly=(catchMode==="ret"); applyFilter(); stats(); legend(); };
   const us=byId("unitSel");
   if(us) us.onchange=()=>{ units=us.value; scaleCtl.setUnit(units==="km"?"metric":"imperial");
     clearCapPanel(); stats(); };
@@ -3403,6 +3535,7 @@ async function enter(r){
         coordinates.textContent=`Latitude ${event.lngLat.lat.toFixed(5)} · Longitude ${event.lngLat.lng.toFixed(5)}`;
       }
     });
+    map.on("contextmenu",copyMapCoordinates);
     if(r!=="l1"){
       map.on("click","dots",e=>{ if(!measuring) search(String(e.features[0].properties.tag), false); });
       map.on("mouseenter","dots",()=>map.getCanvas().style.cursor="pointer");
@@ -3429,13 +3562,15 @@ async function enter(r){
 }
 
 function exportCSV(){
-  const head=["num","color","alpha","sp","rc","dt","spot","lng","lat","in","cm","mm","tF","lvl","turb","do","cfs","airF","dewF","windMph","gustMph","pressIn","wxStation","wxTime"];
+  const head=["num","color","alpha","sp","rc","dt","spot","lng","lat","in","cm","mm","notes","tF","lvl","turb","do","cfs","airF","dewF","windMph","gustMph","pressIn","wxStation","wxTime"];
   const lines=[head.join(",")];
   for(const t of TAGS){
     if(species!=="All" && t.sp!==species) continue;
     for(const c of t.caps){
-      if(retOnly && c.rc!=="Recaptured") continue;
-      const row=[t.num,t.color,t.alpha,t.sp,c.rc,c.dt,c.spot,c.lng,c.lat,c.in,c.cm,c.mm,c.tF,c.lvl,c.turb,c.do,c.cfs,c.airF,c.dewF,c.windMph,c.gustMph,c.pressIn,c.wxStation,c.wxTime]
+      if(catchMode==="ret" && c.rc!=="Recaptured") continue;
+      if(catchMode==="tagged" && c.untagged) continue;
+      if(catchMode==="untagged" && !c.untagged) continue;
+      const row=[c.untagged?"Not Tagged":t.num,t.color,t.alpha,t.sp,c.rc,c.dt,c.spot,c.lng,c.lat,c.in,c.cm,c.mm,c.notes||"",c.tF,c.lvl,c.turb,c.do,c.cfs,c.airF,c.dewF,c.windMph,c.gustMph,c.pressIn,c.wxStation,c.wxTime]
         .map(v=>{
           v=v==null?"":String(v);
           if(/^[\t\r\n ]*[=+\-@]/.test(v)) v="'"+v;
@@ -3446,7 +3581,8 @@ function exportCSV(){
   }
   const a=document.createElement("a");
   a.href=URL.createObjectURL(new Blob([lines.join("\n")],{type:"text/csv"}));
-  a.download="fishtagged_"+(species==="All"?"all":species.toLowerCase().replace(/ /g,""))+(retOnly?"_recaptured":"")+".csv";
+  const modeSuffix=catchMode==="all"?"":"_"+catchMode;
+  a.download="fishtagged_"+(species==="All"?"all":species.toLowerCase().replace(/ /g,""))+modeSuffix+".csv";
   a.click(); URL.revokeObjectURL(a.href);
 }
 document.querySelectorAll(".lvl[data-go]").forEach(button=>button.onclick=()=>requestLevel(button.dataset.go));
